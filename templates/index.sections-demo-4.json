@@ -1,0 +1,336 @@
+{
+  "sections": {
+    "mrow_open": {
+      "type": "multirow",
+      "settings": {
+        "kicker": "Why it feels different",
+        "heading": "Considered in every detail.",
+        "heading_align": "left",
+        "style": "open",
+        "ratio": "landscape",
+        "image_right": false,
+        "alternate": true,
+        "numbered": true,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "frame": "corner",
+            "show_dot": false,
+            "kicker": "Texture",
+            "heading": "A gel that turns to silk.",
+            "text": "<p>Weightless on the fingertips, cushiony on skin — and gone in seconds, leaving only a soft, lit-from-within finish.</p>",
+            "button_style": "link",
+            "color_scheme": "scheme-2",
+            "caption": "Weightless, never sticky.",
+            "button_label": "Discover the texture"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "frame": "arch",
+            "show_dot": true,
+            "kicker": "Formula",
+            "heading": "Actives, gently delivered.",
+            "text": "<p>Encapsulated peptides and vitamin C release slowly for visible radiance without the sting.</p>",
+            "button_style": "link",
+            "color_scheme": "scheme-2",
+            "button_label": "Explore the formula"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "frame": "offset",
+            "show_dot": false,
+            "kicker": "Packaging",
+            "heading": "Glass you'll want to keep.",
+            "text": "<p>Refillable, recyclable and heavy in the hand — made to live beautifully on your shelf.</p>",
+            "button_style": "link",
+            "color_scheme": "scheme-2",
+            "button_label": "Our commitments"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3"
+      ]
+    },
+    "mrow_panels": {
+      "type": "multirow",
+      "settings": {
+        "kicker": "Why it feels different",
+        "heading": "Each row, its own moment.",
+        "heading_align": "left",
+        "style": "panels",
+        "ratio": "square",
+        "image_right": true,
+        "alternate": true,
+        "numbered": true,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "frame": "corner",
+            "show_dot": false,
+            "kicker": "Texture",
+            "heading": "A gel that turns to silk.",
+            "text": "<p>Weightless on the fingertips, cushiony on skin — and gone in seconds, leaving only a soft, lit-from-within finish.</p>",
+            "button_style": "link",
+            "color_scheme": "scheme-2",
+            "caption": "Weightless, never sticky.",
+            "button_label": "Discover the texture"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "frame": "arch",
+            "show_dot": true,
+            "kicker": "Formula",
+            "heading": "Actives, gently delivered.",
+            "text": "<p>Encapsulated peptides and vitamin C release slowly for visible radiance without the sting.</p>",
+            "button_style": "link",
+            "color_scheme": "scheme-2",
+            "button_label": "Explore the formula"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "frame": "offset",
+            "show_dot": false,
+            "kicker": "Packaging",
+            "heading": "Glass you'll want to keep.",
+            "text": "<p>Refillable, recyclable and heavy in the hand — made to live beautifully on your shelf.</p>",
+            "button_style": "link",
+            "color_scheme": "scheme-2",
+            "button_label": "Our commitments"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3"
+      ]
+    },
+    "mcol_editorial": {
+      "type": "multicolumn",
+      "settings": {
+        "kicker": "Rituals for every moment",
+        "heading": "Beauty that fits the day.",
+        "heading_align": "left",
+        "style": "editorial",
+        "shape": "square",
+        "columns": 3,
+        "text_align": "left",
+        "swipe": true,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "column_1": {
+          "type": "column",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Morning",
+            "text": "<p>Light layers and daily protection for a fresh, luminous start.</p>",
+            "link_label": "Shop the AM edit"
+          }
+        },
+        "column_2": {
+          "type": "column",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Evening",
+            "text": "<p>Richer textures that replenish while you rest.</p>",
+            "link_label": "Shop the PM edit"
+          }
+        },
+        "column_3": {
+          "type": "column",
+          "settings": {
+            "icon": "sparkle",
+            "title": "On the go",
+            "text": "<p>Minis and balms for a glow between appointments.</p>",
+            "link_label": "Shop minis"
+          }
+        }
+      },
+      "block_order": [
+        "column_1",
+        "column_2",
+        "column_3"
+      ]
+    },
+    "mcol_icons": {
+      "type": "multicolumn",
+      "settings": {
+        "kicker": "The Lumière promise",
+        "heading": "Small details, carefully kept.",
+        "heading_align": "center",
+        "style": "icon",
+        "shape": "square",
+        "columns": 4,
+        "text_align": "center",
+        "swipe": true,
+        "color_scheme": "scheme-2"
+      },
+      "blocks": {
+        "column_1": {
+          "type": "column",
+          "settings": {
+            "icon": "truck",
+            "title": "Complimentary shipping",
+            "text": "<p>On every order over $75.</p>",
+            "link_label": ""
+          }
+        },
+        "column_2": {
+          "type": "column",
+          "settings": {
+            "icon": "gift",
+            "title": "Two samples",
+            "text": "<p>Chosen for your ritual.</p>",
+            "link_label": ""
+          }
+        },
+        "column_3": {
+          "type": "column",
+          "settings": {
+            "icon": "recycle",
+            "title": "Refillable glass",
+            "text": "<p>Made to be kept.</p>",
+            "link_label": ""
+          }
+        },
+        "column_4": {
+          "type": "column",
+          "settings": {
+            "icon": "rabbit",
+            "title": "Cruelty-free",
+            "text": "<p>Always, everywhere.</p>",
+            "link_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_1",
+        "column_2",
+        "column_3",
+        "column_4"
+      ]
+    },
+    "mcol_numbered": {
+      "type": "multicolumn",
+      "settings": {
+        "kicker": "How it works",
+        "heading": "Your ritual, in three steps.",
+        "heading_align": "left",
+        "style": "numbered",
+        "shape": "square",
+        "columns": 3,
+        "text_align": "left",
+        "swipe": true,
+        "color_scheme": "scheme-3"
+      },
+      "blocks": {
+        "column_1": {
+          "type": "column",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Tell us about your skin",
+            "text": "<p>Two minutes, five questions.</p>",
+            "link_label": ""
+          }
+        },
+        "column_2": {
+          "type": "column",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Receive your edit",
+            "text": "<p>A considered ritual, delivered with samples.</p>",
+            "link_label": ""
+          }
+        },
+        "column_3": {
+          "type": "column",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Glow, gently",
+            "text": "<p>Adjust any time with a specialist.</p>",
+            "link_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_1",
+        "column_2",
+        "column_3"
+      ]
+    },
+    "mcol_open": {
+      "type": "multicolumn",
+      "settings": {
+        "kicker": "Rituals for every moment",
+        "heading": "Open columns, mixed frames.",
+        "heading_align": "left",
+        "style": "open",
+        "shape": "mixed",
+        "columns": 3,
+        "text_align": "left",
+        "swipe": true,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "column_1": {
+          "type": "column",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Morning",
+            "text": "<p>Light layers and daily protection for a fresh, luminous start.</p>",
+            "link_label": "Shop the AM edit"
+          }
+        },
+        "column_2": {
+          "type": "column",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Evening",
+            "text": "<p>Richer textures that replenish while you rest.</p>",
+            "link_label": "Shop the PM edit"
+          }
+        },
+        "column_3": {
+          "type": "column",
+          "settings": {
+            "icon": "sparkle",
+            "title": "On the go",
+            "text": "<p>Minis and balms for a glow between appointments.</p>",
+            "link_label": "Shop minis"
+          }
+        }
+      },
+      "block_order": [
+        "column_1",
+        "column_2",
+        "column_3"
+      ]
+    }
+  },
+  "order": [
+    "mrow_open",
+    "mrow_panels",
+    "mcol_editorial",
+    "mcol_icons",
+    "mcol_numbered",
+    "mcol_open"
+  ]
+}

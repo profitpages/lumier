@@ -1,27 +1,57 @@
-{{ 'section-extras.css' | asset_url | stylesheet_tag }}
-{%- assign s = section.settings -%}
-{%- assign arts = 'serum,jar,compact,pump,tube,lipstick' | split: ',' -%}
-{%- assign tones = 'blush,lilac,peach,sand,blush,lilac' | split: ',' -%}
+{%- comment -%}
+  Multicolumn — columns of image / icon / numeral + text in Lumière's editorial language.
+  Styles: editorial (paper frame cards) | open (image + hairline) | numbered (large serif numerals) | icon (arch icon wells)
+{%- endcomment -%}
+{{ 'section-lumiere-more.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign s = section.settings
+  assign arts = 'serum,jar,pump,tube,compact,swatch' | split: ','
+-%}
 <section class="section color-{{ s.color_scheme }}">
   <div class="page-width">
     {%- render 'section-heading', kicker: s.kicker, title: s.heading, text: s.text, align: s.heading_align -%}
-    <ul class="mcol mcol--{{ s.style }} mcol--{{ s.text_align }}{% if s.swipe %} mcol--swipe{% endif %}" role="list" style="--cols: {{ s.columns }};">
+    <ul class="lcol lcol--{{ s.style }} lcol--{{ s.text_align }}{% if s.swipe %} lcol--swipe{% endif %}" role="list" style="--cols: {{ s.columns }};">
       {%- for block in section.blocks -%}
         {%- assign b = block.settings -%}
         {%- assign i = forloop.index0 | modulo: 6 -%}
-        <li class="mcol__item" data-reveal {{ block.shopify_attributes }}>
-          <div class="mcol__media mcol__media--{{ s.shape }}">
-            {%- render 'responsive-image', image: b.image, max: 900, sizes: '(min-width: 990px) 30vw, 80vw', class: 'mcol__img', art: arts[i], tone: tones[i] -%}
-          </div>
-          <div class="mcol__body">
-            {%- if b.title != blank -%}<h3 class="mcol__title">{{ b.title | escape }}</h3>{%- endif -%}
-            {%- if b.text != blank -%}<div class="rte mcol__text">{{ b.text }}</div>{%- endif -%}
-            {%- if b.link_label != blank -%}<a class="link-underline" href="{{ b.link | default: routes.all_products_collection_url }}">{{ b.link_label | escape }} {% render 'icon', name: 'arrow-right', size: 15 %}</a>{%- endif -%}
+        <li class="lcol__item" data-reveal {{ block.shopify_attributes }}>
+          {%- case s.style -%}
+            {%- when 'numbered' -%}
+              <span class="lcol__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+            {%- when 'icon' -%}
+              <span class="lcol__icon">
+                {%- if b.image != blank -%}
+                  {{ b.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: '', width: 40, height: 40 }}
+                {%- else -%}
+                  {%- render 'icon', name: b.icon, size: 24 -%}
+                {%- endif -%}
+              </span>
+            {%- else -%}
+              {%- liquid
+                assign shape = s.shape
+                if shape == 'mixed'
+                  assign shape = 'square'
+                  if forloop.first
+                    assign shape = 'corner'
+                  elsif forloop.index == 2
+                    assign shape = 'arch'
+                  endif
+                endif
+              -%}
+              <span class="lcol__media lcol__media--{{ shape }}">
+                {%- render 'responsive-image', image: b.image, max: 900, sizes: '(min-width: 990px) 30vw, 80vw', class: 'lcol__img', art: arts[i], tone: 'linen' -%}
+              </span>
+          {%- endcase -%}
+          <div class="lcol__body">
+            {%- if b.kicker != blank -%}<p class="kicker">{{ b.kicker | escape }}</p>{%- endif -%}
+            {%- if b.title != blank -%}<h3 class="lcol__title">{{ b.title | escape }}</h3>{%- endif -%}
+            {%- if b.text != blank -%}<div class="rte lcol__text">{{ b.text }}</div>{%- endif -%}
+            {%- if b.link_label != blank -%}<a class="link-underline lcol__link" href="{{ b.link | default: routes.all_products_collection_url }}">{{ b.link_label | escape }}</a>{%- endif -%}
           </div>
         </li>
       {%- endfor -%}
     </ul>
-    {%- if s.button_label != blank -%}<div class="btn-row btn-row--center mcol__cta">{%- render 'button', label: s.button_label, url: s.button_link, style: 'solid' -%}</div>{%- endif -%}
+    {%- if s.button_label != blank -%}<div class="btn-row lcol__cta lcol__cta--{{ s.heading_align }}">{%- render 'button', label: s.button_label, url: s.button_link, style: 'outline' -%}</div>{%- endif -%}
   </div>
 </section>
 
@@ -31,22 +61,43 @@
   "class": "section-multicolumn",
   "max_blocks": 12,
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Rituals for every moment." },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Rituals for every moment" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Beauty that fits the day." },
     { "type": "richtext", "id": "text", "label": "Text" },
-    { "type": "select", "id": "heading_align", "label": "Heading alignment", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }], "default": "left" },
-    { "type": "range", "id": "columns", "label": "Columns (desktop)", "min": 2, "max": 5, "step": 1, "default": 3 },
     {
-      "type": "select", "id": "style", "label": "Style",
-      "options": [{ "value": "card", "label": "Soft cards" }, { "value": "open", "label": "Open (image + text)" }],
-      "default": "card"
+      "type": "select", "id": "heading_align", "label": "Heading alignment",
+      "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }],
+      "default": "left"
+    },
+    {
+      "type": "select", "id": "style", "label": "Column style",
+      "options": [
+        { "value": "editorial", "label": "Editorial cards (paper frame)" },
+        { "value": "open", "label": "Open (image + hairline)" },
+        { "value": "numbered", "label": "Numbered (large numerals)" },
+        { "value": "icon", "label": "Icons" }
+      ],
+      "default": "editorial"
     },
     {
       "type": "select", "id": "shape", "label": "Image shape",
-      "options": [{ "value": "landscape", "label": "Landscape" }, { "value": "portrait", "label": "Portrait" }, { "value": "arch", "label": "Arch" }, { "value": "circle", "label": "Circle" }],
-      "default": "landscape"
+      "options": [
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait 4:5" },
+        { "value": "landscape", "label": "Landscape 4:3" },
+        { "value": "arch", "label": "Arch" },
+        { "value": "corner", "label": "Curved corner" },
+        { "value": "circle", "label": "Circle" },
+        { "value": "mixed", "label": "Mixed (corner, arch, square)" }
+      ],
+      "default": "square"
     },
-    { "type": "select", "id": "text_align", "label": "Text alignment", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }], "default": "left" },
+    { "type": "range", "id": "columns", "label": "Columns (desktop)", "min": 2, "max": 5, "step": 1, "default": 3 },
+    {
+      "type": "select", "id": "text_align", "label": "Text alignment",
+      "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }],
+      "default": "left"
+    },
     { "type": "checkbox", "id": "swipe", "label": "Swipe on mobile", "default": true },
     { "type": "text", "id": "button_label", "label": "Button label" },
     { "type": "url", "id": "button_link", "label": "Button link" },
@@ -56,10 +107,21 @@
     {
       "type": "column", "name": "Column",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "In the Icons style, an uploaded image replaces the icon." },
+        {
+          "type": "select", "id": "icon", "label": "Icon (Icons style)",
+          "options": [
+            { "value": "sparkle", "label": "Glow" }, { "value": "drop", "label": "Hydration" }, { "value": "leaf", "label": "Botanical" },
+            { "value": "flower", "label": "Flower" }, { "value": "sun", "label": "Morning" }, { "value": "moon", "label": "Evening" },
+            { "value": "shield", "label": "Barrier" }, { "value": "rabbit", "label": "Cruelty-free" }, { "value": "recycle", "label": "Recyclable" },
+            { "value": "flask", "label": "Clinical" }, { "value": "truck", "label": "Delivery" }, { "value": "gift", "label": "Gift" }
+          ],
+          "default": "sparkle"
+        },
+        { "type": "text", "id": "kicker", "label": "Kicker" },
         { "type": "text", "id": "title", "label": "Title", "default": "Morning" },
-        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Light layers and SPF for a fresh, protected glow.</p>" },
-        { "type": "text", "id": "link_label", "label": "Link label", "default": "Shop AM" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Light layers and daily protection for a fresh, luminous start.</p>" },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Shop the AM edit" },
         { "type": "url", "id": "link", "label": "Link" }
       ]
     }
@@ -69,8 +131,27 @@
       "name": "Multicolumn",
       "blocks": [
         { "type": "column" },
-        { "type": "column", "settings": { "title": "Evening", "text": "<p>Richer textures that replenish while you rest.</p>", "link_label": "Shop PM" } },
-        { "type": "column", "settings": { "title": "On the go", "text": "<p>Minis and balms for a glow between meetings.</p>", "link_label": "Shop minis" } }
+        { "type": "column", "settings": { "title": "Evening", "text": "<p>Richer textures that replenish while you rest.</p>", "link_label": "Shop the PM edit" } },
+        { "type": "column", "settings": { "title": "On the go", "text": "<p>Minis and balms for a glow between appointments.</p>", "link_label": "Shop minis" } }
+      ]
+    },
+    {
+      "name": "Multicolumn — icons",
+      "settings": { "style": "icon", "kicker": "The Lumière promise", "heading": "Small details, carefully kept.", "columns": 4, "text_align": "center", "heading_align": "center", "color_scheme": "scheme-2" },
+      "blocks": [
+        { "type": "column", "settings": { "icon": "truck", "title": "Complimentary shipping", "text": "<p>On every order over $75.</p>", "link_label": "" } },
+        { "type": "column", "settings": { "icon": "gift", "title": "Two samples", "text": "<p>Chosen for your ritual.</p>", "link_label": "" } },
+        { "type": "column", "settings": { "icon": "recycle", "title": "Refillable glass", "text": "<p>Made to be kept.</p>", "link_label": "" } },
+        { "type": "column", "settings": { "icon": "rabbit", "title": "Cruelty-free", "text": "<p>Always, everywhere.</p>", "link_label": "" } }
+      ]
+    },
+    {
+      "name": "Multicolumn — numbered",
+      "settings": { "style": "numbered", "kicker": "How it works", "heading": "Your ritual, in three steps.", "color_scheme": "scheme-3" },
+      "blocks": [
+        { "type": "column", "settings": { "title": "Tell us about your skin", "text": "<p>Two minutes, five questions.</p>", "link_label": "" } },
+        { "type": "column", "settings": { "title": "Receive your edit", "text": "<p>A considered ritual, delivered with samples.</p>", "link_label": "" } },
+        { "type": "column", "settings": { "title": "Glow, gently", "text": "<p>Adjust any time with a specialist.</p>", "link_label": "" } }
       ]
     }
   ]

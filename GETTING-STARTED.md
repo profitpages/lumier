@@ -116,13 +116,18 @@ Comparison table, Multirow, Multicolumn, Video reviews and Custom Liquid.
 - **Timeline:** brand milestones, horizontal on desktop and vertical on mobile.
 - **Consultation / atelier:** an arch portrait, opening hours / address / contact rows, and booking and directions buttons. Link the button to your booking app or contact page.
 - **Founder's note:** a portrait arch, a letter-style quote and a signature.
+- **Multirow:** alternating image + text rows. Each row picks its frame (curved corner, arch with champagne slab,
+  offset outline or square), an optional caption chip and accent dot, and an optional featured product with price.
+  Row style is *open* (hairline dividers) or *panels* (each row in its own color scheme). Rows are numbered 01, 02… optionally.
+- **Multicolumn:** four styles: *editorial* paper cards, *open* (image + hairline), *numbered* (large serif numerals) and
+  *icons* (arch icon wells). Image shapes are square, portrait, landscape, arch, curved corner, circle or *mixed*. There are 2–5 columns, and columns swipe on mobile (optional).
 
 ## 10. Known limitations
 - Rating breakdown bars and individual review cards come from your reviews app's block, because Shopify doesn't expose them to themes.
 - The browser wishlist and recently viewed lists live on the shopper's device and don't sync across devices.
 - Option sub-labels (`custom.option_note`) apply to single-option products, since a value maps to one variant only then.
 - The bundle discount in "Complete your routine" must be created under *Discounts*.
-- `templates/index.sections-demo*.json` are QA pages (`?view=sections-demo`, `-2` and `-3`) and are excluded from the release zip.
+- `templates/index.sections-demo*.json` are QA pages (`?view=sections-demo`, `-2`, `-3` and `-4`) and are excluded from the release zip.
 
 ## 11. QA checklist (verified on a development store)
 - [x] Online Store 2.0 architecture: sections everywhere, `{% schema %}` with settings, blocks and presets

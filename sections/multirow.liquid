@@ -1,28 +1,57 @@
-{{ 'section-extras.css' | asset_url | stylesheet_tag }}
-{%- assign s = section.settings -%}
-{%- assign arts = 'serum,jar,compact,pump,tube,lipstick' | split: ',' -%}
-{%- assign tones = 'blush,lilac,peach,sand,blush,lilac' | split: ',' -%}
+{%- comment -%}
+  Multirow — alternating image + text rows in Lumière's frame language.
+  Each row picks its frame (curved corner, arch + slab, offset block, square), optional caption chip,
+  accent dot and an optional featured product.
+{%- endcomment -%}
+{{ 'section-lumiere-more.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign s = section.settings
+  assign arts = 'portrait,serum,jar,pump,swatch,tube' | split: ','
+-%}
 <section class="section color-{{ s.color_scheme }}">
   <div class="page-width">
-    {%- render 'section-heading', kicker: s.kicker, title: s.heading, text: s.text -%}
-    <div class="mrow{% if s.alternate %} mrow--alt{% endif %}">
+    {%- render 'section-heading', kicker: s.kicker, title: s.heading, text: s.text, align: s.heading_align -%}
+    <div class="lrow lrow--{{ s.style }}{% if s.alternate %} lrow--alt{% endif %}{% if s.image_right %} lrow--start-right{% endif %}">
       {%- for block in section.blocks -%}
-        {%- assign b = block.settings -%}
-        {%- assign i = forloop.index0 | modulo: 6 -%}
-        <article class="mrow__row" data-reveal {{ block.shopify_attributes }}>
-          <div class="mrow__media" style="--tint: {{ b.tint }};">
-            <span class="mrow__blob" aria-hidden="true"></span>
-            <div class="mrow__frame">
-              {%- render 'responsive-image', image: b.image, max: 1400, sizes: '(min-width: 990px) 45vw, 92vw', class: 'mrow__img', art: arts[i], tone: tones[i] -%}
+        {%- liquid
+          assign b = block.settings
+          assign i = forloop.index0 | modulo: 6
+          assign p = b.product
+          assign img = b.image | default: p.featured_media.preview_image
+          assign frame = 'frame--corner has-shadow'
+          case b.frame
+            when 'arch'
+              assign frame = 'frame--arch has-slab'
+            when 'offset'
+              assign frame = 'frame--square'
+            when 'square'
+              assign frame = 'frame--square has-shadow'
+          endcase
+        -%}
+        <article class="lrow__row lrow__row--{{ b.frame }}{% if s.style == 'panels' %} color-{{ b.color_scheme }}{% endif %}" data-reveal {{ block.shopify_attributes }}>
+          <div class="lrow__media lrow__media--{{ s.ratio }}">
+            {%- if b.frame == 'offset' -%}<span class="lrow__slab" aria-hidden="true"></span>{%- endif -%}
+            <div class="lrow__frame frame {{ frame }}">
+              {%- render 'responsive-image', image: img, max: 1400, sizes: '(min-width: 990px) 45vw, 92vw', class: 'lrow__img', art: arts[i], tone: 'linen' -%}
             </div>
-            {%- if b.sticker != blank -%}<span class="mrow__sticker glass">{{ b.sticker | escape }}</span>{%- endif -%}
+            {%- if b.show_dot and settings.decor_enable -%}<span class="dot-accent lrow__dot" aria-hidden="true"></span>{%- endif -%}
+            {%- if b.caption != blank -%}<span class="caption-chip caption-chip--serif lrow__caption">{{ b.caption | escape }}</span>{%- endif -%}
           </div>
-          <div class="mrow__copy">
-            {%- if b.number -%}<span class="mrow__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>{%- endif -%}
+          <div class="lrow__copy">
+            {%- if s.numbered -%}<span class="lrow__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>{%- endif -%}
             {%- if b.kicker != blank -%}<p class="kicker">{{ b.kicker | escape }}</p>{%- endif -%}
-            {%- if b.heading != blank -%}<h3 class="h2">{{ b.heading | escape }}</h3>{%- endif -%}
-            {%- if b.text != blank -%}<div class="rte mrow__text">{{ b.text }}</div>{%- endif -%}
-            {%- render 'button', label: b.button_label, url: b.button_link, style: 'outline' -%}
+            {%- if b.heading != blank -%}<h3 class="h2 lrow__title">{{ b.heading | escape }}</h3>{%- endif -%}
+            {%- if b.text != blank -%}<div class="rte lrow__text">{{ b.text }}</div>{%- endif -%}
+            {%- if p != blank -%}
+              <a class="lrow__product" href="{{ p.url }}">
+                <span class="lrow__product-title">{{ p.title | escape }}</span>
+                {%- render 'price', product: p -%}
+              </a>
+            {%- endif -%}
+            {%- if b.button_label != blank -%}
+              {%- assign row_link = b.button_link | default: p.url -%}
+              {%- render 'button', label: b.button_label, url: row_link, style: b.button_style -%}
+            {%- endif -%}
           </div>
         </article>
       {%- endfor -%}
@@ -36,25 +65,58 @@
   "class": "section-multirow",
   "max_blocks": 6,
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Why it feels different." },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Why it feels different" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Considered in every detail." },
     { "type": "richtext", "id": "text", "label": "Text" },
+    {
+      "type": "select", "id": "heading_align", "label": "Heading alignment",
+      "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }],
+      "default": "left"
+    },
+    {
+      "type": "select", "id": "style", "label": "Row style",
+      "options": [{ "value": "open", "label": "Open, hairline dividers" }, { "value": "panels", "label": "Each row in its own color panel" }],
+      "default": "open"
+    },
+    {
+      "type": "select", "id": "ratio", "label": "Image shape",
+      "options": [{ "value": "landscape", "label": "Landscape 3:2" }, { "value": "square", "label": "Square" }, { "value": "portrait", "label": "Portrait 4:5" }],
+      "default": "landscape"
+    },
+    { "type": "checkbox", "id": "image_right", "label": "First image on the right", "default": false },
     { "type": "checkbox", "id": "alternate", "label": "Alternate image side", "default": true },
+    { "type": "checkbox", "id": "numbered", "label": "Number the rows (01, 02…)", "default": true },
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
   ],
   "blocks": [
     {
       "type": "row", "name": "Row",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "color", "id": "tint", "label": "Backdrop shape color", "default": "#efd1cf" },
-        { "type": "text", "id": "sticker", "label": "Floating label" },
-        { "type": "checkbox", "id": "number", "label": "Show step number", "default": false },
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Defaults to the product image when a product is chosen." },
+        {
+          "type": "select", "id": "frame", "label": "Frame",
+          "options": [
+            { "value": "corner", "label": "Curved corner" },
+            { "value": "arch", "label": "Arch with champagne slab" },
+            { "value": "offset", "label": "Offset outline" },
+            { "value": "square", "label": "Square" }
+          ],
+          "default": "corner"
+        },
+        { "type": "text", "id": "caption", "label": "Caption chip" },
+        { "type": "checkbox", "id": "show_dot", "label": "Accent dot", "default": false },
         { "type": "text", "id": "kicker", "label": "Kicker", "default": "Texture" },
         { "type": "text", "id": "heading", "label": "Heading", "default": "A gel that turns to silk." },
-        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Weightless on the fingertips, cushiony on skin — and gone in seconds, leaving only glow.</p>" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Weightless on the fingertips, cushiony on skin — and gone in seconds, leaving only a soft, lit-from-within finish.</p>" },
+        { "type": "product", "id": "product", "label": "Featured product", "info": "Shows the title and price with a link." },
         { "type": "text", "id": "button_label", "label": "Button label" },
-        { "type": "url", "id": "button_link", "label": "Button link" }
+        { "type": "url", "id": "button_link", "label": "Button link", "info": "Defaults to the product." },
+        {
+          "type": "select", "id": "button_style", "label": "Button style",
+          "options": [{ "value": "link", "label": "Underlined link" }, { "value": "outline", "label": "Outline" }, { "value": "solid", "label": "Solid" }],
+          "default": "link"
+        },
+        { "type": "color_scheme", "id": "color_scheme", "label": "Panel color scheme", "info": "Used with the 'color panel' row style.", "default": "scheme-2" }
       ]
     }
   ],
@@ -62,9 +124,9 @@
     {
       "name": "Multirow",
       "blocks": [
-        { "type": "row", "settings": { "sticker": "Weightless", "tint": "#efd1cf" } },
-        { "type": "row", "settings": { "kicker": "Formula", "heading": "Actives, gently delivered.", "text": "<p>Encapsulated peptides and vitamin C release slowly for results without the sting.</p>", "tint": "#ded0ea", "sticker": "Fragrance-free" } },
-        { "type": "row", "settings": { "kicker": "Packaging", "heading": "Glass you'll want to keep.", "text": "<p>Refillable, recyclable and heavy in the hand — made to live on your shelf.</p>", "tint": "#f5d3c2", "button_label": "Our commitments" } }
+        { "type": "row", "settings": { "caption": "Weightless, never sticky.", "button_label": "Discover the texture" } },
+        { "type": "row", "settings": { "frame": "arch", "kicker": "Formula", "heading": "Actives, gently delivered.", "text": "<p>Encapsulated peptides and vitamin C release slowly for visible radiance without the sting.</p>", "show_dot": true, "button_label": "Explore the formula" } },
+        { "type": "row", "settings": { "frame": "offset", "kicker": "Packaging", "heading": "Glass you'll want to keep.", "text": "<p>Refillable, recyclable and heavy in the hand — made to live beautifully on your shelf.</p>", "button_label": "Our commitments" } }
       ]
     }
   ]
