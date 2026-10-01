@@ -1,0 +1,394 @@
+{
+  "sections": {
+    "look": {
+      "type": "shop-the-look",
+      "settings": {
+        "frame": "corner",
+        "image_right": false,
+        "kicker": "Shop the look",
+        "heading": "The morning glow, decoded.",
+        "text": "<p>Tap a point on the image to see what's in the ritual.</p>",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "hotspot_1": {
+          "type": "hotspot",
+          "settings": {
+            "x": 34,
+            "y": 38
+          }
+        },
+        "hotspot_2": {
+          "type": "hotspot",
+          "settings": {
+            "x": 62,
+            "y": 56
+          }
+        },
+        "hotspot_3": {
+          "type": "hotspot",
+          "settings": {
+            "x": 46,
+            "y": 76
+          }
+        }
+      },
+      "block_order": [
+        "hotspot_1",
+        "hotspot_2",
+        "hotspot_3"
+      ]
+    },
+    "results": {
+      "type": "results-stats",
+      "settings": {
+        "kicker": "After four weeks",
+        "heading": "Results you can see in the light.",
+        "show_image": true,
+        "note": "Example figures — replace with results from your own consumer or clinical study, including the number of participants and duration.",
+        "color_scheme": "scheme-3"
+      },
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "figure": "94%",
+            "label": "said skin felt more hydrated"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "figure": "89%",
+            "label": "saw a more radiant-looking finish"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "figure": "8 hrs",
+            "label": "of comfortable moisture"
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3"
+      ]
+    },
+    "free_from": {
+      "type": "free-from",
+      "settings": {
+        "kicker": "Our clean promise",
+        "heading": "Formulated without.",
+        "text": "<p>What we leave out matters as much as what we put in. Every formula is made without:</p>",
+        "button_label": "Read our standards",
+        "color_scheme": "scheme-2"
+      },
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "label": "Parabens"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "label": "Sulphates (SLS & SLES)"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "label": "Synthetic fragrance"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "label": "Mineral oil"
+          }
+        },
+        "item_5": {
+          "type": "item",
+          "settings": {
+            "label": "Phthalates"
+          }
+        },
+        "item_6": {
+          "type": "item",
+          "settings": {
+            "label": "Animal testing"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5",
+        "item_6"
+      ]
+    },
+    "ampm": {
+      "type": "am-pm-ritual",
+      "settings": {
+        "kicker": "Morning to midnight",
+        "heading": "A ritual for every hour.",
+        "am_title": "First light",
+        "am_text": "Fresh, protected and softly luminous.",
+        "am_scheme": "scheme-2",
+        "pm_title": "After hours",
+        "pm_text": "Richer textures that replenish while you rest.",
+        "pm_scheme": "scheme-6",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "period": "am",
+            "label": "Cleanse"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "period": "am",
+            "label": "Treat"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "period": "am",
+            "label": "Protect"
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "period": "pm",
+            "label": "Melt"
+          }
+        },
+        "step_5": {
+          "type": "step",
+          "settings": {
+            "period": "pm",
+            "label": "Restore"
+          }
+        },
+        "step_6": {
+          "type": "step",
+          "settings": {
+            "period": "pm",
+            "label": "Seal"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5",
+        "step_6"
+      ]
+    },
+    "ctabs": {
+      "type": "collection-tabs",
+      "settings": {
+        "kicker": "Shop the edit",
+        "heading": "Find your category.",
+        "limit": 4,
+        "columns": 4,
+        "card_style": "gallery",
+        "link_label": "Shop all",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "collection_1": {
+          "type": "collection",
+          "settings": {
+            "label": "Skincare"
+          }
+        },
+        "collection_2": {
+          "type": "collection",
+          "settings": {
+            "label": "Makeup"
+          }
+        },
+        "collection_3": {
+          "type": "collection",
+          "settings": {
+            "label": "Body"
+          }
+        }
+      },
+      "block_order": [
+        "collection_1",
+        "collection_2",
+        "collection_3"
+      ]
+    },
+    "collage": {
+      "type": "collage",
+      "settings": {
+        "kicker": "The edit",
+        "heading": "Beautifully considered, end to end.",
+        "layout": "left",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "image_1": {
+          "type": "image",
+          "settings": {
+            "kicker": "New season",
+            "title": "The soft-focus edit",
+            "link_label": "Discover"
+          }
+        },
+        "product_2": {
+          "type": "product",
+          "settings": {
+            "kicker": "Cult favourite",
+            "link_label": "Shop now"
+          }
+        },
+        "collection_3": {
+          "type": "collection",
+          "settings": {
+            "kicker": "Collection",
+            "link_label": "Explore",
+            "title": "Body rituals"
+          }
+        }
+      },
+      "block_order": [
+        "image_1",
+        "product_2",
+        "collection_3"
+      ]
+    },
+    "timeline": {
+      "type": "timeline",
+      "settings": {
+        "kicker": "Our journey",
+        "heading": "From a kitchen-table formula to a daily ritual.",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "milestone_1": {
+          "type": "milestone",
+          "settings": {
+            "year": "2019",
+            "title": "The first serum",
+            "text": "A single, considered formula made in small batches."
+          }
+        },
+        "milestone_2": {
+          "type": "milestone",
+          "settings": {
+            "year": "2021",
+            "title": "A ritual takes shape",
+            "text": "Cleanser, cream and mist join the serum."
+          }
+        },
+        "milestone_3": {
+          "type": "milestone",
+          "settings": {
+            "year": "2023",
+            "title": "Refillable glass",
+            "text": "Our signature bottles become refillable."
+          }
+        },
+        "milestone_4": {
+          "type": "milestone",
+          "settings": {
+            "year": "Today",
+            "title": "Rituals, refined",
+            "text": "Thoughtful essentials for luminous everyday living."
+          }
+        }
+      },
+      "block_order": [
+        "milestone_1",
+        "milestone_2",
+        "milestone_3",
+        "milestone_4"
+      ]
+    },
+    "consult": {
+      "type": "consultation",
+      "settings": {
+        "image_right": false,
+        "caption": "Complimentary, by appointment.",
+        "kicker": "One-to-one",
+        "heading": "Book a skin consultation.",
+        "text": "<p>Twenty unhurried minutes with a Lumière specialist — in the atelier or by video — to build a ritual around your skin.</p>",
+        "button_label": "Book a time",
+        "button2_label": "Get directions",
+        "color_scheme": "scheme-5"
+      },
+      "blocks": {
+        "detail_1": {
+          "type": "detail",
+          "settings": {
+            "icon": "clock",
+            "label": "Hours",
+            "value": "<p>Tuesday – Saturday, 10am – 6pm</p>"
+          }
+        },
+        "detail_2": {
+          "type": "detail",
+          "settings": {
+            "icon": "user",
+            "label": "The atelier",
+            "value": "<p>Add your studio address here</p>"
+          }
+        },
+        "detail_3": {
+          "type": "detail",
+          "settings": {
+            "icon": "mail",
+            "label": "Questions",
+            "value": "<p>hello@yourstore.com</p>"
+          }
+        }
+      },
+      "block_order": [
+        "detail_1",
+        "detail_2",
+        "detail_3"
+      ]
+    },
+    "founder": {
+      "type": "founder-note",
+      "settings": {
+        "image_right": false,
+        "kicker": "A note from our founder",
+        "text": "<p>I started Lumière because the most luxurious part of my day was never the products themselves — it was the quiet five minutes I gave myself with them. Every formula is made to protect that moment.</p>",
+        "signature": "With warmth,",
+        "name": "Your name, Founder",
+        "button_label": "Read our story",
+        "color_scheme": "scheme-4"
+      }
+    }
+  },
+  "order": [
+    "look",
+    "results",
+    "free_from",
+    "ampm",
+    "ctabs",
+    "collage",
+    "timeline",
+    "consult",
+    "founder"
+  ]
+}

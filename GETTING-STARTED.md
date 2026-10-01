@@ -104,12 +104,25 @@ sort, badges, wishlist, hover quick add, "Discover more" load more, promo tile) 
 Blog posts, Featured product, Video, Scrolling text, Rich text, Countdown, Skin quiz, Shoppable gallery, Press & logos,
 Comparison table, Multirow, Multicolumn, Video reviews and Custom Liquid.
 
+**Lumière additions:**
+- **Shop the look:** an editorial image with product hotspots. Set each hotspot's position (% from left / top). It opens a
+  price popover and highlights the product in the list beside the image, with quick add.
+- **Results:** large serif figures for consumer or clinical results. **Only publish figures from your own studies.** The
+  study note is shown under the figures, so keep the participant count and duration in it.
+- **Formulated without:** your free-from promise as a hairline list.
+- **AM / PM ritual:** morning and evening routines side by side (ivory and espresso). Each step is a product with quick add.
+- **Collection tabs:** one tab per collection, each with a product grid.
+- **Editorial collage:** an asymmetric mosaic of up to three image / product / collection tiles.
+- **Timeline:** brand milestones, horizontal on desktop and vertical on mobile.
+- **Consultation / atelier:** an arch portrait, opening hours / address / contact rows, and booking and directions buttons. Link the button to your booking app or contact page.
+- **Founder's note:** a portrait arch, a letter-style quote and a signature.
+
 ## 10. Known limitations
 - Rating breakdown bars and individual review cards come from your reviews app's block, because Shopify doesn't expose them to themes.
 - The browser wishlist and recently viewed lists live on the shopper's device and don't sync across devices.
 - Option sub-labels (`custom.option_note`) apply to single-option products, since a value maps to one variant only then.
 - The bundle discount in "Complete your routine" must be created under *Discounts*.
-- `templates/index.sections-demo*.json` are QA pages (`?view=sections-demo` and `?view=sections-demo-2`) and are excluded from the release zip.
+- `templates/index.sections-demo*.json` are QA pages (`?view=sections-demo`, `-2` and `-3`) and are excluded from the release zip.
 
 ## 11. QA checklist (verified on a development store)
 - [x] Online Store 2.0 architecture: sections everywhere, `{% schema %}` with settings, blocks and presets

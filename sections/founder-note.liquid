@@ -1,0 +1,43 @@
+{%- comment -%} A note from our founder — portrait arch, letter-style text, signature. {%- endcomment -%}
+{{ 'section-lumiere-more.css' | asset_url | stylesheet_tag }}
+{%- assign s = section.settings -%}
+<section class="section color-{{ s.color_scheme }}">
+  <div class="page-width">
+    <figure class="note{% if s.image_right %} note--image-right{% endif %}">
+      <div class="note__media">
+        <div class="note__frame frame frame--arch has-slab">
+          {%- render 'responsive-image', image: s.image, max: 900, sizes: '(min-width: 990px) 28vw, 60vw', art: 'portrait', tone: 'blush' -%}
+        </div>
+        {%- if settings.decor_enable -%}<span class="dot-accent note__dot" aria-hidden="true"></span>{%- endif -%}
+      </div>
+      <div class="note__body">
+        {%- if s.kicker != blank -%}<p class="kicker kicker--accent">{{ s.kicker | escape }}</p>{%- endif -%}
+        <blockquote class="note__text rte">{{ s.text }}</blockquote>
+        <figcaption class="note__by">
+          {%- if s.signature != blank -%}<span class="note__sign">{{ s.signature | escape }}</span>{%- endif -%}
+          {%- if s.name != blank -%}<span class="note__name">{{ s.name | escape }}</span>{%- endif -%}
+        </figcaption>
+        {%- render 'button', label: s.button_label, url: s.button_link, style: 'link' -%}
+      </div>
+    </figure>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Founder's note",
+  "class": "section-founder-note",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Portrait" },
+    { "type": "checkbox", "id": "image_right", "label": "Portrait on the right", "default": false },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "A note from our founder" },
+    { "type": "richtext", "id": "text", "label": "Letter", "default": "<p>I started Lumière because the most luxurious part of my day was never the products themselves — it was the quiet five minutes I gave myself with them. Every formula is made to protect that moment.</p>" },
+    { "type": "text", "id": "signature", "label": "Signature", "default": "With warmth," },
+    { "type": "text", "id": "name", "label": "Name & role", "default": "Your name, Founder" },
+    { "type": "text", "id": "button_label", "label": "Link label", "default": "Read our story" },
+    { "type": "url", "id": "button_link", "label": "Link" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-4" }
+  ],
+  "presets": [{ "name": "Founder's note" }]
+}
+{% endschema %}

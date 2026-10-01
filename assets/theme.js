@@ -862,6 +862,42 @@
   }
   define('quote-slider', QuoteSlider);
 
+  /* ---------- Shop the look (hotspots) ---------- */
+  class LookBook extends HTMLElement {
+    connectedCallback() {
+      this.dots = $$('[data-look-dot]', this);
+      this.items = $$('[data-look-item]', this);
+      this.dots.forEach((dot) => dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const i = Number(dot.dataset.lookDot);
+        this.show(dot.getAttribute('aria-expanded') === 'true' ? -1 : i);
+      }));
+      this.items.forEach((item) => {
+        item.addEventListener('mouseenter', () => this.show(Number(item.dataset.lookItem), true));
+        item.addEventListener('mouseleave', () => this.show(-1));
+      });
+      this.onDoc = (e) => { if (!e.target.closest('.look__spot')) this.show(-1); };
+      this.onKey = (e) => { if (e.key === 'Escape') this.show(-1); };
+      document.addEventListener('click', this.onDoc);
+      document.addEventListener('keydown', this.onKey);
+    }
+    disconnectedCallback() {
+      document.removeEventListener('click', this.onDoc);
+      document.removeEventListener('keydown', this.onKey);
+    }
+    show(i, fromList) {
+      this.dots.forEach((d, k) => {
+        const on = k === i;
+        d.setAttribute('aria-expanded', String(on));
+        const pop = d.nextElementSibling;
+        if (pop) pop.hidden = !on;
+      });
+      this.items.forEach((it, k) => it.classList.toggle('is-active', k === i));
+      if (i > -1 && !fromList && matchMedia('(max-width: 989px)').matches) this.items[i]?.scrollIntoView({ block: 'nearest', behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
+  }
+  define('look-book', LookBook);
+
   /* ---------- Misc ---------- */
   document.addEventListener('click', async (e) => {
     const share = e.target.closest('[data-share]');

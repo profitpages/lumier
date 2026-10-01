@@ -1,0 +1,76 @@
+{%- comment -%} Book a consultation / visit the atelier — arch image, copy, detail rows (hours, address, contact) and buttons. {%- endcomment -%}
+{{ 'section-lumiere-more.css' | asset_url | stylesheet_tag }}
+{%- assign s = section.settings -%}
+<section class="section color-{{ s.color_scheme }}">
+  {%- render 'decor', preset: 'corner' -%}
+  <div class="page-width">
+    <div class="consult{% if s.image_right %} consult--image-right{% endif %}">
+      <div class="consult__media">
+        <div class="consult__frame frame frame--arch has-slab">
+          {%- render 'responsive-image', image: s.image, max: 1200, sizes: '(min-width: 990px) 36vw, 80vw', art: 'portrait', tone: 'blush' -%}
+        </div>
+        {%- if s.caption != blank -%}<span class="caption-chip caption-chip--serif consult__caption">{{ s.caption | escape }}</span>{%- endif -%}
+      </div>
+      <div class="consult__copy">
+        {%- if s.kicker != blank -%}<p class="kicker">{{ s.kicker | escape }}</p>{%- endif -%}
+        {%- if s.heading != blank -%}<h2 class="h2">{{ s.heading | escape }}</h2>{%- endif -%}
+        {%- if s.text != blank -%}<div class="rte consult__text">{{ s.text }}</div>{%- endif -%}
+        {%- if section.blocks.size > 0 -%}
+          <dl class="consult__details">
+            {%- for block in section.blocks -%}
+              <div class="consult__row" {{ block.shopify_attributes }}>
+                <dt>{%- render 'icon', name: block.settings.icon, size: 18 -%}<span>{{ block.settings.label | escape }}</span></dt>
+                <dd class="rte">{{ block.settings.value }}</dd>
+              </div>
+            {%- endfor -%}
+          </dl>
+        {%- endif -%}
+        <div class="btn-row">
+          {%- render 'button', label: s.button_label, url: s.button_link, style: 'solid' -%}
+          {%- render 'button', label: s.button2_label, url: s.button2_link, style: 'outline' -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Consultation / atelier",
+  "class": "section-consultation",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "checkbox", "id": "image_right", "label": "Image on the right", "default": false },
+    { "type": "text", "id": "caption", "label": "Caption chip", "default": "Complimentary, by appointment." },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "One-to-one" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Book a skin consultation." },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Twenty unhurried minutes with a Lumière specialist — in the atelier or by video — to build a ritual around your skin.</p>" },
+    { "type": "text", "id": "button_label", "label": "Primary button", "default": "Book a time" },
+    { "type": "url", "id": "button_link", "label": "Primary link", "info": "Your booking app or contact page." },
+    { "type": "text", "id": "button2_label", "label": "Secondary button", "default": "Get directions" },
+    { "type": "url", "id": "button2_link", "label": "Secondary link" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-5" }
+  ],
+  "blocks": [
+    {
+      "type": "detail", "name": "Detail row",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "options": [{ "value": "clock", "label": "Hours" }, { "value": "user", "label": "Person" }, { "value": "mail", "label": "Email" }, { "value": "gift", "label": "Gift" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "hand", "label": "Hand" }], "default": "clock" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Hours" },
+        { "type": "richtext", "id": "value", "label": "Details", "default": "<p>Tuesday – Saturday, 10am – 6pm</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Consultation / atelier",
+      "blocks": [
+        { "type": "detail" },
+        { "type": "detail", "settings": { "icon": "user", "label": "The atelier", "value": "<p>Add your studio address here</p>" } },
+        { "type": "detail", "settings": { "icon": "mail", "label": "Questions", "value": "<p>hello@yourstore.com</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

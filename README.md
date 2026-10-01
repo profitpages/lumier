@@ -13,7 +13,7 @@ assets/      theme.css (tokens, components, 2.5D system) · theme.js (vanilla, n
 config/      settings_schema.json (8 color schemes, typography, layout, 2.5D, cards, cart…) · settings_data.json
 layout/      theme.liquid · password.liquid
 locales/     en.default.json
-sections/    header-group.json · footer-group.json · 64 sections (main-*, hero, featured-products, ingredients, ritual-tabs, …)
+sections/    header-group.json · footer-group.json · 73 sections (main-*, hero, featured-products, ingredients, ritual-tabs, shop-the-look, …)
 snippets/    product-card (4 styles) · price · badge · rating · icon · button · responsive-image · product-form ·
              variant-picker · cart-item · cart-summary · pagination · breadcrumb · cosmetic-art (line-art placeholders) · decor · …
 templates/   JSON templates + customers/* + gift_card.liquid
@@ -31,4 +31,4 @@ shopify theme push --store <store>.myshopify.com --theme <id> --only sections/he
 
 ## Release zip
 Zip `assets config layout locales sections snippets templates` with forward-slash paths. Leave out
-`templates/index.sections-demo.json` and `templates/index.sections-demo-2.json` (QA only).
+the `templates/index.sections-demo*.json` QA pages.

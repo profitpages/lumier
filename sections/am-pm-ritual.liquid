@@ -1,0 +1,117 @@
+{%- comment -%} Morning & evening ritual — two routines side by side; each step is a product with quick add. {%- endcomment -%}
+{{ 'section-lumiere-more.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign s = section.settings
+  assign periods = 'am,pm' | split: ','
+  assign arts = 'serum,jar,tube,pump,compact,lipstick' | split: ','
+-%}
+<section class="section color-{{ s.color_scheme }}">
+  <div class="page-width">
+    {%- render 'section-heading', kicker: s.kicker, title: s.heading, text: s.text, align: 'center' -%}
+    <div class="ampm">
+      {%- for period in periods -%}
+        {%- liquid
+          if period == 'am'
+            assign p_scheme = s.am_scheme
+            assign p_title = s.am_title
+            assign p_text = s.am_text
+            assign p_icon = 'sun'
+          else
+            assign p_scheme = s.pm_scheme
+            assign p_title = s.pm_title
+            assign p_text = s.pm_text
+            assign p_icon = 'moon'
+          endif
+          assign n = 0
+        -%}
+        <div class="ampm__panel color-{{ p_scheme }}">
+          <header class="ampm__head">
+            <span class="ampm__icon">{%- render 'icon', name: p_icon, size: 22 -%}</span>
+            <h3 class="h3">{{ p_title | escape }}</h3>
+            {%- if p_text != blank -%}<p class="ampm__intro">{{ p_text | escape }}</p>{%- endif -%}
+          </header>
+          <ol class="ampm__list" role="list">
+            {%- for block in section.blocks -%}
+              {%- if block.settings.period == period -%}
+                {%- assign n = n | plus: 1 -%}
+                {%- assign p = block.settings.product -%}
+                {%- assign i = forloop.index0 | modulo: 6 -%}
+                <li class="ampm__step" {{ block.shopify_attributes }}>
+                  <span class="ampm__num">{{ n | prepend: '0' | slice: -2, 2 }}</span>
+                  <span class="ampm__thumb">
+                    {%- if p.featured_media -%}{{ p.featured_media | image_url: width: 160 | image_tag: loading: 'lazy', alt: '', width: 60, height: 60 }}{%- else -%}{%- render 'cosmetic-art', name: arts[i] -%}{%- endif -%}
+                  </span>
+                  <span class="ampm__meta">
+                    <span class="ampm__label">{{ block.settings.label | escape }}</span>
+                    {%- if p != blank -%}
+                      <a class="ampm__title" href="{{ p.url }}">{{ p.title | escape }}</a>
+                    {%- else -%}
+                      <span class="ampm__title">{{ 'products.placeholder_title' | t }}</span>
+                    {%- endif -%}
+                  </span>
+                  {%- if p != blank and p.available -%}
+                    {%- capture qa_label -%}{{ 'products.quick_add' | t }} — {{ p.price | money }}{%- endcapture -%}
+                    {%- if p.has_only_default_variant -%}
+                      {%- assign ampm_form = 'ampm-' | append: section.id | append: '-' | append: forloop.index -%}
+                      {%- form 'product', p, id: ampm_form, class: 'ampm__form', data-product-form: '', novalidate: 'novalidate' -%}
+                        <input type="hidden" name="id" value="{{ p.selected_or_first_available_variant.id }}">
+                        <button class="link-underline" type="submit" name="add">{{ qa_label }}</button>
+                      {%- endform -%}
+                    {%- else -%}
+                      <button class="link-underline ampm__form" type="button" data-quick-add="{{ p.url }}" aria-haspopup="dialog">{{ qa_label }}</button>
+                    {%- endif -%}
+                  {%- endif -%}
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ol>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "AM / PM ritual",
+  "class": "section-am-pm",
+  "max_blocks": 10,
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Morning to midnight" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A ritual for every hour." },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "header", "content": "Morning" },
+    { "type": "text", "id": "am_title", "label": "Title", "default": "First light" },
+    { "type": "text", "id": "am_text", "label": "Intro", "default": "Fresh, protected and softly luminous." },
+    { "type": "color_scheme", "id": "am_scheme", "label": "Color scheme", "default": "scheme-2" },
+    { "type": "header", "content": "Evening" },
+    { "type": "text", "id": "pm_title", "label": "Title", "default": "After hours" },
+    { "type": "text", "id": "pm_text", "label": "Intro", "default": "Richer textures that replenish while you rest." },
+    { "type": "color_scheme", "id": "pm_scheme", "label": "Color scheme", "default": "scheme-6" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Section color scheme", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "step", "name": "Step",
+      "settings": [
+        { "type": "select", "id": "period", "label": "Routine", "options": [{ "value": "am", "label": "Morning" }, { "value": "pm", "label": "Evening" }], "default": "am" },
+        { "type": "text", "id": "label", "label": "Step name", "default": "Cleanse" },
+        { "type": "product", "id": "product", "label": "Product" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AM / PM ritual",
+      "blocks": [
+        { "type": "step", "settings": { "period": "am", "label": "Cleanse" } },
+        { "type": "step", "settings": { "period": "am", "label": "Treat" } },
+        { "type": "step", "settings": { "period": "am", "label": "Protect" } },
+        { "type": "step", "settings": { "period": "pm", "label": "Melt" } },
+        { "type": "step", "settings": { "period": "pm", "label": "Restore" } },
+        { "type": "step", "settings": { "period": "pm", "label": "Seal" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
