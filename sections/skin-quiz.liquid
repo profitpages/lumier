@@ -1,0 +1,126 @@
+{%- comment -%}
+  "Find your ritual" — 3-step skin quiz (skin type → concern → budget). Each answer carries a
+  Search & Discovery filter parameter appended to the results collection URL.
+{%- endcomment -%}
+{{ 'section-extras.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign s = section.settings
+  assign results_url = s.collection.url | default: routes.all_products_collection_url
+  assign steps = 'skin,concern,budget' | split: ','
+-%}
+<gift-finder class="section color-{{ s.section_scheme }}" data-results="{{ results_url }}">
+  <div class="page-width">
+    <div class="quiz">
+      <div class="quiz__intro color-{{ s.color_scheme }}">
+        {%- render 'decor', preset: 'hero' -%}
+        <div class="quiz__intro-copy">
+          {%- if s.kicker != blank -%}<p class="kicker">{{ s.kicker | escape }}</p>{%- endif -%}
+          <h2 class="h2">{{ s.heading | escape }}</h2>
+          {%- if s.text != blank -%}<div class="rte quiz__text">{{ s.text }}</div>{%- endif -%}
+        </div>
+        <div class="quiz__art float-y" aria-hidden="true">{%- render 'cosmetic-art', name: 'serum', tone: 'lilac' -%}</div>
+      </div>
+      <div class="quiz__body">
+        <ol class="quiz__progress" role="list" aria-label="{{ 'sections.quiz_progress' | t }}">
+          {%- for step in steps -%}<li class="quiz__dot{% if forloop.first %} is-current{% endif %}" data-progress="{{ forloop.index0 }}"><span>{{ forloop.index }}</span></li>{%- endfor -%}
+        </ol>
+        {%- for step in steps -%}
+          {%- assign q_key = 'q_' | append: step -%}
+          <fieldset class="quiz__step" data-step="{{ forloop.index0 }}"{% unless forloop.first %} hidden{% endunless %}>
+            <legend class="quiz__q">
+              <span class="kicker">{{ 'sections.step_x_of_y' | t: index: forloop.index, count: 3 }}</span>
+              {{ s[q_key] | escape }}
+            </legend>
+            <div class="quiz__options">
+              {%- for block in section.blocks -%}
+                {%- if block.type == step -%}
+                  <button class="finder__option quiz__option" type="button" data-param="{{ block.settings.param | escape }}" {{ block.shopify_attributes }}>
+                    <span class="quiz__icon">{%- render 'icon', name: block.settings.icon, size: 20 -%}</span>
+                    <span class="quiz__label">{{ block.settings.label | escape }}{%- if block.settings.note != blank -%}<small>{{ block.settings.note | escape }}</small>{%- endif -%}</span>
+                  </button>
+                {%- endif -%}
+              {%- endfor -%}
+              <button class="finder__option quiz__option quiz__option--skip" type="button" data-param="">{{ 'sections.quiz_any' | t }}</button>
+            </div>
+            {%- unless forloop.first -%}<button class="link-underline" type="button" data-back>{% render 'icon', name: 'arrow-left', size: 16 %} {{ 'general.previous' | t }}</button>{%- endunless -%}
+          </fieldset>
+        {%- endfor -%}
+        <div class="quiz__done" data-done hidden>
+          <p class="quiz__q">{{ s.done_heading | escape }}</p>
+          <div class="btn-row">
+            <a class="btn btn--solid" href="{{ results_url }}" data-results-link>{{ s.button_label | escape }}{% render 'icon', name: 'arrow-right', size: 18 %}</a>
+            <button class="btn btn--outline" type="button" data-restart>{{ 'sections.quiz_restart' | t }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</gift-finder>
+
+{% schema %}
+{
+  "name": "Find your ritual quiz",
+  "class": "section-skin-quiz",
+  "max_blocks": 18,
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Ritual finder" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Find your ritual in three taps." },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Tell us a little about your skin and we'll edit the shelf for you.</p>" },
+    { "type": "text", "id": "q_skin", "label": "Question 1", "default": "How does your skin usually feel?" },
+    { "type": "text", "id": "q_concern", "label": "Question 2", "default": "What would you love to change?" },
+    { "type": "text", "id": "q_budget", "label": "Question 3", "default": "What's your budget?" },
+    { "type": "text", "id": "done_heading", "label": "Final message", "default": "Your edit is ready." },
+    { "type": "text", "id": "button_label", "label": "Results button", "default": "See my ritual" },
+    { "type": "collection", "id": "collection", "label": "Results collection", "info": "Defaults to all products. Filters must be enabled in Search & Discovery." },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Intro color scheme", "default": "scheme-3" },
+    { "type": "color_scheme", "id": "section_scheme", "label": "Section color scheme", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "skin", "name": "Answer · Skin type",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Dry" },
+        { "type": "text", "id": "note", "label": "Note", "default": "Tight, craves comfort" },
+        { "type": "select", "id": "icon", "label": "Icon", "options": [{ "value": "drop", "label": "Drop" }, { "value": "sun", "label": "Sun" }, { "value": "leaf", "label": "Leaf" }, { "value": "heart", "label": "Heart" }, { "value": "sparkle", "label": "Sparkle" }], "default": "drop" },
+        { "type": "text", "id": "param", "label": "Filter parameter", "default": "filter.p.m.custom.skin_type=Dry" }
+      ]
+    },
+    {
+      "type": "concern", "name": "Answer · Concern",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Dullness" },
+        { "type": "text", "id": "note", "label": "Note" },
+        { "type": "select", "id": "icon", "label": "Icon", "options": [{ "value": "sun", "label": "Sun" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "drop", "label": "Drop" }, { "value": "leaf", "label": "Leaf" }, { "value": "moon", "label": "Moon" }], "default": "sun" },
+        { "type": "text", "id": "param", "label": "Filter parameter", "default": "filter.p.product_type=Serum" }
+      ]
+    },
+    {
+      "type": "budget", "name": "Answer · Budget",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Under $40" },
+        { "type": "text", "id": "note", "label": "Note" },
+        { "type": "select", "id": "icon", "label": "Icon", "options": [{ "value": "tag", "label": "Tag" }, { "value": "gift", "label": "Gift" }, { "value": "sparkle", "label": "Sparkle" }], "default": "tag" },
+        { "type": "text", "id": "param", "label": "Filter parameter", "default": "filter.v.price.lte=40" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Find your ritual quiz",
+      "blocks": [
+        { "type": "skin", "settings": { "label": "Dry", "note": "Tight, craves comfort", "icon": "drop", "param": "filter.p.m.custom.skin_type=Dry" } },
+        { "type": "skin", "settings": { "label": "Oily", "note": "Shiny by midday", "icon": "sun", "param": "filter.p.m.custom.skin_type=Oily" } },
+        { "type": "skin", "settings": { "label": "Combination", "note": "A bit of both", "icon": "leaf", "param": "filter.p.m.custom.skin_type=Combination" } },
+        { "type": "skin", "settings": { "label": "Sensitive", "note": "Reacts easily", "icon": "heart", "param": "filter.p.m.custom.skin_type=Sensitive" } },
+        { "type": "concern", "settings": { "label": "Dullness", "icon": "sun", "param": "filter.p.product_type=Serum" } },
+        { "type": "concern", "settings": { "label": "Fine lines", "icon": "sparkle", "param": "filter.p.product_type=Treatment" } },
+        { "type": "concern", "settings": { "label": "Dehydration", "icon": "drop", "param": "filter.p.product_type=Moisturiser" } },
+        { "type": "concern", "settings": { "label": "Breakouts", "icon": "leaf", "param": "filter.p.product_type=Cleanser" } },
+        { "type": "budget", "settings": { "label": "Under $40", "icon": "tag", "param": "filter.v.price.lte=40" } },
+        { "type": "budget", "settings": { "label": "Under $80", "icon": "gift", "param": "filter.v.price.lte=80" } },
+        { "type": "budget", "settings": { "label": "Treat myself", "icon": "sparkle", "param": "filter.v.price.gte=80" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

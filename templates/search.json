@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-search",
+      "settings": {
+        "per_page": 16,
+        "suggestions": "serum, hydration, SPF, lip oil",
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

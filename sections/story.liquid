@@ -1,0 +1,131 @@
+{%- comment -%}
+  Image with text / brand story. Block-based copy (kicker, heading, text, list, button).
+  Layouts: corner (curved-corner frame) | arch (arch + champagne slab) | offset (offset blush slab, outline) | full (full-bleed split)
+{%- endcomment -%}
+{{ 'section-story.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign s = section.settings
+  assign frame_class = 'frame--corner has-shadow'
+  case s.layout
+    when 'arch'
+      assign frame_class = 'frame--arch has-slab'
+    when 'offset'
+      assign frame_class = 'frame--square'
+    when 'full'
+      assign frame_class = ''
+  endcase
+-%}
+<section class="story story--{{ s.layout }}{% if s.image_right %} story--image-right{% endif %}{% if s.layout != 'full' %} section{% endif %} color-{{ s.color_scheme }}">
+  <div class="story__grid{% if s.layout != 'full' %} page-width{% endif %}">
+    <div class="story__media">
+      {%- if s.layout == 'offset' -%}<span class="story__slab" aria-hidden="true"></span>{%- endif -%}
+      <div class="story__frame frame {{ frame_class }}">
+        {%- render 'responsive-image', image: s.image, max: 1600, sizes: '(min-width: 990px) 50vw, 100vw', class: 'story__img', art: s.art, tone: 'blush' -%}
+      </div>
+      {%- if s.show_dot -%}<span class="dot-accent story__dot" aria-hidden="true"></span>{%- endif -%}
+      {%- if s.caption != blank -%}<span class="caption-chip caption-chip--serif story__caption">{{ s.caption | escape }}</span>{%- endif -%}
+    </div>
+
+    <div class="story__copy">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'kicker' -%}
+            <p class="kicker" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</p>
+          {%- when 'heading' -%}
+            <h2 class="{% if block.settings.size == 'sm' %}h3{% else %}h2{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.heading | escape }}</h2>
+          {%- when 'text' -%}
+            <div class="rte story__text" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+          {%- when 'benefits' -%}
+            {%- assign items = block.settings.items | newline_to_br | split: '<br />' -%}
+            <ul class="tick-list" role="list" {{ block.shopify_attributes }}>
+              {%- for item in items -%}{%- assign it = item | strip -%}{%- if it != blank -%}<li>{{ it | escape }}</li>{%- endif -%}{%- endfor -%}
+            </ul>
+          {%- when 'button' -%}
+            <div class="story__cta" {{ block.shopify_attributes }}>{%- render 'button', label: block.settings.label, url: block.settings.link, style: block.settings.style -%}</div>
+          {%- when 'product' -%}
+            {%- assign p = block.settings.product -%}
+            {%- if p != blank -%}
+              <a class="story__product" href="{{ p.url }}" {{ block.shopify_attributes }}>
+                <span class="story__product-media">{%- render 'responsive-image', image: p.featured_media.preview_image, max: 200, sizes: '64px', art: 'serum' -%}</span>
+                <span><span class="story__product-title">{{ p.title | escape }}</span>{%- render 'price', product: p -%}</span>
+              </a>
+            {%- endif -%}
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image with text",
+  "class": "section-story",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    {
+      "type": "select", "id": "layout", "label": "Layout",
+      "options": [
+        { "value": "corner", "label": "Curved corner" },
+        { "value": "arch", "label": "Arch with offset slab" },
+        { "value": "offset", "label": "Offset color block" },
+        { "value": "full", "label": "Full-bleed split" }
+      ],
+      "default": "corner"
+    },
+    { "type": "checkbox", "id": "image_right", "label": "Image on the right", "default": true },
+    { "type": "checkbox", "id": "show_dot", "label": "Accent dot", "default": false },
+    { "type": "text", "id": "caption", "label": "Caption chip" },
+    {
+      "type": "select", "id": "art", "label": "Placeholder art",
+      "options": [{ "value": "pump", "label": "Pump" }, { "value": "serum", "label": "Serum" }, { "value": "jar", "label": "Jar" }, { "value": "portrait", "label": "Portrait" }],
+      "default": "pump"
+    },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-4" }
+  ],
+  "blocks": [
+    { "type": "kicker", "name": "Kicker", "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "The Lumière point of view" }] },
+    {
+      "type": "heading", "name": "Heading",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Everyday luxury, considered." },
+        { "type": "select", "id": "size", "label": "Size", "options": [{ "value": "lg", "label": "Large" }, { "value": "sm", "label": "Small" }], "default": "lg" }
+      ]
+    },
+    { "type": "text", "name": "Text", "settings": [{ "type": "richtext", "id": "text", "label": "Text", "default": "<p>Thoughtful formulas and considered rituals bring a little more pleasure to the everyday. We favour responsible packaging choices and lasting essentials over excess.</p>" }] },
+    { "type": "benefits", "name": "List", "settings": [{ "type": "textarea", "id": "items", "label": "Items (one per line)", "default": "Carefully considered formulas\nReusable and recyclable packaging where available\nBeauty rituals made for real life" }] },
+    {
+      "type": "button", "name": "Button",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Our story" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "select", "id": "style", "label": "Style", "options": [{ "value": "outline", "label": "Outline" }, { "value": "solid", "label": "Solid" }, { "value": "link", "label": "Underlined link" }], "default": "outline" }
+      ]
+    },
+    { "type": "product", "name": "Featured product", "limit": 1, "settings": [{ "type": "product", "id": "product", "label": "Product" }] }
+  ],
+  "presets": [
+    { "name": "Brand story", "blocks": [{ "type": "kicker" }, { "type": "heading" }, { "type": "text" }, { "type": "benefits" }, { "type": "button" }] },
+    {
+      "name": "Image with text — offset",
+      "settings": { "layout": "offset", "image_right": false, "art": "serum" },
+      "blocks": [
+        { "type": "kicker", "settings": { "text": "Skin first" } },
+        { "type": "heading", "settings": { "heading": "Your skin, in its best light." } },
+        { "type": "text", "settings": { "text": "<p>Our skincare brings thoughtful textures, clinically minded ingredients, and the pleasure of a slow morning together.</p>" } },
+        { "type": "button", "settings": { "label": "Explore skincare" } }
+      ]
+    },
+    {
+      "name": "Image with text — full bleed",
+      "settings": { "layout": "full", "image_right": false, "art": "jar" },
+      "blocks": [
+        { "type": "kicker", "settings": { "text": "The Lumière standard" } },
+        { "type": "heading", "settings": { "heading": "Formulas with intention", "size": "sm" } },
+        { "type": "text", "settings": { "text": "<p>Every texture begins with an edit of efficacious botanicals, barrier-loving actives, and sensorial details worth returning to.</p>" } },
+        { "type": "button", "settings": { "label": "Explore ingredients", "style": "link" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,83 @@
+{%- comment -%}
+  Newsletter — Shopify customer form (subscribers get the 'newsletter' tag and marketing consent).
+  Layouts: panel (centred, inside a panel) | band (split full-width band with joined field) | inline (split, underlined field)
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign nl_id = 'Newsletter-' | append: section.id
+  assign form_class = 'nl-form'
+  case s.layout
+    when 'band'
+      assign form_class = 'nl-form nl-form--pill'
+      assign btn_class = 'btn btn--accent'
+    when 'inline'
+      assign form_class = 'nl-form nl-form--line'
+      assign btn_class = 'btn'
+    else
+      assign btn_class = 'btn btn--solid'
+  endcase
+-%}
+<section class="section{% if s.layout != 'panel' %} newsletter-band color-{{ s.color_scheme }}{% else %} color-{{ s.section_scheme }}{% endif %}">
+  {%- if s.layout == 'band' and s.decor -%}{%- render 'decor', preset: 'band' -%}{%- endif -%}
+  <div class="page-width{% if s.layout == 'inline' %} page-width--nl{% endif %}">
+    <div class="newsletter newsletter--{{ s.layout }}{% if s.layout == 'panel' %} color-{{ s.color_scheme }}{% endif %}">
+      <div class="newsletter__copy">
+        {%- if s.kicker != blank -%}<p class="kicker{% if s.layout == 'band' %} kicker--accent{% endif %}">{{ s.kicker | escape }}</p>{%- endif -%}
+        {%- if s.heading != blank -%}<h2 class="{% if s.layout == 'inline' %}h3{% else %}h2{% endif %}">{{ s.heading | escape }}</h2>{%- endif -%}
+        {%- if s.text != blank -%}<div class="rte newsletter__text">{{ s.text }}</div>{%- endif -%}
+      </div>
+      {%- form 'customer', id: nl_id, class: form_class -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        {%- if form.posted_successfully? -%}
+          <p class="form-msg form-msg--ok" role="status" tabindex="-1" autofocus>{% render 'icon', name: 'check', size: 16 %} {{ 'newsletter.success' | t }}</p>
+        {%- else -%}
+          <div class="nl-form__field">
+            <label class="visually-hidden" for="{{ nl_id }}-email">{{ 'newsletter.email_label' | t }}</label>
+            <input class="input" id="{{ nl_id }}-email" type="email" name="contact[email]" autocomplete="email" required placeholder="{{ 'newsletter.email_label' | t }}"{% if form.errors %} aria-invalid="true" aria-describedby="{{ nl_id }}-error"{% endif %}>
+            <button class="{{ btn_class }}" type="submit">{{ s.button_label | escape }}</button>
+          </div>
+          {%- if form.errors -%}<p class="form-msg form-msg--error" id="{{ nl_id }}-error">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>{%- endif -%}
+          {%- if s.consent != blank -%}<p class="nl-form__consent">{{ s.consent | escape }}</p>{%- endif -%}
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "class": "section-newsletter",
+  "settings": [
+    {
+      "type": "select", "id": "layout", "label": "Layout",
+      "options": [
+        { "value": "panel", "label": "Centred panel" },
+        { "value": "band", "label": "Split band (joined field)" },
+        { "value": "inline", "label": "Split, underlined field" }
+      ],
+      "default": "panel"
+    },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "A little luminosity" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Notes from Lumière" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>New rituals, quiet launches, and thoughtful beauty notes delivered occasionally.</p>" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Join the list" },
+    { "type": "text", "id": "consent", "label": "Small print" },
+    { "type": "checkbox", "id": "decor", "label": "Glow orb (band layout)", "default": true },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Panel / band color scheme", "default": "scheme-5" },
+    { "type": "color_scheme", "id": "section_scheme", "label": "Section color scheme (panel layout)", "default": "scheme-1" },
+    { "type": "paragraph", "content": "Subscribers appear in Customers with marketing consent and the 'newsletter' tag." }
+  ],
+  "presets": [
+    { "name": "Newsletter" },
+    {
+      "name": "Newsletter — dark band",
+      "settings": { "layout": "band", "kicker": "The Lumière edit", "heading": "A softer kind of inbox.", "text": "", "button_label": "Join the edit", "color_scheme": "scheme-7" }
+    },
+    {
+      "name": "Newsletter — inline",
+      "settings": { "layout": "inline", "kicker": "Letters from Lumière", "heading": "Your ritual, in the know", "text": "<p>Receive considered skincare notes, early access, and a little beauty inspiration.</p>", "button_label": "Subscribe", "color_scheme": "scheme-5" }
+    }
+  ]
+}
+{% endschema %}

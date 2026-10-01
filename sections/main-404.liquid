@@ -1,0 +1,27 @@
+<section class="section color-{{ section.settings.color_scheme }}">
+  {%- render 'decor', preset: 'hero' -%}
+  <div class="page-width">
+    <div class="empty empty--big">
+      <div class="empty__art">{%- render 'cosmetic-art', name: 'compact', tone: 'blush' -%}</div>
+      <p class="kicker">404</p>
+      <h1 class="display">{{ section.settings.heading | default: 'Page not found' | escape }}</h1>
+      <div class="rte">{{ section.settings.text }}</div>
+      <div class="btn-row btn-row--center">
+        <a class="btn btn--solid" href="{{ routes.all_products_collection_url }}">{{ 'general.shop_all' | t }}</a>
+        <a class="btn btn--outline" href="{{ routes.root_url }}">{{ 'general.back_home' | t }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "404",
+  "class": "section-404",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "This page slipped away." },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Let's find you something luminous instead.</p>" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,67 @@
+{%- comment -%}
+  Reviews — integration point for review apps. Never invents reviews:
+  • App block(s) render the real review widget (breakdown + review cards).
+  • Rating summary reads the standard reviews.rating / reviews.rating_count metafields.
+  • With no app and no data, nothing shows to shoppers; merchants see a setup hint in the editor.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign has_app = false
+  for block in section.blocks
+    if block.type == '@app'
+      assign has_app = true
+    endif
+  endfor
+  assign r = product.metafields.reviews.rating.value
+  assign count = product.metafields.reviews.rating_count.value | default: 0
+-%}
+{%- if has_app or r != blank or request.design_mode -%}
+  <section class="section color-{{ s.color_scheme }}" id="reviews">
+    <div class="page-width">
+      <div class="reviews">
+        <header class="reviews__head">
+          <div class="sec-head__main">
+            {%- if s.kicker != blank -%}<p class="kicker kicker--accent">{{ s.kicker | escape }}</p>{%- endif -%}
+            {%- if s.heading != blank -%}<h2 class="h2">{{ s.heading | escape }}</h2>{%- endif -%}
+          </div>
+          {%- if r != blank -%}
+            {%- assign avg = r.rating | round: 1 -%}
+            {%- assign pct = r.rating | divided_by: r.scale_max | times: 100 -%}
+            <div class="reviews__summary">
+              <span class="rating__stars rating__stars--lg" style="--pct: {{ pct }}%;" aria-hidden="true">★★★★★</span>
+              <p class="reviews__score-line">{{ 'products.average_from' | t: rating: avg, count: count }}</p>
+              <span class="visually-hidden">{{ 'products.rating' | t: rating: avg, max: r.scale_max }}</span>
+            </div>
+          {%- endif -%}
+        </header>
+        <div class="reviews__app">
+          {%- for block in section.blocks -%}
+            {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
+          {%- endfor -%}
+          {%- if has_app == false and request.design_mode -%}
+            <div class="reviews__hint">
+              {%- render 'icon', name: 'star', size: 20 -%}
+              <p><strong>{{ 'sections.reviews_hint_title' | t }}</strong><br>{{ 'sections.reviews_hint' | t }}</p>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Reviews",
+  "class": "section-reviews",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Luminous words" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Loved in every light." },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Section color scheme", "default": "scheme-1" },
+    { "type": "paragraph", "content": "Install a reviews app and add its block here. The rating summary reads the reviews metafields that apps write automatically." }
+  ],
+  "blocks": [{ "type": "@app" }],
+  "presets": [{ "name": "Reviews" }]
+}
+{% endschema %}

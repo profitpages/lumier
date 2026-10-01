@@ -1,0 +1,21 @@
+/* ---------- Beauty categories / collection list ---------- */
+.cats { display: grid; grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 22px); list-style: none; margin: 0; padding: 0; }
+.cat__link { display: flex; flex-direction: column; gap: 14px; height: 100%; text-decoration: none; color: inherit; position: relative; }
+.cat__stage { position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; background: var(--linen); border: 1px solid color-mix(in srgb, var(--text) 10%, transparent); transition: transform .4s cubic-bezier(.2, .8, .2, 1), box-shadow .4s ease; }
+.cats--arch .cat__stage { border-radius: 999px 999px 0 0; border: 0; }
+.cats--stage .cat:first-child .cat__stage { border-radius: 0 110px 0 0; }
+.cat__img, .cat__stage .art-fallback { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2, .8, .2, 1); }
+.cat__link:hover .cat__stage { transform: translateY(calc(var(--depth) * -1)); box-shadow: 0 20px 48px rgba(var(--shadow-rgb), calc(.12 * var(--shadow-k))); }
+.cat__link:hover .cat__img { transform: scale(1.05); }
+.cat__body { display: grid; gap: 4px; padding-right: 44px; }
+.cat__title { font: 400 1.35rem/1.15 var(--font-heading); letter-spacing: -.01em; }
+.cat__text { font-size: .84rem; color: var(--muted); }
+.cat__count { font-size: .66rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-top: 2px; }
+.cat__arrow { position: absolute; right: 0; bottom: 4px; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--text) 25%, transparent); transition: background-color .25s, color .25s, transform .25s; }
+.cat__link:hover .cat__arrow { background: var(--btn); color: var(--btn-label); border-color: var(--btn); transform: translateX(3px); }
+@media (max-width: 989px) { .cats { grid-template-columns: repeat(min(var(--cols, 4), 3), minmax(0, 1fr)); } }
+@media (max-width: 749px) {
+  .cats { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 64%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 4px 2px 16px; position: relative; }
+  .cat { scroll-snap-align: start; }
+  .cat__title { font-size: 1.2rem; }
+}

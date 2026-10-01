@@ -1,0 +1,56 @@
+<dialog class="drawer color-{{ section.settings.color_scheme }}" id="CartDrawer" aria-labelledby="CartDrawerTitle" data-cart-drawer>
+  <div class="drawer__inner" data-cart-drawer-content>
+    <div class="drawer__head">
+      <div>
+        <p class="kicker">{{ 'cart.kicker' | t }}</p>
+        <h2 class="drawer__title h3" id="CartDrawerTitle">{{ 'cart.title' | t }} <span class="drawer__count">({{ cart.item_count }})</span></h2>
+      </div>
+      <button class="icon-btn icon-btn--ring" type="button" data-cart-close aria-label="{{ 'general.close' | t }}">{% render 'icon', name: 'close', size: 20 %}</button>
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+      <div class="drawer__body">
+        {%- render 'free-shipping-bar' -%}
+        <form action="{{ routes.cart_url }}" method="post" id="CartDrawerForm" novalidate>
+          <ul class="cart-lines" role="list">
+            {%- for item in cart.items -%}{%- render 'cart-item', item: item, index: forloop.index, prefix: 'Drawer' -%}{%- endfor -%}
+          </ul>
+          {%- if settings.cart_note -%}
+            <details class="cart-note">
+              <summary>{{ 'cart.note_label' | t }}</summary>
+              <label class="visually-hidden" for="CartDrawerNote">{{ 'cart.note_label' | t }}</label>
+              <textarea class="input" id="CartDrawerNote" name="note" rows="3" data-cart-note>{{ cart.note }}</textarea>
+            </details>
+          {%- endif -%}
+        </form>
+        {%- if settings.cart_recommendations -%}
+          <cart-recommendations class="cart-recs" data-product-id="{{ cart.items.first.product_id }}" data-url="{{ routes.product_recommendations_url }}?section_id=cart-recommendations&limit=4"></cart-recommendations>
+        {%- endif -%}
+      </div>
+      <div class="drawer__foot">
+        {%- render 'cart-summary', form_id: 'CartDrawerForm' -%}
+        <div class="drawer__links">
+          <a href="{{ routes.cart_url }}">{{ 'cart.view_bag' | t }}</a>
+          <button type="button" class="link-underline" data-cart-close>{{ 'cart.continue' | t }}</button>
+        </div>
+      </div>
+    {%- else -%}
+      <div class="drawer__empty">
+        <div class="drawer__empty-art">{%- render 'cosmetic-art', name: 'jar', tone: 'lilac' -%}</div>
+        <h3 class="h3">{{ 'cart.empty_title' | t }}</h3>
+        <p>{{ 'cart.empty_text' | t }}</p>
+        <a class="btn btn--solid" href="{{ section.settings.empty_link | default: routes.all_products_collection_url }}">{{ 'cart.empty_cta' | t }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</dialog>
+
+{% schema %}
+{
+  "name": "Cart drawer",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" },
+    { "type": "url", "id": "empty_link", "label": "Empty bag button link" }
+  ]
+}
+{% endschema %}

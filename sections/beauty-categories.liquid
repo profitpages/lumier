@@ -1,0 +1,83 @@
+{%- comment -%} Beauty categories — collection cards on sculpted 2.5D stages. Each card picks a Shopify collection. {%- endcomment -%}
+{{ 'section-categories.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign s = section.settings
+  assign arts = 'serum,lipstick,pump,jar,compact,tube' | split: ','
+  assign tones = 'blush,lilac,peach,sand,blush,lilac' | split: ','
+-%}
+<section class="section color-{{ s.color_scheme }}">
+  <div class="page-width">
+    {%- render 'section-heading', kicker: s.kicker, title: s.heading, text: s.text, link_label: s.link_label, link: routes.collections_url -%}
+    <ul class="cats cats--{{ s.style }}" role="list" style="--cols: {{ s.columns }};">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign b = block.settings
+          assign c = b.collection
+          assign title = b.title | default: c.title | default: 'Category'
+          assign img = b.image | default: c.featured_image
+          assign url = b.link | default: c.url | default: routes.collections_url
+          assign ai = forloop.index0 | modulo: 6
+        -%}
+        <li class="cat" data-reveal style="--tint: {{ b.tint }};" {{ block.shopify_attributes }}>
+          <a class="cat__link" href="{{ url }}">
+            <span class="cat__stage">
+              {%- render 'responsive-image', image: img, max: 800, sizes: '(min-width: 990px) 22vw, 46vw', class: 'cat__img', art: arts[ai], tone: tones[ai] -%}
+            </span>
+            <span class="cat__body">
+              <span class="cat__title">{{ title | escape }}</span>
+              {%- if b.text != blank -%}<span class="cat__text">{{ b.text | escape }}</span>{%- endif -%}
+              {%- if s.show_count and c.products_count > 0 -%}<span class="cat__count">{{ 'collections.product_count' | t: count: c.products_count }}</span>{%- endif -%}
+            </span>
+            <span class="cat__arrow" aria-hidden="true">{% render 'icon', name: 'arrow-right', size: 18 %}</span>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Beauty categories",
+  "class": "section-categories",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Shop by ritual" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Find your glow." },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "All collections" },
+    {
+      "type": "select", "id": "style", "label": "Card style",
+      "options": [{ "value": "stage", "label": "Sculpted stage" }, { "value": "arch", "label": "Arch window" }],
+      "default": "stage"
+    },
+    { "type": "range", "id": "columns", "label": "Cards per row (desktop)", "min": 2, "max": 6, "step": 1, "default": 4 },
+    { "type": "checkbox", "id": "show_count", "label": "Show product count", "default": true },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "category", "name": "Category",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "title", "label": "Title", "info": "Defaults to the collection title." },
+        { "type": "text", "id": "text", "label": "Description" },
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Defaults to the collection image, then 2.5D art." },
+        { "type": "url", "id": "link", "label": "Custom link" },
+        { "type": "color", "id": "tint", "label": "Stage tint", "default": "#efd1cf" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Beauty categories",
+      "blocks": [
+        { "type": "category", "settings": { "title": "Skincare", "text": "Serums, creams & essences", "tint": "#efd1cf" } },
+        { "type": "category", "settings": { "title": "Makeup", "text": "Soft-focus colour", "tint": "#ded0ea" } },
+        { "type": "category", "settings": { "title": "Body care", "text": "Veils, oils & milks", "tint": "#f5d3c2" } },
+        { "type": "category", "settings": { "title": "Fragrance", "text": "Quiet, skin-close scents", "tint": "#eadbd0" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

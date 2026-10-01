@@ -1,0 +1,550 @@
+{
+  "sections": {
+    "hero_split": {
+      "type": "hero",
+      "settings": {
+        "layout": "split",
+        "image_position": "center top",
+        "show_polaroids": true,
+        "caption": "A daily ritual, beautifully considered.",
+        "kicker": "A luminous daily practice",
+        "heading": "Rituals, refined.",
+        "text": "<p>High-performance beauty essentials designed for luminous everyday living.</p>",
+        "button_label": "Shop bestsellers",
+        "button2_label": "Discover the ritual",
+        "text_align": "left",
+        "content_right": false,
+        "height": "md",
+        "overlay": 35,
+        "color_scheme": "scheme-3"
+      }
+    },
+    "hero_cover": {
+      "type": "hero",
+      "settings": {
+        "layout": "cover",
+        "image_position": "center top",
+        "show_polaroids": true,
+        "caption": "A daily ritual, beautifully considered.",
+        "kicker": "A luminous daily practice",
+        "heading": "The night ritual.",
+        "text": "<p>High-performance beauty essentials designed for luminous everyday living.</p>",
+        "button_label": "Shop bestsellers",
+        "button2_label": "Discover the ritual",
+        "text_align": "left",
+        "content_right": false,
+        "height": "md",
+        "overlay": 35,
+        "color_scheme": "scheme-3"
+      }
+    },
+    "slideshow": {
+      "type": "slideshow",
+      "settings": {
+        "label": "Featured rituals",
+        "autoplay": true,
+        "interval": 6
+      },
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "kicker": "New ritual",
+            "heading": "Skin, lit from within.",
+            "text": "<p>Layered skincare for the little rituals that make every day feel luminous.</p>",
+            "button_label": "Shop now",
+            "art": "serum",
+            "tone": "blush",
+            "art_left": false,
+            "color_scheme": "scheme-1",
+            "badge": "New · Rose Dew"
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "kicker": "The night edit",
+            "heading": "Rest, repair, wake luminous.",
+            "text": "<p>Layered skincare for the little rituals that make every day feel luminous.</p>",
+            "button_label": "Shop now",
+            "art": "jar",
+            "tone": "lilac",
+            "art_left": true,
+            "color_scheme": "scheme-3"
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "kicker": "Soft-focus colour",
+            "heading": "A flush of something beautiful.",
+            "text": "<p>Layered skincare for the little rituals that make every day feel luminous.</p>",
+            "button_label": "Shop now",
+            "art": "compact",
+            "tone": "peach",
+            "art_left": false,
+            "color_scheme": "scheme-4"
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ]
+    },
+    "marquee": {
+      "type": "marquee",
+      "settings": {
+        "label": "Brand promises",
+        "separator": "sparkle",
+        "serif": true,
+        "speed": 40,
+        "direction": "left",
+        "color_scheme": "scheme-4"
+      },
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "text": "Dermatologist tested"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "text": "Fragrance-free formulas"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "text": "Cruelty-free, always"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "text": "Two samples with every order"
+          }
+        },
+        "item_5": {
+          "type": "item",
+          "settings": {
+            "text": "Recyclable glass"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5"
+      ]
+    },
+    "spotlight": {
+      "type": "featured-product",
+      "settings": {
+        "kicker": "Hero product",
+        "heading": "The one everyone asks about.",
+        "sticker": "Cult favourite",
+        "show_description": true,
+        "color_scheme": "scheme-2",
+        "product": "construct-race-kit-for-kids"
+      }
+    },
+    "cats": {
+      "type": "beauty-categories",
+      "settings": {
+        "kicker": "Shop by ritual",
+        "heading": "Find your glow.",
+        "link_label": "All collections",
+        "style": "stage",
+        "columns": 4,
+        "show_count": true,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "category_1": {
+          "type": "category",
+          "settings": {
+            "tint": "#efd1cf",
+            "title": "Skincare",
+            "text": "Serums, creams & essences"
+          }
+        },
+        "category_2": {
+          "type": "category",
+          "settings": {
+            "tint": "#ded0ea",
+            "title": "Makeup",
+            "text": "Soft-focus colour"
+          }
+        },
+        "category_3": {
+          "type": "category",
+          "settings": {
+            "tint": "#f5d3c2",
+            "title": "Body care",
+            "text": "Veils, oils & milks"
+          }
+        },
+        "category_4": {
+          "type": "category",
+          "settings": {
+            "tint": "#eadbd0",
+            "title": "Fragrance",
+            "text": "Quiet, skin-close scents"
+          }
+        }
+      },
+      "block_order": [
+        "category_1",
+        "category_2",
+        "category_3",
+        "category_4"
+      ]
+    },
+    "benefits_cards": {
+      "type": "benefits",
+      "settings": {
+        "kicker": "The glow standard",
+        "heading": "Luminosity that feels like skincare, not shimmer.",
+        "style": "cards",
+        "columns": 3,
+        "color_scheme": "scheme-2",
+        "section_scheme": "scheme-1"
+      },
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Instant dew",
+            "text": "<p>Light-catching hydration gives complexions a soft, glass-skin finish.</p>"
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "drop",
+            "title": "Deeply hydrated",
+            "text": "<p>Multi-weight hyaluronic acid cushions skin with lasting moisture.</p>"
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "sun",
+            "title": "Barrier-kind",
+            "text": "<p>A featherlight formula layers beautifully beneath makeup and SPF.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3"
+      ]
+    },
+    "testi_cards": {
+      "type": "testimonials",
+      "settings": {
+        "layout": "cards",
+        "kicker": "Luminous words",
+        "heading": "Loved in every light.",
+        "cta_label": "Shop the look",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "quote_1": {
+          "type": "quote",
+          "settings": {
+            "quote": "The glow is refined — my skin simply looks rested, hydrated and expensive.",
+            "author": "Maya R.",
+            "detail": "Verified buyer",
+            "stars": 5
+          }
+        },
+        "quote_2": {
+          "type": "quote",
+          "settings": {
+            "quote": "It disappears into my skin but leaves the most beautiful veil beneath makeup.",
+            "author": "Leena S.",
+            "detail": "Verified buyer",
+            "stars": 5
+          }
+        },
+        "quote_3": {
+          "type": "quote",
+          "settings": {
+            "quote": "My dry skin drinks this up. It has become the step I never skip.",
+            "author": "Amelia K.",
+            "detail": "Verified buyer",
+            "stars": 5
+          }
+        }
+      },
+      "block_order": [
+        "quote_1",
+        "quote_2",
+        "quote_3"
+      ]
+    },
+    "ritual_steps": {
+      "type": "ritual-steps",
+      "settings": {
+        "kicker": "Your ritual",
+        "heading": "Cleanse, treat, moisturise, protect.",
+        "use_metafield": false,
+        "panel": false,
+        "color_scheme": "scheme-2",
+        "section_scheme": "scheme-1"
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Cleanse",
+            "text": "Begin with a fresh, comfortable canvas."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Treat",
+            "text": "Add a targeted serum to your ritual."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Moisturise",
+            "text": "Seal in softness with a comforting cream."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "Protect",
+            "text": "Finish with broad-spectrum SPF in the morning."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ]
+    },
+    "routine": {
+      "type": "routine",
+      "settings": {
+        "kicker": "Build your ritual",
+        "heading": "A three-step glow story.",
+        "text": "<p>Thoughtful layers that let your skin look calm, plush and perfectly awake.</p>",
+        "bundle_kicker": "The full ritual",
+        "bundle_title": "Take the whole routine home.",
+        "button_label": "Add the routine",
+        "bundle_scheme": "scheme-6",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "label": "Cleanse",
+            "use_current": false
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "label": "Treat",
+            "use_current": true
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "label": "Moisturize",
+            "use_current": false
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "label": "Protect",
+            "use_current": false
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ]
+    },
+    "skin": {
+      "type": "skin-types",
+      "settings": {
+        "kicker": "Made for",
+        "heading": "Every skin type, gently.",
+        "use_metafield": true,
+        "color_scheme": "scheme-2"
+      },
+      "blocks": {
+        "type_1": {
+          "type": "type",
+          "settings": {
+            "icon": "drop",
+            "label": "Dry",
+            "text": "Craves cushion"
+          }
+        },
+        "type_2": {
+          "type": "type",
+          "settings": {
+            "icon": "sun",
+            "label": "Oily",
+            "text": "Needs balance"
+          }
+        },
+        "type_3": {
+          "type": "type",
+          "settings": {
+            "icon": "leaf",
+            "label": "Combination",
+            "text": "Wants both"
+          }
+        },
+        "type_4": {
+          "type": "type",
+          "settings": {
+            "icon": "heart",
+            "label": "Sensitive",
+            "text": "Loves gentle"
+          }
+        },
+        "type_5": {
+          "type": "type",
+          "settings": {
+            "icon": "sparkle",
+            "label": "Normal",
+            "text": "Keeps it simple"
+          }
+        }
+      },
+      "block_order": [
+        "type_1",
+        "type_2",
+        "type_3",
+        "type_4",
+        "type_5"
+      ]
+    },
+    "story_arch": {
+      "type": "story",
+      "settings": {
+        "layout": "arch",
+        "image_right": true,
+        "show_dot": true,
+        "art": "pump",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "kicker_1": {
+          "type": "kicker",
+          "settings": {
+            "text": "The Lumière point of view"
+          }
+        },
+        "heading_2": {
+          "type": "heading",
+          "settings": {
+            "heading": "Everyday luxury, considered.",
+            "size": "lg"
+          }
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Thoughtful formulas and considered rituals bring a little more pleasure to the everyday. We favour responsible packaging choices and lasting essentials over excess.</p>"
+          }
+        },
+        "benefits_4": {
+          "type": "benefits",
+          "settings": {
+            "items": "Carefully considered formulas\nReusable and recyclable packaging where available\nBeauty rituals made for real life"
+          }
+        },
+        "button_5": {
+          "type": "button",
+          "settings": {
+            "label": "Our story",
+            "style": "outline"
+          }
+        }
+      },
+      "block_order": [
+        "kicker_1",
+        "heading_2",
+        "text_3",
+        "benefits_4",
+        "button_5"
+      ]
+    },
+    "promos": {
+      "type": "promo-banner",
+      "settings": {
+        "kicker": "Chosen for you",
+        "heading": "A little more to love",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "promo_1": {
+          "type": "promo",
+          "settings": {
+            "layout": "side",
+            "kicker": "Skin reset",
+            "heading": "Comforting essentials for sensitive days.",
+            "link_label": "Discover skincare",
+            "color_scheme": "scheme-5"
+          }
+        },
+        "promo_2": {
+          "type": "promo",
+          "settings": {
+            "layout": "side",
+            "kicker": "After dark",
+            "heading": "The evening edit, rich in replenishment.",
+            "link_label": "Explore night care",
+            "color_scheme": "scheme-3"
+          }
+        }
+      },
+      "block_order": [
+        "promo_1",
+        "promo_2"
+      ]
+    }
+  },
+  "order": [
+    "hero_split",
+    "hero_cover",
+    "slideshow",
+    "marquee",
+    "spotlight",
+    "cats",
+    "benefits_cards",
+    "testi_cards",
+    "ritual_steps",
+    "routine",
+    "skin",
+    "story_arch",
+    "promos"
+  ]
+}

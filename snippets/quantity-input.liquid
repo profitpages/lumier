@@ -1,0 +1,9 @@
+{%- comment -%} Usage: {% render 'quantity-input', id: 'x', name: 'quantity', value: 1, min: 1, line: n, small: true, label: title, form: 'form-id' %} {%- endcomment -%}
+{%- assign qty_label = 'products.quantity' | t -%}
+{%- if label != blank -%}{%- assign qty_label = label -%}{%- endif -%}
+<quantity-input class="qty{% if small %} qty--sm{% endif %}">
+  <button class="qty__btn" type="button" name="minus" aria-label="{{ 'products.quantity_decrease' | t: title: qty_label | escape }}">{% render 'icon', name: 'minus', size: 16 %}</button>
+  <label class="visually-hidden" for="{{ id }}">{{ 'products.quantity' | t }} — {{ qty_label | escape }}</label>
+  <input class="qty__input" type="number" id="{{ id }}" name="{{ name | default: 'quantity' }}" value="{{ value | default: 1 }}" min="{{ min | default: 1 }}" inputmode="numeric"{% if form %} form="{{ form }}"{% endif %}{% if line %} data-line="{{ line }}"{% endif %}>
+  <button class="qty__btn" type="button" name="plus" aria-label="{{ 'products.quantity_increase' | t: title: qty_label | escape }}">{% render 'icon', name: 'plus', size: 16 %}</button>
+</quantity-input>

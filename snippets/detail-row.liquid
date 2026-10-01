@@ -1,0 +1,36 @@
+{%- comment -%}
+  Accordion row whose content can come from a product metafield. Rows with no content are skipped.
+  Usage: {% render 'detail-row', block: block, product: product, compact: false %}
+{%- endcomment -%}
+{%- liquid
+  assign b = block.settings
+  assign body = ''
+  case b.source
+    when 'description'
+      assign body = product.description
+    when 'ingredients'
+      assign body = product.metafields.custom.ingredients | metafield_tag
+    when 'how_to_use'
+      assign body = product.metafields.custom.how_to_use | metafield_tag
+    when 'results'
+      assign body = product.metafields.custom.results | metafield_tag
+    when 'skin_type'
+      assign body = product.metafields.custom.skin_type | metafield_tag
+    when 'size'
+      assign body = product.metafields.custom.size | metafield_tag
+  endcase
+  if body == blank
+    assign body = b.content
+  endif
+-%}
+{%- if body != blank or b.page != blank -%}
+  <details class="acc{% if compact %} acc--compact{% endif %}" data-accordion{% if b.open %} open{% endif %} {{ block.shopify_attributes }}>
+    <summary class="acc__q">{{ b.heading | escape }}<span class="acc__plus" aria-hidden="true"></span></summary>
+    <div class="acc__a">
+      <div class="acc__inner rte">
+        {{ body }}
+        {%- if b.page != blank -%}{{ b.page.content }}{%- endif -%}
+      </div>
+    </div>
+  </details>
+{%- endif -%}

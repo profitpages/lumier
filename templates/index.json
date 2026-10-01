@@ -1,0 +1,494 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "layout": "arch",
+        "image_position": "center top",
+        "show_polaroids": true,
+        "caption": "A daily ritual, beautifully considered.",
+        "kicker": "A luminous daily practice",
+        "heading": "Rituals, refined.",
+        "text": "<p>High-performance beauty essentials designed for luminous everyday living.</p>",
+        "button_label": "Shop bestsellers",
+        "button2_label": "Discover the ritual",
+        "text_align": "left",
+        "content_right": false,
+        "height": "md",
+        "overlay": 35,
+        "color_scheme": "scheme-3"
+      }
+    },
+    "trust": {
+      "type": "trust-bar",
+      "settings": {
+        "bold": false,
+        "color_scheme": "scheme-2"
+      },
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "text": "Thoughtfully formulated",
+            "icon": "none"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "text": "Cruelty-free essentials",
+            "icon": "none"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "text": "Beauty, made beautifully",
+            "icon": "none"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3"
+      ]
+    },
+    "the_edit": {
+      "type": "featured-products",
+      "settings": {
+        "kicker": "Cult favourites",
+        "heading": "The edit",
+        "link_label": "Shop all",
+        "limit": 4,
+        "layout": "grid",
+        "columns": 4,
+        "columns_mobile": "2",
+        "panel": false,
+        "color_scheme": "scheme-1",
+        "card_style": "editorial",
+        "image_ratio": "square",
+        "show_vendor": false,
+        "show_rating": true,
+        "show_badges": true,
+        "show_quick_add": true,
+        "show_secondary": true
+      }
+    },
+    "concerns": {
+      "type": "shop-by-concern",
+      "settings": {
+        "layout": "cards",
+        "kicker": "A ritual for every you",
+        "heading": "Shop by concern",
+        "link_label": "Discover",
+        "columns": 4,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "concern_1": {
+          "type": "concern",
+          "settings": {
+            "title": "Dryness",
+            "text": "Comforting hydration for thirsty skin."
+          }
+        },
+        "concern_2": {
+          "type": "concern",
+          "settings": {
+            "title": "Dullness",
+            "text": "Bring a little light to your daily ritual."
+          }
+        },
+        "concern_3": {
+          "type": "concern",
+          "settings": {
+            "title": "Sensitivity",
+            "text": "Thoughtful textures for a gentler feel."
+          }
+        },
+        "concern_4": {
+          "type": "concern",
+          "settings": {
+            "title": "Uneven tone",
+            "text": "A considered routine for a more even-looking glow."
+          }
+        }
+      },
+      "block_order": [
+        "concern_1",
+        "concern_2",
+        "concern_3",
+        "concern_4"
+      ]
+    },
+    "ingredients": {
+      "type": "ingredients",
+      "settings": {
+        "layout": "feature",
+        "kicker": "Good ingredients, thoughtfully chosen",
+        "heading": "The ingredient edit",
+        "color_scheme": "scheme-2"
+      },
+      "blocks": {
+        "ingredient_1": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Hyaluronic Acid",
+            "benefit": "Plump + quench",
+            "text": "<p>A moisture-loving favourite that helps skin feel supple and comfortably hydrated.</p>"
+          }
+        },
+        "ingredient_2": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Rosehip Oil",
+            "benefit": "Nourish + soften",
+            "text": "<p>A refined botanical oil rich in essential fatty acids to help skin feel soft and cared for.</p>"
+          }
+        },
+        "ingredient_3": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Peptides",
+            "benefit": "Smooth + support",
+            "text": "<p>Targeted peptides support a smoother-looking surface and a fresh, resilient feel.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "ingredient_1",
+        "ingredient_2",
+        "ingredient_3"
+      ]
+    },
+    "soft_focus": {
+      "type": "before-after",
+      "settings": {
+        "layout": "reveal",
+        "before_label": "Bare skin",
+        "after_label": "After the ritual",
+        "range_label": "Reveal image",
+        "start": 70,
+        "kicker": "A closer look",
+        "heading": "Skin, in soft focus",
+        "text": "<p>An illustrative view of a well-loved routine. Individual experiences vary.</p>",
+        "note": "A simple ritual. A more comfortable, radiant-looking finish.",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "community": {
+      "type": "testimonials",
+      "settings": {
+        "layout": "community",
+        "kicker": "Notes from our community",
+        "heading": "Loved in every light.",
+        "cta_label": "Shop the look",
+        "color_scheme": "scheme-6"
+      },
+      "blocks": {
+        "quote_1": {
+          "type": "quote",
+          "settings": {
+            "quote": "The kind of beauty ritual that makes an ordinary Tuesday feel like an occasion.",
+            "author": "Maya R.",
+            "detail": "Verified customer",
+            "stars": 5
+          }
+        },
+        "quote_2": {
+          "type": "quote",
+          "settings": {
+            "quote": "It disappears into my skin but leaves the most beautiful veil beneath makeup.",
+            "author": "Leena S.",
+            "detail": "Verified customer",
+            "stars": 5
+          }
+        }
+      },
+      "block_order": [
+        "quote_1",
+        "quote_2"
+      ]
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "kicker": "A few helpful notes",
+        "heading": "Frequently asked.",
+        "layout": "stacked",
+        "style": "faq",
+        "align": "left",
+        "schema_markup": true,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "When will my order ship?",
+            "answer": "<p>Orders are prepared within one business day and usually arrive in 2–5 days.</p>",
+            "open": false
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "What is your returns approach?",
+            "answer": "<p>Unopened products can be returned within 30 days for a full refund.</p>",
+            "open": false
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "How should I layer products?",
+            "answer": "<p>Thinnest to thickest: cleanse, treat with serums, moisturise, then protect with SPF in the morning.</p>",
+            "open": false
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Are the formulas suitable for sensitive skin?",
+            "answer": "<p>Each product page lists who a formula is made for. Patch test new products and check the full ingredient list.</p>",
+            "open": false
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Are you cruelty-free?",
+            "answer": "<p>Add your brand's cruelty-free and certification details here.</p>",
+            "open": false
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "How can I get order support?",
+            "answer": "<p>Write to us any time — we reply within one business day.</p>",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6"
+      ]
+    },
+    "story": {
+      "type": "story",
+      "settings": {
+        "layout": "corner",
+        "image_right": true,
+        "show_dot": false,
+        "art": "pump",
+        "color_scheme": "scheme-4"
+      },
+      "blocks": {
+        "kicker_1": {
+          "type": "kicker",
+          "settings": {
+            "text": "The Lumière point of view"
+          }
+        },
+        "heading_2": {
+          "type": "heading",
+          "settings": {
+            "heading": "Everyday luxury, considered.",
+            "size": "lg"
+          }
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Thoughtful formulas and considered rituals bring a little more pleasure to the everyday. We favour responsible packaging choices and lasting essentials over excess.</p>"
+          }
+        },
+        "benefits_4": {
+          "type": "benefits",
+          "settings": {
+            "items": "Carefully considered formulas\nReusable and recyclable packaging where available\nBeauty rituals made for real life"
+          }
+        },
+        "button_5": {
+          "type": "button",
+          "settings": {
+            "label": "Our story",
+            "style": "outline"
+          }
+        }
+      },
+      "block_order": [
+        "kicker_1",
+        "heading_2",
+        "text_3",
+        "benefits_4",
+        "button_5"
+      ]
+    },
+    "gift_sets": {
+      "type": "featured-products",
+      "settings": {
+        "kicker": "A little something lovely",
+        "heading": "Gift sets & limited editions",
+        "link_label": "",
+        "limit": 3,
+        "layout": "grid",
+        "columns": 4,
+        "columns_mobile": "2",
+        "panel": false,
+        "color_scheme": "scheme-2",
+        "card_style": "label",
+        "image_ratio": "square",
+        "show_vendor": false,
+        "show_rating": true,
+        "show_badges": true,
+        "show_quick_add": true,
+        "show_secondary": true
+      }
+    },
+    "skin_first": {
+      "type": "story",
+      "settings": {
+        "layout": "offset",
+        "image_right": false,
+        "show_dot": false,
+        "art": "serum",
+        "color_scheme": "scheme-4"
+      },
+      "blocks": {
+        "kicker_1": {
+          "type": "kicker",
+          "settings": {
+            "text": "Skin first"
+          }
+        },
+        "heading_2": {
+          "type": "heading",
+          "settings": {
+            "heading": "Your skin, in its best light.",
+            "size": "lg"
+          }
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Our skincare brings thoughtful textures, clinically minded ingredients, and the pleasure of a slow morning together.</p>"
+          }
+        },
+        "button_4": {
+          "type": "button",
+          "settings": {
+            "label": "Explore skincare",
+            "style": "outline"
+          }
+        }
+      },
+      "block_order": [
+        "kicker_1",
+        "heading_2",
+        "text_3",
+        "button_4"
+      ]
+    },
+    "ritual": {
+      "type": "ritual-tabs",
+      "settings": {
+        "kicker": "Build your moment",
+        "heading": "The three-step ritual",
+        "recommended_label": "Recommended",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "label": "Prep",
+            "title": "Begin with a soft, luminous canvas.",
+            "text": "<p>Cushion skin in a veil of hydration before every step that follows. A simple, sensorial start for lasting radiance.</p>"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "label": "Enhance",
+            "title": "Warmth, dimension, and the softest definition.",
+            "text": "<p>Add luminous sculpting shades that move with skin, creating an effortless, considered finish that feels like you.</p>"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "label": "Finish",
+            "title": "Seal in softness. Carry the glow onward.",
+            "text": "<p>A weightless, rose-infused mist makes every ritual feel freshly finished, from first light to after hours.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ]
+    },
+    "quote": {
+      "type": "testimonials",
+      "settings": {
+        "layout": "single",
+        "kicker": "Notes from our community",
+        "heading": "Loved in every light.",
+        "cta_label": "Shop the look",
+        "color_scheme": "scheme-6"
+      },
+      "blocks": {
+        "quote_1": {
+          "type": "quote",
+          "settings": {
+            "quote": "The kind of beauty ritual that makes an ordinary Tuesday feel like an occasion.",
+            "author": "Maya R.",
+            "detail": "Verified customer",
+            "stars": 5
+          }
+        }
+      },
+      "block_order": [
+        "quote_1"
+      ]
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "layout": "panel",
+        "kicker": "A little luminosity",
+        "heading": "Notes from Lumière",
+        "text": "<p>New rituals, quiet launches, and thoughtful beauty notes delivered occasionally.</p>",
+        "button_label": "Join the list",
+        "decor": true,
+        "color_scheme": "scheme-5",
+        "section_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "trust",
+    "the_edit",
+    "concerns",
+    "ingredients",
+    "soft_focus",
+    "community",
+    "faq",
+    "story",
+    "gift_sets",
+    "skin_first",
+    "ritual",
+    "quote",
+    "newsletter"
+  ]
+}

@@ -1,0 +1,16 @@
+{%- comment -%} Usage: {% render 'article-card', article: article, show_date: true, show_excerpt: true %} {%- endcomment -%}
+<article class="post" data-reveal>
+  <a class="post__media" href="{{ article.url }}" tabindex="-1" aria-hidden="true">
+    {%- assign post_arts = 'swatch,serum,compact' | split: ',' -%}
+    {%- assign post_tones = 'blush,lilac,peach' | split: ',' -%}
+    {%- assign pi = article.id | default: 0 | modulo: 3 -%}
+    {%- render 'responsive-image', image: article.image, max: 900, sizes: '(min-width: 990px) 30vw, 90vw', class: 'post__img', art: post_arts[pi], tone: post_tones[pi] -%}
+  </a>
+  <div class="post__body">
+    {%- if show_date -%}<p class="post__date">{{ article.published_at | time_tag: format: 'date' }}</p>{%- endif -%}
+    <h3 class="post__title"><a href="{{ article.url }}">{{ article.title | escape }}</a></h3>
+    {%- if show_excerpt -%}
+      <p class="post__excerpt">{%- if article.excerpt != blank -%}{{ article.excerpt | strip_html | truncatewords: 20 }}{%- else -%}{{ article.content | strip_html | truncatewords: 20 }}{%- endif -%}</p>
+    {%- endif -%}
+  </div>
+</article>

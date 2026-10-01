@@ -1,0 +1,157 @@
+{
+  "sections": {
+    "banner": {
+      "type": "collection-hero",
+      "settings": {
+        "kicker": "Collection 01",
+        "heading": "The Skincare Edit",
+        "text": "<p>Thoughtfully formulated essentials for skin that looks and feels beautifully cared for.</p>",
+        "title_size": "large",
+        "show_art": true,
+        "show_dot": true,
+        "caption": "A daily ritual, beautifully considered.",
+        "show_count": true,
+        "show_breadcrumb": true,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "concerns": {
+      "type": "shop-by-concern",
+      "settings": {
+        "layout": "chips",
+        "kicker": "A ritual for every you",
+        "heading": "Shop by concern",
+        "link_label": "Discover",
+        "columns": 4,
+        "color_scheme": "scheme-2"
+      },
+      "blocks": {
+        "concern_1": {
+          "type": "concern",
+          "settings": {
+            "title": "Dryness",
+            "text": "Comforting hydration for thirsty skin."
+          }
+        },
+        "concern_2": {
+          "type": "concern",
+          "settings": {
+            "title": "Dullness",
+            "text": "Comforting hydration for thirsty skin."
+          }
+        },
+        "concern_3": {
+          "type": "concern",
+          "settings": {
+            "title": "Sensitivity",
+            "text": "Comforting hydration for thirsty skin."
+          }
+        },
+        "concern_4": {
+          "type": "concern",
+          "settings": {
+            "title": "Uneven tone",
+            "text": "Comforting hydration for thirsty skin."
+          }
+        },
+        "concern_5": {
+          "type": "concern",
+          "settings": {
+            "title": "Fine lines",
+            "text": "Comforting hydration for thirsty skin."
+          }
+        }
+      },
+      "block_order": [
+        "concern_1",
+        "concern_2",
+        "concern_3",
+        "concern_4",
+        "concern_5"
+      ]
+    },
+    "grid": {
+      "type": "main-collection",
+      "settings": {
+        "per_page": 12,
+        "columns": 4,
+        "columns_mobile": "2",
+        "load_more": true,
+        "enable_filters": true,
+        "filter_layout": "drawer",
+        "open_filters": 2,
+        "enable_sorting": true,
+        "card_style": "gallery",
+        "image_ratio": "portrait",
+        "show_vendor": false,
+        "show_quick_add": true,
+        "filter_scheme": "scheme-2",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "standard": {
+      "type": "story",
+      "settings": {
+        "layout": "full",
+        "image_right": false,
+        "show_dot": false,
+        "art": "jar",
+        "color_scheme": "scheme-4"
+      },
+      "blocks": {
+        "kicker_1": {
+          "type": "kicker",
+          "settings": {
+            "text": "The Lumière standard"
+          }
+        },
+        "heading_2": {
+          "type": "heading",
+          "settings": {
+            "heading": "Formulas with intention",
+            "size": "sm"
+          }
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Every texture begins with an edit of efficacious botanicals, barrier-loving actives, and sensorial details worth returning to.</p>"
+          }
+        },
+        "button_4": {
+          "type": "button",
+          "settings": {
+            "label": "Explore ingredients",
+            "style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "kicker_1",
+        "heading_2",
+        "text_3",
+        "button_4"
+      ]
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "layout": "inline",
+        "kicker": "Letters from Lumière",
+        "heading": "Your ritual, in the know",
+        "text": "<p>Receive considered skincare notes, early access, and a little beauty inspiration.</p>",
+        "button_label": "Subscribe",
+        "decor": true,
+        "color_scheme": "scheme-5",
+        "section_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "concerns",
+    "grid",
+    "standard",
+    "newsletter"
+  ]
+}

@@ -1,0 +1,23 @@
+{%- comment -%}
+  Usage: {% render 'section-heading', kicker: s.kicker, title: s.heading, text: s.text, link_label: s.link_label, link: s.link, align: 'left', tag: 'h2', side: false %}
+{%- endcomment -%}
+{%- assign htag = tag | default: 'h2' -%}
+{%- if kicker != blank or title != blank or text != blank -%}
+  <header class="sec-head sec-head--{{ align | default: 'left' }}{% if side %} sec-head--side{% endif %}">
+    <div class="sec-head__main">
+      {%- if kicker != blank -%}<p class="kicker">{{ kicker | escape }}</p>{%- endif -%}
+      {%- if title != blank -%}<{{ htag }} class="h2">{{ title | escape }}</{{ htag }}>{%- endif -%}
+      {%- if text != blank and side == blank -%}<div class="sec-head__text rte">{{ text }}</div>{%- endif -%}
+    </div>
+    {%- if side and text != blank -%}<div class="sec-head__text sec-head__text--side rte">{{ text }}</div>{%- endif -%}
+    {%- if link_label != blank -%}
+      <a class="link-underline" href="{{ link | default: routes.all_products_collection_url }}">{{ link_label | escape }}</a>
+    {%- endif -%}
+    {%- if arrows -%}
+      <div class="rail-arrows">
+        <button class="circle-btn" type="button" data-rail="prev" aria-label="{{ 'general.previous' | t }}">{% render 'icon', name: 'arrow-left', size: 18 %}</button>
+        <button class="circle-btn" type="button" data-rail="next" aria-label="{{ 'general.next' | t }}">{% render 'icon', name: 'arrow-right', size: 18 %}</button>
+      </div>
+    {%- endif -%}
+  </header>
+{%- endif -%}

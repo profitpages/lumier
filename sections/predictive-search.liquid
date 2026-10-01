@@ -1,0 +1,46 @@
+{%- if predictive_search.performed -%}
+  {%- assign r = predictive_search.resources -%}
+  <div class="pred" id="predictive-search-results">
+    {%- if r.queries.size > 0 -%}
+      <div class="pred__group">
+        <p class="kicker">{{ 'search.suggestions' | t }}</p>
+        <ul class="chip-row" role="list">
+          {%- for q in r.queries -%}<li><a class="chip" href="{{ q.url }}">{{ q.styled_text }}</a></li>{%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+    {%- if r.products.size > 0 -%}
+      <div class="pred__group">
+        <p class="kicker">{{ 'search.products' | t }}</p>
+        <ul class="pred__products" role="listbox" aria-label="{{ 'search.products' | t }}">
+          {%- for p in r.products -%}
+            <li role="option" aria-selected="false">
+              <a class="pred__product" href="{{ p.url }}">
+                <span class="pred__thumb">{%- if p.featured_media -%}{{ p.featured_media | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}</span>
+                <span class="pred__meta"><span class="pred__title">{{ p.title | escape }}</span>{%- render 'price', product: p -%}</span>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+    {%- if r.collections.size > 0 or r.pages.size > 0 or r.articles.size > 0 -%}
+      <div class="pred__group">
+        <p class="kicker">{{ 'search.more' | t }}</p>
+        <ul class="chip-row" role="list">
+          {%- for c in r.collections -%}<li><a class="chip" href="{{ c.url }}">{{ c.title | escape }}</a></li>{%- endfor -%}
+          {%- for pg in r.pages -%}<li><a class="chip" href="{{ pg.url }}">{{ pg.title | escape }}</a></li>{%- endfor -%}
+          {%- for a in r.articles -%}<li><a class="chip" href="{{ a.url }}">{{ a.title | escape }}</a></li>{%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+    {%- if r.products.size == 0 and r.queries.size == 0 and r.collections.size == 0 and r.pages.size == 0 and r.articles.size == 0 -%}
+      <p class="pred__empty">{{ 'search.no_results' | t: terms: predictive_search.terms }}</p>
+    {%- endif -%}
+    <a class="btn btn--outline btn--block" href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}&options%5Bprefix%5D=last">{{ 'search.view_all' | t: terms: predictive_search.terms }}{% render 'icon', name: 'arrow-right', size: 18 %}</a>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{ "name": "Predictive search" }
+{% endschema %}

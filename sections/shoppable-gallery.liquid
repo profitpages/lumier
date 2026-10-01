@@ -1,0 +1,68 @@
+{{ 'section-extras.css' | asset_url | stylesheet_tag }}
+{%- assign s = section.settings -%}
+{%- assign arts = 'swatch,serum,compact,jar,lipstick' | split: ',' -%}
+{%- assign tones = 'blush,lilac,peach,sand,blush' | split: ',' -%}
+<section class="section color-{{ s.color_scheme }}">
+  <div class="page-width">
+    {%- render 'section-heading', kicker: s.kicker, title: s.heading, text: s.text, link_label: s.link_label, link: s.link -%}
+    <ul class="ugc" role="list">
+      {%- for block in section.blocks -%}
+        {%- assign b = block.settings -%}
+        {%- assign i = forloop.index0 | modulo: 5 -%}
+        <li class="ugc__tile" data-reveal {{ block.shopify_attributes }}>
+          <div class="ugc__media">
+            {%- assign ugc_alt = b.caption | default: b.image.alt -%}
+            {%- render 'responsive-image', image: b.image, max: 800, sizes: '(min-width: 990px) 20vw, 60vw', class: 'ugc__img', alt: ugc_alt, art: arts[i], tone: tones[i] -%}
+            {%- if b.handle != blank -%}<span class="ugc__handle glass">{{ b.handle | escape }}</span>{%- endif -%}
+          </div>
+          {%- if b.product != blank -%}
+            <a class="ugc__product glass" href="{{ b.product.url }}">
+              <span class="ugc__thumb">{%- if b.product.featured_media -%}{{ b.product.featured_media | image_url: width: 120 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}</span>
+              <span class="ugc__info"><span class="ugc__title">{{ b.product.title | escape }}</span>{%- render 'price', product: b.product -%}</span>
+              <span class="ugc__go" aria-hidden="true">{% render 'icon', name: 'bag', size: 15 %}</span>
+            </a>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shoppable gallery",
+  "class": "section-ugc",
+  "max_blocks": 10,
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "#MyGlowRitual" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "On real shelves, in real light." },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Tap a moment to shop the ritual behind it.</p>" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Follow along" },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "photo", "name": "Photo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "handle", "label": "Credit", "default": "@softmorningrituals" },
+        { "type": "text", "id": "caption", "label": "Image description (screen readers)" },
+        { "type": "product", "id": "product", "label": "Tagged product" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shoppable gallery",
+      "blocks": [
+        { "type": "photo", "settings": { "handle": "@maya.glows" } },
+        { "type": "photo", "settings": { "handle": "@anika.skin" } },
+        { "type": "photo", "settings": { "handle": "@leena.rituals" } },
+        { "type": "photo", "settings": { "handle": "@shelfie.daily" } },
+        { "type": "photo", "settings": { "handle": "@softmorningrituals" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

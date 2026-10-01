@@ -1,0 +1,62 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "settings": {
+        "kicker": "Shop by ritual",
+        "heading": "All collections",
+        "style": "arch",
+        "columns": 4,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "standard": {
+      "type": "story",
+      "settings": {
+        "layout": "full",
+        "image_right": false,
+        "show_dot": false,
+        "art": "jar",
+        "color_scheme": "scheme-4"
+      },
+      "blocks": {
+        "kicker_1": {
+          "type": "kicker",
+          "settings": {
+            "text": "The Lumière standard"
+          }
+        },
+        "heading_2": {
+          "type": "heading",
+          "settings": {
+            "heading": "Formulas with intention",
+            "size": "sm"
+          }
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Every texture begins with an edit of efficacious botanicals, barrier-loving actives, and sensorial details worth returning to.</p>"
+          }
+        },
+        "button_4": {
+          "type": "button",
+          "settings": {
+            "label": "Explore ingredients",
+            "style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "kicker_1",
+        "heading_2",
+        "text_3",
+        "button_4"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "standard"
+  ]
+}

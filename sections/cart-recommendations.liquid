@@ -1,0 +1,32 @@
+{%- comment -%} Rendered via the recommendations endpoint for the cart drawer / cart page. {%- endcomment -%}
+{%- if recommendations.performed and recommendations.products_count > 0 -%}
+  <div class="cart-recs__inner">
+    <p class="kicker">{{ 'cart.recommended' | t }}</p>
+    <ul class="mini-list" role="list">
+      {%- for p in recommendations.products limit: 4 -%}
+        <li class="mini">
+          <a class="mini__media" href="{{ p.url }}" tabindex="-1" aria-hidden="true">
+            {%- if p.featured_media -%}{{ p.featured_media | image_url: width: 200 | image_tag: loading: 'lazy', alt: '' }}{%- else -%}{%- render 'cosmetic-art', name: 'serum', tone: 'blush' -%}{%- endif -%}
+          </a>
+          <div class="mini__info">
+            <a class="mini__title" href="{{ p.url }}">{{ p.title | escape }}</a>
+            {%- render 'price', product: p -%}
+          </div>
+          {%- if p.available and p.has_only_default_variant -%}
+            {%- assign mini_form = 'mini-' | append: p.id -%}
+            {%- form 'product', p, id: mini_form, data-product-form: '', novalidate: 'novalidate' -%}
+              <input type="hidden" name="id" value="{{ p.selected_or_first_available_variant.id }}">
+              <button class="circle-btn" type="submit" name="add" aria-label="{{ 'products.add_title' | t: title: p.title | escape }}">{% render 'icon', name: 'plus', size: 16 %}</button>
+            {%- endform -%}
+          {%- elsif p.available -%}
+            <button class="circle-btn" type="button" data-quick-add="{{ p.url }}" aria-label="{{ 'products.choose_options_for' | t: title: p.title | escape }}">{% render 'icon', name: 'plus', size: 16 %}</button>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{ "name": "Cart recommendations" }
+{% endschema %}

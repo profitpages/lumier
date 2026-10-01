@@ -1,0 +1,73 @@
+{%- comment -%} Product spotlight for any page — same gallery, variant picker and buy box as the product page; prices update client-side. {%- endcomment -%}
+{{ 'component-product.css' | asset_url | stylesheet_tag }}
+{{ 'section-extras.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign s = section.settings
+  assign product = s.product
+  assign current_variant = product.selected_or_first_available_variant
+  assign form_id = 'spotlight-' | append: section.id
+-%}
+<section class="section color-{{ s.color_scheme }}">
+  {%- render 'decor', preset: 'band' -%}
+  <div class="page-width">
+    {%- render 'section-heading', kicker: s.kicker, title: s.heading -%}
+    {%- if product != blank -%}
+      <product-info class="spotlight" data-section="{{ section.id }}" data-url="{{ product.url }}" data-local-price>
+        <media-gallery class="gallery{% if settings.grain_enable %} grain{% endif %}" data-gallery>
+          <div class="gallery__stage">
+            {%- if s.sticker != blank -%}<span class="spotlight__sticker">{{ s.sticker | escape }}</span>{%- endif -%}
+            {%- if product.media.size > 1 -%}<span class="gallery__count" aria-hidden="true"><span data-gallery-index>1</span> / {{ product.media.size | at_most: 6 }}</span>{%- endif -%}
+            <ul class="gallery__track" role="list" data-gallery-track>
+              {%- if product.media.size > 0 -%}
+                {%- for media in product.media limit: 6 -%}
+                  {%- assign m_alt = media.alt | default: product.title -%}
+                  <li class="gallery__slide" data-media-id="{{ media.id }}">{{ media.preview_image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1200, 1400', sizes: '(min-width: 990px) 46vw, 92vw', class: 'gallery__img', alt: m_alt }}</li>
+                {%- endfor -%}
+              {%- else -%}
+                <li class="gallery__slide gallery__slide--art">{%- render 'cosmetic-art', name: 'serum', tone: 'blush' -%}</li>
+              {%- endif -%}
+            </ul>
+            {%- if product.media.size > 1 -%}
+              <div class="gallery__controls">
+                <button class="circle-btn circle-btn--glass" type="button" data-gallery-prev aria-label="{{ 'general.previous' | t }}">{% render 'icon', name: 'arrow-left', size: 18 %}</button>
+                <button class="circle-btn circle-btn--glass" type="button" data-gallery-next aria-label="{{ 'general.next' | t }}">{% render 'icon', name: 'arrow-right', size: 18 %}</button>
+              </div>
+            {%- endif -%}
+          </div>
+        </media-gallery>
+        <div class="pdp__info spotlight__info">
+          {%- assign sp_kind = product.metafields.custom.subtitle.value | default: product.type -%}
+          {%- if sp_kind != blank -%}<p class="kicker">{{ sp_kind | escape }}</p>{%- endif -%}
+          <h3 class="h1 spotlight__title"><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
+          {%- render 'rating', product: product, show_count: true -%}
+          <div data-product-price>{%- render 'price', product: product, variant: current_variant, size: 'lg', show_save: true -%}</div>
+          {%- if s.show_description and product.description != blank -%}<p class="pdp__lead">{{ product.description | strip_html | truncatewords: 30 }}</p>{%- endif -%}
+          {%- render 'variant-picker', product: product, form_id: form_id, uid: form_id -%}
+          {%- render 'product-form', product: product, form_id: form_id, variant: current_variant, show_qty: true, show_buy_now: false -%}
+          <a class="link-underline" href="{{ product.url }}">{{ 'products.view_details' | t }} {% render 'icon', name: 'arrow-right', size: 16 %}</a>
+        </div>
+      </product-info>
+    {%- else -%}
+      <div class="spotlight">
+        <div class="gallery__stage"><div class="gallery__slide gallery__slide--art">{%- render 'cosmetic-art', name: 'serum', tone: 'blush' -%}</div></div>
+        <div class="pdp__info"><h3 class="h1">{{ 'products.placeholder_title' | t }}</h3><p class="muted">{{ 'sections.pick_product' | t }}</p></div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured product",
+  "class": "section-featured-product",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Hero product" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The one everyone asks about." },
+    { "type": "text", "id": "sticker", "label": "Round sticker", "default": "Cult favourite" },
+    { "type": "checkbox", "id": "show_description", "label": "Show description", "default": true },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" }
+  ],
+  "presets": [{ "name": "Featured product" }]
+}
+{% endschema %}

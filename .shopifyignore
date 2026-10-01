@@ -1,0 +1,6 @@
+.git/
+_design-source/
+*.md
+.gitignore
+.gitattributes
+.theme-check.yml

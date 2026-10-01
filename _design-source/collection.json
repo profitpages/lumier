@@ -1,0 +1,285 @@
+{
+ "announcement-bar": {
+  "color": "#fffdfa",
+  "bg": "#2d201d"
+ },
+ "announcement-text": {
+  "text": "Complimentary shipping on orders over $75"
+ },
+ "v": {
+  "color": "#2d201d",
+  "weight": "medium",
+  "size": 16.0
+ },
+ "badge-bestseller": {
+  "text": "Bestseller"
+ },
+ "badge-editor": {
+  "text": "Editor’s pick"
+ },
+ "badge-new": {
+  "text": "New"
+ },
+ "cart-empty-copy": {
+  "text": "Add a beautifully considered essential to begin your ritual."
+ },
+ "cart-empty-title": {
+  "text": "Your bag is waiting"
+ },
+ "cart-title": {
+  "text": "Your bag"
+ },
+ "checkout-button": {
+  "text": "Proceed to checkout"
+ },
+ "collection-copy": {
+  "text": "Thoughtfully formulated essentials for skin that looks and feels beautifully cared for."
+ },
+ "collection-hero": {
+  "bg": "#f8f4ed"
+ },
+ "collection-kicker": {
+  "text": "Collection 01"
+ },
+ "collection-title": {
+  "text": "The Skincare Edit"
+ },
+ "concern-label": {
+  "text": "Shop by concern"
+ },
+ "crumb-home": {
+  "text": "Home"
+ },
+ "crumb-shop": {
+  "text": "Shop"
+ },
+ "crumb-skincare": {
+  "text": "Skincare"
+ },
+ "empty-copy": {
+  "text": "Try clearing a filter, or explore the full skincare edit."
+ },
+ "empty-title": {
+  "text": "No rituals found"
+ },
+ "filter-button": {
+  "text": "Filter"
+ },
+ "filter-title": {
+  "text": "Refine your ritual"
+ },
+ "footer-contact": {
+  "text": "Contact"
+ },
+ "footer-copy": {
+  "text": "Thoughtful formulas for the quiet luxury of everyday care."
+ },
+ "footer-instagram": {
+  "text": "Instagram"
+ },
+ "footer-journal": {
+  "text": "The journal"
+ },
+ "footer-legal": {
+  "text": "© 2026 LUMIÈRE BEAUTY. Rituals, refined."
+ },
+ "footer-shipping": {
+  "text": "Shipping & returns"
+ },
+ "footer-wordmark": {
+  "text": "LUMIÈRE BEAUTY"
+ },
+ "hero-note": {
+  "text": "A daily ritual, beautifully considered."
+ },
+ "ingredient-banner": {
+  "bg": "#e9d7cc"
+ },
+ "ingredient-copy": {
+  "text": "Every texture begins with an edit of efficacious botanicals, barrier-loving actives, and sensorial details worth returning to."
+ },
+ "ingredient-cta": {
+  "text": "Explore ingredients"
+ },
+ "ingredient-kicker": {
+  "text": "The LUMIÈRE standard"
+ },
+ "ingredient-title": {
+  "text": "Formulas with intention"
+ },
+ "load-more-button": {
+  "text": "Discover more"
+ },
+ "mobile-filter-button": {
+  "text": "Filter"
+ },
+ "nav-about": {
+  "text": "About"
+ },
+ "nav-new": {
+  "text": "New arrivals"
+ },
+ "nav-rituals": {
+  "text": "Rituals"
+ },
+ "nav-shop": {
+  "text": "Shop"
+ },
+ "newsletter-button": {
+  "text": "Subscribe"
+ },
+ "newsletter-copy": {
+  "text": "Receive considered skincare notes, early access, and a little beauty inspiration."
+ },
+ "newsletter-kicker": {
+  "text": "Letters from LUMIÈRE"
+ },
+ "newsletter-label": {
+  "text": "Email address"
+ },
+ "newsletter-section": {
+  "bg": "#e9d7cc"
+ },
+ "newsletter-title": {
+  "text": "Your ritual, in the know"
+ },
+ "pill-dryness": {
+  "text": "Dryness"
+ },
+ "pill-dullness": {
+  "text": "Dullness"
+ },
+ "pill-lines": {
+  "text": "Fine lines"
+ },
+ "pill-sensitivity": {
+  "text": "Sensitivity"
+ },
+ "pill-tone": {
+  "text": "Uneven tone"
+ },
+ "product-count-label": {
+  "text": "8 considered essentials"
+ },
+ "product-daily-desc": {
+  "text": "Broad spectrum SPF 50 glow"
+ },
+ "product-daily-name": {
+  "text": "Daily Dew SPF"
+ },
+ "product-daily-price": {
+  "text": "$48"
+ },
+ "product-daily-rating": {
+  "text": "★★★★★  4.8 (109)"
+ },
+ "product-glow-desc": {
+  "text": "Radiance + refined texture"
+ },
+ "product-glow-name": {
+  "text": "Glow Veil Serum"
+ },
+ "product-glow-price": {
+  "text": "$68"
+ },
+ "product-glow-rating": {
+  "text": "★★★★★  4.9 (128)"
+ },
+ "product-moon-desc": {
+  "text": "Comforting cream-to-milk cleanse"
+ },
+ "product-moon-name": {
+  "text": "Moonlit Cleanser"
+ },
+ "product-moon-price": {
+  "text": "$46"
+ },
+ "product-moon-rating": {
+  "text": "★★★★★  4.9 (88)"
+ },
+ "product-night-desc": {
+  "text": "Restorative botanical night oil"
+ },
+ "product-night-name": {
+  "text": "Night Bloom Oil"
+ },
+ "product-night-price": {
+  "text": "$76"
+ },
+ "product-night-rating": {
+  "text": "★★★★★  5.0 (67)"
+ },
+ "product-rose-desc": {
+  "text": "A softening botanical refresh"
+ },
+ "product-rose-name": {
+  "text": "Rosewater Mist"
+ },
+ "product-rose-price": {
+  "text": "$42"
+ },
+ "product-rose-rating": {
+  "text": "★★★★★  4.7 (74)"
+ },
+ "product-sculpt-desc": {
+  "text": "Cooling contour ritual"
+ },
+ "product-sculpt-name": {
+  "text": "Sculpt & Define"
+ },
+ "product-sculpt-price": {
+  "text": "$54"
+ },
+ "product-sculpt-rating": {
+  "text": "★★★★★  4.8 (61)"
+ },
+ "product-silk-desc": {
+  "text": "Cushioning moisture veil"
+ },
+ "product-silk-name": {
+  "text": "Silk Cloud Cream"
+ },
+ "product-silk-price": {
+  "text": "$62"
+ },
+ "product-silk-rating": {
+  "text": "★★★★★  4.8 (96)"
+ },
+ "product-velvet-desc": {
+  "text": "A velvety line-smoothing balm"
+ },
+ "product-velvet-name": {
+  "text": "Velvet Eye Elixir"
+ },
+ "product-velvet-price": {
+  "text": "$72"
+ },
+ "product-velvet-rating": {
+  "text": "★★★★★  4.9 (52)"
+ },
+ "reset-button": {
+  "text": "Reset filters"
+ },
+ "search-label": {
+  "text": "Search products"
+ },
+ "search-title": {
+  "text": "Find your ritual"
+ },
+ "site-footer": {
+  "color": "#f8f4ed",
+  "bg": "#2d201d"
+ },
+ "site-header": {
+  "bg": "#fffdfa"
+ },
+ "sort-label": {
+  "text": "Sort by"
+ },
+ "subtotal-label": {
+  "text": "Subtotal"
+ },
+ "wordmark": {
+  "text": "LUMIÈRE BEAUTY"
+ }
+}

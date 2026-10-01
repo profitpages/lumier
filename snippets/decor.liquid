@@ -1,0 +1,19 @@
+{%- comment -%}
+  Lumière 2.5D background layer: glow orb, accent dot and soft arcs. Hidden when Theme settings ›
+  2.5D effects › "Show glow orbs, accent dots & slabs" is off.
+  Usage: {% render 'decor', preset: 'hero' %}  presets: hero, corner, band, dot
+{%- endcomment -%}
+{%- if settings.decor_enable -%}
+  <div class="decor decor--{{ preset | default: 'corner' }}" aria-hidden="true">
+    {%- case preset -%}
+      {%- when 'hero' -%}
+        <span class="glow"></span>
+      {%- when 'band' -%}
+        <span class="glow glow--band"></span>
+      {%- when 'dot' -%}
+        <span class="dot-accent"></span>
+      {%- else -%}
+        <span class="glow glow--corner"></span>
+    {%- endcase -%}
+  </div>
+{%- endif -%}

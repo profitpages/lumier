@@ -1,0 +1,54 @@
+{%- assign s = section.settings -%}
+<section class="section section--tight color-{{ s.color_scheme }}" data-cart-page>
+  <div class="page-width">
+    <header class="cart-page__head">
+      <p class="kicker">{{ 'cart.kicker' | t }}</p>
+      <h1 class="h1">{{ 'cart.title' | t }}</h1>
+    </header>
+    {%- if cart.item_count > 0 -%}
+      <div class="cart-page">
+        <div class="cart-page__items">
+          {%- render 'free-shipping-bar' -%}
+          <form action="{{ routes.cart_url }}" method="post" id="CartPageForm" novalidate>
+            <ul class="cart-lines cart-lines--page" role="list">
+              {%- for item in cart.items -%}{%- render 'cart-item', item: item, index: forloop.index, prefix: 'Page' -%}{%- endfor -%}
+            </ul>
+            {%- if settings.cart_note -%}
+              <label class="label" for="CartPageNote">{{ 'cart.note_label' | t }}</label>
+              <textarea class="input" id="CartPageNote" name="note" rows="3" data-cart-note>{{ cart.note }}</textarea>
+            {%- endif -%}
+            <noscript><button class="btn btn--outline btn--sm" type="submit" name="update">{{ 'cart.update' | t }}</button></noscript>
+          </form>
+        </div>
+        <aside class="cart-page__summary color-{{ s.summary_scheme }}">
+          <h2 class="h3">{{ 'cart.summary' | t }}</h2>
+          {%- render 'cart-summary', form_id: 'CartPageForm' -%}
+          {%- if additional_checkout_buttons and s.express -%}<div class="cart-page__express">{{ content_for_additional_checkout_buttons }}</div>{%- endif -%}
+        </aside>
+      </div>
+      {%- if settings.cart_recommendations -%}
+        <cart-recommendations class="cart-recs cart-recs--page" data-product-id="{{ cart.items.first.product_id }}" data-url="{{ routes.product_recommendations_url }}?section_id=cart-recommendations&limit=4"></cart-recommendations>
+      {%- endif -%}
+    {%- else -%}
+      <div class="empty">
+        <div class="empty__art">{%- render 'cosmetic-art', name: 'jar', tone: 'lilac' -%}</div>
+        <h2 class="h3">{{ 'cart.empty_title' | t }}</h2>
+        <p>{{ 'cart.empty_text' | t }}</p>
+        <a class="btn btn--solid" href="{{ routes.all_products_collection_url }}">{{ 'cart.empty_cta' | t }}</a>
+        {%- if shop.customer_accounts_enabled and customer == nil -%}<p class="empty__hint">{{ 'cart.login_hint_html' | t: link: routes.account_login_url }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "class": "section-main-cart",
+  "settings": [
+    { "type": "checkbox", "id": "express", "label": "Show express checkout buttons", "default": true },
+    { "type": "color_scheme", "id": "summary_scheme", "label": "Summary color scheme", "default": "scheme-4" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ]
+}
+{% endschema %}

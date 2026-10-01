@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "settings": {
+        "heading": "This page slipped away.",
+        "text": "<p>Let's find you something luminous instead.</p>",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "best": {
+      "type": "featured-products",
+      "settings": {
+        "kicker": "While you're here",
+        "heading": "Cult favourites",
+        "link_label": "",
+        "limit": 4,
+        "layout": "grid",
+        "columns": 4,
+        "columns_mobile": "2",
+        "panel": false,
+        "color_scheme": "scheme-1",
+        "card_style": "editorial",
+        "image_ratio": "square",
+        "show_vendor": false,
+        "show_rating": true,
+        "show_badges": true,
+        "show_quick_add": true,
+        "show_secondary": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "best"
+  ]
+}

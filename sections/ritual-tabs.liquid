@@ -1,0 +1,94 @@
+{%- comment -%} The three-step ritual — tabbed steps with a progress line; each step can recommend a product with quick add. {%- endcomment -%}
+{{ 'section-lumiere.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign s = section.settings
+  assign uid = 'Ritual-' | append: section.id
+  assign n = section.blocks.size | at_least: 1
+-%}
+<section class="section color-{{ s.color_scheme }}">
+  <div class="page-width">
+    {%- render 'section-heading', kicker: s.kicker, title: s.heading, text: s.text -%}
+    <tab-set class="rtabs" style="--steps: {{ n }};">
+      <div class="rtabs__bar">
+        <div class="tabs__list rtabs__list" role="tablist" aria-label="{{ s.heading | escape }}">
+          {%- for block in section.blocks -%}
+            <button class="tabs__tab rtabs__tab" type="button" role="tab" id="{{ uid }}-tab-{{ forloop.index0 }}" aria-controls="{{ uid }}-panel-{{ forloop.index0 }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"{% unless forloop.first %} tabindex="-1"{% endunless %} {{ block.shopify_attributes }}>
+              <span class="rtabs__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span> {{ block.settings.label | escape }}
+            </button>
+          {%- endfor -%}
+        </div>
+        <span class="rtabs__progress" aria-hidden="true"><span class="rtabs__fill" data-tab-progress style="width: calc(100% / {{ n }});"></span></span>
+      </div>
+      {%- for block in section.blocks -%}
+        {%- assign b = block.settings -%}
+        {%- assign p = b.product -%}
+        <div class="tabs__panel rtabs__panel" role="tabpanel" id="{{ uid }}-panel-{{ forloop.index0 }}" aria-labelledby="{{ uid }}-tab-{{ forloop.index0 }}" data-tab-pane="{{ forloop.index0 }}"{% unless forloop.first %} hidden{% endunless %}>
+          <div class="rtabs__copy">
+            <p class="kicker">{{ b.label | escape }}</p>
+            <h3 class="h3 rtabs__title">{{ b.title | escape }}</h3>
+            {%- if b.text != blank -%}<div class="rte rtabs__text">{{ b.text }}</div>{%- endif -%}
+          </div>
+          {%- if p != blank or request.design_mode -%}
+          <div class="rtabs__rec">
+            <p class="kicker">{{ s.recommended_label | escape }}</p>
+            {%- if p != blank -%}
+              <a class="rtabs__product" href="{{ p.url }}">{{ p.title | escape }}</a>
+              {%- capture qa_label -%}{{ 'products.quick_add' | t }} — {{ p.price | money }}{%- endcapture -%}
+              {%- if p.available == false -%}
+                <span class="link-underline" aria-disabled="true">{{ 'products.sold_out' | t }}</span>
+              {%- elsif p.has_only_default_variant -%}
+                {%- assign rt_form = 'ritual-' | append: section.id | append: '-' | append: p.id -%}
+                {%- form 'product', p, id: rt_form, data-product-form: '', novalidate: 'novalidate' -%}
+                  <input type="hidden" name="id" value="{{ p.selected_or_first_available_variant.id }}">
+                  <button class="link-underline" type="submit" name="add">{{ qa_label }}</button>
+                {%- endform -%}
+              {%- else -%}
+                <button class="link-underline" type="button" data-quick-add="{{ p.url }}" aria-haspopup="dialog">{{ qa_label }}</button>
+              {%- endif -%}
+            {%- else -%}
+              <span class="rtabs__product">{{ 'products.placeholder_title' | t }}</span>
+              <span class="muted">{{ 'sections.pick_product' | t }}</span>
+            {%- endif -%}
+          </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </tab-set>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ritual steps (tabs)",
+  "class": "section-ritual-tabs",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Build your moment" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The three-step ritual" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "text", "id": "recommended_label", "label": "Recommendation label", "default": "Recommended" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "step", "name": "Step",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Step name", "default": "Prep" },
+        { "type": "text", "id": "title", "label": "Heading", "default": "Begin with a soft, luminous canvas." },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Cushion skin in a veil of hydration before every step that follows. A simple, sensorial start for lasting radiance.</p>" },
+        { "type": "product", "id": "product", "label": "Recommended product" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ritual steps (tabs)",
+      "blocks": [
+        { "type": "step" },
+        { "type": "step", "settings": { "label": "Enhance", "title": "Warmth, dimension, and the softest definition.", "text": "<p>Add luminous sculpting shades that move with skin, creating an effortless, considered finish that feels like you.</p>" } },
+        { "type": "step", "settings": { "label": "Finish", "title": "Seal in softness. Carry the glow onward.", "text": "<p>A weightless, rose-infused mist makes every ritual feel freshly finished, from first light to after hours.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

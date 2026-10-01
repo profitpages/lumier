@@ -1,0 +1,40 @@
+<section class="section section--tight auth color-scheme-1">
+  {%- render 'decor', preset: 'hero' -%}
+  <div class="page-width auth__wrap">
+    <div class="panel-card auth__card">
+      <div data-recover-panel hidden>
+        <p class="kicker">{{ 'customer.account' | t }}</p>
+        <h1 class="h2">{{ 'customer.reset_title' | t }}</h1>
+        <p class="auth__lead">{{ 'customer.reset_text' | t }}</p>
+        {%- form 'recover_customer_password', class: 'form-grid' -%}
+          {%- if form.posted_successfully? -%}<p class="form-msg form-msg--ok" role="status" data-recover-success>{{ 'customer.reset_sent' | t }}</p>{%- endif -%}
+          {%- if form.errors -%}<div class="form-msg form-msg--error" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
+          <div class="field"><label class="label" for="RecoverEmail">{{ 'customer.email' | t }}</label><input class="input" id="RecoverEmail" type="email" name="email" autocomplete="email" required></div>
+          <button class="btn btn--solid btn--block" type="submit">{{ 'customer.submit' | t }}</button>
+          <button class="link-underline" type="button" data-recover-toggle>{{ 'general.cancel' | t }}</button>
+        {%- endform -%}
+      </div>
+      <div data-login-panel>
+        <p class="kicker">{{ 'customer.welcome_back' | t }}</p>
+        <h1 class="h2">{{ 'customer.log_in' | t }}</h1>
+        {%- form 'customer_login', novalidate: 'novalidate', class: 'form-grid' -%}
+          {%- if form.errors -%}<div class="form-msg form-msg--error" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
+          <div class="field"><label class="label" for="LoginEmail">{{ 'customer.email' | t }}</label><input class="input" id="LoginEmail" type="email" name="customer[email]" autocomplete="email" autocapitalize="off" required></div>
+          {%- if form.password_needed -%}
+            <div class="field"><label class="label" for="LoginPassword">{{ 'customer.password' | t }}</label><input class="input" id="LoginPassword" type="password" name="customer[password]" autocomplete="current-password" required></div>
+            <button class="link-underline auth__forgot" type="button" data-recover-toggle>{{ 'customer.forgot' | t }}</button>
+          {%- endif -%}
+          <button class="btn btn--solid btn--block" type="submit">{{ 'customer.sign_in' | t }}</button>
+        {%- endform -%}
+        <p class="auth__alt">{{ 'customer.no_account' | t }} <a href="{{ routes.account_register_url }}">{{ 'customer.create' | t }}</a></p>
+        {%- if shop.checkout.guest_login -%}
+          {%- form 'guest_login' -%}<button class="btn btn--outline btn--block" type="submit">{{ 'customer.guest' | t }}</button>{%- endform -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Login" }
+{% endschema %}

@@ -1,0 +1,19 @@
+<div class="section color-{{ section.settings.color_scheme }}{% if section.settings.no_padding %} section--flush{% endif %}">
+  <div class="{% if section.settings.contain %}page-width{% endif %}">
+    {{ section.settings.custom_liquid }}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Liquid",
+  "class": "section-custom-liquid",
+  "settings": [
+    { "type": "liquid", "id": "custom_liquid", "label": "Custom Liquid", "info": "Add app snippets or other Liquid code." },
+    { "type": "checkbox", "id": "contain", "label": "Keep within content width", "default": true },
+    { "type": "checkbox", "id": "no_padding", "label": "Remove section spacing", "default": false },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "presets": [{ "name": "Custom Liquid" }]
+}
+{% endschema %}

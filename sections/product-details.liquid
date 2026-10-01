@@ -1,0 +1,72 @@
+{%- comment -%} Product details accordion — rows read product metafields where chosen; empty rows hide. {%- endcomment -%}
+{{ 'section-lumiere.css' | asset_url | stylesheet_tag }}
+{%- assign s = section.settings -%}
+<section class="section section--tight color-{{ s.color_scheme }}">
+  <div class="page-width">
+    <div class="faq faq--side">
+      <header class="sec-head">
+        <div class="sec-head__main">
+          {%- if s.kicker != blank -%}<p class="kicker kicker--accent">{{ s.kicker | escape }}</p>{%- endif -%}
+          {%- if s.heading != blank -%}<h2 class="h2">{{ s.heading | escape }}</h2>{%- endif -%}
+        </div>
+      </header>
+      <div class="accordion-list">
+        {%- for block in section.blocks -%}
+          {%- render 'detail-row', block: block, product: product, compact: false -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product details",
+  "class": "section-product-details",
+  "max_blocks": 12,
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Good to know" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Every last detail." },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "row", "name": "Row",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "The ritual" },
+        {
+          "type": "select", "id": "source", "label": "Content source",
+          "options": [
+            { "value": "custom", "label": "Text below" },
+            { "value": "description", "label": "Product description" },
+            { "value": "ingredients", "label": "Metafield: ingredients" },
+            { "value": "how_to_use", "label": "Metafield: how to use" },
+            { "value": "results", "label": "Metafield: results / benefits" },
+            { "value": "skin_type", "label": "Metafield: skin type" },
+            { "value": "size", "label": "Metafield: size" }
+          ],
+          "default": "description"
+        },
+        { "type": "richtext", "id": "content", "label": "Text", "info": "Used when the source is 'Text below', or as a fallback when the metafield is empty." },
+        { "type": "page", "id": "page", "label": "Append content from page", "info": "Great for Shipping & returns." },
+        { "type": "checkbox", "id": "open", "label": "Open by default", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product details",
+      "blocks": [
+        { "type": "row", "settings": { "heading": "The ritual", "source": "description", "open": true } },
+        { "type": "row", "settings": { "heading": "Inside the bottle", "source": "ingredients" } },
+        { "type": "row", "settings": { "heading": "How to use", "source": "how_to_use" } },
+        { "type": "row", "settings": { "heading": "Clinical results", "source": "results" } },
+        { "type": "row", "settings": { "heading": "Skin type", "source": "skin_type" } },
+        { "type": "row", "settings": { "heading": "Size", "source": "size" } },
+        { "type": "row", "settings": { "heading": "Shipping & returns", "source": "custom", "content": "<p>Orders are prepared within 24 hours on business days. Unopened products can be returned within 30 days.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

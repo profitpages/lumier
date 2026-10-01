@@ -1,0 +1,319 @@
+{
+ "accordion-one": {
+  "text": "Full ingredient list"
+ },
+ "v": {
+  "color": "#2d201d",
+  "weight": "bold",
+  "size": 16.0
+ },
+ "accordion-one-copy": {
+  "text": "Aqua, glycerin, sodium hyaluronate, rosa canina fruit oil, peptide complex, squalane, panthenol and skin-conditioning botanical extracts."
+ },
+ "accordion-three": {
+  "text": "Conscious beauty"
+ },
+ "accordion-three-copy": {
+  "text": "Vegan, cruelty-free and packaged in recyclable glass. Thoughtfully formulated without mineral oil or drying alcohols."
+ },
+ "accordion-two": {
+  "text": "Texture + scent"
+ },
+ "accordion-two-copy": {
+  "text": "A silky, water-light serum with a whisper of rose and clean botanical notes. Absorbs without tackiness."
+ },
+ "add-to-bag": {
+  "text": "Add to bag"
+ },
+ "after-label": {
+  "text": "Glow Veil ritual"
+ },
+ "announcement-bar": {
+  "text": "COMPLIMENTARY SHIPPING ON ORDERS OVER $75"
+ },
+ "availability": {
+  "text": "In stock"
+ },
+ "badge-bestseller": {
+  "text": "Bestseller"
+ },
+ "badge-cruelty-free": {
+  "text": "Cruelty-free"
+ },
+ "bag-empty-copy": {
+  "text": "A few considered essentials can make all the difference."
+ },
+ "bag-empty-title": {
+  "text": "Your bag is waiting."
+ },
+ "bag-title": {
+  "text": "Your bag"
+ },
+ "before-label": {
+  "text": "Bare skin"
+ },
+ "benefit-one-copy": {
+  "text": "Light-catching hydration gives complexions a soft, glass-skin finish."
+ },
+ "benefit-one-title": {
+  "text": "Instant dew"
+ },
+ "benefit-three-copy": {
+  "text": "A featherlight formula layers beautifully beneath makeup and SPF."
+ },
+ "benefit-three-title": {
+  "text": "Barrier-kind"
+ },
+ "benefit-two-copy": {
+  "text": "Multi-weight hyaluronic acid cushions skin with lasting moisture."
+ },
+ "benefit-two-title": {
+  "text": "Deeply hydrated"
+ },
+ "benefits-eyebrow": {
+  "text": "THE GLOW STANDARD"
+ },
+ "benefits-title": {
+  "text": "Luminosity that feels like skincare, not shimmer."
+ },
+ "best-value": {
+  "text": "Best value"
+ },
+ "checkout-button": {
+  "text": "Proceed to checkout"
+ },
+ "crosssell-eyebrow": {
+  "text": "COMPLETE THE RITUAL"
+ },
+ "crosssell-name-1": {
+  "text": "Cloud Cream"
+ },
+ "crosssell-name-2": {
+  "text": "Silk Cleanser"
+ },
+ "crosssell-name-3": {
+  "text": "Night Bloom Oil"
+ },
+ "crosssell-price-1": {
+  "text": "$42.00"
+ },
+ "crosssell-price-2": {
+  "text": "$30.00"
+ },
+ "crosssell-price-3": {
+  "text": "$54.00"
+ },
+ "crosssell-title": {
+  "text": "Pairs beautifully with."
+ },
+ "crumb-home": {
+  "text": "Home"
+ },
+ "crumb-product": {
+  "text": "Glow Veil Serum"
+ },
+ "crumb-shop": {
+  "text": "Shop"
+ },
+ "crumb-skincare": {
+  "text": "Skincare"
+ },
+ "details-eyebrow": {
+  "text": "GOOD TO KNOW"
+ },
+ "details-title": {
+  "text": "Every last detail."
+ },
+ "footer-brand": {
+  "text": "LUMIÈRE"
+ },
+ "footer-care": {
+  "text": "Care"
+ },
+ "footer-copy": {
+  "text": "Thoughtful skincare for skin that lives in the light."
+ },
+ "footer-link-four": {
+  "text": "Shipping + returns"
+ },
+ "footer-link-one": {
+  "text": "Skincare"
+ },
+ "footer-link-three": {
+  "text": "Our philosophy"
+ },
+ "footer-link-two": {
+  "text": "Best sellers"
+ },
+ "footer-shop": {
+  "text": "Shop"
+ },
+ "gallery-note": {
+  "text": "Glow, bottled"
+ },
+ "hyaluronic-copy": {
+  "text": "A multi-weight complex helps bind hydration at skin’s surface for a bouncy, cushion-soft look."
+ },
+ "hyaluronic-kicker": {
+  "text": "PLUMP + QUENCH"
+ },
+ "hyaluronic-title": {
+  "text": "Hyaluronic Acid"
+ },
+ "ingredients-eyebrow": {
+  "text": "THE FORMULA"
+ },
+ "ingredients-title": {
+  "text": "Made for the way skin moves through light."
+ },
+ "newsletter-button": {
+  "text": "Join the edit"
+ },
+ "newsletter-eyebrow": {
+  "text": "THE LUMIÈRE EDIT"
+ },
+ "newsletter-label": {
+  "text": "Your email address"
+ },
+ "newsletter-title": {
+  "text": "A softer kind of inbox."
+ },
+ "peptides-copy": {
+  "text": "Targeted peptides support a smoother-looking surface and a fresh, resilient glow."
+ },
+ "peptides-kicker": {
+  "text": "SMOOTH + SUPPORT"
+ },
+ "peptides-title": {
+  "text": "Peptides"
+ },
+ "product-eyebrow": {
+  "text": "LUMIÈRE BEAUTY / SKINCARE"
+ },
+ "product-price": {
+  "text": "$48.00"
+ },
+ "product-promise": {
+  "text": "A weightless radiance serum for skin that looks freshly lit."
+ },
+ "product-title": {
+  "text": "Glow Veil Serum"
+ },
+ "quantity-label": {
+  "text": "Quantity"
+ },
+ "rating-copy": {
+  "text": "4.9 stars · 128 reviews"
+ },
+ "recent-eyebrow": {
+  "text": "RECENTLY VIEWED"
+ },
+ "recent-name-1": {
+  "text": "Velvet Lip Balm"
+ },
+ "recent-name-2": {
+  "text": "Moonlit Eye Cream"
+ },
+ "recent-price-1": {
+  "text": "$22.00"
+ },
+ "recent-price-2": {
+  "text": "$39.00"
+ },
+ "recent-title": {
+  "text": "Your last little luxuries."
+ },
+ "results-copy": {
+  "text": "Move the handle to explore the appearance of hydrated, light-reflective skin after a consistent ritual."
+ },
+ "results-disclaimer": {
+  "text": "Individual results may vary."
+ },
+ "results-eyebrow": {
+  "text": "THE VEIL EFFECT"
+ },
+ "results-title": {
+  "text": "Skin, softly illuminated."
+ },
+ "review-one-copy": {
+  "text": "“The glow is refined — my skin simply looks rested, hydrated and expensive.”"
+ },
+ "review-three-copy": {
+  "text": "“My dry skin drinks this up. It has become the step I never skip.”"
+ },
+ "review-two-copy": {
+  "text": "“It disappears into my skin but leaves the most beautiful veil beneath makeup.”"
+ },
+ "reviewer-one-name": {
+  "text": "Maya R. · Verified buyer"
+ },
+ "reviewer-three-name": {
+  "text": "Amelia K. · Verified buyer"
+ },
+ "reviewer-two-name": {
+  "text": "Leena S. · Verified buyer"
+ },
+ "reviews-eyebrow": {
+  "text": "LUMINOUS WORDS"
+ },
+ "reviews-summary": {
+  "text": "4.9 average from 128 verified reviews"
+ },
+ "reviews-title": {
+  "text": "Loved in every light."
+ },
+ "ritual-eyebrow": {
+  "text": "HOW TO USE"
+ },
+ "ritual-one-copy": {
+  "text": "After cleansing, press 2–3 drops between palms while skin is still softly damp."
+ },
+ "ritual-one-title": {
+  "text": "Prepare"
+ },
+ "ritual-three-copy": {
+  "text": "Follow with moisturiser and SPF in the morning, or a richer cream in the evening."
+ },
+ "ritual-three-title": {
+  "text": "Seal"
+ },
+ "ritual-title": {
+  "text": "Three quiet minutes for a more luminous ritual."
+ },
+ "ritual-two-copy": {
+  "text": "Press from the centre of the face outward, letting the formula melt in without rush."
+ },
+ "ritual-two-title": {
+  "text": "Press"
+ },
+ "rosehip-copy": {
+  "text": "A refined botanical oil rich in essential fatty acids to help skin feel supple and comforted."
+ },
+ "rosehip-kicker": {
+  "text": "NOURISH + SOFTEN"
+ },
+ "rosehip-title": {
+  "text": "Rosehip Oil"
+ },
+ "search-helper": {
+  "text": "Try “serum”, “cleanser” or “night ritual”."
+ },
+ "search-label": {
+  "text": "Search the collection"
+ },
+ "search-title": {
+  "text": "Find your ritual"
+ },
+ "shipping-reassurance": {
+  "text": "Complimentary shipping on orders over $75 and 30-day returns."
+ },
+ "size-helper": {
+  "text": "One bottle lasts approximately 8–10 weeks."
+ },
+ "size-label": {
+  "text": "Select size"
+ },
+ "subtotal-label": {
+  "text": "Subtotal"
+ }
+}

@@ -1,0 +1,58 @@
+{{ 'section-extras.css' | asset_url | stylesheet_tag }}
+{%- assign s = section.settings -%}
+<section class="section section--logos color-{{ s.color_scheme }}">
+  <div class="page-width">
+    {%- if s.heading != blank -%}<p class="kicker logos__title">{{ s.heading | escape }}</p>{%- endif -%}
+    <ul class="logos{% if s.mono %} logos--mono{% endif %}" role="list">
+      {%- for block in section.blocks -%}
+        <li class="logos__item" {{ block.shopify_attributes }}>
+          {%- capture logo -%}
+            {%- if block.settings.image != blank -%}
+              {%- assign l_alt = block.settings.name | default: block.settings.image.alt -%}
+              {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy', widths: '200, 400', sizes: '180px', alt: l_alt }}
+            {%- else -%}
+              <span class="logos__name">{{ block.settings.name | escape }}</span>
+            {%- endif -%}
+          {%- endcapture -%}
+          {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}">{{ logo }}</a>{%- else -%}{{ logo }}{%- endif -%}
+          {%- if block.settings.quote != blank -%}<p class="logos__quote">“{{ block.settings.quote | escape }}”</p>{%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Press & logos",
+  "class": "section-logos",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "As featured in" },
+    { "type": "checkbox", "id": "mono", "label": "Show logos softly muted until hovered", "default": true },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "logo", "name": "Logo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Logo" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Vogue Beauty" },
+        { "type": "text", "id": "quote", "label": "Short press quote" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Press & logos",
+      "blocks": [
+        { "type": "logo", "settings": { "name": "Glow Journal", "quote": "The serum we can't stop talking about." } },
+        { "type": "logo", "settings": { "name": "Skin Weekly", "quote": "Quietly brilliant." } },
+        { "type": "logo", "settings": { "name": "The Edit", "quote": "Texture, perfected." } },
+        { "type": "logo", "settings": { "name": "Beauty Daily", "quote": "A modern classic." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

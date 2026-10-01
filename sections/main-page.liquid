@@ -1,0 +1,23 @@
+<section class="section section--tight color-{{ section.settings.color_scheme }}">
+  <div class="page-width page-width--narrow">
+    {%- if section.settings.show_title -%}
+      <header class="page-head">
+        {%- if section.settings.kicker != blank -%}<p class="kicker">{{ section.settings.kicker | escape }}</p>{%- endif -%}
+        <h1 class="h1">{{ page.title | escape }}</h1>
+      </header>
+    {%- endif -%}
+    <div class="rte rte--page">{{ page.content }}</div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page content",
+  "class": "section-main-page",
+  "settings": [
+    { "type": "checkbox", "id": "show_title", "label": "Show title", "default": true },
+    { "type": "text", "id": "kicker", "label": "Kicker" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ]
+}
+{% endschema %}

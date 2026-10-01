@@ -1,0 +1,113 @@
+{%- comment -%}
+  Ingredient edit — accessible tabs, one block per ingredient.
+  Layouts: feature (curved-corner image + tabs, home) | panel (heading left, tab list + split card, product page)
+{%- endcomment -%}
+{{ 'section-lumiere.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign s = section.settings
+  assign uid = 'Ing-' | append: section.id
+  assign arts = 'swatch,serum,jar,pump' | split: ','
+-%}
+<section class="section color-{{ s.color_scheme }}">
+  <div class="page-width">
+    <tab-set class="ing ing--{{ s.layout }}">
+      {%- if s.layout == 'feature' -%}
+        <div class="ing__media frame frame--corner has-shadow">
+          {%- for block in section.blocks -%}
+            {%- assign img = block.settings.image | default: s.image -%}
+            <div class="ing__media-pane" data-tab-pane="{{ forloop.index0 }}"{% unless forloop.first %} hidden{% endunless %}>
+              {%- render 'responsive-image', image: img, max: 1200, sizes: '(min-width: 990px) 40vw, 92vw', class: 'ing__img', art: arts[forloop.index0], tone: 'linen' -%}
+            </div>
+          {%- else -%}
+            {%- render 'responsive-image', image: s.image, max: 1200, sizes: '(min-width: 990px) 40vw, 92vw', class: 'ing__img', art: 'swatch', tone: 'linen' -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <div class="ing__copy">
+        {%- if s.kicker != blank -%}<p class="kicker{% if s.layout == 'panel' %} kicker--accent{% endif %}">{{ s.kicker | escape }}</p>{%- endif -%}
+        {%- if s.heading != blank -%}<h2 class="h2">{{ s.heading | escape }}</h2>{%- endif -%}
+      </div>
+
+      <div class="ing__tabs">
+        <div class="tabs__list ing__list" role="tablist" aria-label="{{ s.heading | escape }}">
+          {%- for block in section.blocks -%}
+            <button class="tabs__tab ing__tab" type="button" role="tab" id="{{ uid }}-tab-{{ forloop.index0 }}" aria-controls="{{ uid }}-panel-{{ forloop.index0 }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"{% unless forloop.first %} tabindex="-1"{% endunless %} {{ block.shopify_attributes }}>{{ block.settings.name | escape }}</button>
+          {%- endfor -%}
+        </div>
+        {%- for block in section.blocks -%}
+          {%- assign b = block.settings -%}
+          <div class="tabs__panel ing__panel" role="tabpanel" id="{{ uid }}-panel-{{ forloop.index0 }}" aria-labelledby="{{ uid }}-tab-{{ forloop.index0 }}" data-tab-pane="{{ forloop.index0 }}"{% unless forloop.first %} hidden{% endunless %}>
+            {%- if s.layout == 'panel' -%}
+              <div class="ing__card">
+                <div class="ing__card-copy">
+                  {%- if b.benefit != blank -%}<p class="kicker kicker--accent">{{ b.benefit | escape }}</p>{%- endif -%}
+                  <h3 class="h3 ing__name">{{ b.name | escape }}</h3>
+                  <div class="rte ing__text">{{ b.text }}</div>
+                </div>
+                <div class="ing__card-media">
+                  {%- render 'responsive-image', image: b.image, max: 900, sizes: '(min-width: 990px) 26vw, 92vw', art: arts[forloop.index0], tone: 'blush' -%}
+                </div>
+              </div>
+            {%- else -%}
+              {%- if b.benefit != blank -%}<p class="kicker kicker--accent ing__benefit">{{ b.benefit | escape }}</p>{%- endif -%}
+              <div class="rte ing__text">{{ b.text }}</div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+        {%- if s.button_label != blank -%}<div class="ing__cta">{%- render 'button', label: s.button_label, url: s.button_link, style: 'link' -%}</div>{%- endif -%}
+      </div>
+    </tab-set>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ingredient edit",
+  "class": "section-ingredients",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "select", "id": "layout", "label": "Layout",
+      "options": [{ "value": "feature", "label": "Image + tabs" }, { "value": "panel", "label": "Formula panel (product page)" }],
+      "default": "feature"
+    },
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "Shown when an ingredient has no image of its own." },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Good ingredients, thoughtfully chosen" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The ingredient edit" },
+    { "type": "text", "id": "button_label", "label": "Link label" },
+    { "type": "url", "id": "button_link", "label": "Link" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient", "name": "Ingredient",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "Hyaluronic Acid" },
+        { "type": "text", "id": "benefit", "label": "Benefit", "default": "Plump + quench" },
+        { "type": "richtext", "id": "text", "label": "Description", "default": "<p>A moisture-loving favourite that helps skin feel supple and comfortably hydrated.</p>" },
+        { "type": "image_picker", "id": "image", "label": "Image or texture" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ingredient edit",
+      "blocks": [
+        { "type": "ingredient" },
+        { "type": "ingredient", "settings": { "name": "Rosehip Oil", "benefit": "Nourish + soften", "text": "<p>A refined botanical oil rich in essential fatty acids to help skin feel soft and cared for.</p>" } },
+        { "type": "ingredient", "settings": { "name": "Peptides", "benefit": "Smooth + support", "text": "<p>Targeted peptides support a smoother-looking surface and a fresh, resilient feel.</p>" } }
+      ]
+    },
+    {
+      "name": "Formula panel",
+      "settings": { "layout": "panel", "kicker": "The formula", "heading": "Made for the way skin moves through light.", "color_scheme": "scheme-1" },
+      "blocks": [
+        { "type": "ingredient", "settings": { "text": "<p>A multi-weight complex helps bind hydration at skin's surface for a bouncy, cushion-soft look.</p>" } },
+        { "type": "ingredient", "settings": { "name": "Rosehip Oil", "benefit": "Nourish + soften", "text": "<p>A refined botanical oil rich in essential fatty acids to help skin feel soft and cared for.</p>" } },
+        { "type": "ingredient", "settings": { "name": "Peptides", "benefit": "Smooth + support", "text": "<p>Targeted peptides support a smoother-looking surface and a fresh, resilient feel.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

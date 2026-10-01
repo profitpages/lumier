@@ -1,0 +1,25 @@
+<section class="section section--tight color-{{ section.settings.color_scheme }}" style="--cols: 4; --cols-m: 2;">
+  <div class="page-width">
+    {%- render 'section-heading', kicker: section.settings.kicker, title: section.settings.heading, tag: 'h1' -%}
+    <wishlist-page>
+      <ul class="product-grid" role="list" data-wishlist-grid></ul>
+      <div class="empty" data-wishlist-empty hidden>
+        <div class="empty__art">{%- render 'cosmetic-art', name: 'lipstick', tone: 'blush' -%}</div>
+        <h2 class="h3">{{ 'wishlist.empty' | t }}</h2>
+        <a class="btn btn--solid" href="{{ routes.all_products_collection_url }}">{{ 'general.shop_all' | t }}</a>
+      </div>
+    </wishlist-page>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Wishlist",
+  "class": "section-main-wishlist",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Saved for later" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your wishlist" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ]
+}
+{% endschema %}

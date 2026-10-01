@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-cart",
+      "settings": {
+        "express": true,
+        "summary_scheme": "scheme-4",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "also": {
+      "type": "featured-products",
+      "settings": {
+        "kicker": "Before you go",
+        "heading": "A few considered essentials.",
+        "link_label": "",
+        "limit": 4,
+        "layout": "grid",
+        "columns": 4,
+        "columns_mobile": "2",
+        "panel": false,
+        "color_scheme": "scheme-1",
+        "card_style": "editorial",
+        "image_ratio": "square",
+        "show_vendor": false,
+        "show_rating": true,
+        "show_badges": true,
+        "show_quick_add": true,
+        "show_secondary": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "also"
+  ]
+}

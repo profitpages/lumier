@@ -1,0 +1,41 @@
+<section class="section section--tight color-scheme-1">
+  <div class="page-width page-width--narrow">
+    <a class="link-underline" href="{{ routes.account_url }}">{% render 'icon', name: 'arrow-left', size: 16 %} {{ 'customer.back' | t }}</a>
+    <h1 class="h1">{{ 'customer.addresses' | t }}</h1>
+    <details class="acc panel-card">
+      <summary class="acc__q">{{ 'customer.add_address' | t }}<span class="acc__plus" aria-hidden="true"></span></summary>
+      <div class="acc__a"><div class="acc__inner">
+        {%- form 'customer_address', customer.new_address, class: 'form-grid' -%}
+          {%- render 'address-fields', form: form, uid: 'new' -%}
+          <button class="btn btn--solid" type="submit">{{ 'customer.add_address' | t }}</button>
+        {%- endform -%}
+      </div></div>
+    </details>
+    {%- paginate customer.addresses by 10 -%}
+      {%- for address in customer.addresses -%}
+        <div class="panel-card address">
+          {%- if address == customer.default_address -%}<span class="pill">{{ 'customer.default' | t }}</span>{%- endif -%}
+          {{ address | format_address }}
+          <details class="acc acc--compact">
+            <summary class="acc__q">{{ 'customer.edit' | t }}<span class="acc__plus" aria-hidden="true"></span></summary>
+            <div class="acc__a"><div class="acc__inner">
+              {%- form 'customer_address', address, class: 'form-grid' -%}
+                {%- render 'address-fields', form: form, uid: address.id -%}
+                <button class="btn btn--solid btn--sm" type="submit">{{ 'customer.save' | t }}</button>
+              {%- endform -%}
+            </div></div>
+          </details>
+          <form method="post" action="{{ routes.account_addresses_url }}/{{ address.id }}" data-confirm="{{ 'customer.delete_confirm' | t }}">
+            <input type="hidden" name="_method" value="delete">
+            <button class="link-underline link-underline--danger" type="submit">{{ 'customer.delete' | t }}</button>
+          </form>
+        </div>
+      {%- endfor -%}
+      {%- render 'pagination', paginate: paginate -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Addresses" }
+{% endschema %}

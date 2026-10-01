@@ -1,0 +1,49 @@
+{%- layout none -%}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {%- assign initial_value = gift_card.initial_value | money -%}
+    <title>{{ 'gift_card.title' | t: value: initial_value }} — {{ shop.name }}</title>
+    {%- render 'theme-styles' -%}
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer></script>
+    {{ content_for_header }}
+  </head>
+  <body class="color-scheme-1">
+    <main class="password">
+      {%- render 'decor', preset: 'hero' -%}
+      <div class="password__card panel-card">
+        {%- render 'wordmark' -%}
+        <p class="kicker">{{ 'gift_card.kicker' | t }}</p>
+        <h1 class="h2">{{ gift_card.balance | money }}</h1>
+        {%- if gift_card.balance != gift_card.initial_value -%}<p class="muted">{{ 'gift_card.initial' | t: value: initial_value }}</p>{%- endif -%}
+        {%- if gift_card.expired or gift_card.enabled == false -%}
+          <p class="pill">{{ 'gift_card.expired' | t }}</p>
+        {%- elsif gift_card.expires_on -%}
+          {%- assign exp_date = gift_card.expires_on | date: '%b %d, %Y' -%}
+          <p class="muted">{{ 'gift_card.expires_on' | t: date: exp_date }}</p>
+        {%- endif -%}
+        <p class="label">{{ 'gift_card.code' | t }}</p>
+        <p class="giftcode">{{ gift_card.code | format_code }}</p>
+        <div id="QrCode" class="giftqr" data-identifier="{{ gift_card.qr_identifier }}"></div>
+        <div class="btn-row btn-row--center">
+          <button class="btn btn--outline" type="button" data-copy="{{ gift_card.code }}">{{ 'gift_card.copy' | t }}</button>
+          <a class="btn btn--solid" href="{{ shop.url }}">{{ 'gift_card.shop' | t }}</a>
+        </div>
+        {%- if gift_card.pass_url -%}
+          <a href="{{ gift_card.pass_url }}"><img src="{{ 'gift-card/add-to-apple-wallet.svg' | shopify_asset_url }}" width="120" height="40" alt="{{ 'gift_card.apple_wallet' | t }}" loading="lazy"></a>
+        {%- endif -%}
+      </div>
+    </main>
+    <script>
+      window.addEventListener('load', function () {
+        var el = document.getElementById('QrCode');
+        if (window.QRCode && el) new QRCode(el, { text: el.dataset.identifier, width: 120, height: 120 });
+        var b = document.querySelector('[data-copy]');
+        if (b) b.addEventListener('click', function () { if (navigator.clipboard) navigator.clipboard.writeText(b.dataset.copy); });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+{%- comment -%} Usage: {% render 'breadcrumb' %} — adapts to the current page type. {%- endcomment -%}
+<nav class="breadcrumb" aria-label="{{ 'general.breadcrumb' | t }}">
+  <ol role="list">
+    <li><a href="{{ routes.root_url }}">{{ 'general.home' | t }}</a></li>
+    {%- case request.page_type -%}
+      {%- when 'product' -%}
+        {%- assign crumb_c = collection | default: product.collections.first -%}
+        {%- if crumb_c -%}<li><a href="{{ crumb_c.url }}">{{ crumb_c.title | escape }}</a></li>{%- endif -%}
+        <li aria-current="page">{{ product.title | escape }}</li>
+      {%- when 'collection' -%}
+        <li><a href="{{ routes.collections_url }}">{{ 'collections.all_collections' | t }}</a></li>
+        <li aria-current="page">{{ collection.title | escape }}</li>
+      {%- when 'list-collections' -%}
+        <li aria-current="page">{{ 'collections.all_collections' | t }}</li>
+      {%- when 'blog' -%}
+        <li aria-current="page">{{ blog.title | escape }}</li>
+      {%- when 'article' -%}
+        <li><a href="{{ blog.url }}">{{ blog.title | escape }}</a></li>
+        <li aria-current="page">{{ article.title | escape }}</li>
+      {%- when 'page' -%}
+        <li aria-current="page">{{ page.title | escape }}</li>
+      {%- when 'search' -%}
+        <li aria-current="page">{{ 'search.title' | t }}</li>
+      {%- when 'cart' -%}
+        <li aria-current="page">{{ 'cart.title' | t }}</li>
+    {%- endcase -%}
+  </ol>
+</nav>
+{%- if request.page_type == 'product' or request.page_type == 'collection' or request.page_type == 'article' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": {{ 'general.home' | t | json }}, "item": {{ request.origin | append: routes.root_url | json }} }
+        {%- if request.page_type == 'product' -%}
+          {%- assign crumb_c = collection | default: product.collections.first -%}
+          {%- if crumb_c -%},{ "@type": "ListItem", "position": 2, "name": {{ crumb_c.title | json }}, "item": {{ request.origin | append: crumb_c.url | json }} }{%- endif -%}
+          ,{ "@type": "ListItem", "position": {% if crumb_c %}3{% else %}2{% endif %}, "name": {{ product.title | json }}, "item": {{ request.origin | append: product.url | json }} }
+        {%- elsif request.page_type == 'collection' -%}
+          ,{ "@type": "ListItem", "position": 2, "name": {{ collection.title | json }}, "item": {{ request.origin | append: collection.url | json }} }
+        {%- elsif request.page_type == 'article' -%}
+          ,{ "@type": "ListItem", "position": 2, "name": {{ blog.title | json }}, "item": {{ request.origin | append: blog.url | json }} }
+          ,{ "@type": "ListItem", "position": 3, "name": {{ article.title | json }}, "item": {{ request.origin | append: article.url | json }} }
+        {%- endif -%}
+      ]
+    }
+  </script>
+{%- endif -%}

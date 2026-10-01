@@ -1,0 +1,27 @@
+{%- comment -%}
+  Reads the standard reviews metafields written by review apps. Renders nothing without data —
+  no invented ratings. Usage: {% render 'rating', product: product, show_count: true, show_value: false, link: '#reviews', size: 'sm' %}
+{%- endcomment -%}
+{%- assign r = product.metafields.reviews.rating.value -%}
+{%- if r != blank -%}
+  {%- liquid
+    assign value = r.rating | round: 1
+    assign max = r.scale_max | default: 5
+    assign pct = r.rating | divided_by: max | times: 100
+    assign count = product.metafields.reviews.rating_count.value | default: 0
+  -%}
+  <div class="rating{% if size %} rating--{{ size }}{% endif %}">
+    <span class="rating__stars" style="--pct: {{ pct }}%;" aria-hidden="true">★★★★★</span>
+    <span class="visually-hidden">{{ 'products.rating' | t: rating: value, max: max }}</span>
+    {%- if show_count -%}
+      {%- capture rating_text -%}{{ value }} · {{ 'products.reviews_count' | t: count: count }}{%- endcapture -%}
+      {%- if link -%}
+        <a class="rating__text rating__text--link" href="{{ link }}">{{ rating_text }}</a>
+      {%- else -%}
+        <span class="rating__text">{{ value }} ({{ count }})</span>
+      {%- endif -%}
+    {%- elsif show_value -%}
+      <span class="rating__text">{{ value }}</span>
+    {%- endif -%}
+  </div>
+{%- endif -%}

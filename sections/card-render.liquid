@@ -1,0 +1,8 @@
+{%- comment -%} Renders one product card via /products/{handle}?section_id=card-render (recently viewed, wishlist). {%- endcomment -%}
+{%- if product -%}
+  <li class="product-grid__item">{%- render 'product-card', product: product, section_id: 'cr', show_quick_add: true -%}</li>
+{%- endif -%}
+
+{% schema %}
+{ "name": "Card render" }
+{% endschema %}

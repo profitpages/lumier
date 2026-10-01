@@ -1,0 +1,25 @@
+{%- comment -%}
+  Responsive <img> with srcset. Falls back to 2.5D cosmetic art when no image.
+  Usage: {% render 'responsive-image', image: img, max: 1600, sizes: '50vw', class: 'x', alt: 'y', eager: true, art: 'jar', tone: 'lilac' %}
+{%- endcomment -%}
+{%- if image != blank -%}
+  {%- liquid
+    assign max_w = max | default: 1600
+    if image.width < max_w
+      assign max_w = image.width
+    endif
+    assign img_alt = alt | default: image.alt
+    assign widths = '240, 360, 480, 640, 800, 1000, 1200, 1600, 2000'
+    assign load = 'lazy'
+    if eager
+      assign load = 'eager'
+    endif
+  -%}
+  {%- if eager -%}
+    {{ image | image_url: width: max_w | image_tag: loading: load, fetchpriority: 'high', widths: widths, sizes: sizes, class: class, alt: img_alt }}
+  {%- else -%}
+    {{ image | image_url: width: max_w | image_tag: loading: load, widths: widths, sizes: sizes, class: class, alt: img_alt }}
+  {%- endif -%}
+{%- elsif art != 'none' -%}
+  <div class="art-fallback {{ class }}">{%- render 'cosmetic-art', name: art, tone: tone -%}</div>
+{%- endif -%}

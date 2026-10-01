@@ -1,0 +1,96 @@
+{%- assign s = section.settings -%}
+{{ 'section-lumiere.css' | asset_url | stylesheet_tag }}
+<section class="section color-{{ s.color_scheme }}">
+  <div class="page-width{% if s.layout == 'stacked' %} page-width--faq{% endif %}">
+    <div class="faq faq--{{ s.layout }}">
+      {%- render 'section-heading', kicker: s.kicker, title: s.heading, text: s.text, align: s.align -%}
+      <div class="accordion-list{% if s.style == 'faq' %} accordion-list--bare{% endif %}">
+        {%- for block in section.blocks -%}
+          <details class="acc{% if s.style == 'faq' %} acc--faq{% endif %}" data-accordion{% if block.settings.open %} open{% endif %} {{ block.shopify_attributes }}>
+            <summary class="acc__q">{{ block.settings.question | escape }}<span class="acc__plus" aria-hidden="true"></span></summary>
+            <div class="acc__a"><div class="acc__inner rte">{{ block.settings.answer }}</div></div>
+          </details>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+  {%- if s.schema_markup and section.blocks.size > 0 -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {%- assign sep = '' -%}
+          {%- for block in section.blocks -%}
+            {%- if block.settings.answer != blank -%}
+              {{ sep }}{ "@type": "Question", "name": {{ block.settings.question | json }}, "acceptedAnswer": { "@type": "Answer", "text": {{ block.settings.answer | strip_html | json }} } }
+              {%- assign sep = ',' -%}
+            {%- endif -%}
+          {%- endfor -%}
+        ]
+      }
+    </script>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "class": "section-faq",
+  "max_blocks": 16,
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "A few helpful notes" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently asked." },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    {
+      "type": "select", "id": "layout", "label": "Layout",
+      "options": [{ "value": "stacked", "label": "Narrow, stacked" }, { "value": "side", "label": "Heading beside questions" }],
+      "default": "stacked"
+    },
+    {
+      "type": "select", "id": "style", "label": "Question style",
+      "options": [{ "value": "faq", "label": "Arrow marker, sans" }, { "value": "plus", "label": "Serif with plus" }],
+      "default": "faq"
+    },
+    {
+      "type": "select", "id": "align", "label": "Heading alignment",
+      "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }],
+      "default": "left"
+    },
+    { "type": "checkbox", "id": "schema_markup", "label": "Add FAQ markup for search engines", "default": true },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "question", "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "How long does shipping take?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Orders are prepared within 24 hours on business days and usually arrive in 2–5 days.</p>" },
+        { "type": "checkbox", "id": "open", "label": "Open by default", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        { "type": "question", "settings": { "question": "When will my order ship?", "answer": "<p>Orders are prepared within one business day and usually arrive in 2–5 days.</p>" } },
+        { "type": "question", "settings": { "question": "What is your returns approach?", "answer": "<p>Unopened products can be returned within 30 days for a full refund.</p>" } },
+        { "type": "question", "settings": { "question": "How should I layer products?", "answer": "<p>Thinnest to thickest: cleanse, treat with serums, moisturise, then protect with SPF in the morning.</p>" } },
+        { "type": "question", "settings": { "question": "Are the formulas suitable for sensitive skin?", "answer": "<p>Each product page lists who a formula is made for. Patch test new products and check the full ingredient list.</p>" } },
+        { "type": "question", "settings": { "question": "Are you cruelty-free?", "answer": "<p>Add your brand's cruelty-free and certification details here.</p>" } },
+        { "type": "question", "settings": { "question": "How can I get order support?", "answer": "<p>Write to us any time — we reply within one business day.</p>" } }
+      ]
+    },
+    {
+      "name": "Product details — FAQ",
+      "settings": { "layout": "side", "style": "plus", "kicker": "Good to know", "heading": "Every last detail.", "schema_markup": false },
+      "blocks": [
+        { "type": "question", "settings": { "question": "Full ingredient list", "answer": "<p>Connect this to the product's ingredients metafield with the dynamic-source button.</p>" } },
+        { "type": "question", "settings": { "question": "Texture + scent", "answer": "<p>Describe how the formula feels and smells.</p>" } },
+        { "type": "question", "settings": { "question": "Conscious beauty", "answer": "<p>Share packaging and sourcing details.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

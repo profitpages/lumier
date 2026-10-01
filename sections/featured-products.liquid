@@ -1,0 +1,115 @@
+{%- comment -%}
+  Product grid / carousel. Source: a collection OR a hand-picked product list.
+  Covers Best-loved essentials, Bestsellers rail, New arrivals, Trending.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign source = s.collection.products
+  assign source_count = s.collection.products_count
+  if s.products.size > 0
+    assign source = s.products
+    assign source_count = s.products.size
+  elsif s.collection == blank
+    assign source = collections.all.products
+    assign source_count = collections.all.products_count
+  endif
+  assign view_link = s.link | default: s.collection.url | default: routes.all_products_collection_url
+  assign is_rail = false
+  if s.layout == 'carousel'
+    assign is_rail = true
+  endif
+-%}
+<section class="section color-{{ s.color_scheme }}{% if s.panel %} section--panel-wrap{% endif %}" style="--cols: {{ s.columns }}; --cols-m: {{ s.columns_mobile }};">
+  <div class="page-width">
+    <div class="{% if s.panel %}panel{% endif %}">
+      {%- render 'section-heading', kicker: s.kicker, title: s.heading, text: s.text, link_label: s.link_label, link: view_link, arrows: is_rail -%}
+      <rail-slider class="{% if is_rail %}rail{% else %}grid-wrap{% endif %}">
+        <ul class="{% if is_rail %}rail__track{% else %}product-grid{% endif %}" role="list" data-rail-track>
+          {%- if source_count > 0 -%}
+            {%- for product in source limit: s.limit -%}
+              {%- assign lazy = true -%}
+              {%- if section.index <= 2 and forloop.index <= 4 -%}{%- assign lazy = false -%}{%- endif -%}
+              <li class="product-grid__item">
+                {%- render 'product-card',
+                  product: product,
+                  style: s.card_style,
+                  ratio: s.image_ratio,
+                  show_vendor: s.show_vendor,
+                  show_rating: s.show_rating,
+                  show_badges: s.show_badges,
+                  show_quick_add: s.show_quick_add,
+                  show_secondary: s.show_secondary,
+                  lazy: lazy,
+                  section_id: section.id
+                -%}
+              </li>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for i in (1..4) -%}
+              <li class="product-grid__item">{%- render 'product-card', product: blank, style: s.card_style, ratio: s.image_ratio -%}</li>
+            {%- endfor -%}
+          {%- endif -%}
+        </ul>
+      </rail-slider>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured products",
+  "class": "section-featured-products",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Cult favourites" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The edit" },
+    { "type": "richtext", "id": "text", "label": "Description" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Shop all" },
+    { "type": "url", "id": "link", "label": "Link", "info": "Defaults to the collection." },
+    { "type": "header", "content": "Products" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "product_list", "id": "products", "label": "Or pick products", "limit": 12, "info": "Overrides the collection." },
+    { "type": "range", "id": "limit", "label": "Number of products", "min": 2, "max": 16, "step": 1, "default": 4 },
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select", "id": "layout", "label": "Layout",
+      "options": [{ "value": "grid", "label": "Grid" }, { "value": "carousel", "label": "Carousel with arrows" }],
+      "default": "grid"
+    },
+    { "type": "range", "id": "columns", "label": "Products per row (desktop)", "min": 2, "max": 5, "step": 1, "default": 4 },
+    {
+      "type": "select", "id": "columns_mobile", "label": "Products per row (mobile)",
+      "options": [{ "value": "1", "label": "1" }, { "value": "2", "label": "2" }],
+      "default": "2"
+    },
+    { "type": "checkbox", "id": "panel", "label": "Show inside a panel", "default": false },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Product cards" },
+    {
+      "type": "select", "id": "card_style", "label": "Card style",
+      "options": [{ "value": "editorial", "label": "Editorial (paper frame)" }, { "value": "label", "label": "Boutique (label + button)" }, { "value": "rounded", "label": "Rounded (soft card)" }, { "value": "gallery", "label": "Gallery (frameless)" }],
+      "default": "editorial"
+    },
+    {
+      "type": "select", "id": "image_ratio", "label": "Image ratio",
+      "options": [{ "value": "square", "label": "Square" }, { "value": "portrait", "label": "Portrait 4:5" }, { "value": "tall", "label": "Tall 3:4" }],
+      "default": "square"
+    },
+    { "type": "checkbox", "id": "show_vendor", "label": "Show vendor", "default": false },
+    { "type": "checkbox", "id": "show_rating", "label": "Show rating", "default": true },
+    { "type": "checkbox", "id": "show_badges", "label": "Show badges", "default": true },
+    { "type": "checkbox", "id": "show_quick_add", "label": "Show quick add", "default": true },
+    { "type": "checkbox", "id": "show_secondary", "label": "Show second image on hover", "default": true }
+  ],
+  "presets": [
+    { "name": "Featured products" },
+    {
+      "name": "Gift sets",
+      "settings": { "kicker": "A little something lovely", "heading": "Gift sets & limited editions", "link_label": "", "limit": 3, "card_style": "label", "color_scheme": "scheme-2" }
+    },
+    {
+      "name": "Bestseller carousel",
+      "settings": { "kicker": "Cult favourites", "heading": "Bestsellers, on repeat.", "link_label": "", "layout": "carousel", "limit": 8 }
+    }
+  ]
+}
+{% endschema %}

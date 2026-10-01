@@ -1,0 +1,103 @@
+{%- comment -%} Slideshow — each slide reuses the hero's 2.5D arch stage (glow orb + arch frame + champagne slab). {%- endcomment -%}
+{{ 'section-hero.css' | asset_url | stylesheet_tag }}
+{{ 'section-extras.css' | asset_url | stylesheet_tag }}
+{%- assign s = section.settings -%}
+<slide-show class="slideshow" data-autoplay="{{ s.autoplay }}" data-interval="{{ s.interval | times: 1000 }}" aria-roledescription="carousel" aria-label="{{ s.label | escape }}">
+  <div class="slideshow__track">
+    {%- for block in section.blocks -%}
+      {%- assign b = block.settings -%}
+      {%- capture htag -%}{% if section.index == 1 and forloop.first %}h1{% else %}h2{% endif %}{%- endcapture -%}
+      <div class="slideshow__slide hero hero--arch color-{{ b.color_scheme }}{% if forloop.first %} is-active{% endif %}{% if b.art_left %} hero--content-right{% endif %}" role="group" aria-roledescription="slide" aria-label="{{ 'sections.slide_x_of_y' | t: index: forloop.index, count: forloop.length }}"{% unless forloop.first %} aria-hidden="true"{% endunless %} data-slide {{ block.shopify_attributes }}>
+        {%- render 'decor', preset: 'hero' -%}
+        <div class="hero__grid page-width">
+          <div class="hero__copy">
+            {%- if b.kicker != blank -%}<p class="kicker">{{ b.kicker | escape }}</p>{%- endif -%}
+            {%- if b.heading != blank -%}<{{ htag }} class="display hero__title">{{ b.heading | escape }}</{{ htag }}>{%- endif -%}
+            {%- if b.text != blank -%}<div class="hero__text rte">{{ b.text }}</div>{%- endif -%}
+            <div class="btn-row">
+              {%- render 'button', label: b.button_label, url: b.button_link, style: 'solid' -%}
+              {%- render 'button', label: b.button2_label, url: b.button2_link, style: 'outline' -%}
+            </div>
+          </div>
+          <div class="hero__art">
+            <div class="hero__frame frame frame--arch has-slab">
+              {%- liquid
+                assign eager = false
+                if section.index == 1 and forloop.first
+                  assign eager = true
+                endif
+              -%}
+              {%- render 'responsive-image', image: b.image, max: 1600, sizes: '(min-width: 990px) 45vw, 90vw', class: 'hero__img', eager: eager, art: b.art, tone: b.tone -%}
+            </div>
+            {%- if b.badge != blank -%}<span class="caption-chip caption-chip--serif hero__caption hero__caption--slide">{{ b.badge | escape }}</span>{%- endif -%}
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+  {%- if section.blocks.size > 1 -%}
+    <div class="slideshow__controls page-width">
+      <button class="circle-btn" type="button" data-prev aria-label="{{ 'general.previous' | t }}">{% render 'icon', name: 'arrow-left', size: 18 %}</button>
+      <div class="slideshow__dots glass" role="group" aria-label="{{ 'sections.choose_slide' | t }}">
+        {%- for block in section.blocks -%}
+          <button class="slideshow__dot{% if forloop.first %} is-active{% endif %}" type="button" data-dot="{{ forloop.index0 }}" aria-label="{{ 'sections.slide_x_of_y' | t: index: forloop.index, count: forloop.length }}"{% if forloop.first %} aria-current="true"{% endif %}></button>
+        {%- endfor -%}
+      </div>
+      <button class="circle-btn" type="button" data-next aria-label="{{ 'general.next' | t }}">{% render 'icon', name: 'arrow-right', size: 18 %}</button>
+      {%- if s.autoplay -%}
+        <button class="circle-btn slideshow__pause" type="button" data-pause aria-label="{{ 'sections.pause' | t }}" data-label-pause="{{ 'sections.pause' | t }}" data-label-play="{{ 'sections.play' | t }}"><span class="slideshow__pause-icon" aria-hidden="true"></span></button>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</slide-show>
+
+{% schema %}
+{
+  "name": "Slideshow",
+  "class": "section-slideshow",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "text", "id": "label", "label": "Accessible name", "default": "Featured rituals" },
+    { "type": "checkbox", "id": "autoplay", "label": "Auto-rotate slides", "default": true },
+    { "type": "range", "id": "interval", "label": "Change every", "min": 3, "max": 10, "step": 1, "unit": "s", "default": 6 }
+  ],
+  "blocks": [
+    {
+      "type": "slide", "name": "Slide",
+      "settings": [
+        { "type": "text", "id": "kicker", "label": "Kicker", "default": "New ritual" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Skin, lit from within." },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Layered skincare for the little rituals that make every day feel luminous.</p>" },
+        { "type": "text", "id": "button_label", "label": "Primary button", "default": "Shop now" },
+        { "type": "url", "id": "button_link", "label": "Primary link" },
+        { "type": "text", "id": "button2_label", "label": "Secondary button" },
+        { "type": "url", "id": "button2_link", "label": "Secondary link" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        {
+          "type": "select", "id": "art", "label": "Default art (no image)",
+          "options": [{ "value": "serum", "label": "Serum" }, { "value": "jar", "label": "Jar" }, { "value": "pump", "label": "Pump" }, { "value": "lipstick", "label": "Lipstick" }, { "value": "compact", "label": "Compact" }, { "value": "tube", "label": "Tube" }],
+          "default": "serum"
+        },
+        {
+          "type": "select", "id": "tone", "label": "Art tone",
+          "options": [{ "value": "blush", "label": "Blush" }, { "value": "lilac", "label": "Lilac" }, { "value": "peach", "label": "Peach" }, { "value": "sand", "label": "Sand" }],
+          "default": "blush"
+        },
+        { "type": "text", "id": "badge", "label": "Tilted badge" },
+        { "type": "checkbox", "id": "art_left", "label": "Image on the left", "default": false },
+        { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slideshow",
+      "blocks": [
+        { "type": "slide", "settings": { "badge": "New · Rose Dew" } },
+        { "type": "slide", "settings": { "kicker": "The night edit", "heading": "Rest, repair, wake luminous.", "art": "jar", "tone": "lilac", "art_left": true, "color_scheme": "scheme-3" } },
+        { "type": "slide", "settings": { "kicker": "Soft-focus colour", "heading": "A flush of something beautiful.", "art": "compact", "tone": "peach", "color_scheme": "scheme-4" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

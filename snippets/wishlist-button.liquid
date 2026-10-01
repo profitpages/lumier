@@ -1,0 +1,7 @@
+{%- comment -%} Wishlist integration point (browser storage). Disable in Theme settings › Wishlist if a wishlist app is used. {%- endcomment -%}
+{%- if settings.wishlist_enable -%}
+  <button type="button" class="wish{% if class %} {{ class }}{% endif %}" data-wishlist-toggle="{{ product.handle }}" aria-pressed="false" aria-label="{{ 'products.wishlist_add' | t: title: product.title | escape }}">
+    {%- render 'icon', name: 'heart', size: 18 -%}
+    {%- if label -%}<span>{{ 'products.save' | t }}</span>{%- endif -%}
+  </button>
+{%- endif -%}

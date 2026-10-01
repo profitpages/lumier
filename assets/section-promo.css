@@ -1,0 +1,24 @@
+/* ---------- Promotional cards ---------- */
+.promos { display: grid; grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 22px); }
+.promo-card { position: relative; display: grid; overflow: hidden; background: var(--bg); background-image: var(--bg-gradient); color: var(--text); min-height: 340px; border-radius: var(--radius-card); transition: transform .4s ease, box-shadow .4s ease; }
+.promo-card:hover { transform: translateY(calc(var(--depth) * -.5)); box-shadow: 0 20px 48px rgba(var(--shadow-rgb), calc(.12 * var(--shadow-k))); }
+.promo-card--side { grid-template-columns: 1fr 1fr; }
+.promo-card__media { position: relative; overflow: hidden; min-height: 240px; }
+.promo-card--side .promo-card__media { border-radius: 0 120px 0 0; }
+.promo-card__img, .promo-card__media .art-fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .7s ease; }
+.promo-card:hover .promo-card__img { transform: scale(1.04); }
+.promo-card__copy { display: grid; align-content: center; justify-items: start; gap: 12px; padding: clamp(22px, 3vw, 40px); }
+.promo-card__title { margin: 0; font: 400 clamp(1.4rem, 2vw, 1.9rem)/1.15 var(--font-heading); letter-spacing: -.015em; }
+.promo-card__text { color: var(--muted); }
+.promo-card--stack { grid-template-rows: auto 1fr; }
+.promo-card--stack .promo-card__media { aspect-ratio: 16 / 10; }
+.promo-card--overlay .promo-card__media { position: absolute; inset: 0; }
+.promo-card--overlay .promo-card__media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(45, 32, 28, .6), transparent 70%); }
+.promo-card--overlay .promo-card__copy { position: relative; z-index: 1; align-content: end; color: #fffaf4; }
+.promo-card--overlay .kicker, .promo-card--overlay .promo-card__text { color: #fffaf4; }
+.promos[style*='--cols: 1'] .promo-card--side { grid-template-columns: 1.1fr 1fr; min-height: 460px; }
+@media (max-width: 989px) { .promos { grid-template-columns: 1fr; } }
+@media (max-width: 749px) {
+  .promo-card--side, .promos[style*='--cols: 1'] .promo-card--side { grid-template-columns: 1fr; }
+  .promo-card--side .promo-card__media { aspect-ratio: 4 / 3; min-height: 0; }
+}

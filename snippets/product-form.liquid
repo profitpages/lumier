@@ -1,0 +1,29 @@
+{%- comment -%}
+  Quantity + Add to bag (+ wishlist square) + optional Buy it now. Real Shopify product form.
+  Usage: {% render 'product-form', product: product, form_id: 'x', variant: v, show_buy_now: true, show_wishlist: true, show_qty: true, qty_note: 'text' %}
+{%- endcomment -%}
+<div class="buy">
+  {%- form 'product', product, id: form_id, class: 'buy__form', data-product-form: '', novalidate: 'novalidate' -%}
+    <input type="hidden" name="id" value="{{ variant.id }}" data-variant-id>
+    {%- if show_qty -%}
+      {%- assign qty_id = 'Qty-' | append: form_id -%}
+      <div class="buy__qty">
+        <div class="buy__qty-field">
+          <span class="label" aria-hidden="true">{{ 'products.quantity' | t }}</span>
+          {%- render 'quantity-input', id: qty_id, value: 1, min: 1, label: product.title -%}
+        </div>
+        {%- if qty_note != blank -%}<p class="buy__note">{{ qty_note | escape }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+    <div class="buy__row">
+      <button type="submit" name="add" class="btn btn--solid btn--square btn--grow" data-add-button{% unless variant.available %} disabled{% endunless %}>
+        <span data-add-label>{%- if variant.available -%}{{ 'products.add_to_cart' | t }}{%- else -%}{{ 'products.sold_out' | t }}{%- endif -%}</span>
+      </button>
+      {%- if show_wishlist -%}{%- render 'wishlist-button', product: product, class: 'wish--square' -%}{%- endif -%}
+    </div>
+    {%- if show_buy_now -%}
+      <div class="buy__dynamic">{{ form | payment_button }}</div>
+    {%- endif -%}
+    <p class="form-msg form-msg--error" role="alert" hidden data-form-error></p>
+  {%- endform -%}
+</div>

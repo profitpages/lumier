@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "settings": {
+        "show_author": true,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "journal": {
+      "type": "blog-posts",
+      "settings": {
+        "kicker": "The journal",
+        "heading": "Keep reading",
+        "link_label": "Read the journal",
+        "limit": 3,
+        "show_date": false,
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "journal"
+  ]
+}

@@ -1,0 +1,15 @@
+{%- comment -%} Logo, or the shop name as a letter-spaced wordmark. Usage: {% render 'wordmark', inverse: false %} {%- endcomment -%}
+{%- liquid
+  assign logo_img = settings.logo
+  if inverse and settings.logo_inverse != blank
+    assign logo_img = settings.logo_inverse
+  endif
+-%}
+<a class="wordmark" href="{{ routes.root_url }}">
+  {%- if logo_img != blank -%}
+    {%- assign logo_h = settings.logo_width | divided_by: logo_img.aspect_ratio | round -%}
+    {{ logo_img | image_url: width: 600 | image_tag: width: settings.logo_width, height: logo_h, alt: shop.name, loading: 'eager', widths: '150, 300, 450, 600', class: 'wordmark__img' }}
+  {%- else -%}
+    <span class="wordmark__text wordmark__text--{{ settings.wordmark_style }} wordmark__text--{{ settings.wordmark_font }}">{{ shop.name | escape }}</span>
+  {%- endif -%}
+</a>

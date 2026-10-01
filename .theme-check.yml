@@ -1,0 +1,3 @@
+RemoteAsset:
+  ignore:
+    - snippets/theme-styles.liquid

@@ -1,0 +1,53 @@
+{{ 'section-extras.css' | asset_url | stylesheet_tag }}
+{%- assign s = section.settings -%}
+<section class="section color-{{ s.color_scheme }}">
+  {%- render 'decor', preset: 'hero' -%}
+  <div class="page-width{% unless s.full_width %} page-width--video{% endunless %}">
+    {%- render 'section-heading', kicker: s.kicker, title: s.heading, text: s.text, align: 'center' -%}
+    <deferred-media class="vframe">
+      <div class="vframe__screen">
+        <button class="vframe__poster" type="button" data-play aria-label="{{ 'sections.play_video' | t: title: s.heading | escape }}">
+          {%- if s.cover != blank -%}
+            {%- render 'responsive-image', image: s.cover, max: 2000, sizes: '(min-width: 990px) 960px, 100vw' -%}
+          {%- elsif s.video != blank -%}
+            {%- render 'responsive-image', image: s.video.preview_image, max: 2000, sizes: '(min-width: 990px) 960px, 100vw' -%}
+          {%- else -%}
+            <span class="vframe__art">{%- render 'cosmetic-art', name: 'swatch', tone: 'lilac' -%}</span>
+          {%- endif -%}
+          <span class="vframe__play glass">{% render 'icon', name: 'play', size: 26 %}</span>
+        </button>
+        <template>
+          {%- if s.video != blank -%}
+            {{ s.video | video_tag: autoplay: true, controls: true, playsinline: true, preload: 'auto', class: 'vframe__media' }}
+          {%- elsif s.video_url != blank -%}
+            {%- if s.video_url.type == 'youtube' -%}
+              <iframe class="vframe__media" src="https://www.youtube-nocookie.com/embed/{{ s.video_url.id }}?autoplay=1&rel=0" title="{{ s.heading | escape }}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+            {%- else -%}
+              <iframe class="vframe__media" src="https://player.vimeo.com/video/{{ s.video_url.id }}?autoplay=1" title="{{ s.heading | escape }}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+            {%- endif -%}
+          {%- endif -%}
+        </template>
+      </div>
+      {%- if s.caption != blank -%}<p class="vframe__caption">{{ s.caption | escape }}</p>{%- endif -%}
+    </deferred-media>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Video",
+  "class": "section-video",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "The ritual, in motion" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Watch the texture melt in." },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "video", "id": "video", "label": "Shopify-hosted video" },
+    { "type": "video_url", "id": "video_url", "label": "Or YouTube / Vimeo link", "accept": ["youtube", "vimeo"] },
+    { "type": "image_picker", "id": "cover", "label": "Cover image" },
+    { "type": "text", "id": "caption", "label": "Caption" },
+    { "type": "checkbox", "id": "full_width", "label": "Use full content width", "default": false },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "presets": [{ "name": "Video" }]
+}
+{% endschema %}

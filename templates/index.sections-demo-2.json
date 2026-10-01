@@ -1,0 +1,520 @@
+{
+  "sections": {
+    "quiz": {
+      "type": "skin-quiz",
+      "settings": {
+        "kicker": "Ritual finder",
+        "heading": "Find your ritual in three taps.",
+        "text": "<p>Tell us a little about your skin and we'll edit the shelf for you.</p>",
+        "q_skin": "How does your skin usually feel?",
+        "q_concern": "What would you love to change?",
+        "q_budget": "What's your budget?",
+        "done_heading": "Your edit is ready.",
+        "button_label": "See my ritual",
+        "color_scheme": "scheme-3",
+        "section_scheme": "scheme-1"
+      },
+      "blocks": {
+        "skin_1": {
+          "type": "skin",
+          "settings": {
+            "label": "Dry",
+            "note": "Tight, craves comfort",
+            "icon": "drop",
+            "param": "filter.p.m.custom.skin_type=Dry"
+          }
+        },
+        "skin_2": {
+          "type": "skin",
+          "settings": {
+            "label": "Oily",
+            "note": "Shiny by midday",
+            "icon": "sun",
+            "param": "filter.p.m.custom.skin_type=Oily"
+          }
+        },
+        "skin_3": {
+          "type": "skin",
+          "settings": {
+            "label": "Combination",
+            "note": "A bit of both",
+            "icon": "leaf",
+            "param": "filter.p.m.custom.skin_type=Combination"
+          }
+        },
+        "skin_4": {
+          "type": "skin",
+          "settings": {
+            "label": "Sensitive",
+            "note": "Reacts easily",
+            "icon": "heart",
+            "param": "filter.p.m.custom.skin_type=Sensitive"
+          }
+        },
+        "concern_5": {
+          "type": "concern",
+          "settings": {
+            "label": "Dullness",
+            "icon": "sun",
+            "param": "filter.p.product_type=Serum"
+          }
+        },
+        "concern_6": {
+          "type": "concern",
+          "settings": {
+            "label": "Fine lines",
+            "icon": "sparkle",
+            "param": "filter.p.product_type=Treatment"
+          }
+        },
+        "concern_7": {
+          "type": "concern",
+          "settings": {
+            "label": "Dehydration",
+            "icon": "drop",
+            "param": "filter.p.product_type=Moisturiser"
+          }
+        },
+        "concern_8": {
+          "type": "concern",
+          "settings": {
+            "label": "Breakouts",
+            "icon": "leaf",
+            "param": "filter.p.product_type=Cleanser"
+          }
+        },
+        "budget_9": {
+          "type": "budget",
+          "settings": {
+            "label": "Under $40",
+            "icon": "tag",
+            "param": "filter.v.price.lte=40"
+          }
+        },
+        "budget_10": {
+          "type": "budget",
+          "settings": {
+            "label": "Under $80",
+            "icon": "gift",
+            "param": "filter.v.price.lte=80"
+          }
+        },
+        "budget_11": {
+          "type": "budget",
+          "settings": {
+            "label": "Treat myself",
+            "icon": "sparkle",
+            "param": "filter.v.price.gte=80"
+          }
+        }
+      },
+      "block_order": [
+        "skin_1",
+        "skin_2",
+        "skin_3",
+        "skin_4",
+        "concern_5",
+        "concern_6",
+        "concern_7",
+        "concern_8",
+        "budget_9",
+        "budget_10",
+        "budget_11"
+      ]
+    },
+    "video": {
+      "type": "video",
+      "settings": {
+        "kicker": "The ritual, in motion",
+        "heading": "Watch the texture melt in.",
+        "full_width": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "vrev": {
+      "type": "video-reviews",
+      "settings": {
+        "kicker": "#LumiereRitual",
+        "heading": "Seen on your feed.",
+        "text": "<p>Real routines from our community — tap to play.</p>",
+        "autoplay": true,
+        "color_scheme": "scheme-3"
+      },
+      "blocks": {
+        "video_1": {
+          "type": "video",
+          "settings": {
+            "handle": "@yourcustomer",
+            "quote": "My skin has never looked this calm."
+          }
+        },
+        "video_2": {
+          "type": "video",
+          "settings": {
+            "handle": "@yourcustomer",
+            "quote": "The texture is unreal."
+          }
+        },
+        "video_3": {
+          "type": "video",
+          "settings": {
+            "handle": "@yourcustomer",
+            "quote": "Glow, no filter."
+          }
+        },
+        "video_4": {
+          "type": "video",
+          "settings": {
+            "handle": "@yourcustomer",
+            "quote": "Part of my AM ritual now."
+          }
+        },
+        "video_5": {
+          "type": "video",
+          "settings": {
+            "handle": "@yourcustomer"
+          }
+        }
+      },
+      "block_order": [
+        "video_1",
+        "video_2",
+        "video_3",
+        "video_4",
+        "video_5"
+      ]
+    },
+    "countdown": {
+      "type": "countdown",
+      "settings": {
+        "end_date": "2026-12-24",
+        "end_time": "23:59",
+        "when_expired": "hide",
+        "expired_text": "This edit has ended — new rituals are on the way.",
+        "kicker": "The holiday edit",
+        "heading": "Gift sets, beautifully wrapped — for a little while.",
+        "text": "<p>Limited-edition rituals with complimentary gift wrap.</p>",
+        "button_label": "Shop gift sets",
+        "color_scheme": "scheme-7",
+        "section_scheme": "scheme-1"
+      }
+    },
+    "compare": {
+      "type": "comparison-table",
+      "settings": {
+        "kicker": "Which one is yours?",
+        "heading": "Compare our serums",
+        "rows": "Best for\nTexture\nKey active\nFragrance-free\nUse AM\nUse PM",
+        "flag": "Most loved",
+        "color_scheme": "scheme-2"
+      },
+      "blocks": {
+        "column_1": {
+          "type": "column",
+          "settings": {
+            "values": "Dull skin\nSilky gel\nVitamin C\nyes\nyes\nno",
+            "highlight": false,
+            "title": "Bright Serum"
+          }
+        },
+        "column_2": {
+          "type": "column",
+          "settings": {
+            "values": "Fine lines\nMilky fluid\nPeptides\nyes\nyes\nyes",
+            "highlight": true,
+            "title": "Peptide Serum"
+          }
+        },
+        "column_3": {
+          "type": "column",
+          "settings": {
+            "values": "Dry skin\nSilky oil\nSqualane\nyes\nno\nyes",
+            "highlight": false,
+            "title": "Night Oil"
+          }
+        }
+      },
+      "block_order": [
+        "column_1",
+        "column_2",
+        "column_3"
+      ]
+    },
+    "multirow": {
+      "type": "multirow",
+      "settings": {
+        "heading": "Why it feels different.",
+        "alternate": true,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "tint": "#efd1cf",
+            "number": false,
+            "kicker": "Texture",
+            "heading": "A gel that turns to silk.",
+            "text": "<p>Weightless on the fingertips, cushiony on skin — and gone in seconds, leaving only glow.</p>",
+            "sticker": "Weightless"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "tint": "#ded0ea",
+            "number": false,
+            "kicker": "Formula",
+            "heading": "Actives, gently delivered.",
+            "text": "<p>Encapsulated peptides and vitamin C release slowly for results without the sting.</p>",
+            "sticker": "Fragrance-free"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "tint": "#f5d3c2",
+            "number": false,
+            "kicker": "Packaging",
+            "heading": "Glass you'll want to keep.",
+            "text": "<p>Refillable, recyclable and heavy in the hand — made to live on your shelf.</p>",
+            "button_label": "Our commitments"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3"
+      ]
+    },
+    "multicolumn": {
+      "type": "multicolumn",
+      "settings": {
+        "heading": "Rituals for every moment.",
+        "heading_align": "left",
+        "columns": 3,
+        "style": "card",
+        "shape": "landscape",
+        "text_align": "left",
+        "swipe": true,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "column_1": {
+          "type": "column",
+          "settings": {
+            "title": "Morning",
+            "text": "<p>Light layers and SPF for a fresh, protected glow.</p>",
+            "link_label": "Shop AM"
+          }
+        },
+        "column_2": {
+          "type": "column",
+          "settings": {
+            "title": "Evening",
+            "text": "<p>Richer textures that replenish while you rest.</p>",
+            "link_label": "Shop PM"
+          }
+        },
+        "column_3": {
+          "type": "column",
+          "settings": {
+            "title": "On the go",
+            "text": "<p>Minis and balms for a glow between meetings.</p>",
+            "link_label": "Shop minis"
+          }
+        }
+      },
+      "block_order": [
+        "column_1",
+        "column_2",
+        "column_3"
+      ]
+    },
+    "ugc": {
+      "type": "shoppable-gallery",
+      "settings": {
+        "kicker": "#MyGlowRitual",
+        "heading": "On real shelves, in real light.",
+        "text": "<p>Tap a moment to shop the ritual behind it.</p>",
+        "link_label": "Follow along",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "photo_1": {
+          "type": "photo",
+          "settings": {
+            "handle": "@maya.glows"
+          }
+        },
+        "photo_2": {
+          "type": "photo",
+          "settings": {
+            "handle": "@anika.skin"
+          }
+        },
+        "photo_3": {
+          "type": "photo",
+          "settings": {
+            "handle": "@leena.rituals"
+          }
+        },
+        "photo_4": {
+          "type": "photo",
+          "settings": {
+            "handle": "@shelfie.daily"
+          }
+        },
+        "photo_5": {
+          "type": "photo",
+          "settings": {
+            "handle": "@softmorningrituals"
+          }
+        }
+      },
+      "block_order": [
+        "photo_1",
+        "photo_2",
+        "photo_3",
+        "photo_4",
+        "photo_5"
+      ]
+    },
+    "logos": {
+      "type": "logo-list",
+      "settings": {
+        "heading": "As featured in",
+        "mono": true,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "logo_1": {
+          "type": "logo",
+          "settings": {
+            "name": "Glow Journal",
+            "quote": "The serum we can't stop talking about."
+          }
+        },
+        "logo_2": {
+          "type": "logo",
+          "settings": {
+            "name": "Skin Weekly",
+            "quote": "Quietly brilliant."
+          }
+        },
+        "logo_3": {
+          "type": "logo",
+          "settings": {
+            "name": "The Edit",
+            "quote": "Texture, perfected."
+          }
+        },
+        "logo_4": {
+          "type": "logo",
+          "settings": {
+            "name": "Beauty Daily",
+            "quote": "A modern classic."
+          }
+        }
+      },
+      "block_order": [
+        "logo_1",
+        "logo_2",
+        "logo_3",
+        "logo_4"
+      ]
+    },
+    "richtext": {
+      "type": "rich-text",
+      "settings": {
+        "alignment": "center",
+        "width": 800,
+        "card": false,
+        "color_scheme": "scheme-3",
+        "section_scheme": "scheme-1"
+      },
+      "blocks": {
+        "kicker_1": {
+          "type": "kicker",
+          "settings": {
+            "text": "Our philosophy"
+          }
+        },
+        "heading_2": {
+          "type": "heading",
+          "settings": {
+            "heading": "Beauty that feels like a deep breath.",
+            "size": "section"
+          }
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We make fewer, better things: textures you look forward to, formulas that respect your skin, and packaging you'll want to keep.</p>"
+          }
+        },
+        "signature_4": {
+          "type": "signature",
+          "settings": {
+            "text": "— The studio"
+          }
+        }
+      },
+      "block_order": [
+        "kicker_1",
+        "heading_2",
+        "text_3",
+        "signature_4"
+      ]
+    },
+    "journal": {
+      "type": "blog-posts",
+      "settings": {
+        "kicker": "Notes from the journal",
+        "heading": "Small rituals, considered.",
+        "link_label": "Read the journal",
+        "limit": 3,
+        "show_date": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "nl_band": {
+      "type": "newsletter",
+      "settings": {
+        "layout": "band",
+        "kicker": "The Lumière edit",
+        "heading": "A softer kind of inbox.",
+        "text": "",
+        "button_label": "Join the edit",
+        "decor": true,
+        "color_scheme": "scheme-7",
+        "section_scheme": "scheme-1"
+      }
+    },
+    "custom": {
+      "type": "custom-liquid",
+      "settings": {
+        "contain": true,
+        "no_padding": false,
+        "color_scheme": "scheme-1",
+        "custom_liquid": "<div class='panel-card' style='text-align:center'><p class='kicker'>Custom Liquid</p><p>Rendered at {{ 'now' | date: '%H:%M' }}</p></div>"
+      }
+    }
+  },
+  "order": [
+    "quiz",
+    "video",
+    "vrev",
+    "countdown",
+    "compare",
+    "multirow",
+    "multicolumn",
+    "ugc",
+    "logos",
+    "richtext",
+    "journal",
+    "nl_band",
+    "custom"
+  ]
+}

@@ -1,0 +1,354 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "show_breadcrumb": true,
+        "enable_zoom": true,
+        "sticky_bar": true,
+        "color_scheme": "scheme-1",
+        "media_badge": "Glow, bottled"
+      },
+      "blocks": {
+        "kicker_1": {
+          "type": "kicker",
+          "settings": {
+            "show_save": false,
+            "text": ""
+          }
+        },
+        "title_2": {
+          "type": "title",
+          "settings": {
+            "show_vendor": false
+          }
+        },
+        "rating_3": {
+          "type": "rating",
+          "settings": {}
+        },
+        "description_4": {
+          "type": "description",
+          "settings": {
+            "words": 25
+          }
+        },
+        "divider_5": {
+          "type": "divider",
+          "settings": {}
+        },
+        "price_6": {
+          "type": "price",
+          "settings": {
+            "show_stock": true
+          }
+        },
+        "highlights_7": {
+          "type": "highlights",
+          "settings": {
+            "items": "Bestseller\nCruelty-free"
+          }
+        },
+        "variant_picker_8": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "buy_buttons_9": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_buy_now": false,
+            "show_wishlist": true
+          }
+        },
+        "shipping_note_10": {
+          "type": "shipping_note",
+          "settings": {
+            "text": "Complimentary shipping on orders over $75 and 30-day returns.",
+            "icon": "gift",
+            "color_scheme": "scheme-4"
+          }
+        }
+      },
+      "block_order": [
+        "kicker_1",
+        "title_2",
+        "rating_3",
+        "description_4",
+        "divider_5",
+        "price_6",
+        "highlights_7",
+        "variant_picker_8",
+        "buy_buttons_9",
+        "shipping_note_10"
+      ]
+    },
+    "glow_standard": {
+      "type": "benefits",
+      "settings": {
+        "kicker": "The glow standard",
+        "heading": "Luminosity that feels like skincare, not shimmer.",
+        "style": "standard",
+        "columns": 3,
+        "color_scheme": "scheme-2",
+        "section_scheme": "scheme-3"
+      },
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Instant dew",
+            "text": "<p>Light-catching hydration gives complexions a soft, glass-skin finish.</p>"
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "drop",
+            "title": "Deeply hydrated",
+            "text": "<p>Multi-weight hyaluronic acid cushions skin with lasting moisture.</p>"
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "sun",
+            "title": "Barrier-kind",
+            "text": "<p>A featherlight formula layers beautifully beneath makeup and SPF.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3"
+      ]
+    },
+    "formula": {
+      "type": "ingredients",
+      "settings": {
+        "layout": "panel",
+        "kicker": "The formula",
+        "heading": "Made for the way skin moves through light.",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "ingredient_1": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Hyaluronic Acid",
+            "benefit": "Plump + quench",
+            "text": "<p>A multi-weight complex helps bind hydration at skin's surface for a bouncy, cushion-soft look.</p>"
+          }
+        },
+        "ingredient_2": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Rosehip Oil",
+            "benefit": "Nourish + soften",
+            "text": "<p>A refined botanical oil rich in essential fatty acids to help skin feel soft and cared for.</p>"
+          }
+        },
+        "ingredient_3": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Peptides",
+            "benefit": "Smooth + support",
+            "text": "<p>Targeted peptides support a smoother-looking surface and a fresh, resilient feel.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "ingredient_1",
+        "ingredient_2",
+        "ingredient_3"
+      ]
+    },
+    "how_to_use": {
+      "type": "ritual-steps",
+      "settings": {
+        "kicker": "How to use",
+        "heading": "Three quiet minutes for a more luminous ritual.",
+        "use_metafield": false,
+        "panel": false,
+        "color_scheme": "scheme-2",
+        "section_scheme": "scheme-6"
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Prepare",
+            "text": "After cleansing, press 2–3 drops between palms while skin is still softly damp."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Press",
+            "text": "Press from the centre of the face outward, letting the formula melt in without rush."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Seal",
+            "text": "Follow with moisturiser and SPF in the morning, or a richer cream in the evening."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ]
+    },
+    "veil_effect": {
+      "type": "before-after",
+      "settings": {
+        "layout": "split",
+        "before_label": "Bare skin",
+        "after_label": "After the ritual",
+        "range_label": "Compare before and after",
+        "start": 50,
+        "kicker": "The veil effect",
+        "heading": "Skin, softly illuminated.",
+        "text": "<p>Move the handle to explore the appearance of hydrated, light-reflective skin after a consistent ritual.</p>",
+        "note": "Individual results may vary.",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "details": {
+      "type": "product-details",
+      "settings": {
+        "kicker": "Good to know",
+        "heading": "Every last detail.",
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "heading": "The ritual",
+            "source": "description",
+            "open": true
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "heading": "Inside the bottle",
+            "source": "ingredients",
+            "open": false
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "heading": "How to use",
+            "source": "how_to_use",
+            "open": false
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "heading": "Clinical results",
+            "source": "results",
+            "open": false
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "heading": "Skin type",
+            "source": "skin_type",
+            "open": false
+          }
+        },
+        "row_6": {
+          "type": "row",
+          "settings": {
+            "heading": "Size",
+            "source": "size",
+            "open": false
+          }
+        },
+        "row_7": {
+          "type": "row",
+          "settings": {
+            "heading": "Shipping & returns",
+            "source": "custom",
+            "open": false,
+            "content": "<p>Orders are prepared within 24 hours on business days. Unopened products can be returned within 30 days.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6",
+        "row_7"
+      ]
+    },
+    "pairs": {
+      "type": "product-recommendations",
+      "settings": {
+        "intent": "complementary",
+        "kicker": "Complete the ritual",
+        "heading": "Pairs beautifully with.",
+        "limit": 3,
+        "columns": 3,
+        "layout": "grid",
+        "card_style": "rounded",
+        "color_scheme": "scheme-3"
+      }
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {
+        "kicker": "Luminous words",
+        "heading": "Loved in every light.",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "recent": {
+      "type": "recently-viewed",
+      "settings": {
+        "kicker": "Continue your ritual",
+        "heading": "Recently viewed",
+        "link_label": "Shop all",
+        "limit": 4,
+        "color_scheme": "scheme-4"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "layout": "band",
+        "kicker": "The Lumière edit",
+        "heading": "A softer kind of inbox.",
+        "text": "",
+        "button_label": "Join the edit",
+        "decor": true,
+        "color_scheme": "scheme-7",
+        "section_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "glow_standard",
+    "formula",
+    "how_to_use",
+    "veil_effect",
+    "details",
+    "pairs",
+    "reviews",
+    "recent",
+    "newsletter"
+  ]
+}

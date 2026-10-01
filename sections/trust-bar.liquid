@@ -1,0 +1,63 @@
+{%- assign s = section.settings -%}
+<section class="trust color-{{ s.color_scheme }}{% if s.bold %} trust--bold{% endif %}" style="border-block: 1px solid color-mix(in srgb, var(--text) 9%, transparent);">
+  <div class="page-width">
+    <ul class="trust__list" role="list" style="--cols: {{ section.blocks.size | at_least: 1 | at_most: 4 }};">
+      {%- for block in section.blocks -%}
+        <li class="trust__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != 'none' -%}{%- render 'icon', name: block.settings.icon, size: 18 -%}{%- endif -%}
+          {%- if block.settings.link != blank -%}
+            <a href="{{ block.settings.link }}" style="text-decoration: none;">{{ block.settings.text | escape }}</a>
+          {%- else -%}
+            <span>{{ block.settings.text | escape }}</span>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trust strip",
+  "class": "section-trust",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "checkbox", "id": "bold", "label": "Bold text", "default": false },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" }
+  ],
+  "blocks": [
+    {
+      "type": "item", "name": "Statement",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Thoughtfully formulated" },
+        {
+          "type": "select", "id": "icon", "label": "Icon",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "sparkle", "label": "Sparkle" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "rabbit", "label": "Cruelty-free" },
+            { "value": "recycle", "label": "Recyclable" },
+            { "value": "truck", "label": "Delivery" },
+            { "value": "return", "label": "Returns" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "flask", "label": "Lab-tested" }
+          ],
+          "default": "none"
+        },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust strip",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Thoughtfully formulated" } },
+        { "type": "item", "settings": { "text": "Cruelty-free essentials" } },
+        { "type": "item", "settings": { "text": "Beauty, made beautifully" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

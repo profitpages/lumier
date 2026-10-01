@@ -1,0 +1,44 @@
+{%- assign s = section.settings -%}
+<section class="section color-{{ s.color_scheme }}">
+  <div class="page-width">
+    {%- assign blog_link = s.blog.url -%}
+    {%- render 'section-heading', kicker: s.kicker, title: s.heading, text: s.text, link_label: s.link_label, link: blog_link -%}
+    <ul class="posts" role="list">
+      {%- if s.blog != blank and s.blog.articles_count > 0 -%}
+        {%- for article in s.blog.articles limit: s.limit -%}
+          <li>{%- render 'article-card', article: article, show_date: s.show_date, show_excerpt: true -%}</li>
+        {%- endfor -%}
+      {%- else -%}
+        {%- assign demo_titles = 'sections.blog_demo_1,sections.blog_demo_2,sections.blog_demo_3' | split: ',' -%}
+        {%- for t in demo_titles -%}
+          <li>
+            <article class="post post--placeholder">
+              {%- assign ph_arts = 'swatch,serum,compact' | split: ',' -%}
+              {%- assign ph_tones = 'blush,lilac,peach' | split: ',' -%}
+              <div class="post__media">{%- render 'cosmetic-art', name: ph_arts[forloop.index0], tone: ph_tones[forloop.index0] -%}</div>
+              <div class="post__body"><h3 class="post__title">{{ t | t }}</h3><p class="post__excerpt">{{ 'sections.blog_placeholder' | t }}</p></div>
+            </article>
+          </li>
+        {%- endfor -%}
+      {%- endif -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog posts",
+  "class": "section-blog-posts",
+  "settings": [
+    { "type": "blog", "id": "blog", "label": "Blog" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Notes from the journal" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Small rituals, considered." },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Read the journal" },
+    { "type": "range", "id": "limit", "label": "Posts", "min": 2, "max": 6, "step": 1, "default": 3 },
+    { "type": "checkbox", "id": "show_date", "label": "Show date", "default": false },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "presets": [{ "name": "Blog posts" }]
+}
+{% endschema %}

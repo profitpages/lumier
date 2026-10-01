@@ -1,0 +1,57 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "blocks": {
+        "a1": {
+          "type": "announcement",
+          "settings": {
+            "text": "Complimentary shipping on orders over $75",
+            "link": "",
+            "icon": "none"
+          }
+        },
+        "a2": {
+          "type": "announcement",
+          "settings": {
+            "text": "Two complimentary samples with every ritual",
+            "link": "",
+            "icon": "none"
+          }
+        }
+      },
+      "block_order": [
+        "a1",
+        "a2"
+      ],
+      "settings": {
+        "enable": true,
+        "color_scheme": "scheme-6",
+        "caps": false,
+        "interval": 5
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "menu": "main-menu",
+        "logo_position": "left",
+        "nav_style": "plain",
+        "sticky": true,
+        "cart_style": "icon",
+        "show_search": true,
+        "show_account": true,
+        "show_wishlist": false,
+        "color_scheme": "scheme-1",
+        "menu_scheme": "scheme-2",
+        "sheet_note": "Complimentary shipping on orders over $75."
+      }
+    }
+  },
+  "order": [
+    "announcement",
+    "header"
+  ]
+}

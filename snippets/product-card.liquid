@@ -1,0 +1,172 @@
+{%- comment -%}
+  Lumière product card. All data comes from Shopify; section options override theme defaults.
+  Styles: editorial (paper frame, underlined quick add) | label (eyebrow + pill button) |
+          rounded (soft card, outline pill) | gallery (frameless, badges + wishlist, hover quick add)
+  Usage:
+    {% render 'product-card', product: product, style: 'editorial', ratio: 'square',
+       show_vendor: nil, show_rating: nil, show_badges: nil, show_quick_add: nil,
+       show_secondary: nil, lazy: true, section_id: section.id, sizes: '...' %}
+  A placeholder card renders when product is blank (theme editor onboarding).
+{%- endcomment -%}
+{%- liquid
+  assign card_style = style | default: settings.card_style
+  assign card_ratio = ratio | default: settings.card_ratio
+  case card_ratio
+    when 'portrait'
+      assign ratio_value = 0.8
+    when 'tall'
+      assign ratio_value = 0.75
+    when 'landscape'
+      assign ratio_value = 1.087
+    else
+      assign ratio_value = 1
+  endcase
+
+  assign sv = settings.card_show_vendor
+  if show_vendor != nil
+    assign sv = show_vendor
+  endif
+  assign sr = settings.card_show_rating
+  if show_rating != nil
+    assign sr = show_rating
+  endif
+  assign sb = settings.card_show_badges
+  if show_badges != nil
+    assign sb = show_badges
+  endif
+  assign sq = settings.card_show_quick_add
+  if show_quick_add != nil
+    assign sq = show_quick_add
+  endif
+  assign s2 = settings.card_show_secondary
+  if show_secondary != nil
+    assign s2 = show_secondary
+  endif
+
+  assign img_sizes = sizes | default: '(min-width: 1100px) 22vw, (min-width: 750px) 30vw, 46vw'
+  assign load = 'lazy'
+  if lazy == false
+    assign load = 'eager'
+  endif
+  assign arts = 'serum,jar,tube,pump,compact,lipstick' | split: ','
+  assign art_i = product.id | default: 0 | modulo: 6
+  assign subtitle = product.metafields.custom.subtitle.value
+  if subtitle == blank and settings.card_show_type
+    assign subtitle = product.type
+  endif
+  assign eyebrow = product.metafields.custom.badge.value | default: product.type
+
+  assign qa_class = 'card__add'
+  case card_style
+    when 'editorial'
+      assign qa_class = 'card__add card__add--link'
+    when 'label'
+      assign qa_class = 'card__add card__add--pill'
+    when 'rounded'
+      assign qa_class = 'card__add card__add--outline'
+    when 'gallery'
+      assign qa_class = 'card__add card__add--float'
+  endcase
+-%}
+
+{%- capture quick_add -%}
+  {%- if sq and product != blank -%}
+    {%- if product.available == false -%}
+      <button class="{{ qa_class }}" type="button" disabled>{{ 'products.sold_out' | t }}</button>
+    {%- elsif product.has_only_default_variant -%}
+      {%- assign card_form_id = 'card-' | append: section_id | append: '-' | append: product.id -%}
+      {%- form 'product', product, id: card_form_id, class: 'card__form', data-product-form: '', novalidate: 'novalidate' -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <button class="{{ qa_class }}" type="submit" name="add"><span>{{ 'products.quick_add' | t }}</span></button>
+      {%- endform -%}
+    {%- else -%}
+      <button class="{{ qa_class }}" type="button" data-quick-add="{{ product.url | split: '?' | first }}" aria-haspopup="dialog">
+        <span>{{ 'products.quick_add' | t }}</span>
+      </button>
+    {%- endif -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture price_html -%}
+  {%- if product != blank -%}
+    {%- render 'price', product: product -%}
+  {%- else -%}
+    <div class="price"><span class="price__now">{{ 4800 | money }}</span></div>
+  {%- endif -%}
+{%- endcapture -%}
+
+<article class="card card--{{ card_style }}" data-reveal>
+  <div class="card__media" style="--ratio: {{ ratio_value }};">
+    {%- if product != blank -%}
+      <a class="card__media-link" href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+        {%- if product.featured_media -%}
+          {%- assign card_alt = product.featured_media.alt | default: product.title -%}
+          {{ product.featured_media | image_url: width: 900 | image_tag:
+            loading: load,
+            widths: '260, 360, 480, 640, 900',
+            sizes: img_sizes,
+            alt: card_alt,
+            class: 'card__img'
+          }}
+          {%- if s2 and product.media[1] -%}
+            {{ product.media[1] | image_url: width: 900 | image_tag:
+              loading: 'lazy',
+              widths: '260, 360, 480, 640, 900',
+              sizes: img_sizes,
+              alt: '',
+              class: 'card__img card__img--alt'
+            }}
+          {%- endif -%}
+        {%- else -%}
+          <div class="card__art">{%- render 'cosmetic-art', name: arts[art_i] -%}</div>
+        {%- endif -%}
+      </a>
+      {%- if sb and card_style != 'label' -%}
+        <div class="card__badges">{%- render 'badge', product: product -%}</div>
+      {%- endif -%}
+      {%- if card_style == 'gallery' or card_style == 'rounded' -%}
+        {%- render 'wishlist-button', product: product, class: 'card__wish' -%}
+      {%- endif -%}
+      {%- if card_style == 'gallery' -%}<div class="card__float">{{ quick_add }}</div>{%- endif -%}
+    {%- else -%}
+      <div class="card__art">{%- render 'cosmetic-art', name: arts[art_i] -%}</div>
+    {%- endif -%}
+  </div>
+
+  <div class="card__info">
+    {%- if card_style == 'label' and eyebrow != blank -%}
+      <p class="card__eyebrow">{{ eyebrow | escape }}</p>
+    {%- endif -%}
+    {%- if sv and product.vendor != blank -%}
+      <p class="card__vendor">{{ product.vendor | escape }}</p>
+    {%- endif -%}
+
+    <div class="card__row">
+      <h3 class="card__title">
+        {%- if product != blank -%}
+          <a class="card__link" href="{{ product.url }}">{{ product.title | escape }}</a>
+        {%- else -%}
+          {{ 'products.placeholder_title' | t }}
+        {%- endif -%}
+      </h3>
+      {%- if card_style == 'editorial' or card_style == 'gallery' -%}{{ price_html }}{%- endif -%}
+    </div>
+
+    {%- if card_style == 'label' -%}
+      <div class="card__line">{{ price_html }}{%- if subtitle != blank -%}<span class="card__sub card__sub--inline">{{ subtitle | escape }}</span>{%- endif -%}</div>
+    {%- else -%}
+      {%- if subtitle != blank -%}<p class="card__sub">{{ subtitle | escape }}</p>{%- endif -%}
+      {%- if card_style == 'rounded' -%}{{ price_html }}{%- endif -%}
+    {%- endif -%}
+
+    {%- if card_style == 'editorial' -%}
+      <div class="card__foot">
+        {%- if sr and product != blank -%}{%- render 'rating', product: product, show_count: false, size: 'sm', show_value: true -%}{%- endif -%}
+        {{ quick_add }}
+      </div>
+    {%- else -%}
+      {%- if sr and product != blank and card_style != 'label' -%}{%- render 'rating', product: product, show_count: true, size: 'sm' -%}{%- endif -%}
+      {%- if card_style != 'gallery' -%}<div class="card__foot">{{ quick_add }}</div>{%- endif -%}
+    {%- endif -%}
+  </div>
+</article>

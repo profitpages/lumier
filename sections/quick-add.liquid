@@ -1,0 +1,24 @@
+{%- comment -%} Compact product form loaded into the quick-add dialog via /products/{handle}?section_id=quick-add {%- endcomment -%}
+{%- if product -%}
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+  {%- assign qa_form = 'quick-add-' | append: product.id -%}
+  <product-info class="qa" data-section="quick-add" data-url="{{ product.url }}" data-local-price>
+    <div class="qa__media">
+      {%- render 'responsive-image', image: product.featured_media.preview_image, max: 800, sizes: '(min-width: 750px) 320px, 90vw', art: 'serum', tone: 'blush' -%}
+    </div>
+    <div class="qa__info">
+      {%- assign qa_kind = product.metafields.custom.subtitle.value | default: product.type -%}
+      {%- if qa_kind != blank -%}<p class="kicker">{{ qa_kind | escape }}</p>{%- endif -%}
+      <h2 class="h3 qa__title">{{ product.title | escape }}</h2>
+      {%- render 'rating', product: product, show_count: true -%}
+      <div data-product-price>{%- render 'price', product: product, variant: current_variant, size: 'md', show_save: true -%}</div>
+      {%- render 'variant-picker', product: product, form_id: qa_form, uid: qa_form -%}
+      {%- render 'product-form', product: product, form_id: qa_form, variant: current_variant, show_qty: true, show_buy_now: false -%}
+      <a class="link-underline" href="{{ product.url }}">{{ 'products.view_details' | t }}</a>
+    </div>
+  </product-info>
+{%- endif -%}
+
+{% schema %}
+{ "name": "Quick add" }
+{% endschema %}

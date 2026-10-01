@@ -1,0 +1,47 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "shop": {
+          "type": "menu",
+          "settings": {
+            "heading": "Shop",
+            "menu": "main-menu"
+          }
+        },
+        "brand": {
+          "type": "menu",
+          "settings": {
+            "heading": "Lumière",
+            "menu": "footer"
+          }
+        },
+        "follow": {
+          "type": "social",
+          "settings": {
+            "heading": "Follow"
+          }
+        }
+      },
+      "block_order": [
+        "shop",
+        "brand",
+        "follow"
+      ],
+      "settings": {
+        "color_scheme": "scheme-6",
+        "blurb": "<p>Beauty for becoming, every day.</p>",
+        "show_social": false,
+        "copyright": "Rituals, refined.",
+        "show_policies": true,
+        "show_payment": true
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

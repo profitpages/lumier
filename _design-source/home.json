@@ -1,0 +1,195 @@
+{
+ "announcement-bar": {
+  "color": "#fff8f0",
+  "bg": "#2d201c"
+ },
+ "announcement-text": {
+  "text": "Complimentary shipping on orders over $75"
+ },
+ "v": {
+  "color": "#2d201c",
+  "weight": "semibold",
+  "size": 12.0
+ },
+ "collection-section": {
+  "bg": "#f8f4ed"
+ },
+ "copyright-text": {
+  "text": "© 2026 Lumière Beauty. All rights reserved."
+ },
+ "edit-eyebrow": {
+  "text": "Cult favourites"
+ },
+ "edit-title": {
+  "text": "The edit"
+ },
+ "editorial-copy": {
+  "text": "Our skincare brings thoughtful textures, clinically minded ingredients, and the pleasure of a slow morning together."
+ },
+ "editorial-cta": {
+  "text": "Explore skincare"
+ },
+ "editorial-eyebrow": {
+  "text": "Skin first"
+ },
+ "editorial-section": {
+  "bg": "#e9cbc5"
+ },
+ "editorial-title": {
+  "text": "Your skin, in its best light."
+ },
+ "footer-about-title": {
+  "text": "Lumière"
+ },
+ "footer-follow-title": {
+  "text": "Follow"
+ },
+ "footer-note": {
+  "text": "Beauty for becoming, every day."
+ },
+ "footer-shop-title": {
+  "text": "Shop"
+ },
+ "footer-wordmark": {
+  "text": "LUMIÈRE BEAUTY"
+ },
+ "hero-copy": {
+  "text": "High-performance beauty essentials designed for luminous everyday living."
+ },
+ "hero-eyebrow": {
+  "text": "A luminous daily practice"
+ },
+ "hero-primary-cta": {
+  "text": "Shop bestsellers"
+ },
+ "hero-secondary-cta": {
+  "text": "Discover the ritual"
+ },
+ "hero-section": {
+  "bg": "#eee2d6"
+ },
+ "hero-title": {
+  "text": "Rituals, refined."
+ },
+ "newsletter-button": {
+  "text": "Join the list"
+ },
+ "newsletter-copy": {
+  "text": "New rituals, quiet launches, and thoughtful beauty notes delivered occasionally."
+ },
+ "newsletter-eyebrow": {
+  "text": "A little luminosity"
+ },
+ "newsletter-label": {
+  "text": "Email address"
+ },
+ "newsletter-section": {
+  "bg": "#f8f4ed"
+ },
+ "newsletter-title": {
+  "text": "Notes from Lumière"
+ },
+ "product-card-four": {
+  "bg": "#fffdf9"
+ },
+ "product-card-one": {
+  "bg": "#fffdf9"
+ },
+ "product-card-three": {
+  "bg": "#fffdf9"
+ },
+ "product-card-two": {
+  "bg": "#fffdf9"
+ },
+ "product-description-four": {
+  "text": "A fresh, petal-soft reset"
+ },
+ "product-description-one": {
+  "text": "Radiance in every drop"
+ },
+ "product-description-three": {
+  "text": "Soft-focus contour palette"
+ },
+ "product-description-two": {
+  "text": "Weightless barrier comfort"
+ },
+ "product-name-four": {
+  "text": "Rosewater Mist"
+ },
+ "product-name-one": {
+  "text": "Glow Veil Serum"
+ },
+ "product-name-three": {
+  "text": "Sculpt & Define"
+ },
+ "product-name-two": {
+  "text": "Silk Cloud Cream"
+ },
+ "product-price-four": {
+  "text": "$29"
+ },
+ "product-price-one": {
+  "text": "$48"
+ },
+ "product-price-three": {
+  "text": "$38"
+ },
+ "product-price-two": {
+  "text": "$42"
+ },
+ "product-rating-four": {
+  "text": "★★★★★ 4.7"
+ },
+ "product-rating-one": {
+  "text": "★★★★★ 4.9"
+ },
+ "product-rating-three": {
+  "text": "★★★★★ 4.9"
+ },
+ "product-rating-two": {
+  "text": "★★★★★ 4.8"
+ },
+ "ritual-eyebrow": {
+  "text": "Build your moment"
+ },
+ "ritual-section": {
+  "bg": "#f8f4ed"
+ },
+ "ritual-title": {
+  "text": "The three-step ritual"
+ },
+ "shop-all-link": {
+  "text": "SHOP ALL"
+ },
+ "site-footer": {
+  "bg": "#eadfd5"
+ },
+ "site-header": {
+  "bg": "#f8f4ed"
+ },
+ "testimonial-mark": {
+  "text": "“"
+ },
+ "testimonial-name": {
+  "text": "MAYA R. — VERIFIED CUSTOMER"
+ },
+ "testimonial-quote": {
+  "text": "The kind of beauty ritual that makes an ordinary Tuesday feel like an occasion."
+ },
+ "testimonial-section": {
+  "color": "#fffaf4",
+  "bg": "#2d201c"
+ },
+ "trust-one": {
+  "text": "Thoughtfully formulated"
+ },
+ "trust-section": {
+  "bg": "#fffdf9"
+ },
+ "trust-three": {
+  "text": "Beauty, made beautifully"
+ },
+ "trust-two": {
+  "text": "Cruelty-free essentials"
+ }
+}

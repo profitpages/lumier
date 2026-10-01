@@ -1,0 +1,38 @@
+{%- assign s = section.settings -%}
+<section class="section section--tight color-{{ s.color_scheme }}">
+  <div class="page-width">
+    <header class="page-head page-head--center">
+      <p class="kicker">{{ s.kicker | escape }}</p>
+      <h1 class="h1">{{ blog.title | escape }}</h1>
+    </header>
+    {%- paginate blog.articles by s.per_page -%}
+      {%- if blog.all_tags.size > 0 -%}
+        <ul class="chip-row chip-row--center" role="list">
+          <li><a class="chip{% if current_tags == blank %} is-active{% endif %}" href="{{ blog.url }}">{{ 'blogs.all' | t }}</a></li>
+          {%- for tag in blog.all_tags -%}<li><a class="chip{% if current_tags contains tag %} is-active{% endif %}" href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag | escape }}</a></li>{%- endfor -%}
+        </ul>
+      {%- endif -%}
+      <ul class="posts posts--page" role="list">
+        {%- for article in blog.articles -%}
+          <li>{%- render 'article-card', article: article, show_date: s.show_date, show_excerpt: true -%}</li>
+        {%- else -%}
+          <li class="empty"><p>{{ 'blogs.empty' | t }}</p></li>
+        {%- endfor -%}
+      </ul>
+      {%- render 'pagination', paginate: paginate -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog posts",
+  "class": "section-main-blog",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "The journal" },
+    { "type": "range", "id": "per_page", "label": "Posts per page", "min": 3, "max": 24, "step": 3, "default": 9 },
+    { "type": "checkbox", "id": "show_date", "label": "Show date", "default": true },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ]
+}
+{% endschema %}

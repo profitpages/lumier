@@ -1,0 +1,69 @@
+{%- assign s = section.settings -%}
+<article class="section section--tight color-{{ s.color_scheme }}">
+  <div class="page-width page-width--narrow">
+    {%- render 'breadcrumb' -%}
+    <header class="page-head">
+      <p class="kicker">{{ article.published_at | time_tag: format: 'date' }}{% if s.show_author %} · {{ article.author }}{% endif %}</p>
+      <h1 class="h1">{{ article.title | escape }}</h1>
+    </header>
+    {%- if article.image -%}
+      <div class="article__hero">{%- render 'responsive-image', image: article.image, max: 1800, sizes: '(min-width: 900px) 860px, 100vw', eager: true -%}</div>
+    {%- endif -%}
+    <div class="rte rte--page">{{ article.content }}</div>
+    {%- if article.tags.size > 0 -%}
+      <ul class="chip-row" role="list">{%- for tag in article.tags -%}<li><a class="chip" href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag | escape }}</a></li>{%- endfor -%}</ul>
+    {%- endif -%}
+
+    {%- if blog.comments_enabled? -%}
+      <section class="comments" aria-labelledby="CommentsTitle">
+        <h2 class="h3" id="CommentsTitle">{{ 'blogs.comments' | t: count: article.comments_count }}</h2>
+        {%- paginate article.comments by 10 -%}
+          {%- for comment in article.comments -%}
+            <div class="comment">
+              <p class="comment__by">{{ comment.author | escape }} · {{ comment.created_at | time_tag: format: 'date' }}</p>
+              <div class="rte">{{ comment.content }}</div>
+            </div>
+          {%- endfor -%}
+          {%- render 'pagination', paginate: paginate -%}
+        {%- endpaginate -%}
+        {%- form 'new_comment', article, class: 'panel-card form-grid' -%}
+          <h3 class="h3">{{ 'blogs.leave_comment' | t }}</h3>
+          {%- if form.posted_successfully? -%}
+            <p class="form-msg form-msg--ok" role="status">{%- if blog.moderated? -%}{{ 'blogs.comment_moderated' | t }}{%- else -%}{{ 'blogs.comment_posted' | t }}{%- endif -%}</p>
+          {%- endif -%}
+          {%- if form.errors -%}<div class="form-msg form-msg--error" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
+          <div class="form-grid__row">
+            <div class="field"><label class="label" for="CommentAuthor">{{ 'customer.name' | t }}</label><input class="input" id="CommentAuthor" type="text" name="comment[author]" value="{{ form.author }}" required autocomplete="name"></div>
+            <div class="field"><label class="label" for="CommentEmail">{{ 'customer.email' | t }}</label><input class="input" id="CommentEmail" type="email" name="comment[email]" value="{{ form.email }}" required autocomplete="email"></div>
+          </div>
+          <div class="field"><label class="label" for="CommentBody">{{ 'blogs.comment' | t }}</label><textarea class="input" id="CommentBody" name="comment[body]" rows="5" required>{{ form.body }}</textarea></div>
+          <button class="btn btn--solid" type="submit">{{ 'blogs.post_comment' | t }}</button>
+        {%- endform -%}
+      </section>
+    {%- endif -%}
+  </div>
+</article>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": {{ article.title | json }},
+    "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+    "dateModified": {{ article.updated_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+    "author": { "@type": "Person", "name": {{ article.author | json }} },
+    {%- if article.image -%}"image": [{{ article.image | image_url: width: 1200 | prepend: 'https:' | json }}],{%- endif -%}
+    "publisher": { "@type": "Organization", "name": {{ shop.name | json }} }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Blog post",
+  "class": "section-main-article",
+  "settings": [
+    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": true },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,10 @@
+{%- comment -%}
+  Usage: {% render 'button', label: s.label, url: s.link, style: 'solid', icon: 'arrow-right', class: '' %}
+  style: solid (scheme button) | outline | accent (Add to bag clay) | link
+{%- endcomment -%}
+{%- if label != blank -%}
+  <a class="btn btn--{{ style | default: 'solid' }}{% if class %} {{ class }}{% endif %}" href="{{ url | default: routes.all_products_collection_url }}">
+    <span>{{ label | escape }}</span>
+    {%- if icon != blank -%}{%- render 'icon', name: icon, size: 18 -%}{%- endif -%}
+  </a>
+{%- endif -%}

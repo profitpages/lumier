@@ -1,0 +1,97 @@
+{%- comment -%} Shop by concern — photo cards (home) or chip links (collection pages). Each block links to a collection. {%- endcomment -%}
+{{ 'section-lumiere.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign s = section.settings
+  assign arts = 'swatch,portrait,jar,serum,pump,tube' | split: ','
+-%}
+<section class="section{% if s.layout == 'chips' %} section--chips{% endif %} color-{{ s.color_scheme }}">
+  <div class="page-width">
+    {%- if s.layout == 'chips' -%}
+      <div class="concern-chips">
+        {%- if s.heading != blank -%}<h2 class="kicker">{{ s.heading | escape }}</h2>{%- endif -%}
+        <ul class="chip-row" role="list">
+          {%- for block in section.blocks -%}
+            {%- assign b = block.settings -%}
+            {%- assign url = b.link | default: b.collection.url | default: routes.all_products_collection_url -%}
+            <li {{ block.shopify_attributes }}><a class="chip{% if b.collection != blank and collection.handle == b.collection.handle %} is-active{% endif %}" href="{{ url }}">{{ b.title | escape }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- else -%}
+      {%- render 'section-heading', kicker: s.kicker, title: s.heading, text: s.text -%}
+      <ul class="concerns" role="list" style="--cols: {{ s.columns }};">
+        {%- for block in section.blocks -%}
+          {%- assign b = block.settings -%}
+          {%- assign url = b.link | default: b.collection.url | default: routes.all_products_collection_url -%}
+          {%- assign c_img = b.image | default: b.collection.featured_image -%}
+          {%- assign i = forloop.index0 | modulo: 6 -%}
+          <li class="concern" data-reveal {{ block.shopify_attributes }}>
+            <a class="concern__link" href="{{ url }}">
+              <span class="concern__media">
+                {%- render 'responsive-image', image: c_img, max: 700, sizes: '(min-width: 990px) 22vw, (min-width: 750px) 30vw, 70vw', class: 'concern__img', art: arts[i], tone: 'blush' -%}
+              </span>
+              <span class="concern__title">{{ b.title | escape }}</span>
+              {%- if b.text != blank -%}<span class="concern__text">{{ b.text | escape }}</span>{%- endif -%}
+              {%- if s.link_label != blank -%}<span class="concern__go">{{ s.link_label | escape }}</span>{%- endif -%}
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop by concern",
+  "class": "section-concerns",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "select", "id": "layout", "label": "Layout",
+      "options": [{ "value": "cards", "label": "Photo cards" }, { "value": "chips", "label": "Chip links (compact)" }],
+      "default": "cards"
+    },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "A ritual for every you" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop by concern" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "text", "id": "link_label", "label": "Card link label", "default": "Discover" },
+    { "type": "range", "id": "columns", "label": "Cards per row (desktop)", "min": 3, "max": 5, "step": 1, "default": 4 },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "concern", "name": "Concern",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Dryness" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Comforting hydration for thirsty skin." },
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Defaults to the collection image." },
+        { "type": "url", "id": "link", "label": "Custom link", "info": "Overrides the collection, e.g. a filtered collection URL." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop by concern",
+      "blocks": [
+        { "type": "concern", "settings": { "title": "Dryness", "text": "Comforting hydration for thirsty skin." } },
+        { "type": "concern", "settings": { "title": "Dullness", "text": "Bring a little light to your daily ritual." } },
+        { "type": "concern", "settings": { "title": "Sensitivity", "text": "Thoughtful textures for a gentler feel." } },
+        { "type": "concern", "settings": { "title": "Uneven tone", "text": "A considered routine for a more even-looking glow." } }
+      ]
+    },
+    {
+      "name": "Concern chips",
+      "settings": { "layout": "chips", "heading": "Shop by concern", "color_scheme": "scheme-2" },
+      "blocks": [
+        { "type": "concern", "settings": { "title": "Dryness" } },
+        { "type": "concern", "settings": { "title": "Dullness" } },
+        { "type": "concern", "settings": { "title": "Sensitivity" } },
+        { "type": "concern", "settings": { "title": "Uneven tone" } },
+        { "type": "concern", "settings": { "title": "Fine lines" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

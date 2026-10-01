@@ -1,0 +1,72 @@
+{{ 'section-extras.css' | asset_url | stylesheet_tag }}
+{%- assign s = section.settings -%}
+{%- assign arts = 'serum,jar,compact,pump,tube,lipstick' | split: ',' -%}
+{%- assign tones = 'blush,lilac,peach,sand,blush,lilac' | split: ',' -%}
+<section class="section color-{{ s.color_scheme }}">
+  <div class="page-width">
+    {%- render 'section-heading', kicker: s.kicker, title: s.heading, text: s.text -%}
+    <div class="mrow{% if s.alternate %} mrow--alt{% endif %}">
+      {%- for block in section.blocks -%}
+        {%- assign b = block.settings -%}
+        {%- assign i = forloop.index0 | modulo: 6 -%}
+        <article class="mrow__row" data-reveal {{ block.shopify_attributes }}>
+          <div class="mrow__media" style="--tint: {{ b.tint }};">
+            <span class="mrow__blob" aria-hidden="true"></span>
+            <div class="mrow__frame">
+              {%- render 'responsive-image', image: b.image, max: 1400, sizes: '(min-width: 990px) 45vw, 92vw', class: 'mrow__img', art: arts[i], tone: tones[i] -%}
+            </div>
+            {%- if b.sticker != blank -%}<span class="mrow__sticker glass">{{ b.sticker | escape }}</span>{%- endif -%}
+          </div>
+          <div class="mrow__copy">
+            {%- if b.number -%}<span class="mrow__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>{%- endif -%}
+            {%- if b.kicker != blank -%}<p class="kicker">{{ b.kicker | escape }}</p>{%- endif -%}
+            {%- if b.heading != blank -%}<h3 class="h2">{{ b.heading | escape }}</h3>{%- endif -%}
+            {%- if b.text != blank -%}<div class="rte mrow__text">{{ b.text }}</div>{%- endif -%}
+            {%- render 'button', label: b.button_label, url: b.button_link, style: 'outline' -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Multirow",
+  "class": "section-multirow",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Why it feels different." },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "checkbox", "id": "alternate", "label": "Alternate image side", "default": true },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "row", "name": "Row",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "color", "id": "tint", "label": "Backdrop shape color", "default": "#efd1cf" },
+        { "type": "text", "id": "sticker", "label": "Floating label" },
+        { "type": "checkbox", "id": "number", "label": "Show step number", "default": false },
+        { "type": "text", "id": "kicker", "label": "Kicker", "default": "Texture" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "A gel that turns to silk." },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Weightless on the fingertips, cushiony on skin — and gone in seconds, leaving only glow.</p>" },
+        { "type": "text", "id": "button_label", "label": "Button label" },
+        { "type": "url", "id": "button_link", "label": "Button link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Multirow",
+      "blocks": [
+        { "type": "row", "settings": { "sticker": "Weightless", "tint": "#efd1cf" } },
+        { "type": "row", "settings": { "kicker": "Formula", "heading": "Actives, gently delivered.", "text": "<p>Encapsulated peptides and vitamin C release slowly for results without the sting.</p>", "tint": "#ded0ea", "sticker": "Fragrance-free" } },
+        { "type": "row", "settings": { "kicker": "Packaging", "heading": "Glass you'll want to keep.", "text": "<p>Refillable, recyclable and heavy in the hand — made to live on your shelf.</p>", "tint": "#f5d3c2", "button_label": "Our commitments" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

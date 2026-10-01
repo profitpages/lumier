@@ -1,0 +1,32 @@
+{%- comment -%}
+  Usage: {% render 'pagination', paginate: paginate, anchor: '#x', load_more: true %}
+  load_more renders a "Load more" button (progressively enhanced) + numbered links.
+{%- endcomment -%}
+{%- if paginate.pages > 1 -%}
+  <nav class="pagination" aria-label="{{ 'general.pagination' | t }}">
+    {%- if load_more and paginate.next -%}
+      <a class="btn btn--solid pagination__more" href="{{ paginate.next.url }}{{ anchor }}" data-load-more>
+        {{ 'collections.load_more' | t }}
+      </a>
+    {%- endif -%}
+    <ul class="pagination__list{% if load_more %} pagination__list--quiet{% endif %}" role="list">
+      {%- if paginate.previous -%}
+        <li><a class="pagination__item" href="{{ paginate.previous.url }}{{ anchor }}" aria-label="{{ 'general.previous' | t }}">{% render 'icon', name: 'chevron-left', size: 18 %}</a></li>
+      {%- endif -%}
+      {%- for part in paginate.parts -%}
+        <li>
+          {%- if part.is_link -%}
+            <a class="pagination__item" href="{{ part.url }}{{ anchor }}" aria-label="{{ 'general.page' | t: page: part.title }}">{{ part.title }}</a>
+          {%- elsif part.title == paginate.current_page -%}
+            <span class="pagination__item is-current" aria-current="page">{{ part.title }}</span>
+          {%- else -%}
+            <span class="pagination__item pagination__item--gap">{{ part.title }}</span>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+      {%- if paginate.next -%}
+        <li><a class="pagination__item" href="{{ paginate.next.url }}{{ anchor }}" aria-label="{{ 'general.next' | t }}">{% render 'icon', name: 'chevron-right', size: 18 %}</a></li>
+      {%- endif -%}
+    </ul>
+  </nav>
+{%- endif -%}

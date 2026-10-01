@@ -1,0 +1,86 @@
+{%- comment -%}
+  Skin types. On product pages it can read custom.skin_type (list of text) and highlight matching cards;
+  non-matching types are shown dimmed. Without the metafield, all cards display normally.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign matched = ''
+  if s.use_metafield and product
+    assign mf = product.metafields.custom.skin_type.value
+    if mf != blank
+      assign matched = mf | join: '|' | downcase
+      assign matched = '|' | append: matched | append: '|'
+    endif
+  endif
+-%}
+<section class="section color-{{ s.color_scheme }}">
+  <div class="page-width">
+    {%- render 'section-heading', kicker: s.kicker, title: s.heading, text: s.text, align: 'center' -%}
+    <ul class="skin-types" role="list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign key = block.settings.label | downcase | strip
+          assign needle = '|' | append: key | append: '|'
+          assign state = ''
+          if matched != blank
+            if matched contains needle
+              assign state = 'is-match'
+            else
+              assign state = 'is-dim'
+            endif
+          endif
+        -%}
+        <li class="skin {{ state }}" {{ block.shopify_attributes }}>
+          <span class="skin__icon">{%- render 'icon', name: block.settings.icon, size: 26 -%}</span>
+          <span class="skin__label">{{ block.settings.label | escape }}</span>
+          {%- if block.settings.text != blank -%}<span class="skin__text">{{ block.settings.text | escape }}</span>{%- endif -%}
+          {%- if state == 'is-match' -%}<span class="skin__check">{% render 'icon', name: 'check', size: 14 %}<span class="visually-hidden">{{ 'products.suitable' | t }}</span></span>{%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Skin types",
+  "class": "section-skin-types",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Made for" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Every skin type, gently." },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "checkbox", "id": "use_metafield", "label": "On product pages, highlight the product's skin types", "default": true, "info": "Reads custom.skin_type (list of single-line text). Labels must match, e.g. 'Dry'." },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" }
+  ],
+  "blocks": [
+    {
+      "type": "type", "name": "Skin type",
+      "settings": [
+        {
+          "type": "select", "id": "icon", "label": "Icon",
+          "options": [
+            { "value": "drop", "label": "Drop" }, { "value": "sun", "label": "Sun" }, { "value": "leaf", "label": "Leaf" },
+            { "value": "flower", "label": "Flower" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "heart", "label": "Heart" }, { "value": "moon", "label": "Moon" }
+          ],
+          "default": "drop"
+        },
+        { "type": "text", "id": "label", "label": "Skin type", "default": "Dry" },
+        { "type": "text", "id": "text", "label": "Short note", "default": "Craves cushion" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Skin types",
+      "blocks": [
+        { "type": "type", "settings": { "icon": "drop", "label": "Dry", "text": "Craves cushion" } },
+        { "type": "type", "settings": { "icon": "sun", "label": "Oily", "text": "Needs balance" } },
+        { "type": "type", "settings": { "icon": "leaf", "label": "Combination", "text": "Wants both" } },
+        { "type": "type", "settings": { "icon": "heart", "label": "Sensitive", "text": "Loves gentle" } },
+        { "type": "type", "settings": { "icon": "sparkle", "label": "Normal", "text": "Keeps it simple" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

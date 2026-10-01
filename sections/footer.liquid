@@ -1,0 +1,134 @@
+{%- liquid
+  assign s = section.settings
+  assign scheme = settings.color_schemes[s.color_scheme]
+  assign is_dark = false
+  if scheme.settings.background.lightness < 45
+    assign is_dark = true
+  endif
+  assign socials = 'instagram,tiktok,pinterest,facebook,youtube' | split: ','
+-%}
+<footer class="footer color-{{ s.color_scheme }}">
+  <div class="page-width">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        {%- render 'wordmark', inverse: is_dark -%}
+        {%- if s.blurb != blank -%}<div class="footer__blurb rte">{{ s.blurb }}</div>{%- endif -%}
+        {%- if s.show_social -%}
+          <ul class="socials" role="list">
+            {%- for name in socials -%}
+              {%- assign key = 'social_' | append: name -%}
+              {%- if settings[key] != blank -%}
+                <li><a href="{{ settings[key] }}" target="_blank" rel="noopener" aria-label="{{ name | capitalize }}">{% render 'icon', name: name, size: 18 %}</a></li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        <div class="footer__col footer__col--{{ block.type }}" {{ block.shopify_attributes }}>
+          {%- case block.type -%}
+            {%- when 'menu' -%}
+              {%- if block.settings.heading != blank -%}<h2 class="footer__title">{{ block.settings.heading | escape }}</h2>{%- endif -%}
+              <ul class="footer__links" role="list">
+                {%- for link in block.settings.menu.links -%}
+                  <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+                {%- endfor -%}
+              </ul>
+            {%- when 'social' -%}
+              {%- if block.settings.heading != blank -%}<h2 class="footer__title">{{ block.settings.heading | escape }}</h2>{%- endif -%}
+              <ul class="footer__links" role="list">
+                {%- for name in socials -%}
+                  {%- assign key = 'social_' | append: name -%}
+                  {%- assign social_key = 'general.social_' | append: name -%}
+                  {%- if settings[key] != blank -%}<li><a href="{{ settings[key] }}" target="_blank" rel="noopener">{{ social_key | t }}</a></li>{%- endif -%}
+                {%- endfor -%}
+              </ul>
+            {%- when 'text' -%}
+              {%- if block.settings.heading != blank -%}<h2 class="footer__title">{{ block.settings.heading | escape }}</h2>{%- endif -%}
+              <div class="rte footer__text">{{ block.settings.text }}</div>
+            {%- when 'newsletter' -%}
+              {%- if block.settings.heading != blank -%}<h2 class="footer__title">{{ block.settings.heading | escape }}</h2>{%- endif -%}
+              {%- if block.settings.text != blank -%}<p class="footer__nl-copy">{{ block.settings.text | escape }}</p>{%- endif -%}
+              {%- assign f_nl_id = 'FooterNewsletter-' | append: block.id -%}
+              {%- form 'customer', id: f_nl_id, class: 'nl-form nl-form--compact' -%}
+                <input type="hidden" name="contact[tags]" value="newsletter">
+                {%- if form.posted_successfully? -%}
+                  <p class="form-msg form-msg--ok" role="status">{{ 'newsletter.success' | t }}</p>
+                {%- else -%}
+                  <div class="nl-form__field">
+                    <label class="visually-hidden" for="{{ f_nl_id }}-email">{{ 'newsletter.email_label' | t }}</label>
+                    <input class="input" id="{{ f_nl_id }}-email" type="email" name="contact[email]" autocomplete="email" required placeholder="{{ 'newsletter.email_label' | t }}">
+                    <button class="btn btn--solid" type="submit" aria-label="{{ 'newsletter.subscribe' | t }}">{% render 'icon', name: 'arrow-right', size: 18 %}</button>
+                  </div>
+                  {%- if form.errors -%}<p class="form-msg form-msg--error">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>{%- endif -%}
+                {%- endif -%}
+              {%- endform -%}
+          {%- endcase -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__legal">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url }}{%- if s.copyright != blank %} · {{ s.copyright | escape }}{% endif -%}
+      </p>
+      {%- if s.show_policies -%}
+        <ul class="footer__policies" role="list">
+          {%- for policy in shop.policies -%}<li><a href="{{ policy.url }}">{{ policy.title | escape }}</a></li>{%- endfor -%}
+        </ul>
+      {%- endif -%}
+      {%- if s.show_payment and shop.enabled_payment_types.size > 0 -%}
+        <ul class="footer__pay" role="list">
+          {%- for type in shop.enabled_payment_types -%}<li>{{ type | payment_type_svg_tag: class: 'pay-icon' }}</li>{%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "section-footer",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-6" },
+    { "type": "richtext", "id": "blurb", "label": "Brand text", "default": "<p>Beauty for becoming, every day.</p>" },
+    { "type": "checkbox", "id": "show_social", "label": "Show social icons under the brand", "default": false, "info": "Add links in Theme settings › Social media." },
+    { "type": "text", "id": "copyright", "label": "Copyright note", "default": "Rituals, refined." },
+    { "type": "checkbox", "id": "show_policies", "label": "Show policy links", "default": true },
+    { "type": "checkbox", "id": "show_payment", "label": "Show payment icons", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "menu", "name": "Menu",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Explore" },
+        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+      ]
+    },
+    {
+      "type": "social", "name": "Social links", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Follow" },
+        { "type": "paragraph", "content": "Lists the profiles added in Theme settings › Social media." }
+      ]
+    },
+    {
+      "type": "text", "name": "Text / contact",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Support" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>hello@yourstore.com<br>Mon–Fri, 9am–5pm</p>" }
+      ]
+    },
+    {
+      "type": "newsletter", "name": "Newsletter", "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Stay luminous" },
+        { "type": "text", "id": "text", "label": "Text", "default": "A small note from the studio, plus early access to new rituals." }
+      ]
+    }
+  ]
+}
+{% endschema %}

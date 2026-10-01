@@ -1,0 +1,49 @@
+{{ 'section-categories.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign s = section.settings
+  assign tints = '#efd1cf,#ded0ea,#f5d3c2,#eadbd0,#e3e6dc,#f6ddd5' | split: ','
+  assign arts = 'serum,lipstick,pump,jar,compact,tube' | split: ','
+  assign tones = 'blush,lilac,peach,sand,blush,lilac' | split: ','
+-%}
+<section class="section color-{{ s.color_scheme }}">
+  <div class="page-width">
+    {%- render 'breadcrumb' -%}
+    {%- render 'section-heading', kicker: s.kicker, title: s.heading, tag: 'h1' -%}
+    {%- paginate collections by 24 -%}
+      <ul class="cats cats--{{ s.style }}" role="list" style="--cols: {{ s.columns }};">
+        {%- for c in collections -%}
+          {%- assign i = forloop.index0 | modulo: 6 -%}
+          <li class="cat" data-reveal style="--tint: {{ tints[i] }};">
+            <a class="cat__link" href="{{ c.url }}">
+              <span class="cat__stage">{%- render 'responsive-image', image: c.featured_image, max: 800, sizes: '(min-width: 990px) 22vw, 46vw', class: 'cat__img', art: arts[i], tone: tones[i] -%}</span>
+              <span class="cat__body">
+                <span class="cat__title">{{ c.title | escape }}</span>
+                <span class="cat__count">{{ 'collections.product_count' | t: count: c.products_count }}</span>
+              </span>
+              <span class="cat__arrow" aria-hidden="true">{% render 'icon', name: 'arrow-right', size: 18 %}</span>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+      {%- render 'pagination', paginate: paginate -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collections list",
+  "class": "section-list-collections",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Shop by ritual" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "All collections" },
+    {
+      "type": "select", "id": "style", "label": "Card style",
+      "options": [{ "value": "stage", "label": "Sculpted stage" }, { "value": "arch", "label": "Arch window" }],
+      "default": "arch"
+    },
+    { "type": "range", "id": "columns", "label": "Cards per row", "min": 2, "max": 5, "step": 1, "default": 4 },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ]
+}
+{% endschema %}

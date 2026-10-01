@@ -1,0 +1,61 @@
+{{ 'section-extras.css' | asset_url | stylesheet_tag }}
+{%- assign s = section.settings -%}
+{%- capture items -%}
+  {%- for block in section.blocks -%}
+    <span class="marquee__item" {{ block.shopify_attributes }}>
+      {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}">{{ block.settings.text | escape }}</a>{%- else -%}{{ block.settings.text | escape }}{%- endif -%}
+    </span>
+    <span class="marquee__sep" aria-hidden="true">{% render 'icon', name: s.separator, size: 18 %}</span>
+  {%- endfor -%}
+{%- endcapture -%}
+<section class="marquee color-{{ s.color_scheme }} marquee--{{ s.direction }}{% if s.serif %} marquee--serif{% endif %}" style="--speed: {{ s.speed }}s;" aria-label="{{ s.label | escape }}">
+  <div class="marquee__track">
+    <div class="marquee__group">{{ items }}</div>
+    <div class="marquee__group" aria-hidden="true">{{ items }}</div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Scrolling text",
+  "class": "section-marquee",
+  "max_blocks": 10,
+  "settings": [
+    { "type": "text", "id": "label", "label": "Accessible name", "default": "Brand promises" },
+    {
+      "type": "select", "id": "separator", "label": "Separator",
+      "options": [{ "value": "sparkle", "label": "Sparkle" }, { "value": "flower", "label": "Flower" }, { "value": "dot", "label": "Dot" }, { "value": "leaf", "label": "Leaf" }],
+      "default": "sparkle"
+    },
+    { "type": "checkbox", "id": "serif", "label": "Large serif text", "default": true },
+    { "type": "range", "id": "speed", "label": "Loop duration (higher = slower)", "min": 16, "max": 80, "step": 4, "unit": "s", "default": 40 },
+    {
+      "type": "select", "id": "direction", "label": "Direction",
+      "options": [{ "value": "left", "label": "Left" }, { "value": "right", "label": "Right" }],
+      "default": "left"
+    },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-4" }
+  ],
+  "blocks": [
+    {
+      "type": "item", "name": "Text",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Dermatologist tested" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scrolling text",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Dermatologist tested" } },
+        { "type": "item", "settings": { "text": "Fragrance-free formulas" } },
+        { "type": "item", "settings": { "text": "Cruelty-free, always" } },
+        { "type": "item", "settings": { "text": "Two samples with every order" } },
+        { "type": "item", "settings": { "text": "Recyclable glass" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

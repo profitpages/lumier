@@ -1,0 +1,32 @@
+{%- comment -%} Totals, promo code and checkout — shared by drawer and cart page. Usage: {% render 'cart-summary', form_id: 'CartDrawerForm' %} {%- endcomment -%}
+<div class="summary">
+  {%- if settings.cart_promo -%}
+    <form class="promo" action="{{ routes.root_url }}discount/" data-promo-form>
+      <label class="visually-hidden" for="Promo-{{ form_id }}">{{ 'cart.promo_label' | t }}</label>
+      <input class="input" id="Promo-{{ form_id }}" type="text" name="code" placeholder="{{ 'cart.promo_label' | t }}" autocomplete="off" required>
+      <button class="btn btn--outline btn--sm" type="submit">{{ 'cart.apply' | t }}</button>
+    </form>
+    {%- if cart.discount_applications.size > 0 -%}
+      <ul class="summary__codes" role="list">
+        {%- for d in cart.discount_applications -%}
+          {%- if d.type == 'discount_code' -%}<li>{% render 'icon', name: 'tag', size: 14 %} {{ d.title | escape }}</li>{%- endif -%}
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if cart.cart_level_discount_applications.size > 0 -%}
+    <p class="summary__row"><span>{{ 'cart.subtotal_before' | t }}</span><span>{{ cart.items_subtotal_price | money }}</span></p>
+    {%- for d in cart.cart_level_discount_applications -%}
+      <p class="summary__row summary__row--discount"><span>{{ d.title | escape }}</span><span>−{{ d.total_allocated_amount | money }}</span></p>
+    {%- endfor -%}
+  {%- endif -%}
+  <p class="summary__row summary__row--total"><span>{{ 'cart.subtotal' | t }}</span><span>{{ cart.total_price | money_with_currency }}</span></p>
+  <p class="summary__note">
+    {%- if cart.taxes_included -%}{{ 'cart.taxes_included' | t }}{%- else -%}{{ 'cart.taxes_note' | t }}{%- endif -%}
+  </p>
+  <button type="submit" name="checkout" form="{{ form_id }}" class="btn btn--solid btn--block">
+    {%- render 'icon', name: 'shield', size: 18 -%}<span>{{ 'cart.checkout' | t }}</span>
+  </button>
+  {%- if settings.cart_reassurance != blank -%}<p class="summary__reassure">{{ settings.cart_reassurance | escape }}</p>{%- endif -%}
+</div>
