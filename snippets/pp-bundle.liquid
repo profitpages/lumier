@@ -1,0 +1,94 @@
+{%- comment -%}
+  Bought together (Profit Pages add-on), in Lumière's design.
+  Data: product.metafields.profitpages.bundle (discount) + .bundle_products (the
+  companions, as product references). Shows only while the plan is active.
+  Behavior (live total, adding the set + its discount) comes from assets/pp-addons.js.
+  Usage: {% render 'pp-bundle', product: product, variant: current_variant, heading: block.settings.heading %}
+{%- endcomment -%}
+{%- liquid
+  assign addons = shop.metafields.profitpages.addons.value
+  assign offer = product.metafields.profitpages.bundle.value
+  assign companions = product.metafields.profitpages.bundle_products.value
+-%}
+{%- if addons.active and offer and companions.size > 0 -%}
+  {%- liquid
+    assign total = variant.price
+    for c in companions
+      assign total = total | plus: c.selected_or_first_available_variant.price
+    endfor
+    assign value = offer.discountValue | times: 1
+    if offer.discountType == 'fixed'
+      assign off = value | times: 100 | round
+    else
+      assign off = total | times: value | divided_by: 100 | round
+    endif
+    if off > total
+      assign off = total
+    endif
+    assign pay = total | minus: off
+    if heading == blank
+      assign heading = 'addons.bundle_kicker' | t
+    else
+      assign heading = heading | escape
+    endif
+  -%}
+  <div class="pp-bundle pp-bundle--look" data-pp-bundle data-handle="{{ product.handle }}" data-discount-type="{{ offer.discountType | escape }}" data-discount-value="{{ value }}" data-money-format="{{ shop.money_format | strip_html | escape }}">
+    <div class="pp-bundle__head">
+      <p class="pp-bundle__heading kicker">{{ heading }}</p>
+      {%- if off > 0 -%}
+        {%- if offer.discountType == 'fixed' -%}{%- assign save_label = off | money_without_trailing_zeros -%}{%- else -%}{%- assign save_label = value | append: '%' -%}{%- endif -%}
+        <span class="pp-bundle__badge badge">{{ 'addons.bundle_save' | t: amount: save_label }}</span>
+      {%- endif -%}
+    </div>
+    <div class="pp-bundle__look" aria-hidden="true">
+      <span class="pp-bundle__look-img">{%- assign img = variant.featured_image | default: product.featured_image -%}{%- if img -%}{{ img | image_url: width: 360 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}</span>
+      {%- for c in companions -%}
+        <span class="pp-bundle__plus">+</span>
+        <span class="pp-bundle__look-img">{%- if c.featured_image -%}{{ c.featured_image | image_url: width: 360 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}</span>
+      {%- endfor -%}
+    </div>
+    <ul class="pp-bundle__items" role="list">
+      <li class="pp-bundle__item is-anchor" data-pp-bundle-row>
+        <label class="pp-bundle__check check">
+          <input type="checkbox" data-pp-bundle-item value="{{ variant.id }}" data-pp-price="{{ variant.price }}" checked disabled>
+          <span class="check__box" aria-hidden="true">{%- render 'icon', name: 'check', size: 12 -%}</span>
+          <span class="visually-hidden">{{ product.title | escape }}</span>
+        </label>
+        <span class="pp-bundle__thumb">{%- assign img = variant.featured_image | default: product.featured_image -%}{%- if img -%}{{ img | image_url: width: 240 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}</span>
+        <span class="pp-bundle__name"><span class="pp-bundle__this">{{ 'addons.bundle_this' | t }}</span><span class="pp-bundle__title">{{ product.title | escape }}</span></span>
+        <span class="pp-bundle__price">{{ variant.price | money }}</span>
+      </li>
+      {%- for c in companions -%}
+        {%- assign cv = c.selected_or_first_available_variant -%}
+        {%- assign item_id = 'PPB-' | append: product.id | append: '-' | append: forloop.index -%}
+        <li class="pp-bundle__item" data-pp-bundle-row>
+          <label class="pp-bundle__check check" for="{{ item_id }}">
+            <input type="checkbox" id="{{ item_id }}" data-pp-bundle-item value="{{ cv.id }}" data-pp-price="{{ cv.price }}"{% if cv.available %} checked{% else %} disabled{% endif %}>
+            <span class="check__box" aria-hidden="true">{%- render 'icon', name: 'check', size: 12 -%}</span>
+            <span class="visually-hidden">{{ c.title | escape }}</span>
+          </label>
+          <a class="pp-bundle__thumb" href="{{ c.url }}" tabindex="-1">{%- if c.featured_image -%}{{ c.featured_image | image_url: width: 240 | image_tag: loading: 'lazy', alt: c.featured_image.alt | escape }}{%- endif -%}</a>
+          <span class="pp-bundle__name">
+            <a class="pp-bundle__title" href="{{ c.url }}">{{ c.title | escape }}</a>
+            {%- if c.variants.size > 1 -%}
+              <select class="pp-bundle__variant" data-pp-bundle-variant aria-label="{{ 'products.choose_options_for' | t: title: c.title | escape }}">
+                {%- for v in c.variants -%}<option value="{{ v.id }}" data-pp-price="{{ v.price }}"{% if v == cv %} selected{% endif %}{% unless v.available %} disabled{% endunless %}>{{ v.title | escape }}</option>{%- endfor -%}
+              </select>
+            {%- endif -%}
+          </span>
+          <span class="pp-bundle__price" data-pp-bundle-price>{{ cv.price | money }}</span>
+        </li>
+      {%- endfor -%}
+    </ul>
+    <div class="pp-bundle__foot">
+      <p class="pp-bundle__total">
+        <span class="pp-bundle__total-label">{{ 'addons.bundle_total' | t }}</span>
+        <strong data-pp-bundle-total>{{ pay | money }}</strong>
+        <s data-pp-bundle-compare{% if off == 0 %} hidden{% endif %}>{{ total | money }}</s>
+      </p>
+      <button type="button" class="btn btn--solid btn--square pp-bundle__add" data-pp-bundle-add>
+        <span>{{ 'addons.bundle_add' | t }}</span>
+      </button>
+    </div>
+  </div>
+{%- endif -%}

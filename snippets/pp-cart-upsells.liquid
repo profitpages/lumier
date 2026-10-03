@@ -1,0 +1,164 @@
+{%- comment -%}
+  Cart upsells (Profit Pages add-on) inside Lumière's cart drawer.
+  Config: shop.metafields.profitpages.addons.value.cart (written by the app);
+  slider products: shop.metafields.profitpages.cart_upsells. Shows only while
+  the merchant's plan is active. Behavior comes from assets/pp-addons.js.
+  Usage: {% render 'pp-cart-upsells', part: 'top' %}     rewards bar, timer
+         {% render 'pp-cart-upsells', part: 'bottom' %}  protection, suggestions, payment icons
+  Sets no output when inactive, so the drawer falls back to the theme's own bar.
+{%- endcomment -%}
+{%- liquid
+  assign addons = shop.metafields.profitpages.addons.value
+  assign c = addons.cart
+-%}
+{%- if addons.active and c -%}
+  {%- if part == 'top' -%}
+    {%- if c.rewards -%}
+      {%- liquid
+        assign goals = ''
+        if c.rewards.freeShipping
+          assign goals = goals | append: c.rewards.freeShipping.threshold | append: ':ship,'
+        endif
+        if c.rewards.percentOff
+          assign goals = goals | append: c.rewards.percentOff.threshold | append: ':pct,'
+        endif
+        if c.rewards.freeGift
+          assign goals = goals | append: c.rewards.freeGift.threshold | append: ':gift,'
+        endif
+        assign max = 0
+        assign next_amount = 0
+        assign next_kind = ''
+        assign goal_list = goals | split: ','
+        for g in goal_list
+          assign parts = g | split: ':'
+          assign cents = parts[0] | times: 100 | round
+          if cents > max
+            assign max = cents
+          endif
+          if cents > cart.total_price
+            if next_amount == 0 or cents < next_amount
+              assign next_amount = cents
+              assign next_kind = parts[1]
+            endif
+          endif
+        endfor
+        assign pct = 100
+        if max > 0
+          assign pct = cart.total_price | times: 100 | divided_by: max
+        endif
+        if pct > 100
+          assign pct = 100
+        endif
+      -%}
+      <div class="ship pp-rewards{% if next_amount == 0 %} ship--done{% endif %}">
+        <p class="ship__text">
+          {%- if next_amount > 0 -%}
+            {%- assign remaining = next_amount | minus: cart.total_price | money -%}
+            {%- case next_kind -%}
+              {%- when 'ship' -%}{{ 'cart.free_shipping_remaining_html' | t: amount: remaining }}
+              {%- when 'pct' -%}{{ 'addons.reward_percent_html' | t: amount: remaining, percent: c.rewards.percentOff.percent }}
+              {%- when 'gift' -%}{{ 'addons.reward_gift_html' | t: amount: remaining }}
+            {%- endcase -%}
+          {%- else -%}
+            {%- assign unlocked = c.rewards.unlockedText | escape -%}{%- if unlocked == blank -%}{%- assign unlocked = 'addons.reward_all' | t -%}{%- endif -%}
+            {%- render 'icon', name: 'sparkle', size: 16 -%} {{ unlocked }}
+          {%- endif -%}
+        </p>
+        <div class="ship__track pp-rewards__track" role="progressbar" aria-label="{{ 'cart.free_shipping_progress' | t }}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ pct }}">
+          <span class="ship__fill" style="width: {{ pct }}%;"></span>
+          {%- for g in goal_list -%}
+            {%- assign parts = g | split: ':' -%}
+            {%- assign cents = parts[0] | times: 100 | round -%}
+            {%- assign at = cents | times: 100 | divided_by: max -%}
+            <span class="pp-rewards__stop{% if cart.total_price >= cents %} is-done{% endif %}" style="left: {{ at }}%;" aria-hidden="true">
+              {%- case parts[1] -%}{%- when 'ship' -%}{% render 'icon', name: 'truck', size: 12 %}{%- when 'pct' -%}%{%- when 'gift' -%}{% render 'icon', name: 'gift', size: 12 %}{%- endcase -%}
+            </span>
+          {%- endfor -%}
+        </div>
+        <div class="pp-rewards__labels" aria-hidden="true">
+          {%- for g in goal_list -%}
+            {%- assign parts = g | split: ':' -%}
+            {%- assign cents = parts[0] | times: 100 | round -%}
+            {%- assign at = cents | times: 100 | divided_by: max -%}
+            <span class="pp-rewards__label{% if cart.total_price >= cents %} is-done{% endif %}" style="left: {{ at }}%;">
+              {%- case parts[1] -%}{%- when 'ship' -%}{{ 'addons.reward_ship_short' | t }}{%- when 'pct' -%}{{ 'addons.reward_percent_short' | t: percent: c.rewards.percentOff.percent }}{%- when 'gift' -%}{{ 'addons.reward_gift_short' | t }}{%- endcase -%}
+            </span>
+          {%- endfor -%}
+        </div>
+      </div>
+      {%- if c.rewards.freeGift.variantId -%}
+        {%- assign gift_cents = c.rewards.freeGift.threshold | times: 100 | round -%}
+        <div data-pp-gift data-variant-id="{{ c.rewards.freeGift.variantId }}" data-threshold="{{ gift_cents }}" hidden></div>
+      {%- endif -%}
+    {%- endif -%}
+    {%- if c.timer and c.timer.minutes > 0 -%}
+      {%- assign timer_html = '<span class="pp-timer__clock" data-pp-timer data-minutes="' | append: c.timer.minutes | append: '">' | append: c.timer.minutes | append: ':00</span>' -%}
+      {%- assign timer_text = c.timer.text | escape -%}{%- if timer_text == blank -%}{%- assign timer_text = 'addons.timer_default' | t: time: timer_html -%}{%- endif -%}
+      {%- liquid
+        # The time placeholder token is built from parts so no double braces sit inside a Liquid tag.
+        assign open = '{' | append: '{'
+        assign close = '}' | append: '}'
+        assign token_tight = open | append: 'time' | append: close
+        assign token_spaced = open | append: ' time ' | append: close
+        assign timer_text = timer_text | replace: token_tight, timer_html | replace: token_spaced, timer_html
+      -%}
+      <p class="pp-timer">{%- render 'icon', name: 'clock', size: 16 -%}<span>{{ timer_text }}</span></p>
+    {%- endif -%}
+
+  {%- elsif part == 'bottom' -%}
+    {%- if c.protection -%}
+      {%- liquid
+        assign protected = false
+        for item in cart.items
+          if item.variant_id == c.protection.variantId
+            assign protected = true
+          endif
+        endfor
+      -%}
+      <label class="pp-protect check">
+        <input type="checkbox" data-pp-protection data-variant-id="{{ c.protection.variantId }}"{% if protected %} checked{% endif %}>
+        <span class="check__box" aria-hidden="true">{%- render 'icon', name: 'check', size: 12 -%}</span>
+        <span class="pp-protect__icon" aria-hidden="true">{%- render 'icon', name: 'shield', size: 20 -%}</span>
+        <span class="pp-protect__text">
+          <strong>{{ c.protection.label | escape }}</strong>
+          {%- if c.protection.description != blank -%}<span>{{ c.protection.description | escape }}</span>{%- endif -%}
+        </span>
+        <span class="pp-protect__price">{{ c.protection.price | times: 100 | money }}</span>
+      </label>
+    {%- endif -%}
+
+    {%- assign picks = shop.metafields.profitpages.cart_upsells.value -%}
+    {%- if c.slider and picks.size > 0 -%}
+      {%- capture cards -%}
+        {%- for p in picks -%}
+          {%- assign in_cart = false -%}
+          {%- for item in cart.items -%}{%- if item.product_id == p.id -%}{%- assign in_cart = true -%}{%- endif -%}{%- endfor -%}
+          {%- assign pv = p.selected_or_first_available_variant -%}
+          {%- unless in_cart or pv.available == false -%}
+            <li class="pp-upsell">
+              <a class="pp-upsell__media" href="{{ p.url }}" tabindex="-1">{%- if p.featured_image -%}{{ p.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}</a>
+              <span class="pp-upsell__info">
+                <a class="pp-upsell__title" href="{{ p.url }}">{{ p.title | escape }}</a>
+                <span class="pp-upsell__price">{{ pv.price | money }}</span>
+              </span>
+              <button type="button" class="btn btn--outline btn--sm pp-upsell__add" data-pp-add-variant="{{ pv.id }}" aria-label="{{ 'products.add_title' | t: title: p.title | escape }}">{%- render 'icon', name: 'plus', size: 16 -%}</button>
+            </li>
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+      {%- if cards != blank -%}
+        <div class="pp-upsells">
+          {%- assign up_heading = c.slider.heading | escape -%}{%- if up_heading == blank -%}{%- assign up_heading = 'addons.upsells_heading' | t -%}{%- endif -%}
+          <p class="pp-upsells__heading kicker">{{ up_heading }}</p>
+          <ul class="pp-upsells__rail" role="list">{{ cards }}</ul>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if c.paymentIcons and shop.enabled_payment_types.size > 0 -%}
+      <ul class="pp-payments" role="list" aria-label="{{ 'addons.payment_methods' | t }}">
+        {%- for type in shop.enabled_payment_types -%}<li>{{ type | payment_type_svg_tag: class: 'pp-payments__icon' }}</li>{%- endfor -%}
+      </ul>
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}

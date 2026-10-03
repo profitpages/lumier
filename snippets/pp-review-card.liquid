@@ -1,0 +1,28 @@
+{%- comment -%}
+  One review card (Profit Pages reviews), in Lumière's design. Rendered by
+  Liquid for the reviews stored on the product, and as the <template> that
+  assets/pp-addons.js fills for "More reviews" (the data-field attributes).
+  Usage: {% render 'pp-review-card', review: r %}   (review blank = template)
+{%- endcomment -%}
+{%- liquid
+  assign rating = review.rating | default: 5
+  assign pct = rating | times: 20
+-%}
+<article class="pp-review">
+  <div class="pp-review__top">
+    <span class="pp-review__score" data-field="rating" aria-hidden="true">{{ rating }}</span>
+    <span class="pp-review__stars rating__stars" data-field="stars" style="--pct: {{ pct }}%;" role="img" aria-label="{{ 'products.rating' | t: rating: rating, max: 5 }}">★★★★★</span>
+    <time class="pp-review__date" data-field="date">{{ review.date }}</time>
+  </div>
+  {%- if review == blank or review.title != blank -%}<h3 class="pp-review__title" data-field="title">{{ review.title | escape }}</h3>{%- endif -%}
+  <p class="pp-review__body" data-field="body">{{ review.body | escape }}</p>
+  {%- if review == blank or review.photos.size > 0 -%}
+    <div class="pp-review__photos" data-field="photos">
+      {%- for src in review.photos limit: 4 -%}<img src="{{ src }}" alt="" loading="lazy" width="96" height="96" onerror="if(!this.dataset.r){this.dataset.r=1;this.src='/apps/pages/review-image?url='+encodeURIComponent(this.src)}">{%- endfor -%}
+    </div>
+  {%- endif -%}
+  <p class="pp-review__author">
+    <strong data-field="author">{{ review.author | escape }}</strong>
+    {%- if review == blank or review.country != blank -%}<span class="pp-review__country" data-field="country">{{ review.country | escape }}</span>{%- endif -%}
+  </p>
+</article>

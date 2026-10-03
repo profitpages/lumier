@@ -23,7 +23,9 @@
     {%- render 'meta-tags' -%}
     {%- render 'theme-styles' -%}
     {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ 'section-addons.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'pp-addons.js' | asset_url }}" defer="defer"></script>
 
     <script>
       document.documentElement.className = document.documentElement.className.replace('no-js', 'js');

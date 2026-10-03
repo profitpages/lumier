@@ -1,0 +1,51 @@
+{%- comment -%}
+  Quantity breaks (Profit Pages add-on), in Lumière's design.
+  Data: product.metafields.profitpages.quantity_breaks (written by the app).
+  Shows only while the merchant's plan is active (shop.metafields.profitpages.addons).
+  Behavior (adding the tier + its discount) comes from assets/pp-addons.js.
+  Usage: {% render 'pp-quantity-breaks', product: product, variant: current_variant, form_id: form_id, heading: block.settings.heading, uid: section.id %}
+{%- endcomment -%}
+{%- liquid
+  assign addons = shop.metafields.profitpages.addons.value
+  assign qb = product.metafields.profitpages.quantity_breaks.value
+-%}
+{%- if addons.active and qb.tiers.size > 1 -%}
+  <fieldset class="pp-qb pp-qb--rows" data-pp-qb data-handle="{{ product.handle }}" data-form="{{ form_id }}">
+    {%- if heading == blank -%}{%- assign heading = 'addons.qb_heading' | t -%}{%- else -%}{%- assign heading = heading | escape -%}{%- endif -%}
+    <legend class="pp-qb__legend kicker">{{ heading }}</legend>
+    <div class="pp-qb__tiers">
+      {%- for tier in qb.tiers -%}
+        {%- liquid
+          assign qty = tier.quantity | times: 1
+          assign full = variant.price | times: qty
+          assign value = tier.discountValue | times: 1
+          if tier.discountType == 'fixed'
+            assign off = value | times: 100 | round
+          else
+            assign off = full | times: value | divided_by: 100 | round
+          endif
+          if off > full
+            assign off = full
+          endif
+          assign pay = full | minus: off
+          assign each = pay | divided_by: qty
+          assign tier_id = 'PPQB-' | append: uid | append: '-' | append: forloop.index
+        -%}
+        <label class="pp-qb__tier" for="{{ tier_id }}">
+          <input class="pp-qb__input" type="radio" id="{{ tier_id }}" name="pp_qb_{{ uid }}" value="{{ qty }}" data-pp-qb-tier data-discount="{{ value }}"{% if forloop.first %} checked{% endif %}>
+          <span class="pp-qb__dot" aria-hidden="true"></span>
+          <span class="pp-qb__main">
+            <span class="pp-qb__label">{{ tier.label | escape }}</span>
+            {%- if qty > 1 -%}{%- assign each_money = each | money -%}<span class="pp-qb__each">{{ 'addons.qb_each' | t: price: each_money }}</span>{%- endif -%}
+          </span>
+          {%- if tier.badge != blank -%}<span class="pp-qb__badge badge">{{ tier.badge | escape }}</span>{%- endif -%}
+          <span class="pp-qb__price">
+            <strong>{{ pay | money }}</strong>
+            {%- if off > 0 -%}<s>{{ full | money }}</s>{%- endif -%}
+          </span>
+          {%- if off > 0 -%}{%- assign off_money = off | money -%}<span class="pp-qb__save">{{ 'addons.qb_save' | t: amount: off_money }}</span>{%- endif -%}
+        </label>
+      {%- endfor -%}
+    </div>
+  </fieldset>
+{%- endif -%}

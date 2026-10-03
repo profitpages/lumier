@@ -401,10 +401,13 @@
     async refresh(id) {
       try {
         const doc = parse(await (await fetch(`${this.dataset.url}?variant=${id}&section_id=${this.dataset.section}`)).text());
-        ['[data-product-price]', '[data-inventory]', '[data-sticky-price]'].forEach((s) => {
+        // Quantity-tier and bundle prices depend on the variant too; keep the shopper's chosen tier.
+        const tier = $('[data-pp-qb-tier]:checked', this)?.value;
+        ['[data-product-price]', '[data-inventory]', '[data-sticky-price]', '[data-pp-qb]', '[data-pp-bundle]'].forEach((s) => {
           const a = $(s, doc); const b = $(s, this);
           if (a && b) b.innerHTML = a.innerHTML;
         });
+        if (tier) { const t = $(`[data-pp-qb-tier][value="${tier}"]`, this); if (t) t.checked = true; }
         const src = $$('.variants__pill', doc);
         $$('.variants__pill', this).forEach((l, i) => { if (src[i]) l.className = src[i].className; });
       } catch (e) { /* keep UI */ }
@@ -917,6 +920,22 @@
   }
   $$('select[data-default]').forEach((s) => { if (s.dataset.default) s.value = s.dataset.default; });
   Wishlist.sync();
+
+  /* ---------- Profit Pages add-ons (assets/pp-addons.js) ---------- */
+  // The add-ons' script changes the cart itself; Lumière re-renders its cart and opens the drawer.
+  document.addEventListener('pp:cart-updated', async () => {
+    try { Cart.render(await (await fetch(`${root}/?sections=${Cart.sections().join(',')}`)).json()); } catch (e) { /* keep UI */ }
+  });
+  document.addEventListener('pp:added', () => Cart.afterAdd());
+  document.addEventListener('pp:error', (e) => toast(e.detail?.message || theme.strings.error));
+  // Picking a quantity tier sets the quantity field, so the two never disagree.
+  document.addEventListener('change', (e) => {
+    const t = e.target.closest('[data-pp-qb-tier]');
+    if (!t) return;
+    const form = document.getElementById(t.closest('[data-pp-qb]')?.dataset.form || '');
+    const q = form && $('.qty__input, [name="quantity"]', form);
+    if (q) q.value = t.value;
+  });
 
   /* ---------- Theme editor ---------- */
   document.addEventListener('shopify:section:load', () => { revealAll(); Wishlist.sync(); });

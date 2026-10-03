@@ -67,6 +67,18 @@
             "icon": "gift",
             "color_scheme": "scheme-4"
           }
+        },
+        "quantity_breaks": {
+          "type": "quantity_breaks",
+          "settings": {
+            "heading": "Buy more, save more"
+          }
+        },
+        "bundle": {
+          "type": "bundle",
+          "settings": {
+            "heading": "Complete the ritual"
+          }
         }
       },
       "block_order": [
@@ -78,7 +90,9 @@
         "price_6",
         "highlights_7",
         "variant_picker_8",
+        "quantity_breaks",
         "buy_buttons_9",
+        "bundle",
         "shipping_note_10"
       ]
     },

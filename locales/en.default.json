@@ -66,7 +66,7 @@
     "wishlist_add": "Save {{ title }} to wishlist",
     "zoom": "Open image zoom",
     "zoom_short": "Zoom",
-    "average_from": "{{ rating }} average from {{ count }} verified reviews"
+    "average_from": "{{ rating }} average from {{ count }} reviews"
   },
   "cart": {
     "apply": "Apply",
@@ -274,5 +274,25 @@
     "kicker": "Your gift card",
     "shop": "Start shopping",
     "title": "{{ value }} gift card"
+  },
+  "addons": {
+    "qb_heading": "Buy more, save more",
+    "qb_each": "{{ price }} each",
+    "qb_save": "Save {{ amount }}",
+    "bundle_kicker": "Complete the ritual",
+    "bundle_this": "This item",
+    "bundle_save": "Save {{ amount }}",
+    "bundle_total": "Together",
+    "bundle_add": "Add the ritual to bag",
+    "reviews_more": "More reviews",
+    "reward_percent_html": "You're <strong>{{ amount }}</strong> away from {{ percent }}% off.",
+    "reward_gift_html": "You're <strong>{{ amount }}</strong> away from a free gift.",
+    "reward_all": "You've unlocked every reward.",
+    "reward_ship_short": "Free shipping",
+    "reward_percent_short": "{{ percent }}% off",
+    "reward_gift_short": "Free gift",
+    "timer_default": "Your bag is reserved for {{ time }}",
+    "upsells_heading": "Pairs beautifully with",
+    "payment_methods": "Payment methods we accept"
   }
 }
