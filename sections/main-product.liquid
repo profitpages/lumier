@@ -192,7 +192,11 @@
               </ul>
 
             {%- when 'shipping_note' -%}
-              <p class="ship-note color-{{ block.settings.color_scheme }}" {{ block.shopify_attributes }}>{%- render 'icon', name: block.settings.icon, size: 18 -%}<span>{{ block.settings.text | escape }}</span></p>
+              {%- assign note_parts = block.settings.text | replace: ' · ', '|' | replace: ' • ', '|' | replace: '; ', '|' | replace: ' | ', '|' | split: '|' -%}
+              {%- if note_parts.size > 1 -%}
+                {%- capture note_class -%}ship-note color-{{ block.settings.color_scheme }}{%- endcapture -%}
+                {%- render 'note-list', block: block, parts: note_parts, class: note_class, size: 18 -%}
+              {%- elsif block.settings.text != blank -%}<p class="ship-note color-{{ block.settings.color_scheme }}" {{ block.shopify_attributes }}>{%- render 'icon', name: block.settings.icon, size: 18 -%}<span>{{ block.settings.text | escape }}</span></p>{%- endif -%}
 
             {%- when 'collapsible' -%}
               {%- render 'detail-row', block: block, product: product, compact: true -%}
@@ -527,9 +531,70 @@
             {
               "value": "leaf",
               "label": "Leaf"
+            },
+            {
+              "value": "shield",
+              "label": "Guarantee"
             }
           ],
           "default": "gift"
+        },
+        {
+          "type": "select",
+          "id": "icon_2",
+          "label": "Second item icon",
+          "info": "When the text lists items separated by ·",
+          "options": [
+            {
+              "value": "gift",
+              "label": "Parcel"
+            },
+            {
+              "value": "truck",
+              "label": "Delivery"
+            },
+            {
+              "value": "return",
+              "label": "Returns"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "shield",
+              "label": "Guarantee"
+            }
+          ],
+          "default": "return"
+        },
+        {
+          "type": "select",
+          "id": "icon_3",
+          "label": "Third item icon",
+          "options": [
+            {
+              "value": "gift",
+              "label": "Parcel"
+            },
+            {
+              "value": "truck",
+              "label": "Delivery"
+            },
+            {
+              "value": "return",
+              "label": "Returns"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "shield",
+              "label": "Guarantee"
+            }
+          ],
+          "default": "shield"
         },
         {
           "type": "color_scheme",

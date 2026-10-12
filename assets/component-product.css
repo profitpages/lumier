@@ -126,3 +126,8 @@ media-gallery:not(:has(.gallery__thumbs)) { grid-template-columns: minmax(0, 1fr
   .sticky-buy { bottom: 10px; }
   .reviews__summary { justify-items: start; text-align: left; }
 }
+
+/* Notes listing several items, each with its own icon (snippets/note-list.liquid). */
+.note-list { flex-wrap: wrap; align-items: center; gap: 8px 20px; list-style: none; text-align: left; }
+.note-list li { display: inline-flex; align-items: center; gap: 7px; }
+.note-list li > svg, .note-list li > .icon { flex: none; }

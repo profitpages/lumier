@@ -1,0 +1,20 @@
+{%- comment -%}
+  A note listing several short items ("Free shipping over $50 · 30-day returns"),
+  each with its own icon: block.settings.icon, icon_2, icon_3.
+  Accepts: block, parts (the text split into items), class, size
+{%- endcomment -%}
+<ul class="{{ class }} note-list" {{ block.shopify_attributes }}>
+  {%- for part in parts -%}
+    {%- assign label = part | strip -%}
+    {%- assign tail = label | slice: -1 -%}
+    {%- if tail == '.' -%}{%- assign keep = label.size | minus: 1 -%}{%- assign label = label | slice: 0, keep -%}{%- endif -%}
+    {%- if label != blank -%}
+      {%- case forloop.index -%}
+        {%- when 1 -%}{%- assign note_icon = block.settings.icon -%}
+        {%- when 2 -%}{%- assign note_icon = block.settings.icon_2 | default: block.settings.icon -%}
+        {%- else -%}{%- assign note_icon = block.settings.icon_3 | default: block.settings.icon -%}
+      {%- endcase -%}
+      <li>{%- render 'icon', name: note_icon, size: size -%}<span>{{ label | escape }}</span></li>
+    {%- endif -%}
+  {%- endfor -%}
+</ul>
