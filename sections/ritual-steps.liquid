@@ -29,47 +29,151 @@
 
 {% schema %}
 {
-  "name": "Ritual steps",
+  "name": "t:sections.ritual-steps.name",
   "class": "section-steps",
   "max_blocks": 6,
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "How to use" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Three quiet minutes for a more luminous ritual." },
-    { "type": "richtext", "id": "text", "label": "Text" },
-    { "type": "checkbox", "id": "use_metafield", "label": "On product pages, also show the product's how-to-use text", "default": false, "info": "Reads custom.how_to_use." },
-    { "type": "text", "id": "button_label", "label": "Button label" },
-    { "type": "url", "id": "button_link", "label": "Button link" },
-    { "type": "checkbox", "id": "panel", "label": "Show inside a panel", "default": false },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Panel color scheme", "default": "scheme-2" },
-    { "type": "color_scheme", "id": "section_scheme", "label": "Section color scheme", "default": "scheme-6" }
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.ritual-steps.settings.kicker.label",
+      "default": "How to use"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.ritual-steps.settings.heading.label",
+      "default": "Three quiet minutes for a more luminous ritual."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.ritual-steps.settings.text.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_metafield",
+      "label": "t:sections.ritual-steps.settings.use_metafield.label",
+      "default": false,
+      "info": "t:sections.ritual-steps.settings.use_metafield.info"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.ritual-steps.settings.button_label.label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.ritual-steps.settings.button_link.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "panel",
+      "label": "t:sections.ritual-steps.settings.panel.label",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.ritual-steps.settings.color_scheme.label",
+      "default": "scheme-2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "section_scheme",
+      "label": "t:sections.ritual-steps.settings.section_scheme.label",
+      "default": "scheme-6"
+    }
   ],
   "blocks": [
     {
-      "type": "step", "name": "Step",
+      "type": "step",
+      "name": "t:sections.ritual-steps.blocks.step.name",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image (optional)" },
-        { "type": "text", "id": "title", "label": "Title", "default": "Prepare" },
-        { "type": "textarea", "id": "text", "label": "Text", "default": "After cleansing, press 2–3 drops between palms while skin is still softly damp." }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.ritual-steps.blocks.step.settings.image.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.ritual-steps.blocks.step.settings.title.label",
+          "default": "Prepare"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "t:sections.ritual-steps.blocks.step.settings.text.label",
+          "default": "After cleansing, press 2–3 drops between palms while skin is still softly damp."
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "How to use",
+      "name": "t:sections.ritual-steps.presets.presets__1.name",
       "blocks": [
-        { "type": "step", "settings": { "title": "Prepare", "text": "After cleansing, press 2–3 drops between palms while skin is still softly damp." } },
-        { "type": "step", "settings": { "title": "Press", "text": "Press from the centre of the face outward, letting the formula melt in without rush." } },
-        { "type": "step", "settings": { "title": "Seal", "text": "Follow with moisturiser and SPF in the morning, or a richer cream in the evening." } }
+        {
+          "type": "step",
+          "settings": {
+            "title": "Prepare",
+            "text": "After cleansing, press 2–3 drops between palms while skin is still softly damp."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Press",
+            "text": "Press from the centre of the face outward, letting the formula melt in without rush."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Seal",
+            "text": "Follow with moisturiser and SPF in the morning, or a richer cream in the evening."
+          }
+        }
       ]
     },
     {
-      "name": "Routine steps",
-      "settings": { "kicker": "Your ritual", "heading": "Cleanse, treat, moisturise, protect.", "section_scheme": "scheme-1" },
+      "name": "t:sections.ritual-steps.presets.presets__2.name",
+      "settings": {
+        "kicker": "Your ritual",
+        "heading": "Cleanse, treat, moisturise, protect.",
+        "section_scheme": "scheme-1"
+      },
       "blocks": [
-        { "type": "step", "settings": { "title": "Cleanse", "text": "Begin with a fresh, comfortable canvas." } },
-        { "type": "step", "settings": { "title": "Treat", "text": "Add a targeted serum to your ritual." } },
-        { "type": "step", "settings": { "title": "Moisturise", "text": "Seal in softness with a comforting cream." } },
-        { "type": "step", "settings": { "title": "Protect", "text": "Finish with broad-spectrum SPF in the morning." } }
+        {
+          "type": "step",
+          "settings": {
+            "title": "Cleanse",
+            "text": "Begin with a fresh, comfortable canvas."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Treat",
+            "text": "Add a targeted serum to your ritual."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Moisturise",
+            "text": "Seal in softness with a comforting cream."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Protect",
+            "text": "Finish with broad-spectrum SPF in the morning."
+          }
+        }
       ]
     }
   ]

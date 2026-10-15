@@ -2,7 +2,7 @@
 {{ 'section-extras.css' | asset_url | stylesheet_tag }}
 {%- liquid
   assign s = section.settings
-  assign rows = s.rows | newline_to_br | split: '<br />'
+  assign rows = s.rows | newline_to_br | replace: '|', '<br />' | split: '<br />'
   assign arts = 'serum,jar,pump,tube' | split: ','
 -%}
 <section class="section color-{{ s.color_scheme }}">
@@ -18,10 +18,10 @@
               <th scope="col" class="cmp__col{% if b.highlight %} is-hl{% endif %}" {{ block.shopify_attributes }}>
                 {%- if b.highlight and s.flag != blank -%}<span class="cmp__flag">{{ s.flag | escape }}</span>{%- endif -%}
                 <span class="cmp__media">
-                  {%- assign cmp_img = b.image | default: b.product.featured_media.preview_image -%}
+                  {%- assign cmp_img = b.product.featured_media.preview_image | default: b.image -%}
                   {%- render 'responsive-image', image: cmp_img, max: 400, sizes: '140px', art: arts[forloop.index0], tone: 'blush' -%}
                 </span>
-                <span class="cmp__name">{{ b.title | default: b.product.title | escape }}</span>
+                <span class="cmp__name">{{ b.product.title | default: b.title | escape }}</span>
                 {%- if b.product != blank -%}{%- render 'price', product: b.product -%}{%- endif -%}
               </th>
             {%- endfor -%}
@@ -35,7 +35,7 @@
               <tr>
                 <th scope="row">{{ label | escape }}</th>
                 {%- for block in section.blocks -%}
-                  {%- assign vals = block.settings.values | newline_to_br | split: '<br />' -%}
+                  {%- assign vals = block.settings.values | newline_to_br | replace: '|', '<br />' | split: '<br />' -%}
                   {%- assign v = vals[r] | strip -%}
                   {%- assign vd = v | downcase -%}
                   <td class="{% if block.settings.highlight %}is-hl{% endif %}">
@@ -65,36 +65,109 @@
 
 {% schema %}
 {
-  "name": "Comparison table",
+  "name": "t:sections.comparison-table.name",
   "class": "section-comparison",
   "max_blocks": 4,
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Which one is yours?" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Compare our serums" },
-    { "type": "richtext", "id": "text", "label": "Text" },
-    { "type": "textarea", "id": "rows", "label": "Row labels", "default": "Best for\nTexture\nKey active\nFragrance-free\nUse AM\nUse PM", "info": "One per line. Columns list values in the same order; yes / no become icons." },
-    { "type": "text", "id": "flag", "label": "Highlighted column flag", "default": "Most loved" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" }
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.comparison-table.settings.kicker.label",
+      "default": "Which one is yours?"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.comparison-table.settings.heading.label",
+      "default": "Compare our serums"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.comparison-table.settings.text.label"
+    },
+    {
+      "type": "textarea",
+      "id": "rows",
+      "label": "t:sections.comparison-table.settings.rows.label",
+      "default": "Best for\nTexture\nKey active\nFragrance-free\nUse AM\nUse PM",
+      "info": "t:sections.comparison-table.settings.rows.info"
+    },
+    {
+      "type": "text",
+      "id": "flag",
+      "label": "t:sections.comparison-table.settings.flag.label",
+      "default": "Most loved"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.comparison-table.settings.color_scheme.label",
+      "default": "scheme-2"
+    }
   ],
   "blocks": [
     {
-      "type": "column", "name": "Column",
+      "type": "column",
+      "name": "t:sections.comparison-table.blocks.column.name",
       "settings": [
-        { "type": "product", "id": "product", "label": "Product" },
-        { "type": "text", "id": "title", "label": "Title", "info": "Defaults to the product title." },
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "textarea", "id": "values", "label": "Values (one per line)", "default": "Dull skin\nSilky gel\nVitamin C\nyes\nyes\nno" },
-        { "type": "checkbox", "id": "highlight", "label": "Highlight this column", "default": false }
+        {
+          "type": "product",
+          "id": "product",
+          "label": "t:sections.comparison-table.blocks.column.settings.product.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.comparison-table.blocks.column.settings.title.label",
+          "info": "t:sections.comparison-table.blocks.column.settings.title.info"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.comparison-table.blocks.column.settings.image.label"
+        },
+        {
+          "type": "textarea",
+          "id": "values",
+          "label": "t:sections.comparison-table.blocks.column.settings.values.label",
+          "default": "Dull skin\nSilky gel\nVitamin C\nyes\nyes\nno"
+        },
+        {
+          "type": "checkbox",
+          "id": "highlight",
+          "label": "t:sections.comparison-table.blocks.column.settings.highlight.label",
+          "default": false
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Comparison table",
+      "name": "t:sections.comparison-table.presets.presets__1.name",
       "blocks": [
-        { "type": "column", "settings": { "title": "Bright Serum", "values": "Dull skin\nSilky gel\nVitamin C\nyes\nyes\nno" } },
-        { "type": "column", "settings": { "title": "Peptide Serum", "values": "Fine lines\nMilky fluid\nPeptides\nyes\nyes\nyes", "highlight": true } },
-        { "type": "column", "settings": { "title": "Night Oil", "values": "Dry skin\nSilky oil\nSqualane\nyes\nno\nyes" } }
+        {
+          "type": "column",
+          "settings": {
+            "title": "Bright Serum",
+            "values": "Dull skin\nSilky gel\nVitamin C\nyes\nyes\nno"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "title": "Peptide Serum",
+            "values": "Fine lines\nMilky fluid\nPeptides\nyes\nyes\nyes",
+            "highlight": true
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "title": "Night Oil",
+            "values": "Dry skin\nSilky oil\nSqualane\nyes\nno\nyes"
+          }
+        }
       ]
     }
   ]

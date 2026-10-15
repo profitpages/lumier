@@ -35,19 +35,67 @@
 
 {% schema %}
 {
-  "name": "Video",
+  "name": "t:sections.video.name",
   "class": "section-video",
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "The ritual, in motion" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Watch the texture melt in." },
-    { "type": "richtext", "id": "text", "label": "Text" },
-    { "type": "video", "id": "video", "label": "Shopify-hosted video" },
-    { "type": "video_url", "id": "video_url", "label": "Or YouTube / Vimeo link", "accept": ["youtube", "vimeo"] },
-    { "type": "image_picker", "id": "cover", "label": "Cover image" },
-    { "type": "text", "id": "caption", "label": "Caption" },
-    { "type": "checkbox", "id": "full_width", "label": "Use full content width", "default": false },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.video.settings.kicker.label",
+      "default": "The ritual, in motion"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.video.settings.heading.label",
+      "default": "Watch the texture melt in."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.video.settings.text.label"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:sections.video.settings.video.label"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "t:sections.video.settings.video_url.label",
+      "accept": [
+        "youtube",
+        "vimeo"
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "cover",
+      "label": "t:sections.video.settings.cover.label"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "t:sections.video.settings.caption.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.video.settings.full_width.label",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.video.settings.color_scheme.label",
+      "default": "scheme-1"
+    }
   ],
-  "presets": [{ "name": "Video" }]
+  "presets": [
+    {
+      "name": "t:sections.video.presets.presets__1.name"
+    }
+  ]
 }
 {% endschema %}

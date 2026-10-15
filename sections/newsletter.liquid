@@ -46,37 +46,106 @@
 
 {% schema %}
 {
-  "name": "Newsletter",
+  "name": "t:sections.newsletter.name",
   "class": "section-newsletter",
   "settings": [
     {
-      "type": "select", "id": "layout", "label": "Layout",
+      "type": "select",
+      "id": "layout",
+      "label": "t:sections.newsletter.settings.layout.label",
       "options": [
-        { "value": "panel", "label": "Centred panel" },
-        { "value": "band", "label": "Split band (joined field)" },
-        { "value": "inline", "label": "Split, underlined field" }
+        {
+          "value": "panel",
+          "label": "t:sections.newsletter.settings.layout.options__1.label"
+        },
+        {
+          "value": "band",
+          "label": "t:sections.newsletter.settings.layout.options__2.label"
+        },
+        {
+          "value": "inline",
+          "label": "t:sections.newsletter.settings.layout.options__3.label"
+        }
       ],
       "default": "panel"
     },
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "A little luminosity" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Notes from Lumière" },
-    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>New rituals, quiet launches, and thoughtful beauty notes delivered occasionally.</p>" },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Join the list" },
-    { "type": "text", "id": "consent", "label": "Small print" },
-    { "type": "checkbox", "id": "decor", "label": "Glow orb (band layout)", "default": true },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Panel / band color scheme", "default": "scheme-5" },
-    { "type": "color_scheme", "id": "section_scheme", "label": "Section color scheme (panel layout)", "default": "scheme-1" },
-    { "type": "paragraph", "content": "Subscribers appear in Customers with marketing consent and the 'newsletter' tag." }
-  ],
-  "presets": [
-    { "name": "Newsletter" },
     {
-      "name": "Newsletter — dark band",
-      "settings": { "layout": "band", "kicker": "The Lumière edit", "heading": "A softer kind of inbox.", "text": "", "button_label": "Join the edit", "color_scheme": "scheme-7" }
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.newsletter.settings.kicker.label",
+      "default": "A little luminosity"
     },
     {
-      "name": "Newsletter — inline",
-      "settings": { "layout": "inline", "kicker": "Letters from Lumière", "heading": "Your ritual, in the know", "text": "<p>Receive considered skincare notes, early access, and a little beauty inspiration.</p>", "button_label": "Subscribe", "color_scheme": "scheme-5" }
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.newsletter.settings.heading.label",
+      "default": "Notes from Lumière"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.newsletter.settings.text.label",
+      "default": "<p>New rituals, quiet launches, and thoughtful beauty notes delivered occasionally.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.newsletter.settings.button_label.label",
+      "default": "Join the list"
+    },
+    {
+      "type": "text",
+      "id": "consent",
+      "label": "t:sections.newsletter.settings.consent.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "decor",
+      "label": "t:sections.newsletter.settings.decor.label",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.newsletter.settings.color_scheme.label",
+      "default": "scheme-5"
+    },
+    {
+      "type": "color_scheme",
+      "id": "section_scheme",
+      "label": "t:sections.newsletter.settings.section_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.newsletter.settings.paragraph__10.content"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.newsletter.presets.presets__1.name"
+    },
+    {
+      "name": "t:sections.newsletter.presets.presets__2.name",
+      "settings": {
+        "layout": "band",
+        "kicker": "The Lumière edit",
+        "heading": "A softer kind of inbox.",
+        "text": "",
+        "button_label": "Join the edit",
+        "color_scheme": "scheme-7"
+      }
+    },
+    {
+      "name": "t:sections.newsletter.presets.presets__3.name",
+      "settings": {
+        "layout": "inline",
+        "kicker": "Letters from Lumière",
+        "heading": "Your ritual, in the know",
+        "text": "<p>Receive considered skincare notes, early access, and a little beauty inspiration.</p>",
+        "button_label": "Subscribe",
+        "color_scheme": "scheme-5"
+      }
     }
   ]
 }

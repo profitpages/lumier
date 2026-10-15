@@ -30,37 +30,109 @@
 
 {% schema %}
 {
-  "name": "Shoppable gallery",
+  "name": "t:sections.shoppable-gallery.name",
   "class": "section-ugc",
   "max_blocks": 10,
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "#MyGlowRitual" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "On real shelves, in real light." },
-    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Tap a moment to shop the ritual behind it.</p>" },
-    { "type": "text", "id": "link_label", "label": "Link label", "default": "Follow along" },
-    { "type": "url", "id": "link", "label": "Link" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.shoppable-gallery.settings.kicker.label",
+      "default": "#MyGlowRitual"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.shoppable-gallery.settings.heading.label",
+      "default": "On real shelves, in real light."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.shoppable-gallery.settings.text.label",
+      "default": "<p>Tap a moment to shop the ritual behind it.</p>"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "t:sections.shoppable-gallery.settings.link_label.label",
+      "default": "Follow along"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:sections.shoppable-gallery.settings.link.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.shoppable-gallery.settings.color_scheme.label",
+      "default": "scheme-1"
+    }
   ],
   "blocks": [
     {
-      "type": "photo", "name": "Photo",
+      "type": "photo",
+      "name": "t:sections.shoppable-gallery.blocks.photo.name",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "handle", "label": "Credit", "default": "@softmorningrituals" },
-        { "type": "text", "id": "caption", "label": "Image description (screen readers)" },
-        { "type": "product", "id": "product", "label": "Tagged product" }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.shoppable-gallery.blocks.photo.settings.image.label"
+        },
+        {
+          "type": "text",
+          "id": "handle",
+          "label": "t:sections.shoppable-gallery.blocks.photo.settings.handle.label",
+          "default": "@softmorningrituals"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "t:sections.shoppable-gallery.blocks.photo.settings.caption.label"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "t:sections.shoppable-gallery.blocks.photo.settings.product.label"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Shoppable gallery",
+      "name": "t:sections.shoppable-gallery.presets.presets__1.name",
       "blocks": [
-        { "type": "photo", "settings": { "handle": "@maya.glows" } },
-        { "type": "photo", "settings": { "handle": "@anika.skin" } },
-        { "type": "photo", "settings": { "handle": "@leena.rituals" } },
-        { "type": "photo", "settings": { "handle": "@shelfie.daily" } },
-        { "type": "photo", "settings": { "handle": "@softmorningrituals" } }
+        {
+          "type": "photo",
+          "settings": {
+            "handle": "@maya.glows"
+          }
+        },
+        {
+          "type": "photo",
+          "settings": {
+            "handle": "@anika.skin"
+          }
+        },
+        {
+          "type": "photo",
+          "settings": {
+            "handle": "@leena.rituals"
+          }
+        },
+        {
+          "type": "photo",
+          "settings": {
+            "handle": "@shelfie.daily"
+          }
+        },
+        {
+          "type": "photo",
+          "settings": {
+            "handle": "@softmorningrituals"
+          }
+        }
       ]
     }
   ]

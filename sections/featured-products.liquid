@@ -57,58 +57,227 @@
 
 {% schema %}
 {
-  "name": "Featured products",
+  "name": "t:sections.featured-products.name",
   "class": "section-featured-products",
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Cult favourites" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "The edit" },
-    { "type": "richtext", "id": "text", "label": "Description" },
-    { "type": "text", "id": "link_label", "label": "Link label", "default": "Shop all" },
-    { "type": "url", "id": "link", "label": "Link", "info": "Defaults to the collection." },
-    { "type": "header", "content": "Products" },
-    { "type": "collection", "id": "collection", "label": "Collection" },
-    { "type": "product_list", "id": "products", "label": "Or pick products", "limit": 12, "info": "Overrides the collection." },
-    { "type": "range", "id": "limit", "label": "Number of products", "min": 2, "max": 16, "step": 1, "default": 4 },
-    { "type": "header", "content": "Layout" },
     {
-      "type": "select", "id": "layout", "label": "Layout",
-      "options": [{ "value": "grid", "label": "Grid" }, { "value": "carousel", "label": "Carousel with arrows" }],
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.featured-products.settings.kicker.label",
+      "default": "Cult favourites"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.featured-products.settings.heading.label",
+      "default": "The edit"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.featured-products.settings.text.label"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "t:sections.featured-products.settings.link_label.label",
+      "default": "Shop all"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:sections.featured-products.settings.link.label",
+      "info": "t:sections.featured-products.settings.link.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.featured-products.settings.header__6.content"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:sections.featured-products.settings.collection.label"
+    },
+    {
+      "type": "product_list",
+      "id": "products",
+      "label": "t:sections.featured-products.settings.products.label",
+      "limit": 12,
+      "info": "t:sections.featured-products.settings.products.info"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "t:sections.featured-products.settings.limit.label",
+      "min": 2,
+      "max": 16,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "t:sections.featured-products.settings.header__10.content"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "t:sections.featured-products.settings.layout.label",
+      "options": [
+        {
+          "value": "grid",
+          "label": "t:sections.featured-products.settings.layout.options__1.label"
+        },
+        {
+          "value": "carousel",
+          "label": "t:sections.featured-products.settings.layout.options__2.label"
+        }
+      ],
       "default": "grid"
     },
-    { "type": "range", "id": "columns", "label": "Products per row (desktop)", "min": 2, "max": 5, "step": 1, "default": 4 },
     {
-      "type": "select", "id": "columns_mobile", "label": "Products per row (mobile)",
-      "options": [{ "value": "1", "label": "1" }, { "value": "2", "label": "2" }],
+      "type": "range",
+      "id": "columns",
+      "label": "t:sections.featured-products.settings.columns.label",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "t:sections.featured-products.settings.columns_mobile.label",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:sections.featured-products.settings.columns_mobile.options__1.label"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.featured-products.settings.columns_mobile.options__2.label"
+        }
+      ],
       "default": "2"
     },
-    { "type": "checkbox", "id": "panel", "label": "Show inside a panel", "default": false },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
-    { "type": "header", "content": "Product cards" },
     {
-      "type": "select", "id": "card_style", "label": "Card style",
-      "options": [{ "value": "editorial", "label": "Editorial (paper frame)" }, { "value": "label", "label": "Boutique (label + button)" }, { "value": "rounded", "label": "Rounded (soft card)" }, { "value": "gallery", "label": "Gallery (frameless)" }],
+      "type": "checkbox",
+      "id": "panel",
+      "label": "t:sections.featured-products.settings.panel.label",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.featured-products.settings.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.featured-products.settings.header__16.content"
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "t:sections.featured-products.settings.card_style.label",
+      "options": [
+        {
+          "value": "editorial",
+          "label": "t:sections.featured-products.settings.card_style.options__1.label"
+        },
+        {
+          "value": "label",
+          "label": "t:sections.featured-products.settings.card_style.options__2.label"
+        },
+        {
+          "value": "rounded",
+          "label": "t:sections.featured-products.settings.card_style.options__3.label"
+        },
+        {
+          "value": "gallery",
+          "label": "t:sections.featured-products.settings.card_style.options__4.label"
+        }
+      ],
       "default": "editorial"
     },
     {
-      "type": "select", "id": "image_ratio", "label": "Image ratio",
-      "options": [{ "value": "square", "label": "Square" }, { "value": "portrait", "label": "Portrait 4:5" }, { "value": "tall", "label": "Tall 3:4" }],
-      "default": "square"
+      "type": "select",
+      "id": "image_ratio",
+      "label": "t:sections.featured-products.settings.image_ratio.label",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.featured-products.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.featured-products.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.featured-products.settings.image_ratio.options__3.label"
+        },
+        {
+          "value": "tall",
+          "label": "t:sections.featured-products.settings.image_ratio.options__4.label"
+        }
+      ],
+      "default": "adapt"
     },
-    { "type": "checkbox", "id": "show_vendor", "label": "Show vendor", "default": false },
-    { "type": "checkbox", "id": "show_rating", "label": "Show rating", "default": true },
-    { "type": "checkbox", "id": "show_badges", "label": "Show badges", "default": true },
-    { "type": "checkbox", "id": "show_quick_add", "label": "Show quick add", "default": true },
-    { "type": "checkbox", "id": "show_secondary", "label": "Show second image on hover", "default": true }
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "t:sections.featured-products.settings.show_vendor.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "t:sections.featured-products.settings.show_rating.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badges",
+      "label": "t:sections.featured-products.settings.show_badges.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quick_add",
+      "label": "t:sections.featured-products.settings.show_quick_add.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary",
+      "label": "t:sections.featured-products.settings.show_secondary.label",
+      "default": true
+    }
   ],
   "presets": [
-    { "name": "Featured products" },
     {
-      "name": "Gift sets",
-      "settings": { "kicker": "A little something lovely", "heading": "Gift sets & limited editions", "link_label": "", "limit": 3, "card_style": "label", "color_scheme": "scheme-2" }
+      "name": "t:sections.featured-products.presets.presets__1.name"
     },
     {
-      "name": "Bestseller carousel",
-      "settings": { "kicker": "Cult favourites", "heading": "Bestsellers, on repeat.", "link_label": "", "layout": "carousel", "limit": 8 }
+      "name": "t:sections.featured-products.presets.presets__2.name",
+      "settings": {
+        "kicker": "A little something lovely",
+        "heading": "Gift sets & limited editions",
+        "link_label": "",
+        "limit": 3,
+        "card_style": "label",
+        "color_scheme": "scheme-2"
+      }
+    },
+    {
+      "name": "t:sections.featured-products.presets.presets__3.name",
+      "settings": {
+        "kicker": "Cult favourites",
+        "heading": "Bestsellers, on repeat.",
+        "link_label": "",
+        "layout": "carousel",
+        "limit": 8
+      }
     }
   ]
 }

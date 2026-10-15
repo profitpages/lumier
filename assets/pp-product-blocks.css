@@ -1,0 +1,77 @@
+/* ==========================================================================
+   Lumière × Profit Pages product blocks: emoji benefits, urgency text,
+   clickable discount, shipping checkpoints and the quantity selector.
+   Quiet-luxury editorial: blush washes, espresso type, hairlines and the
+   serif for the offer and the steps. Reads the theme's tokens, so it
+   follows the merchant's colors, fonts and corners.
+   ========================================================================== */
+
+/* ---------- Structure shared by every theme (the bridge above maps the --ppb-* tokens, the layer below sets the look) ---------- */
+.ppb {
+  --ppb-radius-sm: min(var(--ppb-radius), 12px);
+  --ppb-tint: color-mix(in srgb, var(--ppb-accent) 9%, var(--ppb-bg));
+  --ppb-tint-strong: color-mix(in srgb, var(--ppb-accent) 14%, var(--ppb-bg));
+  margin: 0;
+  min-width: 0;
+  color: var(--ppb-text);
+}
+.ppb .ppb-icon { display: block; flex: none; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: var(--ppb-stroke, 1.7); stroke-linecap: round; stroke-linejoin: round; }
+
+/* Rating stars (themes whose product page had none) */
+.ppb-rating { display: flex; align-items: center; gap: 8px; font-size: .92em; }
+.ppb-rating__stars { --pct: 100%; letter-spacing: .12em; background: linear-gradient(90deg, var(--ppb-star) var(--pct), color-mix(in srgb, var(--ppb-text) 18%, transparent) var(--pct)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.ppb-rating__text { color: var(--ppb-muted); }
+
+/* Emoji benefits */
+ul.ppb-benefits { display: grid; gap: 10px; padding: 0; list-style: none; }
+.ppb-benefits li { display: flex; align-items: flex-start; gap: 10px; line-height: 1.45; }
+.ppb-benefits__text { min-width: 0; }
+.ppb-benefits__emoji { flex: none; width: 1.5em; font-size: 1.05em; line-height: 1.4; text-align: center; }
+.ppb-benefits__mark { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--ppb-tint-strong); color: var(--ppb-accent); }
+.ppb-benefits__mark .ppb-icon { width: 13px; height: 13px; stroke-width: 2.4; }
+.ppb-benefits__dot { flex: none; width: 6px; height: 6px; margin: .6em 7px 0 5px; border-radius: 50%; background: var(--ppb-accent); }
+
+/* Urgency text */
+.ppb-urgency { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: var(--ppb-radius-sm); background: var(--ppb-tint); font-size: .93em; line-height: 1.4; }
+.ppb-urgency .ppb-icon { color: var(--ppb-accent); }
+.ppb-urgency__clock { font-variant-numeric: tabular-nums; color: var(--ppb-accent); white-space: nowrap; }
+
+/* Clickable discount */
+.ppb-code { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 12px 12px 12px 14px; border: 1.5px dashed color-mix(in srgb, var(--ppb-accent) 55%, var(--ppb-line)); border-radius: var(--ppb-radius); background: color-mix(in srgb, var(--ppb-accent) 5%, var(--ppb-bg)); }
+.ppb-code__icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: var(--ppb-radius-sm); background: var(--ppb-bg); color: var(--ppb-accent); }
+.ppb-code__copy { min-width: 0; }
+.ppb-code__title { margin: 0; font-weight: 600; line-height: 1.3; }
+.ppb-code__text { margin: 2px 0 0; color: var(--ppb-muted); font-size: .9em; line-height: 1.4; }
+.ppb-code__value { display: inline-block; padding: 1px 7px; border-radius: min(var(--ppb-radius), 6px); background: var(--ppb-bg); color: var(--ppb-text); font-weight: 600; letter-spacing: .05em; white-space: nowrap; }
+.ppb-code__btn { white-space: nowrap; }
+.ppb-code__btn.is-applied { pointer-events: none; }
+@media (max-width: 389px) {
+  .ppb-code { grid-template-columns: auto minmax(0, 1fr); }
+  .ppb-code__btn { grid-column: 1 / -1; width: 100%; }
+}
+
+/* Shipping checkpoints */
+ol.ppb-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-block: 6px; padding: 0; list-style: none; }
+.ppb-steps__step { position: relative; display: grid; justify-items: center; align-content: start; gap: 3px; text-align: center; }
+.ppb-steps__step + .ppb-steps__step::before { content: ''; position: absolute; top: 20px; right: calc(50% + 28px); width: calc(100% - 56px); border-top: 1.5px dashed var(--ppb-line); }
+.ppb-steps__icon { display: grid; place-items: center; width: 40px; height: 40px; margin-bottom: 5px; border-radius: 50%; background: var(--ppb-tint-strong); color: var(--ppb-accent); }
+.ppb-steps__label { font-size: .86em; font-weight: 600; line-height: 1.3; }
+.ppb-steps__date { color: var(--ppb-muted); font-size: .82em; line-height: 1.3; }
+
+/* Quantity selector (the theme's own stepper inside) */
+.ppb-qty { display: grid; justify-items: start; gap: 10px; }
+.ppb-qty__label { margin: 0; font-size: .95em; font-weight: 600; }
+.ppb-qty .ppb-qty__row { margin: 0; }
+
+/* Token bridge: the blocks' variables mapped onto the theme's. */
+.ppb { --ppb-text: var(--text); --ppb-muted: var(--muted); --ppb-bg: var(--bg); --ppb-surface: var(--card); --ppb-line: var(--border); --ppb-accent: var(--accent); --ppb-star: var(--stars, var(--accent)); --ppb-radius: var(--radius-card); --ppb-heading: var(--font-heading); }
+
+/* ---------- Theme layer ---------- */
+.ppb { --ppb-accent: var(--text); --ppb-tint: color-mix(in srgb, var(--blush, var(--accent)) 30%, var(--bg)); --ppb-tint-strong: color-mix(in srgb, var(--blush, var(--accent)) 45%, var(--bg)); --ppb-stroke: 1.35; }
+.ppb-urgency { border: 1px solid color-mix(in srgb, var(--blush, var(--accent)) 60%, var(--border)); }
+.ppb-urgency__clock { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 1.15em; }
+.ppb-code { border: 1px solid var(--border); background: var(--ppb-tint); }
+.ppb-code__title { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 1.2rem; }
+.ppb-code__value { letter-spacing: .14em; }
+.ppb-steps__step + .ppb-steps__step::before { border-top: 1px solid var(--border); }
+.ppb-steps__label { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 1.02em; }

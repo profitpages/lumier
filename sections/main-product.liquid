@@ -1,3 +1,5 @@
+{{ 'pp-product-blocks.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pp-product-blocks.js' | asset_url }}" defer="defer"></script>
 {{ 'component-product.css' | asset_url | stylesheet_tag }}
 {%- liquid
   assign s = section.settings
@@ -21,7 +23,7 @@
           <ul class="gallery__track" role="list" data-gallery-track>
             {%- if media_count > 0 -%}
               {%- for media in product.media -%}
-                <li class="gallery__slide" data-media-id="{{ media.id }}" aria-label="{{ 'products.gallery_slide' | t: index: forloop.index, count: media_count }}">
+                <li class="gallery__slide" data-media-id="{{ media.id }}" aria-label="{{ 'products.gallery_slide' | t: index: forloop.index, count: media_count }}"{% if media.media_type == 'image' %} data-product-image-fit="{{ settings.product_image_fit | default: 'contain' }}" style="--product-image-ratio: {{ media.preview_image.aspect_ratio | default: media.aspect_ratio | default: 1 }}"{% endif %}>
                   {%- case media.media_type -%}
                     {%- when 'image' -%}
                       {%- liquid
@@ -161,6 +163,16 @@
                 {%- for p in pills -%}{%- assign pt = p | strip -%}{%- if pt != blank -%}<li class="pill {% cycle 'pill--blush', 'pill--champagne' %}">{{ pt | escape }}</li>{%- endif -%}{%- endfor -%}
               </ul>
 
+            {%- when 'benefit_list', 'urgency', 'discount_code', 'checkpoints' -%}
+              {%- render 'pp-product-block', block: block, product: product, btn_class: 'btn btn--sm' -%}
+
+            {%- when 'quantity' -%}
+              <div class="ppb ppb-qty" {{ block.shopify_attributes }}>
+                {%- if block.settings.label != blank -%}<p class="ppb-qty__label" aria-hidden="true">{{ block.settings.label | escape }}</p>{%- endif -%}
+                {%- assign ppb_qty_id = 'QtyBlock-' | append: section.id -%}
+                <div class="buy__row ppb-qty__row">{%- render 'quantity-input', id: ppb_qty_id, value: 1, min: 1, label: product.title, form: form_id -%}</div>
+              </div>
+
             {%- when 'variant_picker' -%}
               <div {{ block.shopify_attributes }}>{%- render 'variant-picker', product: product, form_id: form_id, uid: section.id -%}</div>
 
@@ -177,7 +189,15 @@
             {%- when 'buy_buttons' -%}
               <div class="pdp__buy" {{ block.shopify_attributes }}>
                 {%- assign qty_note = product.metafields.custom.usage_note.value | default: block.settings.qty_note -%}
-                {%- render 'product-form', product: product, form_id: form_id, variant: current_variant, show_qty: true, show_buy_now: block.settings.show_buy_now, show_wishlist: block.settings.show_wishlist, qty_note: qty_note -%}
+                {%- liquid
+                  assign ppb_show_qty = true
+                  for qb in section.blocks
+                    if qb.type == 'quantity'
+                      assign ppb_show_qty = false
+                    endif
+                  endfor
+                -%}
+                {%- render 'product-form', product: product, form_id: form_id, variant: current_variant, show_qty: ppb_show_qty, show_buy_now: block.settings.show_buy_now, show_wishlist: block.settings.show_wishlist, qty_note: qty_note -%}
               </div>
 
             {%- when 'reassurance' -%}
@@ -250,37 +270,37 @@
 
 {% schema %}
 {
-  "name": "Product information",
+  "name": "t:sections.main-product.name",
   "class": "section-main-product",
   "settings": [
     {
       "type": "checkbox",
       "id": "show_breadcrumb",
-      "label": "Show breadcrumb",
+      "label": "t:sections.main-product.settings.show_breadcrumb.label",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "enable_zoom",
-      "label": "Enable image zoom",
+      "label": "t:sections.main-product.settings.enable_zoom.label",
       "default": true
     },
     {
       "type": "text",
       "id": "media_badge",
-      "label": "Image badge",
-      "info": "Small caption chip on the main image, e.g. 'Glow, bottled'. The product metafield custom.media_badge overrides it."
+      "label": "t:sections.main-product.settings.media_badge.label",
+      "info": "t:sections.main-product.settings.media_badge.info"
     },
     {
       "type": "checkbox",
       "id": "sticky_bar",
-      "label": "Sticky add-to-bag bar",
+      "label": "t:sections.main-product.settings.sticky_bar.label",
       "default": true
     },
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Color scheme",
+      "label": "t:sections.main-product.settings.color_scheme.label",
       "default": "scheme-1"
     }
   ],
@@ -290,51 +310,51 @@
     },
     {
       "type": "kicker",
-      "name": "Kicker & save",
+      "name": "t:sections.main-product.blocks.kicker.name",
       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "text",
-          "label": "Kicker",
-          "info": "Defaults to vendor / product type."
+          "label": "t:sections.main-product.blocks.kicker.settings.text.label",
+          "info": "t:sections.main-product.blocks.kicker.settings.text.info"
         },
         {
           "type": "checkbox",
           "id": "show_save",
-          "label": "Show Save (wishlist) button",
+          "label": "t:sections.main-product.blocks.kicker.settings.show_save.label",
           "default": false
         }
       ]
     },
     {
       "type": "title",
-      "name": "Title",
+      "name": "t:sections.main-product.blocks.title.name",
       "limit": 1,
       "settings": [
         {
           "type": "checkbox",
           "id": "show_vendor",
-          "label": "Show vendor",
+          "label": "t:sections.main-product.blocks.title.settings.show_vendor.label",
           "default": false
         }
       ]
     },
     {
       "type": "description",
-      "name": "Short description",
+      "name": "t:sections.main-product.blocks.description.name",
       "limit": 1,
       "settings": [
         {
           "type": "richtext",
           "id": "text",
-          "label": "Text",
-          "info": "Connect a metafield, or leave empty to use the start of the description."
+          "label": "t:sections.main-product.blocks.description.settings.text.label",
+          "info": "t:sections.main-product.blocks.description.settings.text.info"
         },
         {
           "type": "range",
           "id": "words",
-          "label": "Words from description",
+          "label": "t:sections.main-product.blocks.description.settings.words.label",
           "min": 10,
           "max": 60,
           "step": 5,
@@ -344,41 +364,41 @@
     },
     {
       "type": "rating",
-      "name": "Rating",
+      "name": "t:sections.main-product.blocks.rating.name",
       "limit": 1
     },
     {
       "type": "divider",
-      "name": "Divider"
+      "name": "t:sections.main-product.blocks.divider.name"
     },
     {
       "type": "price",
-      "name": "Price",
+      "name": "t:sections.main-product.blocks.price.name",
       "limit": 1,
       "settings": [
         {
           "type": "checkbox",
           "id": "show_stock",
-          "label": "Show stock status beside the price",
+          "label": "t:sections.main-product.blocks.price.settings.show_stock.label",
           "default": true
         }
       ]
     },
     {
       "type": "inventory",
-      "name": "Stock status",
+      "name": "t:sections.main-product.blocks.inventory.name",
       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "in_stock_text",
-          "label": "In-stock message",
+          "label": "t:sections.main-product.blocks.inventory.settings.in_stock_text.label",
           "default": "In stock — ships within 24 hours"
         },
         {
           "type": "range",
           "id": "threshold",
-          "label": "Show low stock below",
+          "label": "t:sections.main-product.blocks.inventory.settings.threshold.label",
           "min": 1,
           "max": 20,
           "step": 1,
@@ -388,153 +408,414 @@
     },
     {
       "type": "highlights",
-      "name": "Highlight pills",
+      "name": "t:sections.main-product.blocks.highlights.name",
       "limit": 1,
       "settings": [
         {
           "type": "textarea",
           "id": "items",
-          "label": "Pills (one per line)",
+          "label": "t:sections.main-product.blocks.highlights.settings.items.label",
           "default": "Fragrance-free\nDermatologist tested\nBarrier kind",
-          "info": "The product metafield custom.highlights (list) overrides these."
+          "info": "t:sections.main-product.blocks.highlights.settings.items.info"
+        }
+      ]
+    },
+    {
+      "type": "benefit_list",
+      "name": "t:sections.main-product.blocks.benefit_list.name",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "select",
+          "id": "source",
+          "label": "t:sections.main-product.blocks.benefit_list.settings.source.label",
+          "default": "product",
+          "options": [
+            {
+              "value": "product",
+              "label": "t:sections.main-product.blocks.benefit_list.settings.source.options__1.label"
+            },
+            {
+              "value": "block",
+              "label": "t:sections.main-product.blocks.benefit_list.settings.source.options__2.label"
+            }
+          ]
+        },
+        {
+          "type": "textarea",
+          "id": "items",
+          "label": "t:sections.main-product.blocks.benefit_list.settings.items.label",
+          "default": "✨ Thoughtfully made\n📦 Carefully packed\n💬 Here to help",
+          "info": "t:sections.main-product.blocks.benefit_list.settings.items.info"
+        },
+        {
+          "type": "select",
+          "id": "marker",
+          "label": "t:sections.main-product.blocks.benefit_list.settings.marker.label",
+          "default": "emoji",
+          "options": [
+            {
+              "value": "emoji",
+              "label": "t:sections.main-product.blocks.benefit_list.settings.marker.options__1.label"
+            },
+            {
+              "value": "check",
+              "label": "t:sections.main-product.blocks.benefit_list.settings.marker.options__2.label"
+            },
+            {
+              "value": "dot",
+              "label": "t:sections.main-product.blocks.benefit_list.settings.marker.options__3.label"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "urgency",
+      "name": "t:sections.main-product.blocks.urgency.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-product.blocks.urgency.settings.paragraph__1.content"
+        },
+        {
+          "type": "select",
+          "id": "mode",
+          "label": "t:sections.main-product.blocks.urgency.settings.mode.label",
+          "default": "cutoff",
+          "options": [
+            {
+              "value": "cutoff",
+              "label": "t:sections.main-product.blocks.urgency.settings.mode.options__1.label"
+            },
+            {
+              "value": "text",
+              "label": "t:sections.main-product.blocks.urgency.settings.mode.options__2.label"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "cutoff_hour",
+          "label": "t:sections.main-product.blocks.urgency.settings.cutoff_hour.label",
+          "min": 8,
+          "max": 23,
+          "step": 1,
+          "default": 14
+        },
+        {
+          "type": "checkbox",
+          "id": "weekdays_only",
+          "label": "t:sections.main-product.blocks.urgency.settings.weekdays_only.label",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "before_text",
+          "label": "t:sections.main-product.blocks.urgency.settings.before_text.label",
+          "default": "Order within [time] to ship today",
+          "info": "t:sections.main-product.blocks.urgency.settings.before_text.info"
+        },
+        {
+          "type": "text",
+          "id": "after_text",
+          "label": "t:sections.main-product.blocks.urgency.settings.after_text.label",
+          "default": "Order now to ship on the next dispatch day"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "t:sections.main-product.blocks.urgency.settings.text.label"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "t:sections.main-product.blocks.urgency.settings.icon.label",
+          "default": "clock",
+          "options": [
+            {
+              "value": "clock",
+              "label": "t:sections.main-product.blocks.urgency.settings.icon.options__1.label"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.main-product.blocks.urgency.settings.icon.options__2.label"
+            },
+            {
+              "value": "package",
+              "label": "t:sections.main-product.blocks.urgency.settings.icon.options__3.label"
+            },
+            {
+              "value": "bolt",
+              "label": "t:sections.main-product.blocks.urgency.settings.icon.options__4.label"
+            },
+            {
+              "value": "gift",
+              "label": "t:sections.main-product.blocks.urgency.settings.icon.options__5.label"
+            },
+            {
+              "value": "sparkle",
+              "label": "t:sections.main-product.blocks.urgency.settings.icon.options__6.label"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "discount_code",
+      "name": "t:sections.main-product.blocks.discount_code.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-product.blocks.discount_code.settings.paragraph__1.content"
+        },
+        {
+          "type": "text",
+          "id": "code",
+          "label": "t:sections.main-product.blocks.discount_code.settings.code.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.main-product.blocks.discount_code.settings.title.label",
+          "default": "Extra savings"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "t:sections.main-product.blocks.discount_code.settings.text.label",
+          "default": "Use code"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "t:sections.main-product.blocks.discount_code.settings.button_label.label",
+          "default": "Apply"
+        },
+        {
+          "type": "text",
+          "id": "applied_label",
+          "label": "t:sections.main-product.blocks.discount_code.settings.applied_label.label",
+          "default": "Applied"
+        }
+      ]
+    },
+    {
+      "type": "checkpoints",
+      "name": "t:sections.main-product.blocks.checkpoints.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-product.blocks.checkpoints.settings.paragraph__1.content"
+        },
+        {
+          "type": "range",
+          "id": "ship_days",
+          "label": "t:sections.main-product.blocks.checkpoints.settings.ship_days.label",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "min_days",
+          "label": "t:sections.main-product.blocks.checkpoints.settings.min_days.label",
+          "min": 1,
+          "max": 30,
+          "step": 1,
+          "default": 3
+        },
+        {
+          "type": "range",
+          "id": "max_days",
+          "label": "t:sections.main-product.blocks.checkpoints.settings.max_days.label",
+          "min": 1,
+          "max": 30,
+          "step": 1,
+          "default": 7
+        },
+        {
+          "type": "checkbox",
+          "id": "skip_weekends",
+          "label": "t:sections.main-product.blocks.checkpoints.settings.skip_weekends.label",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "ordered_label",
+          "label": "t:sections.main-product.blocks.checkpoints.settings.ordered_label.label",
+          "default": "Ordered"
+        },
+        {
+          "type": "text",
+          "id": "shipped_label",
+          "label": "t:sections.main-product.blocks.checkpoints.settings.shipped_label.label",
+          "default": "Ships"
+        },
+        {
+          "type": "text",
+          "id": "delivered_label",
+          "label": "t:sections.main-product.blocks.checkpoints.settings.delivered_label.label",
+          "default": "Delivered"
+        }
+      ]
+    },
+    {
+      "type": "quantity",
+      "name": "t:sections.main-product.blocks.quantity.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-product.blocks.quantity.settings.paragraph__1.content"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "t:sections.main-product.blocks.quantity.settings.label.label",
+          "default": "Quantity"
         }
       ]
     },
     {
       "type": "variant_picker",
-      "name": "Variant picker",
+      "name": "t:sections.main-product.blocks.variant_picker.name",
       "limit": 1
     },
     {
       "type": "quantity_breaks",
-      "name": "Quantity breaks",
+      "name": "t:sections.main-product.blocks.quantity_breaks.name",
       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "heading",
-          "label": "Heading",
+          "label": "t:sections.main-product.blocks.quantity_breaks.settings.heading.label",
           "default": "Buy more, save more"
         },
         {
           "type": "paragraph",
-          "content": "Shows the tiers you set up in Profit Pages → Bundle Offers → Quantity breaks. Hidden on products without a rule."
+          "content": "t:sections.main-product.blocks.quantity_breaks.settings.paragraph__2.content"
         }
       ]
     },
     {
       "type": "bundle",
-      "name": "Bought together",
+      "name": "t:sections.main-product.blocks.bundle.name",
       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "heading",
-          "label": "Heading",
+          "label": "t:sections.main-product.blocks.bundle.settings.heading.label",
           "default": "Complete the ritual"
         },
         {
           "type": "paragraph",
-          "content": "Shows the bundle you set up in Profit Pages → Bundle Offers → Bought together. Hidden on products without one."
+          "content": "t:sections.main-product.blocks.bundle.settings.paragraph__2.content"
         }
       ]
     },
     {
       "type": "buy_buttons",
-      "name": "Buy buttons",
+      "name": "t:sections.main-product.blocks.buy_buttons.name",
       "limit": 1,
       "settings": [
         {
           "type": "checkbox",
           "id": "show_buy_now",
-          "label": "Show Buy it now",
+          "label": "t:sections.main-product.blocks.buy_buttons.settings.show_buy_now.label",
           "default": false
         },
         {
           "type": "checkbox",
           "id": "show_wishlist",
-          "label": "Show wishlist button",
+          "label": "t:sections.main-product.blocks.buy_buttons.settings.show_wishlist.label",
           "default": true
         },
         {
           "type": "text",
           "id": "qty_note",
-          "label": "Note beside quantity",
-          "info": "The product metafield custom.usage_note overrides it, e.g. 'One bottle lasts approximately 8–10 weeks.'"
+          "label": "t:sections.main-product.blocks.buy_buttons.settings.qty_note.label",
+          "info": "t:sections.main-product.blocks.buy_buttons.settings.qty_note.info"
         }
       ]
     },
     {
       "type": "reassurance",
-      "name": "Reassurance panel",
+      "name": "t:sections.main-product.blocks.reassurance.name",
       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "text_1",
-          "label": "Shipping",
+          "label": "t:sections.main-product.blocks.reassurance.settings.text_1.label",
           "default": "Free shipping over $75"
         },
         {
           "type": "text",
           "id": "text_2",
-          "label": "Returns",
+          "label": "t:sections.main-product.blocks.reassurance.settings.text_2.label",
           "default": "30-day easy returns"
         },
         {
           "type": "text",
           "id": "text_3",
-          "label": "Security",
+          "label": "t:sections.main-product.blocks.reassurance.settings.text_3.label",
           "default": "Secure checkout"
         },
         {
           "type": "text",
           "id": "text_4",
-          "label": "Gift",
+          "label": "t:sections.main-product.blocks.reassurance.settings.text_4.label",
           "default": "Two samples with every order"
         },
         {
           "type": "color_scheme",
           "id": "color_scheme",
-          "label": "Color scheme",
+          "label": "t:sections.main-product.blocks.reassurance.settings.color_scheme.label",
           "default": "scheme-4"
         }
       ]
     },
     {
       "type": "shipping_note",
-      "name": "Shipping note",
+      "name": "t:sections.main-product.blocks.shipping_note.name",
       "settings": [
         {
           "type": "text",
           "id": "text",
-          "label": "Text",
+          "label": "t:sections.main-product.blocks.shipping_note.settings.text.label",
           "default": "Complimentary shipping on orders over $75 and 30-day returns."
         },
         {
           "type": "select",
           "id": "icon",
-          "label": "Icon",
+          "label": "t:sections.main-product.blocks.shipping_note.settings.icon.label",
           "options": [
             {
               "value": "gift",
-              "label": "Parcel"
+              "label": "t:sections.main-product.blocks.shipping_note.settings.icon.options__1.label"
             },
             {
               "value": "truck",
-              "label": "Delivery"
+              "label": "t:sections.main-product.blocks.shipping_note.settings.icon.options__2.label"
             },
             {
               "value": "return",
-              "label": "Returns"
+              "label": "t:sections.main-product.blocks.shipping_note.settings.icon.options__3.label"
             },
             {
               "value": "leaf",
-              "label": "Leaf"
+              "label": "t:sections.main-product.blocks.shipping_note.settings.icon.options__4.label"
             },
             {
               "value": "shield",
-              "label": "Guarantee"
+              "label": "t:sections.main-product.blocks.shipping_note.settings.icon.options__5.label"
             }
           ],
           "default": "gift"
@@ -542,28 +823,28 @@
         {
           "type": "select",
           "id": "icon_2",
-          "label": "Second item icon",
-          "info": "When the text lists items separated by ·",
+          "label": "t:sections.main-product.blocks.shipping_note.settings.icon_2.label",
+          "info": "t:sections.main-product.blocks.shipping_note.settings.icon_2.info",
           "options": [
             {
               "value": "gift",
-              "label": "Parcel"
+              "label": "t:sections.main-product.blocks.shipping_note.settings.icon_2.options__1.label"
             },
             {
               "value": "truck",
-              "label": "Delivery"
+              "label": "t:sections.main-product.blocks.shipping_note.settings.icon_2.options__2.label"
             },
             {
               "value": "return",
-              "label": "Returns"
+              "label": "t:sections.main-product.blocks.shipping_note.settings.icon_2.options__3.label"
             },
             {
               "value": "leaf",
-              "label": "Leaf"
+              "label": "t:sections.main-product.blocks.shipping_note.settings.icon_2.options__4.label"
             },
             {
               "value": "shield",
-              "label": "Guarantee"
+              "label": "t:sections.main-product.blocks.shipping_note.settings.icon_2.options__5.label"
             }
           ],
           "default": "return"
@@ -571,27 +852,27 @@
         {
           "type": "select",
           "id": "icon_3",
-          "label": "Third item icon",
+          "label": "t:sections.main-product.blocks.shipping_note.settings.icon_3.label",
           "options": [
             {
               "value": "gift",
-              "label": "Parcel"
+              "label": "t:sections.main-product.blocks.shipping_note.settings.icon_3.options__1.label"
             },
             {
               "value": "truck",
-              "label": "Delivery"
+              "label": "t:sections.main-product.blocks.shipping_note.settings.icon_3.options__2.label"
             },
             {
               "value": "return",
-              "label": "Returns"
+              "label": "t:sections.main-product.blocks.shipping_note.settings.icon_3.options__3.label"
             },
             {
               "value": "leaf",
-              "label": "Leaf"
+              "label": "t:sections.main-product.blocks.shipping_note.settings.icon_3.options__4.label"
             },
             {
               "value": "shield",
-              "label": "Guarantee"
+              "label": "t:sections.main-product.blocks.shipping_note.settings.icon_3.options__5.label"
             }
           ],
           "default": "shield"
@@ -599,53 +880,53 @@
         {
           "type": "color_scheme",
           "id": "color_scheme",
-          "label": "Color scheme",
+          "label": "t:sections.main-product.blocks.shipping_note.settings.color_scheme.label",
           "default": "scheme-4"
         }
       ]
     },
     {
       "type": "collapsible",
-      "name": "Collapsible row",
+      "name": "t:sections.main-product.blocks.collapsible.name",
       "settings": [
         {
           "type": "text",
           "id": "heading",
-          "label": "Heading",
+          "label": "t:sections.main-product.blocks.collapsible.settings.heading.label",
           "default": "How to use"
         },
         {
           "type": "select",
           "id": "source",
-          "label": "Content source",
+          "label": "t:sections.main-product.blocks.collapsible.settings.source.label",
           "options": [
             {
               "value": "custom",
-              "label": "Text below"
+              "label": "t:sections.main-product.blocks.collapsible.settings.source.options__1.label"
             },
             {
               "value": "description",
-              "label": "Product description"
+              "label": "t:sections.main-product.blocks.collapsible.settings.source.options__2.label"
             },
             {
               "value": "ingredients",
-              "label": "Metafield: ingredients"
+              "label": "t:sections.main-product.blocks.collapsible.settings.source.options__3.label"
             },
             {
               "value": "how_to_use",
-              "label": "Metafield: how to use"
+              "label": "t:sections.main-product.blocks.collapsible.settings.source.options__4.label"
             },
             {
               "value": "results",
-              "label": "Metafield: results"
+              "label": "t:sections.main-product.blocks.collapsible.settings.source.options__5.label"
             },
             {
               "value": "skin_type",
-              "label": "Metafield: skin type"
+              "label": "t:sections.main-product.blocks.collapsible.settings.source.options__6.label"
             },
             {
               "value": "size",
-              "label": "Metafield: size"
+              "label": "t:sections.main-product.blocks.collapsible.settings.source.options__7.label"
             }
           ],
           "default": "how_to_use"
@@ -653,28 +934,28 @@
         {
           "type": "richtext",
           "id": "content",
-          "label": "Text"
+          "label": "t:sections.main-product.blocks.collapsible.settings.content.label"
         },
         {
           "type": "page",
           "id": "page",
-          "label": "Content from page"
+          "label": "t:sections.main-product.blocks.collapsible.settings.page.label"
         }
       ]
     },
     {
       "type": "share",
-      "name": "Share",
+      "name": "t:sections.main-product.blocks.share.name",
       "limit": 1
     },
     {
       "type": "custom_liquid",
-      "name": "Custom Liquid",
+      "name": "t:sections.main-product.blocks.custom_liquid.name",
       "settings": [
         {
           "type": "liquid",
           "id": "custom_liquid",
-          "label": "Custom Liquid"
+          "label": "t:sections.main-product.blocks.custom_liquid.settings.custom_liquid.label"
         }
       ]
     }

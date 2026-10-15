@@ -184,3 +184,12 @@ ul.pp-bundle__items { gap: 0; }
 .pp-upsell { border: 1px solid var(--border); border-radius: calc(var(--radius-image) * .45); background: var(--bg); }
 .pp-upsell__media { border-radius: calc(var(--radius-image) * .3); }
 .pp-upsell__title { font-family: var(--font-heading); font-size: .98rem; }
+/* Profit Pages: native add-ons fit narrow product columns and long labels. */
+.pp-qb, .pp-bundle, .pp-bundle * { box-sizing: border-box; min-width: 0; }
+.pp-qb [hidden], .pp-bundle [hidden] { display: none !important; }
+.pp-qb--tiles .pp-qb__tiers { grid-auto-flow: row; grid-template-columns: repeat(auto-fit, minmax(min(100%, 112px), 1fr)); }
+.pp-qb__label, .pp-bundle__title { overflow-wrap: anywhere; }
+.pp-bundle__head { flex-wrap: wrap; }
+.pp-qb__badge { width: max-content; max-width: calc(100% - 12px); white-space: normal; text-align: center; overflow-wrap: anywhere; }
+.pp-bundle__variant { max-width: 100%; }
+.pp-bundle--cards ul.pp-bundle__items { grid-auto-flow: row; grid-template-columns: repeat(auto-fit, minmax(min(100%, 120px), 1fr)); }

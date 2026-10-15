@@ -26,35 +26,112 @@
 
 {% schema %}
 {
-  "name": "Product recommendations",
+  "name": "t:sections.product-recommendations.name",
   "class": "section-recommendations",
-  "enabled_on": { "templates": ["product"] },
+  "enabled_on": {
+    "templates": [
+      "product"
+    ]
+  },
   "settings": [
     {
-      "type": "select", "id": "intent", "label": "Type",
+      "type": "select",
+      "id": "intent",
+      "label": "t:sections.product-recommendations.settings.intent.label",
       "options": [
-        { "value": "complementary", "label": "Complementary (Pair it with)" },
-        { "value": "related", "label": "Related (You may also like)" }
+        {
+          "value": "complementary",
+          "label": "t:sections.product-recommendations.settings.intent.options__1.label"
+        },
+        {
+          "value": "related",
+          "label": "t:sections.product-recommendations.settings.intent.options__2.label"
+        }
       ],
       "default": "related",
-      "info": "Complementary products are chosen in the Search & Discovery app."
+      "info": "t:sections.product-recommendations.settings.intent.info"
     },
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Complete the ritual" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Pairs beautifully with." },
-    { "type": "range", "id": "limit", "label": "Products", "min": 2, "max": 10, "step": 1, "default": 3 },
-    { "type": "range", "id": "columns", "label": "Columns (desktop)", "min": 2, "max": 5, "step": 1, "default": 3 },
     {
-      "type": "select", "id": "layout", "label": "Layout",
-      "options": [{ "value": "grid", "label": "Grid" }, { "value": "carousel", "label": "Carousel" }],
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.product-recommendations.settings.kicker.label",
+      "default": "Complete the ritual"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.product-recommendations.settings.heading.label",
+      "default": "Pairs beautifully with."
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "t:sections.product-recommendations.settings.limit.label",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "t:sections.product-recommendations.settings.columns.label",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "t:sections.product-recommendations.settings.layout.label",
+      "options": [
+        {
+          "value": "grid",
+          "label": "t:sections.product-recommendations.settings.layout.options__1.label"
+        },
+        {
+          "value": "carousel",
+          "label": "t:sections.product-recommendations.settings.layout.options__2.label"
+        }
+      ],
       "default": "grid"
     },
     {
-      "type": "select", "id": "card_style", "label": "Card style",
-      "options": [{ "value": "editorial", "label": "Editorial (paper frame)" }, { "value": "label", "label": "Boutique (label + button)" }, { "value": "rounded", "label": "Rounded (soft card)" }, { "value": "gallery", "label": "Gallery (frameless)" }],
+      "type": "select",
+      "id": "card_style",
+      "label": "t:sections.product-recommendations.settings.card_style.label",
+      "options": [
+        {
+          "value": "editorial",
+          "label": "t:sections.product-recommendations.settings.card_style.options__1.label"
+        },
+        {
+          "value": "label",
+          "label": "t:sections.product-recommendations.settings.card_style.options__2.label"
+        },
+        {
+          "value": "rounded",
+          "label": "t:sections.product-recommendations.settings.card_style.options__3.label"
+        },
+        {
+          "value": "gallery",
+          "label": "t:sections.product-recommendations.settings.card_style.options__4.label"
+        }
+      ],
       "default": "rounded"
     },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.product-recommendations.settings.color_scheme.label",
+      "default": "scheme-1"
+    }
   ],
-  "presets": [{ "name": "Product recommendations" }]
+  "presets": [
+    {
+      "name": "t:sections.product-recommendations.presets.presets__1.name"
+    }
+  ]
 }
 {% endschema %}

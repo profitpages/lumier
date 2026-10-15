@@ -57,101 +57,357 @@
 
 {% schema %}
 {
-  "name": "Multicolumn",
+  "name": "t:sections.multicolumn.name",
   "class": "section-multicolumn",
   "max_blocks": 12,
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Rituals for every moment" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Beauty that fits the day." },
-    { "type": "richtext", "id": "text", "label": "Text" },
     {
-      "type": "select", "id": "heading_align", "label": "Heading alignment",
-      "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }],
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.multicolumn.settings.kicker.label",
+      "default": "Rituals for every moment"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.multicolumn.settings.heading.label",
+      "default": "Beauty that fits the day."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.multicolumn.settings.text.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "t:sections.multicolumn.settings.heading_align.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.multicolumn.settings.heading_align.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.multicolumn.settings.heading_align.options__2.label"
+        }
+      ],
       "default": "left"
     },
     {
-      "type": "select", "id": "style", "label": "Column style",
+      "type": "select",
+      "id": "style",
+      "label": "t:sections.multicolumn.settings.style.label",
       "options": [
-        { "value": "editorial", "label": "Editorial cards (paper frame)" },
-        { "value": "open", "label": "Open (image + hairline)" },
-        { "value": "numbered", "label": "Numbered (large numerals)" },
-        { "value": "icon", "label": "Icons" }
+        {
+          "value": "editorial",
+          "label": "t:sections.multicolumn.settings.style.options__1.label"
+        },
+        {
+          "value": "open",
+          "label": "t:sections.multicolumn.settings.style.options__2.label"
+        },
+        {
+          "value": "numbered",
+          "label": "t:sections.multicolumn.settings.style.options__3.label"
+        },
+        {
+          "value": "icon",
+          "label": "t:sections.multicolumn.settings.style.options__4.label"
+        }
       ],
       "default": "editorial"
     },
     {
-      "type": "select", "id": "shape", "label": "Image shape",
+      "type": "select",
+      "id": "shape",
+      "label": "t:sections.multicolumn.settings.shape.label",
       "options": [
-        { "value": "square", "label": "Square" },
-        { "value": "portrait", "label": "Portrait 4:5" },
-        { "value": "landscape", "label": "Landscape 4:3" },
-        { "value": "arch", "label": "Arch" },
-        { "value": "corner", "label": "Curved corner" },
-        { "value": "circle", "label": "Circle" },
-        { "value": "mixed", "label": "Mixed (corner, arch, square)" }
+        {
+          "value": "square",
+          "label": "t:sections.multicolumn.settings.shape.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.multicolumn.settings.shape.options__2.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.multicolumn.settings.shape.options__3.label"
+        },
+        {
+          "value": "arch",
+          "label": "t:sections.multicolumn.settings.shape.options__4.label"
+        },
+        {
+          "value": "corner",
+          "label": "t:sections.multicolumn.settings.shape.options__5.label"
+        },
+        {
+          "value": "circle",
+          "label": "t:sections.multicolumn.settings.shape.options__6.label"
+        },
+        {
+          "value": "mixed",
+          "label": "t:sections.multicolumn.settings.shape.options__7.label"
+        }
       ],
       "default": "square"
     },
-    { "type": "range", "id": "columns", "label": "Columns (desktop)", "min": 2, "max": 5, "step": 1, "default": 3 },
     {
-      "type": "select", "id": "text_align", "label": "Text alignment",
-      "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }],
+      "type": "range",
+      "id": "columns",
+      "label": "t:sections.multicolumn.settings.columns.label",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "t:sections.multicolumn.settings.text_align.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.multicolumn.settings.text_align.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.multicolumn.settings.text_align.options__2.label"
+        }
+      ],
       "default": "left"
     },
-    { "type": "checkbox", "id": "swipe", "label": "Swipe on mobile", "default": true },
-    { "type": "text", "id": "button_label", "label": "Button label" },
-    { "type": "url", "id": "button_link", "label": "Button link" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+    {
+      "type": "checkbox",
+      "id": "swipe",
+      "label": "t:sections.multicolumn.settings.swipe.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.multicolumn.settings.button_label.label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.multicolumn.settings.button_link.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.multicolumn.settings.color_scheme.label",
+      "default": "scheme-1"
+    }
   ],
   "blocks": [
     {
-      "type": "column", "name": "Column",
+      "type": "column",
+      "name": "t:sections.multicolumn.blocks.column.name",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image", "info": "In the Icons style, an uploaded image replaces the icon." },
         {
-          "type": "select", "id": "icon", "label": "Icon (Icons style)",
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.multicolumn.blocks.column.settings.image.label",
+          "info": "t:sections.multicolumn.blocks.column.settings.image.info"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "t:sections.multicolumn.blocks.column.settings.icon.label",
           "options": [
-            { "value": "sparkle", "label": "Glow" }, { "value": "drop", "label": "Hydration" }, { "value": "leaf", "label": "Botanical" },
-            { "value": "flower", "label": "Flower" }, { "value": "sun", "label": "Morning" }, { "value": "moon", "label": "Evening" },
-            { "value": "shield", "label": "Barrier" }, { "value": "rabbit", "label": "Cruelty-free" }, { "value": "recycle", "label": "Recyclable" },
-            { "value": "flask", "label": "Clinical" }, { "value": "truck", "label": "Delivery" }, { "value": "gift", "label": "Gift" }
+            {
+              "value": "sparkle",
+              "label": "t:sections.multicolumn.blocks.column.settings.icon.options__1.label"
+            },
+            {
+              "value": "drop",
+              "label": "t:sections.multicolumn.blocks.column.settings.icon.options__2.label"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.multicolumn.blocks.column.settings.icon.options__3.label"
+            },
+            {
+              "value": "flower",
+              "label": "t:sections.multicolumn.blocks.column.settings.icon.options__4.label"
+            },
+            {
+              "value": "sun",
+              "label": "t:sections.multicolumn.blocks.column.settings.icon.options__5.label"
+            },
+            {
+              "value": "moon",
+              "label": "t:sections.multicolumn.blocks.column.settings.icon.options__6.label"
+            },
+            {
+              "value": "shield",
+              "label": "t:sections.multicolumn.blocks.column.settings.icon.options__7.label"
+            },
+            {
+              "value": "rabbit",
+              "label": "t:sections.multicolumn.blocks.column.settings.icon.options__8.label"
+            },
+            {
+              "value": "recycle",
+              "label": "t:sections.multicolumn.blocks.column.settings.icon.options__9.label"
+            },
+            {
+              "value": "flask",
+              "label": "t:sections.multicolumn.blocks.column.settings.icon.options__10.label"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.multicolumn.blocks.column.settings.icon.options__11.label"
+            },
+            {
+              "value": "gift",
+              "label": "t:sections.multicolumn.blocks.column.settings.icon.options__12.label"
+            }
           ],
           "default": "sparkle"
         },
-        { "type": "text", "id": "kicker", "label": "Kicker" },
-        { "type": "text", "id": "title", "label": "Title", "default": "Morning" },
-        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Light layers and daily protection for a fresh, luminous start.</p>" },
-        { "type": "text", "id": "link_label", "label": "Link label", "default": "Shop the AM edit" },
-        { "type": "url", "id": "link", "label": "Link" }
+        {
+          "type": "text",
+          "id": "kicker",
+          "label": "t:sections.multicolumn.blocks.column.settings.kicker.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.multicolumn.blocks.column.settings.title.label",
+          "default": "Morning"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:sections.multicolumn.blocks.column.settings.text.label",
+          "default": "<p>Light layers and daily protection for a fresh, luminous start.</p>"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "t:sections.multicolumn.blocks.column.settings.link_label.label",
+          "default": "Shop the AM edit"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.multicolumn.blocks.column.settings.link.label"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Multicolumn",
+      "name": "t:sections.multicolumn.presets.presets__1.name",
       "blocks": [
-        { "type": "column" },
-        { "type": "column", "settings": { "title": "Evening", "text": "<p>Richer textures that replenish while you rest.</p>", "link_label": "Shop the PM edit" } },
-        { "type": "column", "settings": { "title": "On the go", "text": "<p>Minis and balms for a glow between appointments.</p>", "link_label": "Shop minis" } }
+        {
+          "type": "column"
+        },
+        {
+          "type": "column",
+          "settings": {
+            "title": "Evening",
+            "text": "<p>Richer textures that replenish while you rest.</p>",
+            "link_label": "Shop the PM edit"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "title": "On the go",
+            "text": "<p>Minis and balms for a glow between appointments.</p>",
+            "link_label": "Shop minis"
+          }
+        }
       ]
     },
     {
-      "name": "Multicolumn — icons",
-      "settings": { "style": "icon", "kicker": "The Lumière promise", "heading": "Small details, carefully kept.", "columns": 4, "text_align": "center", "heading_align": "center", "color_scheme": "scheme-2" },
+      "name": "t:sections.multicolumn.presets.presets__2.name",
+      "settings": {
+        "style": "icon",
+        "kicker": "The Lumière promise",
+        "heading": "Small details, carefully kept.",
+        "columns": 4,
+        "text_align": "center",
+        "heading_align": "center",
+        "color_scheme": "scheme-2"
+      },
       "blocks": [
-        { "type": "column", "settings": { "icon": "truck", "title": "Complimentary shipping", "text": "<p>On every order over $75.</p>", "link_label": "" } },
-        { "type": "column", "settings": { "icon": "gift", "title": "Two samples", "text": "<p>Chosen for your ritual.</p>", "link_label": "" } },
-        { "type": "column", "settings": { "icon": "recycle", "title": "Refillable glass", "text": "<p>Made to be kept.</p>", "link_label": "" } },
-        { "type": "column", "settings": { "icon": "rabbit", "title": "Cruelty-free", "text": "<p>Always, everywhere.</p>", "link_label": "" } }
+        {
+          "type": "column",
+          "settings": {
+            "icon": "truck",
+            "title": "Complimentary shipping",
+            "text": "<p>On every order over $75.</p>",
+            "link_label": ""
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "icon": "gift",
+            "title": "Two samples",
+            "text": "<p>Chosen for your ritual.</p>",
+            "link_label": ""
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "icon": "recycle",
+            "title": "Refillable glass",
+            "text": "<p>Made to be kept.</p>",
+            "link_label": ""
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "icon": "rabbit",
+            "title": "Cruelty-free",
+            "text": "<p>Always, everywhere.</p>",
+            "link_label": ""
+          }
+        }
       ]
     },
     {
-      "name": "Multicolumn — numbered",
-      "settings": { "style": "numbered", "kicker": "How it works", "heading": "Your ritual, in three steps.", "color_scheme": "scheme-3" },
+      "name": "t:sections.multicolumn.presets.presets__3.name",
+      "settings": {
+        "style": "numbered",
+        "kicker": "How it works",
+        "heading": "Your ritual, in three steps.",
+        "color_scheme": "scheme-3"
+      },
       "blocks": [
-        { "type": "column", "settings": { "title": "Tell us about your skin", "text": "<p>Two minutes, five questions.</p>", "link_label": "" } },
-        { "type": "column", "settings": { "title": "Receive your edit", "text": "<p>A considered ritual, delivered with samples.</p>", "link_label": "" } },
-        { "type": "column", "settings": { "title": "Glow, gently", "text": "<p>Adjust any time with a specialist.</p>", "link_label": "" } }
+        {
+          "type": "column",
+          "settings": {
+            "title": "Tell us about your skin",
+            "text": "<p>Two minutes, five questions.</p>",
+            "link_label": ""
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "title": "Receive your edit",
+            "text": "<p>A considered ritual, delivered with samples.</p>",
+            "link_label": ""
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "title": "Glow, gently",
+            "text": "<p>Adjust any time with a specialist.</p>",
+            "link_label": ""
+          }
+        }
       ]
     }
   ]

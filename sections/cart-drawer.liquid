@@ -53,10 +53,19 @@
 
 {% schema %}
 {
-  "name": "Cart drawer",
+  "name": "t:sections.cart-drawer.name",
   "settings": [
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" },
-    { "type": "url", "id": "empty_link", "label": "Empty bag button link" }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.cart-drawer.settings.color_scheme.label",
+      "default": "scheme-2"
+    },
+    {
+      "type": "url",
+      "id": "empty_link",
+      "label": "t:sections.cart-drawer.settings.empty_link.label"
+    }
   ]
 }
 {% endschema %}

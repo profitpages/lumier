@@ -49,34 +49,124 @@
 
 {% schema %}
 {
-  "name": "Before / after",
+  "name": "t:sections.before-after.name",
   "class": "section-before-after",
   "settings": [
     {
-      "type": "select", "id": "layout", "label": "Layout",
-      "options": [{ "value": "reveal", "label": "Reveal (curved frame)" }, { "value": "split", "label": "Split panel with labels" }],
+      "type": "select",
+      "id": "layout",
+      "label": "t:sections.before-after.settings.layout.label",
+      "options": [
+        {
+          "value": "reveal",
+          "label": "t:sections.before-after.settings.layout.options__1.label"
+        },
+        {
+          "value": "split",
+          "label": "t:sections.before-after.settings.layout.options__2.label"
+        }
+      ],
       "default": "reveal"
     },
-    { "type": "image_picker", "id": "before", "label": "Before image" },
-    { "type": "image_picker", "id": "after", "label": "After image", "info": "Use two images with the same size and framing." },
-    { "type": "text", "id": "before_label", "label": "Before label", "default": "Bare skin" },
-    { "type": "text", "id": "after_label", "label": "After label", "default": "After the ritual" },
-    { "type": "text", "id": "range_label", "label": "Slider label", "default": "Reveal image" },
-    { "type": "range", "id": "start", "label": "Starting position", "min": 10, "max": 90, "step": 5, "unit": "%", "default": 70 },
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "A closer look" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Skin, in soft focus" },
-    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>An illustrative view of a well-loved routine. Individual experiences vary.</p>" },
-    { "type": "text", "id": "note", "label": "Note", "default": "A simple ritual. A more comfortable, radiant-looking finish." },
-    { "type": "text", "id": "button_label", "label": "Button label" },
-    { "type": "url", "id": "button_link", "label": "Button link" },
-    { "type": "paragraph", "content": "Only use genuine, unretouched images you have the rights to." },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+    {
+      "type": "image_picker",
+      "id": "before",
+      "label": "t:sections.before-after.settings.before.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "after",
+      "label": "t:sections.before-after.settings.after.label",
+      "info": "t:sections.before-after.settings.after.info"
+    },
+    {
+      "type": "text",
+      "id": "before_label",
+      "label": "t:sections.before-after.settings.before_label.label",
+      "default": "Bare skin"
+    },
+    {
+      "type": "text",
+      "id": "after_label",
+      "label": "t:sections.before-after.settings.after_label.label",
+      "default": "After the ritual"
+    },
+    {
+      "type": "text",
+      "id": "range_label",
+      "label": "t:sections.before-after.settings.range_label.label",
+      "default": "Reveal image"
+    },
+    {
+      "type": "range",
+      "id": "start",
+      "label": "t:sections.before-after.settings.start.label",
+      "min": 10,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.before-after.settings.kicker.label",
+      "default": "A closer look"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.before-after.settings.heading.label",
+      "default": "Skin, in soft focus"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.before-after.settings.text.label",
+      "default": "<p>An illustrative view of a well-loved routine. Individual experiences vary.</p>"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "t:sections.before-after.settings.note.label",
+      "default": "A simple ritual. A more comfortable, radiant-looking finish."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.before-after.settings.button_label.label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.before-after.settings.button_link.label"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.before-after.settings.paragraph__14.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.before-after.settings.color_scheme.label",
+      "default": "scheme-1"
+    }
   ],
   "presets": [
-    { "name": "Before / after" },
     {
-      "name": "Before / after — split",
-      "settings": { "layout": "split", "start": 50, "kicker": "The veil effect", "heading": "Skin, softly illuminated.", "text": "<p>Move the handle to explore the appearance of hydrated, light-reflective skin after a consistent ritual.</p>", "note": "Individual results may vary.", "range_label": "Compare before and after" }
+      "name": "t:sections.before-after.presets.presets__1.name"
+    },
+    {
+      "name": "t:sections.before-after.presets.presets__2.name",
+      "settings": {
+        "layout": "split",
+        "start": 50,
+        "kicker": "The veil effect",
+        "heading": "Skin, softly illuminated.",
+        "text": "<p>Move the handle to explore the appearance of hydrated, light-reflective skin after a consistent ritual.</p>",
+        "note": "Individual results may vary.",
+        "range_label": "Compare before and after"
+      }
     }
   ]
 }

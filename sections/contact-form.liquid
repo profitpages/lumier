@@ -21,14 +21,38 @@
 
 {% schema %}
 {
-  "name": "Contact form",
+  "name": "t:sections.contact-form.name",
   "class": "section-contact",
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "We'd love to hear from you" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Say hello." },
-    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Questions about a formula, an order, or your routine? We reply within one business day.</p>" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.contact-form.settings.kicker.label",
+      "default": "We'd love to hear from you"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.contact-form.settings.heading.label",
+      "default": "Say hello."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.contact-form.settings.text.label",
+      "default": "<p>Questions about a formula, an order, or your routine? We reply within one business day.</p>"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.contact-form.settings.color_scheme.label",
+      "default": "scheme-1"
+    }
   ],
-  "presets": [{ "name": "Contact form" }]
+  "presets": [
+    {
+      "name": "t:sections.contact-form.presets.presets__1.name"
+    }
+  ]
 }
 {% endschema %}

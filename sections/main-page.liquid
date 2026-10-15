@@ -12,12 +12,26 @@
 
 {% schema %}
 {
-  "name": "Page content",
+  "name": "t:sections.main-page.name",
   "class": "section-main-page",
   "settings": [
-    { "type": "checkbox", "id": "show_title", "label": "Show title", "default": true },
-    { "type": "text", "id": "kicker", "label": "Kicker" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "t:sections.main-page.settings.show_title.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.main-page.settings.kicker.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.main-page.settings.color_scheme.label",
+      "default": "scheme-1"
+    }
   ]
 }
 {% endschema %}

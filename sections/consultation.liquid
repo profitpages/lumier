@@ -36,39 +36,150 @@
 
 {% schema %}
 {
-  "name": "Consultation / atelier",
+  "name": "t:sections.consultation.name",
   "class": "section-consultation",
   "max_blocks": 5,
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Image" },
-    { "type": "checkbox", "id": "image_right", "label": "Image on the right", "default": false },
-    { "type": "text", "id": "caption", "label": "Caption chip", "default": "Complimentary, by appointment." },
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "One-to-one" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Book a skin consultation." },
-    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Twenty unhurried minutes with a Lumière specialist — in the atelier or by video — to build a ritual around your skin.</p>" },
-    { "type": "text", "id": "button_label", "label": "Primary button", "default": "Book a time" },
-    { "type": "url", "id": "button_link", "label": "Primary link", "info": "Your booking app or contact page." },
-    { "type": "text", "id": "button2_label", "label": "Secondary button", "default": "Get directions" },
-    { "type": "url", "id": "button2_link", "label": "Secondary link" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-5" }
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.consultation.settings.image.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "image_right",
+      "label": "t:sections.consultation.settings.image_right.label",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "t:sections.consultation.settings.caption.label",
+      "default": "Complimentary, by appointment."
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.consultation.settings.kicker.label",
+      "default": "One-to-one"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.consultation.settings.heading.label",
+      "default": "Book a skin consultation."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.consultation.settings.text.label",
+      "default": "<p>Twenty unhurried minutes with a Lumière specialist — in the atelier or by video — to build a ritual around your skin.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.consultation.settings.button_label.label",
+      "default": "Book a time"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.consultation.settings.button_link.label",
+      "info": "t:sections.consultation.settings.button_link.info"
+    },
+    {
+      "type": "text",
+      "id": "button2_label",
+      "label": "t:sections.consultation.settings.button2_label.label",
+      "default": "Get directions"
+    },
+    {
+      "type": "url",
+      "id": "button2_link",
+      "label": "t:sections.consultation.settings.button2_link.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.consultation.settings.color_scheme.label",
+      "default": "scheme-5"
+    }
   ],
   "blocks": [
     {
-      "type": "detail", "name": "Detail row",
+      "type": "detail",
+      "name": "t:sections.consultation.blocks.detail.name",
       "settings": [
-        { "type": "select", "id": "icon", "label": "Icon", "options": [{ "value": "clock", "label": "Hours" }, { "value": "user", "label": "Person" }, { "value": "mail", "label": "Email" }, { "value": "gift", "label": "Gift" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "hand", "label": "Hand" }], "default": "clock" },
-        { "type": "text", "id": "label", "label": "Label", "default": "Hours" },
-        { "type": "richtext", "id": "value", "label": "Details", "default": "<p>Tuesday – Saturday, 10am – 6pm</p>" }
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "t:sections.consultation.blocks.detail.settings.icon.label",
+          "options": [
+            {
+              "value": "clock",
+              "label": "t:sections.consultation.blocks.detail.settings.icon.options__1.label"
+            },
+            {
+              "value": "user",
+              "label": "t:sections.consultation.blocks.detail.settings.icon.options__2.label"
+            },
+            {
+              "value": "mail",
+              "label": "t:sections.consultation.blocks.detail.settings.icon.options__3.label"
+            },
+            {
+              "value": "gift",
+              "label": "t:sections.consultation.blocks.detail.settings.icon.options__4.label"
+            },
+            {
+              "value": "sparkle",
+              "label": "t:sections.consultation.blocks.detail.settings.icon.options__5.label"
+            },
+            {
+              "value": "hand",
+              "label": "t:sections.consultation.blocks.detail.settings.icon.options__6.label"
+            }
+          ],
+          "default": "clock"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "t:sections.consultation.blocks.detail.settings.label.label",
+          "default": "Hours"
+        },
+        {
+          "type": "richtext",
+          "id": "value",
+          "label": "t:sections.consultation.blocks.detail.settings.value.label",
+          "default": "<p>Tuesday – Saturday, 10am – 6pm</p>"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Consultation / atelier",
+      "name": "t:sections.consultation.presets.presets__1.name",
       "blocks": [
-        { "type": "detail" },
-        { "type": "detail", "settings": { "icon": "user", "label": "The atelier", "value": "<p>Add your studio address here</p>" } },
-        { "type": "detail", "settings": { "icon": "mail", "label": "Questions", "value": "<p>hello@yourstore.com</p>" } }
+        {
+          "type": "detail"
+        },
+        {
+          "type": "detail",
+          "settings": {
+            "icon": "user",
+            "label": "The atelier",
+            "value": "<p>Add your studio address here</p>"
+          }
+        },
+        {
+          "type": "detail",
+          "settings": {
+            "icon": "mail",
+            "label": "Questions",
+            "value": "<p>hello@yourstore.com</p>"
+          }
+        }
       ]
     }
   ]

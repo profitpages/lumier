@@ -82,7 +82,7 @@
         "open_filters": 2,
         "enable_sorting": true,
         "card_style": "gallery",
-        "image_ratio": "portrait",
+        "image_ratio": "adapt",
         "show_vendor": false,
         "show_quick_add": true,
         "filter_scheme": "scheme-2",

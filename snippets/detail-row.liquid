@@ -25,7 +25,7 @@
 -%}
 {%- if body != blank or b.page != blank -%}
   <details class="acc{% if compact %} acc--compact{% endif %}" data-accordion{% if b.open %} open{% endif %} {{ block.shopify_attributes }}>
-    <summary class="acc__q">{{ b.heading | escape }}<span class="acc__plus" aria-hidden="true"></span></summary>
+    <summary class="acc__q">{%- if b.heading != blank -%}{{ b.heading | escape }}{%- else -%}{{ 'general.product_details' | t }}{%- endif -%}<span class="acc__plus" aria-hidden="true"></span></summary>
     <div class="acc__a">
       <div class="acc__inner rte">
         {{ body }}

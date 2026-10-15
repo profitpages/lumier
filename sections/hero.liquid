@@ -78,61 +78,217 @@
 
 {% schema %}
 {
-  "name": "Hero",
+  "name": "t:sections.hero.name",
   "class": "section-hero",
   "settings": [
     {
-      "type": "select", "id": "layout", "label": "Layout",
+      "type": "select",
+      "id": "layout",
+      "label": "t:sections.hero.settings.layout.label",
       "options": [
-        { "value": "arch", "label": "Arch with floating polaroids" },
-        { "value": "split", "label": "Split, curved-corner image" },
-        { "value": "cover", "label": "Full-bleed image" }
+        {
+          "value": "arch",
+          "label": "t:sections.hero.settings.layout.options__1.label"
+        },
+        {
+          "value": "split",
+          "label": "t:sections.hero.settings.layout.options__2.label"
+        },
+        {
+          "value": "cover",
+          "label": "t:sections.hero.settings.layout.options__3.label"
+        }
       ],
       "default": "arch"
     },
-    { "type": "image_picker", "id": "image", "label": "Image", "info": "Portrait images work best for the arch (about 4:5)." },
-    { "type": "image_picker", "id": "mobile_image", "label": "Mobile image", "info": "Optional. Shown on phones instead of the main image." },
     {
-      "type": "select", "id": "image_position", "label": "Image focal point",
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.hero.settings.image.label",
+      "info": "t:sections.hero.settings.image.info"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "t:sections.hero.settings.mobile_image.label",
+      "info": "t:sections.hero.settings.mobile_image.info"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "t:sections.hero.settings.image_position.label",
       "options": [
-        { "value": "center top", "label": "Top" },
-        { "value": "center center", "label": "Center" },
-        { "value": "center bottom", "label": "Bottom" },
-        { "value": "left center", "label": "Left" },
-        { "value": "right center", "label": "Right" }
+        {
+          "value": "center top",
+          "label": "t:sections.hero.settings.image_position.options__1.label"
+        },
+        {
+          "value": "center center",
+          "label": "t:sections.hero.settings.image_position.options__2.label"
+        },
+        {
+          "value": "center bottom",
+          "label": "t:sections.hero.settings.image_position.options__3.label"
+        },
+        {
+          "value": "left center",
+          "label": "t:sections.hero.settings.image_position.options__4.label"
+        },
+        {
+          "value": "right center",
+          "label": "t:sections.hero.settings.image_position.options__5.label"
+        }
       ],
       "default": "center top"
     },
-    { "type": "header", "content": "Floating polaroids (arch layout)" },
-    { "type": "checkbox", "id": "show_polaroids", "label": "Show polaroids", "default": true },
-    { "type": "product", "id": "polaroid_product_1", "label": "Polaroid 1 — product", "info": "Uses the product image and links to it." },
-    { "type": "image_picker", "id": "polaroid_1", "label": "Polaroid 1 — custom image" },
-    { "type": "product", "id": "polaroid_product_2", "label": "Polaroid 2 — product" },
-    { "type": "image_picker", "id": "polaroid_2", "label": "Polaroid 2 — custom image" },
-    { "type": "text", "id": "caption", "label": "Caption chip (split layout)", "default": "A daily ritual, beautifully considered." },
-    { "type": "header", "content": "Content" },
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "A luminous daily practice" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Rituals, refined." },
-    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>High-performance beauty essentials designed for luminous everyday living.</p>" },
-    { "type": "text", "id": "button_label", "label": "Primary button", "default": "Shop bestsellers" },
-    { "type": "url", "id": "button_link", "label": "Primary link" },
-    { "type": "text", "id": "button2_label", "label": "Secondary button", "default": "Discover the ritual" },
-    { "type": "url", "id": "button2_link", "label": "Secondary link" },
-    { "type": "header", "content": "Layout" },
     {
-      "type": "select", "id": "text_align", "label": "Text alignment",
-      "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }],
+      "type": "header",
+      "content": "t:sections.hero.settings.header__5.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_polaroids",
+      "label": "t:sections.hero.settings.show_polaroids.label",
+      "default": true
+    },
+    {
+      "type": "product",
+      "id": "polaroid_product_1",
+      "label": "t:sections.hero.settings.polaroid_product_1.label",
+      "info": "t:sections.hero.settings.polaroid_product_1.info"
+    },
+    {
+      "type": "image_picker",
+      "id": "polaroid_1",
+      "label": "t:sections.hero.settings.polaroid_1.label"
+    },
+    {
+      "type": "product",
+      "id": "polaroid_product_2",
+      "label": "t:sections.hero.settings.polaroid_product_2.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "polaroid_2",
+      "label": "t:sections.hero.settings.polaroid_2.label"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "t:sections.hero.settings.caption.label",
+      "default": "A daily ritual, beautifully considered."
+    },
+    {
+      "type": "header",
+      "content": "t:sections.hero.settings.header__12.content"
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.hero.settings.kicker.label",
+      "default": "A luminous daily practice"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.hero.settings.heading.label",
+      "default": "Rituals, refined."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.hero.settings.text.label",
+      "default": "<p>High-performance beauty essentials designed for luminous everyday living.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.hero.settings.button_label.label",
+      "default": "Shop bestsellers"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.hero.settings.button_link.label"
+    },
+    {
+      "type": "text",
+      "id": "button2_label",
+      "label": "t:sections.hero.settings.button2_label.label",
+      "default": "Discover the ritual"
+    },
+    {
+      "type": "url",
+      "id": "button2_link",
+      "label": "t:sections.hero.settings.button2_link.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.hero.settings.header__20.content"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "t:sections.hero.settings.text_align.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.hero.settings.text_align.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.hero.settings.text_align.options__2.label"
+        }
+      ],
       "default": "left"
     },
-    { "type": "checkbox", "id": "content_right", "label": "Show text on the right (desktop)", "default": false },
     {
-      "type": "select", "id": "height", "label": "Section height",
-      "options": [{ "value": "md", "label": "Medium" }, { "value": "lg", "label": "Large" }, { "value": "full", "label": "Full screen" }],
+      "type": "checkbox",
+      "id": "content_right",
+      "label": "t:sections.hero.settings.content_right.label",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "t:sections.hero.settings.height.label",
+      "options": [
+        {
+          "value": "md",
+          "label": "t:sections.hero.settings.height.options__1.label"
+        },
+        {
+          "value": "lg",
+          "label": "t:sections.hero.settings.height.options__2.label"
+        },
+        {
+          "value": "full",
+          "label": "t:sections.hero.settings.height.options__3.label"
+        }
+      ],
       "default": "md"
     },
-    { "type": "range", "id": "overlay", "label": "Image overlay (full-bleed)", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 35 },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-3" }
+    {
+      "type": "range",
+      "id": "overlay",
+      "label": "t:sections.hero.settings.overlay.label",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 35
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.hero.settings.color_scheme.label",
+      "default": "scheme-3"
+    }
   ],
-  "presets": [{ "name": "Hero" }]
+  "presets": [
+    {
+      "name": "t:sections.hero.presets.presets__1.name"
+    }
+  ]
 }
 {% endschema %}

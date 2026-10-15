@@ -63,49 +63,148 @@
 
 {% schema %}
 {
-  "name": "Ingredient edit",
+  "name": "t:sections.ingredients.name",
   "class": "section-ingredients",
   "max_blocks": 6,
   "settings": [
     {
-      "type": "select", "id": "layout", "label": "Layout",
-      "options": [{ "value": "feature", "label": "Image + tabs" }, { "value": "panel", "label": "Formula panel (product page)" }],
+      "type": "select",
+      "id": "layout",
+      "label": "t:sections.ingredients.settings.layout.label",
+      "options": [
+        {
+          "value": "feature",
+          "label": "t:sections.ingredients.settings.layout.options__1.label"
+        },
+        {
+          "value": "panel",
+          "label": "t:sections.ingredients.settings.layout.options__2.label"
+        }
+      ],
       "default": "feature"
     },
-    { "type": "image_picker", "id": "image", "label": "Image", "info": "Shown when an ingredient has no image of its own." },
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Good ingredients, thoughtfully chosen" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "The ingredient edit" },
-    { "type": "text", "id": "button_label", "label": "Link label" },
-    { "type": "url", "id": "button_link", "label": "Link" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" }
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.ingredients.settings.image.label",
+      "info": "t:sections.ingredients.settings.image.info"
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.ingredients.settings.kicker.label",
+      "default": "Good ingredients, thoughtfully chosen"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.ingredients.settings.heading.label",
+      "default": "The ingredient edit"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.ingredients.settings.button_label.label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.ingredients.settings.button_link.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.ingredients.settings.color_scheme.label",
+      "default": "scheme-2"
+    }
   ],
   "blocks": [
     {
-      "type": "ingredient", "name": "Ingredient",
+      "type": "ingredient",
+      "name": "t:sections.ingredients.blocks.ingredient.name",
       "settings": [
-        { "type": "text", "id": "name", "label": "Name", "default": "Hyaluronic Acid" },
-        { "type": "text", "id": "benefit", "label": "Benefit", "default": "Plump + quench" },
-        { "type": "richtext", "id": "text", "label": "Description", "default": "<p>A moisture-loving favourite that helps skin feel supple and comfortably hydrated.</p>" },
-        { "type": "image_picker", "id": "image", "label": "Image or texture" }
+        {
+          "type": "text",
+          "id": "name",
+          "label": "t:sections.ingredients.blocks.ingredient.settings.name.label",
+          "default": "Hyaluronic Acid"
+        },
+        {
+          "type": "text",
+          "id": "benefit",
+          "label": "t:sections.ingredients.blocks.ingredient.settings.benefit.label",
+          "default": "Plump + quench"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:sections.ingredients.blocks.ingredient.settings.text.label",
+          "default": "<p>A moisture-loving favourite that helps skin feel supple and comfortably hydrated.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.ingredients.blocks.ingredient.settings.image.label"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Ingredient edit",
+      "name": "t:sections.ingredients.presets.presets__1.name",
       "blocks": [
-        { "type": "ingredient" },
-        { "type": "ingredient", "settings": { "name": "Rosehip Oil", "benefit": "Nourish + soften", "text": "<p>A refined botanical oil rich in essential fatty acids to help skin feel soft and cared for.</p>" } },
-        { "type": "ingredient", "settings": { "name": "Peptides", "benefit": "Smooth + support", "text": "<p>Targeted peptides support a smoother-looking surface and a fresh, resilient feel.</p>" } }
+        {
+          "type": "ingredient"
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Rosehip Oil",
+            "benefit": "Nourish + soften",
+            "text": "<p>A refined botanical oil rich in essential fatty acids to help skin feel soft and cared for.</p>"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Peptides",
+            "benefit": "Smooth + support",
+            "text": "<p>Targeted peptides support a smoother-looking surface and a fresh, resilient feel.</p>"
+          }
+        }
       ]
     },
     {
-      "name": "Formula panel",
-      "settings": { "layout": "panel", "kicker": "The formula", "heading": "Made for the way skin moves through light.", "color_scheme": "scheme-1" },
+      "name": "t:sections.ingredients.presets.presets__2.name",
+      "settings": {
+        "layout": "panel",
+        "kicker": "The formula",
+        "heading": "Made for the way skin moves through light.",
+        "color_scheme": "scheme-1"
+      },
       "blocks": [
-        { "type": "ingredient", "settings": { "text": "<p>A multi-weight complex helps bind hydration at skin's surface for a bouncy, cushion-soft look.</p>" } },
-        { "type": "ingredient", "settings": { "name": "Rosehip Oil", "benefit": "Nourish + soften", "text": "<p>A refined botanical oil rich in essential fatty acids to help skin feel soft and cared for.</p>" } },
-        { "type": "ingredient", "settings": { "name": "Peptides", "benefit": "Smooth + support", "text": "<p>Targeted peptides support a smoother-looking surface and a fresh, resilient feel.</p>" } }
+        {
+          "type": "ingredient",
+          "settings": {
+            "text": "<p>A multi-weight complex helps bind hydration at skin's surface for a bouncy, cushion-soft look.</p>"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Rosehip Oil",
+            "benefit": "Nourish + soften",
+            "text": "<p>A refined botanical oil rich in essential fatty acids to help skin feel soft and cared for.</p>"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Peptides",
+            "benefit": "Smooth + support",
+            "text": "<p>Targeted peptides support a smoother-looking surface and a fresh, resilient feel.</p>"
+          }
+        }
       ]
     }
   ]

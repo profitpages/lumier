@@ -62,12 +62,31 @@
 
 {% schema %}
 {
-  "name": "Search results",
+  "name": "t:sections.main-search.name",
   "class": "section-main-search",
   "settings": [
-    { "type": "range", "id": "per_page", "label": "Results per page", "min": 8, "max": 36, "step": 4, "default": 16 },
-    { "type": "text", "id": "suggestions", "label": "Popular searches", "default": "serum, hydration, SPF, lip oil", "info": "Comma separated." },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+    {
+      "type": "range",
+      "id": "per_page",
+      "label": "t:sections.main-search.settings.per_page.label",
+      "min": 8,
+      "max": 36,
+      "step": 4,
+      "default": 16
+    },
+    {
+      "type": "text",
+      "id": "suggestions",
+      "label": "t:sections.main-search.settings.suggestions.label",
+      "default": "serum, hydration, SPF, lip oil",
+      "info": "t:sections.main-search.settings.suggestions.info"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.main-search.settings.color_scheme.label",
+      "default": "scheme-1"
+    }
   ]
 }
 {% endschema %}

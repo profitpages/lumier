@@ -25,36 +25,105 @@
 
 {% schema %}
 {
-  "name": "Formulated without",
+  "name": "t:sections.free-from.name",
   "class": "section-free-from",
   "max_blocks": 12,
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Our clean promise" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Formulated without." },
-    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>What we leave out matters as much as what we put in. Every formula is made without:</p>" },
-    { "type": "text", "id": "button_label", "label": "Link label", "default": "Read our standards" },
-    { "type": "url", "id": "button_link", "label": "Link" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" }
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.free-from.settings.kicker.label",
+      "default": "Our clean promise"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.free-from.settings.heading.label",
+      "default": "Formulated without."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.free-from.settings.text.label",
+      "default": "<p>What we leave out matters as much as what we put in. Every formula is made without:</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.free-from.settings.button_label.label",
+      "default": "Read our standards"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.free-from.settings.button_link.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.free-from.settings.color_scheme.label",
+      "default": "scheme-2"
+    }
   ],
   "blocks": [
     {
-      "type": "item", "name": "Item",
+      "type": "item",
+      "name": "t:sections.free-from.blocks.item.name",
       "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "Parabens" },
-        { "type": "text", "id": "note", "label": "Short note" }
+        {
+          "type": "text",
+          "id": "label",
+          "label": "t:sections.free-from.blocks.item.settings.label.label",
+          "default": "Parabens"
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "t:sections.free-from.blocks.item.settings.note.label"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Formulated without",
+      "name": "t:sections.free-from.presets.presets__1.name",
       "blocks": [
-        { "type": "item", "settings": { "label": "Parabens" } },
-        { "type": "item", "settings": { "label": "Sulphates (SLS & SLES)" } },
-        { "type": "item", "settings": { "label": "Synthetic fragrance" } },
-        { "type": "item", "settings": { "label": "Mineral oil" } },
-        { "type": "item", "settings": { "label": "Phthalates" } },
-        { "type": "item", "settings": { "label": "Animal testing" } }
+        {
+          "type": "item",
+          "settings": {
+            "label": "Parabens"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "label": "Sulphates (SLS & SLES)"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "label": "Synthetic fragrance"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "label": "Mineral oil"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "label": "Phthalates"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "label": "Animal testing"
+          }
+        }
       ]
     }
   ]

@@ -175,44 +175,141 @@
 
 {% schema %}
 {
-  "name": "Header",
+  "name": "t:sections.header.name",
   "class": "section-header",
   "max_blocks": 6,
   "settings": [
-    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
     {
-      "type": "select", "id": "logo_position", "label": "Logo position (desktop)",
-      "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }],
+      "type": "link_list",
+      "id": "menu",
+      "label": "t:sections.header.settings.menu.label",
+      "default": "main-menu"
+    },
+    {
+      "type": "select",
+      "id": "logo_position",
+      "label": "t:sections.header.settings.logo_position.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.header.settings.logo_position.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.header.settings.logo_position.options__2.label"
+        }
+      ],
       "default": "left"
     },
     {
-      "type": "select", "id": "nav_style", "label": "Menu style",
-      "options": [{ "value": "plain", "label": "Sentence case" }, { "value": "caps", "label": "Small caps, letter-spaced" }],
+      "type": "select",
+      "id": "nav_style",
+      "label": "t:sections.header.settings.nav_style.label",
+      "options": [
+        {
+          "value": "plain",
+          "label": "t:sections.header.settings.nav_style.options__1.label"
+        },
+        {
+          "value": "caps",
+          "label": "t:sections.header.settings.nav_style.options__2.label"
+        }
+      ],
       "default": "plain"
     },
-    { "type": "checkbox", "id": "sticky", "label": "Sticky header", "default": true },
     {
-      "type": "select", "id": "cart_style", "label": "Cart button",
-      "options": [{ "value": "icon", "label": "Icon" }, { "value": "pill", "label": "Pill with label" }],
+      "type": "checkbox",
+      "id": "sticky",
+      "label": "t:sections.header.settings.sticky.label",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "cart_style",
+      "label": "t:sections.header.settings.cart_style.label",
+      "options": [
+        {
+          "value": "icon",
+          "label": "t:sections.header.settings.cart_style.options__1.label"
+        },
+        {
+          "value": "pill",
+          "label": "t:sections.header.settings.cart_style.options__2.label"
+        }
+      ],
       "default": "icon"
     },
-    { "type": "checkbox", "id": "show_search", "label": "Show search", "default": true },
-    { "type": "checkbox", "id": "show_account", "label": "Show account", "default": true },
-    { "type": "checkbox", "id": "show_wishlist", "label": "Show wishlist", "default": false },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
-    { "type": "color_scheme", "id": "menu_scheme", "label": "Dropdown & mobile menu scheme", "default": "scheme-2" },
-    { "type": "text", "id": "sheet_note", "label": "Mobile menu note", "default": "Complimentary shipping on orders over $75." }
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "t:sections.header.settings.show_search.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account",
+      "label": "t:sections.header.settings.show_account.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wishlist",
+      "label": "t:sections.header.settings.show_wishlist.label",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.header.settings.color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "menu_scheme",
+      "label": "t:sections.header.settings.menu_scheme.label",
+      "default": "scheme-2"
+    },
+    {
+      "type": "text",
+      "id": "sheet_note",
+      "label": "t:sections.header.settings.sheet_note.label",
+      "default": "Complimentary shipping on orders over $75."
+    }
   ],
   "blocks": [
     {
       "type": "promo",
-      "name": "Mega menu promo",
+      "name": "t:sections.header.blocks.promo.name",
       "settings": [
-        { "type": "text", "id": "menu_item", "label": "Show in menu item", "info": "Type the top-level menu title exactly, e.g. 'Shop'.", "default": "Shop" },
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "kicker", "label": "Kicker", "default": "New ritual" },
-        { "type": "text", "id": "heading", "label": "Heading", "default": "Glow Veil Serum" },
-        { "type": "url", "id": "link", "label": "Link" }
+        {
+          "type": "text",
+          "id": "menu_item",
+          "label": "t:sections.header.blocks.promo.settings.menu_item.label",
+          "info": "t:sections.header.blocks.promo.settings.menu_item.info",
+          "default": "Shop"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.header.blocks.promo.settings.image.label"
+        },
+        {
+          "type": "text",
+          "id": "kicker",
+          "label": "t:sections.header.blocks.promo.settings.kicker.label",
+          "default": "New ritual"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.header.blocks.promo.settings.heading.label",
+          "default": "Glow Veil Serum"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.header.blocks.promo.settings.link.label"
+        }
       ]
     }
   ]

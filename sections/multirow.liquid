@@ -61,72 +61,247 @@
 
 {% schema %}
 {
-  "name": "Multirow",
+  "name": "t:sections.multirow.name",
   "class": "section-multirow",
   "max_blocks": 6,
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Why it feels different" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Considered in every detail." },
-    { "type": "richtext", "id": "text", "label": "Text" },
     {
-      "type": "select", "id": "heading_align", "label": "Heading alignment",
-      "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }],
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.multirow.settings.kicker.label",
+      "default": "Why it feels different"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.multirow.settings.heading.label",
+      "default": "Considered in every detail."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.multirow.settings.text.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "t:sections.multirow.settings.heading_align.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.multirow.settings.heading_align.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.multirow.settings.heading_align.options__2.label"
+        }
+      ],
       "default": "left"
     },
     {
-      "type": "select", "id": "style", "label": "Row style",
-      "options": [{ "value": "open", "label": "Open, hairline dividers" }, { "value": "panels", "label": "Each row in its own color panel" }],
+      "type": "select",
+      "id": "style",
+      "label": "t:sections.multirow.settings.style.label",
+      "options": [
+        {
+          "value": "open",
+          "label": "t:sections.multirow.settings.style.options__1.label"
+        },
+        {
+          "value": "panels",
+          "label": "t:sections.multirow.settings.style.options__2.label"
+        }
+      ],
       "default": "open"
     },
     {
-      "type": "select", "id": "ratio", "label": "Image shape",
-      "options": [{ "value": "landscape", "label": "Landscape 3:2" }, { "value": "square", "label": "Square" }, { "value": "portrait", "label": "Portrait 4:5" }],
+      "type": "select",
+      "id": "ratio",
+      "label": "t:sections.multirow.settings.ratio.label",
+      "options": [
+        {
+          "value": "landscape",
+          "label": "t:sections.multirow.settings.ratio.options__1.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.multirow.settings.ratio.options__2.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.multirow.settings.ratio.options__3.label"
+        }
+      ],
       "default": "landscape"
     },
-    { "type": "checkbox", "id": "image_right", "label": "First image on the right", "default": false },
-    { "type": "checkbox", "id": "alternate", "label": "Alternate image side", "default": true },
-    { "type": "checkbox", "id": "numbered", "label": "Number the rows (01, 02…)", "default": true },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+    {
+      "type": "checkbox",
+      "id": "image_right",
+      "label": "t:sections.multirow.settings.image_right.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "alternate",
+      "label": "t:sections.multirow.settings.alternate.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "numbered",
+      "label": "t:sections.multirow.settings.numbered.label",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.multirow.settings.color_scheme.label",
+      "default": "scheme-1"
+    }
   ],
   "blocks": [
     {
-      "type": "row", "name": "Row",
+      "type": "row",
+      "name": "t:sections.multirow.blocks.row.name",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image", "info": "Defaults to the product image when a product is chosen." },
         {
-          "type": "select", "id": "frame", "label": "Frame",
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.multirow.blocks.row.settings.image.label",
+          "info": "t:sections.multirow.blocks.row.settings.image.info"
+        },
+        {
+          "type": "select",
+          "id": "frame",
+          "label": "t:sections.multirow.blocks.row.settings.frame.label",
           "options": [
-            { "value": "corner", "label": "Curved corner" },
-            { "value": "arch", "label": "Arch with champagne slab" },
-            { "value": "offset", "label": "Offset outline" },
-            { "value": "square", "label": "Square" }
+            {
+              "value": "corner",
+              "label": "t:sections.multirow.blocks.row.settings.frame.options__1.label"
+            },
+            {
+              "value": "arch",
+              "label": "t:sections.multirow.blocks.row.settings.frame.options__2.label"
+            },
+            {
+              "value": "offset",
+              "label": "t:sections.multirow.blocks.row.settings.frame.options__3.label"
+            },
+            {
+              "value": "square",
+              "label": "t:sections.multirow.blocks.row.settings.frame.options__4.label"
+            }
           ],
           "default": "corner"
         },
-        { "type": "text", "id": "caption", "label": "Caption chip" },
-        { "type": "checkbox", "id": "show_dot", "label": "Accent dot", "default": false },
-        { "type": "text", "id": "kicker", "label": "Kicker", "default": "Texture" },
-        { "type": "text", "id": "heading", "label": "Heading", "default": "A gel that turns to silk." },
-        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Weightless on the fingertips, cushiony on skin — and gone in seconds, leaving only a soft, lit-from-within finish.</p>" },
-        { "type": "product", "id": "product", "label": "Featured product", "info": "Shows the title and price with a link." },
-        { "type": "text", "id": "button_label", "label": "Button label" },
-        { "type": "url", "id": "button_link", "label": "Button link", "info": "Defaults to the product." },
         {
-          "type": "select", "id": "button_style", "label": "Button style",
-          "options": [{ "value": "link", "label": "Underlined link" }, { "value": "outline", "label": "Outline" }, { "value": "solid", "label": "Solid" }],
+          "type": "text",
+          "id": "caption",
+          "label": "t:sections.multirow.blocks.row.settings.caption.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_dot",
+          "label": "t:sections.multirow.blocks.row.settings.show_dot.label",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "kicker",
+          "label": "t:sections.multirow.blocks.row.settings.kicker.label",
+          "default": "Texture"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.multirow.blocks.row.settings.heading.label",
+          "default": "A gel that turns to silk."
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:sections.multirow.blocks.row.settings.text.label",
+          "default": "<p>Weightless on the fingertips, cushiony on skin — and gone in seconds, leaving only a soft, lit-from-within finish.</p>"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "t:sections.multirow.blocks.row.settings.product.label",
+          "info": "t:sections.multirow.blocks.row.settings.product.info"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "t:sections.multirow.blocks.row.settings.button_label.label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:sections.multirow.blocks.row.settings.button_link.label",
+          "info": "t:sections.multirow.blocks.row.settings.button_link.info"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "t:sections.multirow.blocks.row.settings.button_style.label",
+          "options": [
+            {
+              "value": "link",
+              "label": "t:sections.multirow.blocks.row.settings.button_style.options__1.label"
+            },
+            {
+              "value": "outline",
+              "label": "t:sections.multirow.blocks.row.settings.button_style.options__2.label"
+            },
+            {
+              "value": "solid",
+              "label": "t:sections.multirow.blocks.row.settings.button_style.options__3.label"
+            }
+          ],
           "default": "link"
         },
-        { "type": "color_scheme", "id": "color_scheme", "label": "Panel color scheme", "info": "Used with the 'color panel' row style.", "default": "scheme-2" }
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "t:sections.multirow.blocks.row.settings.color_scheme.label",
+          "info": "t:sections.multirow.blocks.row.settings.color_scheme.info",
+          "default": "scheme-2"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Multirow",
+      "name": "t:sections.multirow.presets.presets__1.name",
       "blocks": [
-        { "type": "row", "settings": { "caption": "Weightless, never sticky.", "button_label": "Discover the texture" } },
-        { "type": "row", "settings": { "frame": "arch", "kicker": "Formula", "heading": "Actives, gently delivered.", "text": "<p>Encapsulated peptides and vitamin C release slowly for visible radiance without the sting.</p>", "show_dot": true, "button_label": "Explore the formula" } },
-        { "type": "row", "settings": { "frame": "offset", "kicker": "Packaging", "heading": "Glass you'll want to keep.", "text": "<p>Refillable, recyclable and heavy in the hand — made to live beautifully on your shelf.</p>", "button_label": "Our commitments" } }
+        {
+          "type": "row",
+          "settings": {
+            "caption": "Weightless, never sticky.",
+            "button_label": "Discover the texture"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "frame": "arch",
+            "kicker": "Formula",
+            "heading": "Actives, gently delivered.",
+            "text": "<p>Encapsulated peptides and vitamin C release slowly for visible radiance without the sting.</p>",
+            "show_dot": true,
+            "button_label": "Explore the formula"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "frame": "offset",
+            "kicker": "Packaging",
+            "heading": "Glass you'll want to keep.",
+            "text": "<p>Refillable, recyclable and heavy in the hand — made to live beautifully on your shelf.</p>",
+            "button_label": "Our commitments"
+          }
+        }
       ]
     }
   ]

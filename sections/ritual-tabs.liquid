@@ -59,34 +59,94 @@
 
 {% schema %}
 {
-  "name": "Ritual steps (tabs)",
+  "name": "t:sections.ritual-tabs.name",
   "class": "section-ritual-tabs",
   "max_blocks": 5,
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Build your moment" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "The three-step ritual" },
-    { "type": "richtext", "id": "text", "label": "Text" },
-    { "type": "text", "id": "recommended_label", "label": "Recommendation label", "default": "Recommended" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.ritual-tabs.settings.kicker.label",
+      "default": "Build your moment"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.ritual-tabs.settings.heading.label",
+      "default": "The three-step ritual"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.ritual-tabs.settings.text.label"
+    },
+    {
+      "type": "text",
+      "id": "recommended_label",
+      "label": "t:sections.ritual-tabs.settings.recommended_label.label",
+      "default": "Recommended"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.ritual-tabs.settings.color_scheme.label",
+      "default": "scheme-1"
+    }
   ],
   "blocks": [
     {
-      "type": "step", "name": "Step",
+      "type": "step",
+      "name": "t:sections.ritual-tabs.blocks.step.name",
       "settings": [
-        { "type": "text", "id": "label", "label": "Step name", "default": "Prep" },
-        { "type": "text", "id": "title", "label": "Heading", "default": "Begin with a soft, luminous canvas." },
-        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Cushion skin in a veil of hydration before every step that follows. A simple, sensorial start for lasting radiance.</p>" },
-        { "type": "product", "id": "product", "label": "Recommended product" }
+        {
+          "type": "text",
+          "id": "label",
+          "label": "t:sections.ritual-tabs.blocks.step.settings.label.label",
+          "default": "Prep"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.ritual-tabs.blocks.step.settings.title.label",
+          "default": "Begin with a soft, luminous canvas."
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:sections.ritual-tabs.blocks.step.settings.text.label",
+          "default": "<p>Cushion skin in a veil of hydration before every step that follows. A simple, sensorial start for lasting radiance.</p>"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "t:sections.ritual-tabs.blocks.step.settings.product.label"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Ritual steps (tabs)",
+      "name": "t:sections.ritual-tabs.presets.presets__1.name",
       "blocks": [
-        { "type": "step" },
-        { "type": "step", "settings": { "label": "Enhance", "title": "Warmth, dimension, and the softest definition.", "text": "<p>Add luminous sculpting shades that move with skin, creating an effortless, considered finish that feels like you.</p>" } },
-        { "type": "step", "settings": { "label": "Finish", "title": "Seal in softness. Carry the glow onward.", "text": "<p>A weightless, rose-infused mist makes every ritual feel freshly finished, from first light to after hours.</p>" } }
+        {
+          "type": "step"
+        },
+        {
+          "type": "step",
+          "settings": {
+            "label": "Enhance",
+            "title": "Warmth, dimension, and the softest definition.",
+            "text": "<p>Add luminous sculpting shades that move with skin, creating an effortless, considered finish that feels like you.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "label": "Finish",
+            "title": "Seal in softness. Carry the glow onward.",
+            "text": "<p>A weightless, rose-infused mist makes every ritual feel freshly finished, from first light to after hours.</p>"
+          }
+        }
       ]
     }
   ]

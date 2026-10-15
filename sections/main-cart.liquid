@@ -49,12 +49,27 @@
 
 {% schema %}
 {
-  "name": "Cart",
+  "name": "t:sections.main-cart.name",
   "class": "section-main-cart",
   "settings": [
-    { "type": "checkbox", "id": "express", "label": "Show express checkout buttons", "default": true },
-    { "type": "color_scheme", "id": "summary_scheme", "label": "Summary color scheme", "default": "scheme-4" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+    {
+      "type": "checkbox",
+      "id": "express",
+      "label": "t:sections.main-cart.settings.express.label",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "summary_scheme",
+      "label": "t:sections.main-cart.settings.summary_scheme.label",
+      "default": "scheme-4"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.main-cart.settings.color_scheme.label",
+      "default": "scheme-1"
+    }
   ]
 }
 {% endschema %}

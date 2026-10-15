@@ -3,6 +3,8 @@
   {%- assign current_variant = product.selected_or_first_available_variant -%}
   {%- assign qa_form = 'quick-add-' | append: product.id -%}
   <product-info class="qa" data-section="quick-add" data-url="{{ product.url }}" data-local-price>
+    {%- comment -%} Only .qa is copied into the dialog, so the picker and buy-box styles travel inside it (collection pages don't load them). {%- endcomment -%}
+    {{ 'component-product.css' | asset_url | stylesheet_tag }}
     <div class="qa__media">
       {%- render 'responsive-image', image: product.featured_media.preview_image, max: 800, sizes: '(min-width: 750px) 320px, 90vw', art: 'serum', tone: 'blush' -%}
     </div>
@@ -20,5 +22,7 @@
 {%- endif -%}
 
 {% schema %}
-{ "name": "Quick add" }
+{
+  "name": "t:sections.quick-add.name"
+}
 {% endschema %}

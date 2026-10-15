@@ -59,11 +59,21 @@
 
 {% schema %}
 {
-  "name": "Blog post",
+  "name": "t:sections.main-article.name",
   "class": "section-main-article",
   "settings": [
-    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": true },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "t:sections.main-article.settings.show_author.label",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.main-article.settings.color_scheme.label",
+      "default": "scheme-1"
+    }
   ]
 }
 {% endschema %}

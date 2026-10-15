@@ -18,44 +18,108 @@
 
 {% schema %}
 {
-  "name": "Trust strip",
+  "name": "t:sections.trust-bar.name",
   "class": "section-trust",
   "max_blocks": 4,
   "settings": [
-    { "type": "checkbox", "id": "bold", "label": "Bold text", "default": false },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" }
+    {
+      "type": "checkbox",
+      "id": "bold",
+      "label": "t:sections.trust-bar.settings.bold.label",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.trust-bar.settings.color_scheme.label",
+      "default": "scheme-2"
+    }
   ],
   "blocks": [
     {
-      "type": "item", "name": "Statement",
+      "type": "item",
+      "name": "t:sections.trust-bar.blocks.item.name",
       "settings": [
-        { "type": "text", "id": "text", "label": "Text", "default": "Thoughtfully formulated" },
         {
-          "type": "select", "id": "icon", "label": "Icon",
+          "type": "text",
+          "id": "text",
+          "label": "t:sections.trust-bar.blocks.item.settings.text.label",
+          "default": "Thoughtfully formulated"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "t:sections.trust-bar.blocks.item.settings.icon.label",
           "options": [
-            { "value": "none", "label": "None" },
-            { "value": "sparkle", "label": "Sparkle" },
-            { "value": "leaf", "label": "Leaf" },
-            { "value": "rabbit", "label": "Cruelty-free" },
-            { "value": "recycle", "label": "Recyclable" },
-            { "value": "truck", "label": "Delivery" },
-            { "value": "return", "label": "Returns" },
-            { "value": "shield", "label": "Shield" },
-            { "value": "flask", "label": "Lab-tested" }
+            {
+              "value": "none",
+              "label": "t:sections.trust-bar.blocks.item.settings.icon.options__1.label"
+            },
+            {
+              "value": "sparkle",
+              "label": "t:sections.trust-bar.blocks.item.settings.icon.options__2.label"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.trust-bar.blocks.item.settings.icon.options__3.label"
+            },
+            {
+              "value": "rabbit",
+              "label": "t:sections.trust-bar.blocks.item.settings.icon.options__4.label"
+            },
+            {
+              "value": "recycle",
+              "label": "t:sections.trust-bar.blocks.item.settings.icon.options__5.label"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.trust-bar.blocks.item.settings.icon.options__6.label"
+            },
+            {
+              "value": "return",
+              "label": "t:sections.trust-bar.blocks.item.settings.icon.options__7.label"
+            },
+            {
+              "value": "shield",
+              "label": "t:sections.trust-bar.blocks.item.settings.icon.options__8.label"
+            },
+            {
+              "value": "flask",
+              "label": "t:sections.trust-bar.blocks.item.settings.icon.options__9.label"
+            }
           ],
           "default": "none"
         },
-        { "type": "url", "id": "link", "label": "Link" }
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.trust-bar.blocks.item.settings.link.label"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Trust strip",
+      "name": "t:sections.trust-bar.presets.presets__1.name",
       "blocks": [
-        { "type": "item", "settings": { "text": "Thoughtfully formulated" } },
-        { "type": "item", "settings": { "text": "Cruelty-free essentials" } },
-        { "type": "item", "settings": { "text": "Beauty, made beautifully" } }
+        {
+          "type": "item",
+          "settings": {
+            "text": "Thoughtfully formulated"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "Cruelty-free essentials"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "Beauty, made beautifully"
+          }
+        }
       ]
     }
   ]

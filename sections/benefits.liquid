@@ -35,61 +35,234 @@
 
 {% schema %}
 {
-  "name": "Benefits",
+  "name": "t:sections.benefits.name",
   "class": "section-benefits",
   "max_blocks": 8,
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "The glow standard" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Luminosity that feels like skincare, not shimmer." },
-    { "type": "richtext", "id": "text", "label": "Text" },
     {
-      "type": "select", "id": "style", "label": "Style",
-      "options": [{ "value": "standard", "label": "Statement + columns" }, { "value": "cards", "label": "Cards" }, { "value": "panel", "label": "Inside a panel" }, { "value": "pills", "label": "Compact pills" }],
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.benefits.settings.kicker.label",
+      "default": "The glow standard"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.benefits.settings.heading.label",
+      "default": "Luminosity that feels like skincare, not shimmer."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.benefits.settings.text.label"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "t:sections.benefits.settings.style.label",
+      "options": [
+        {
+          "value": "standard",
+          "label": "t:sections.benefits.settings.style.options__1.label"
+        },
+        {
+          "value": "cards",
+          "label": "t:sections.benefits.settings.style.options__2.label"
+        },
+        {
+          "value": "panel",
+          "label": "t:sections.benefits.settings.style.options__3.label"
+        },
+        {
+          "value": "pills",
+          "label": "t:sections.benefits.settings.style.options__4.label"
+        }
+      ],
       "default": "standard"
     },
-    { "type": "range", "id": "columns", "label": "Columns (desktop)", "min": 2, "max": 5, "step": 1, "default": 3 },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Panel color scheme", "default": "scheme-2" },
-    { "type": "color_scheme", "id": "section_scheme", "label": "Section color scheme", "default": "scheme-3" }
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "t:sections.benefits.settings.columns.label",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.benefits.settings.color_scheme.label",
+      "default": "scheme-2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "section_scheme",
+      "label": "t:sections.benefits.settings.section_scheme.label",
+      "default": "scheme-3"
+    }
   ],
   "blocks": [
     {
       "type": "benefit",
-      "name": "Benefit",
+      "name": "t:sections.benefits.blocks.benefit.name",
       "settings": [
         {
-          "type": "select", "id": "icon", "label": "Icon",
+          "type": "select",
+          "id": "icon",
+          "label": "t:sections.benefits.blocks.benefit.settings.icon.label",
           "options": [
-            { "value": "sparkle", "label": "Glow" }, { "value": "drop", "label": "Hydration" }, { "value": "leaf", "label": "Botanical" },
-            { "value": "flower", "label": "Flower" }, { "value": "sun", "label": "Brightening" }, { "value": "moon", "label": "Overnight" },
-            { "value": "shield", "label": "Barrier / tested" }, { "value": "rabbit", "label": "Cruelty-free" }, { "value": "recycle", "label": "Recyclable" },
-            { "value": "flask", "label": "Clinical" }, { "value": "clock", "label": "Long-lasting" }, { "value": "heart", "label": "Gentle" }
+            {
+              "value": "sparkle",
+              "label": "t:sections.benefits.blocks.benefit.settings.icon.options__1.label"
+            },
+            {
+              "value": "drop",
+              "label": "t:sections.benefits.blocks.benefit.settings.icon.options__2.label"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.benefits.blocks.benefit.settings.icon.options__3.label"
+            },
+            {
+              "value": "flower",
+              "label": "t:sections.benefits.blocks.benefit.settings.icon.options__4.label"
+            },
+            {
+              "value": "sun",
+              "label": "t:sections.benefits.blocks.benefit.settings.icon.options__5.label"
+            },
+            {
+              "value": "moon",
+              "label": "t:sections.benefits.blocks.benefit.settings.icon.options__6.label"
+            },
+            {
+              "value": "shield",
+              "label": "t:sections.benefits.blocks.benefit.settings.icon.options__7.label"
+            },
+            {
+              "value": "rabbit",
+              "label": "t:sections.benefits.blocks.benefit.settings.icon.options__8.label"
+            },
+            {
+              "value": "recycle",
+              "label": "t:sections.benefits.blocks.benefit.settings.icon.options__9.label"
+            },
+            {
+              "value": "flask",
+              "label": "t:sections.benefits.blocks.benefit.settings.icon.options__10.label"
+            },
+            {
+              "value": "clock",
+              "label": "t:sections.benefits.blocks.benefit.settings.icon.options__11.label"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.benefits.blocks.benefit.settings.icon.options__12.label"
+            }
           ],
           "default": "sparkle"
         },
-        { "type": "image_picker", "id": "image", "label": "Custom icon" },
-        { "type": "text", "id": "title", "label": "Title", "default": "Visible glow" },
-        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Light-catching finishes designed for an effortlessly rested look.</p>" }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.benefits.blocks.benefit.settings.image.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.benefits.blocks.benefit.settings.title.label",
+          "default": "Visible glow"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:sections.benefits.blocks.benefit.settings.text.label",
+          "default": "<p>Light-catching finishes designed for an effortlessly rested look.</p>"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Benefits",
+      "name": "t:sections.benefits.presets.presets__1.name",
       "blocks": [
-        { "type": "benefit", "settings": { "icon": "sparkle", "title": "Instant dew", "text": "<p>Light-catching hydration gives complexions a soft, glass-skin finish.</p>" } },
-        { "type": "benefit", "settings": { "icon": "drop", "title": "Deeply hydrated", "text": "<p>Multi-weight hyaluronic acid cushions skin with lasting moisture.</p>" } },
-        { "type": "benefit", "settings": { "icon": "sun", "title": "Barrier-kind", "text": "<p>A featherlight formula layers beautifully beneath makeup and SPF.</p>" } }
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Instant dew",
+            "text": "<p>Light-catching hydration gives complexions a soft, glass-skin finish.</p>"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "drop",
+            "title": "Deeply hydrated",
+            "text": "<p>Multi-weight hyaluronic acid cushions skin with lasting moisture.</p>"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "sun",
+            "title": "Barrier-kind",
+            "text": "<p>A featherlight formula layers beautifully beneath makeup and SPF.</p>"
+          }
+        }
       ]
     },
     {
-      "name": "Key benefits",
-      "settings": { "kicker": "Why it works", "heading": "Key benefits", "style": "pills", "columns": 5, "section_scheme": "scheme-1" },
+      "name": "t:sections.benefits.presets.presets__2.name",
+      "settings": {
+        "kicker": "Why it works",
+        "heading": "Key benefits",
+        "style": "pills",
+        "columns": 5,
+        "section_scheme": "scheme-1"
+      },
       "blocks": [
-        { "type": "benefit", "settings": { "icon": "drop", "title": "Hydrating", "text": "" } },
-        { "type": "benefit", "settings": { "icon": "sun", "title": "Brightening", "text": "" } },
-        { "type": "benefit", "settings": { "icon": "flower", "title": "Nourishing", "text": "" } },
-        { "type": "benefit", "settings": { "icon": "sparkle", "title": "Lightweight", "text": "" } },
-        { "type": "benefit", "settings": { "icon": "clock", "title": "Long-lasting", "text": "" } }
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "drop",
+            "title": "Hydrating",
+            "text": ""
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "sun",
+            "title": "Brightening",
+            "text": ""
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "flower",
+            "title": "Nourishing",
+            "text": ""
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Lightweight",
+            "text": ""
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "clock",
+            "title": "Long-lasting",
+            "text": ""
+          }
+        }
       ]
     }
   ]

@@ -35,60 +35,193 @@
 
 {% schema %}
 {
-  "name": "FAQ",
+  "name": "t:sections.faq.name",
   "class": "section-faq",
   "max_blocks": 16,
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "A few helpful notes" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently asked." },
-    { "type": "richtext", "id": "text", "label": "Text" },
     {
-      "type": "select", "id": "layout", "label": "Layout",
-      "options": [{ "value": "stacked", "label": "Narrow, stacked" }, { "value": "side", "label": "Heading beside questions" }],
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.faq.settings.kicker.label",
+      "default": "A few helpful notes"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.faq.settings.heading.label",
+      "default": "Frequently asked."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.faq.settings.text.label"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "t:sections.faq.settings.layout.label",
+      "options": [
+        {
+          "value": "stacked",
+          "label": "t:sections.faq.settings.layout.options__1.label"
+        },
+        {
+          "value": "side",
+          "label": "t:sections.faq.settings.layout.options__2.label"
+        }
+      ],
       "default": "stacked"
     },
     {
-      "type": "select", "id": "style", "label": "Question style",
-      "options": [{ "value": "faq", "label": "Arrow marker, sans" }, { "value": "plus", "label": "Serif with plus" }],
+      "type": "select",
+      "id": "style",
+      "label": "t:sections.faq.settings.style.label",
+      "options": [
+        {
+          "value": "faq",
+          "label": "t:sections.faq.settings.style.options__1.label"
+        },
+        {
+          "value": "plus",
+          "label": "t:sections.faq.settings.style.options__2.label"
+        }
+      ],
       "default": "faq"
     },
     {
-      "type": "select", "id": "align", "label": "Heading alignment",
-      "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }],
+      "type": "select",
+      "id": "align",
+      "label": "t:sections.faq.settings.align.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.faq.settings.align.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.faq.settings.align.options__2.label"
+        }
+      ],
       "default": "left"
     },
-    { "type": "checkbox", "id": "schema_markup", "label": "Add FAQ markup for search engines", "default": true },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+    {
+      "type": "checkbox",
+      "id": "schema_markup",
+      "label": "t:sections.faq.settings.schema_markup.label",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.faq.settings.color_scheme.label",
+      "default": "scheme-1"
+    }
   ],
   "blocks": [
     {
-      "type": "question", "name": "Question",
+      "type": "question",
+      "name": "t:sections.faq.blocks.question.name",
       "settings": [
-        { "type": "text", "id": "question", "label": "Question", "default": "How long does shipping take?" },
-        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Orders are prepared within 24 hours on business days and usually arrive in 2–5 days.</p>" },
-        { "type": "checkbox", "id": "open", "label": "Open by default", "default": false }
+        {
+          "type": "text",
+          "id": "question",
+          "label": "t:sections.faq.blocks.question.settings.question.label",
+          "default": "How long does shipping take?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "t:sections.faq.blocks.question.settings.answer.label",
+          "default": "<p>Orders are prepared within 24 hours on business days and usually arrive in 2–5 days.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "open",
+          "label": "t:sections.faq.blocks.question.settings.open.label",
+          "default": false
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "FAQ",
+      "name": "t:sections.faq.presets.presets__1.name",
       "blocks": [
-        { "type": "question", "settings": { "question": "When will my order ship?", "answer": "<p>Orders are prepared within one business day and usually arrive in 2–5 days.</p>" } },
-        { "type": "question", "settings": { "question": "What is your returns approach?", "answer": "<p>Unopened products can be returned within 30 days for a full refund.</p>" } },
-        { "type": "question", "settings": { "question": "How should I layer products?", "answer": "<p>Thinnest to thickest: cleanse, treat with serums, moisturise, then protect with SPF in the morning.</p>" } },
-        { "type": "question", "settings": { "question": "Are the formulas suitable for sensitive skin?", "answer": "<p>Each product page lists who a formula is made for. Patch test new products and check the full ingredient list.</p>" } },
-        { "type": "question", "settings": { "question": "Are you cruelty-free?", "answer": "<p>Add your brand's cruelty-free and certification details here.</p>" } },
-        { "type": "question", "settings": { "question": "How can I get order support?", "answer": "<p>Write to us any time — we reply within one business day.</p>" } }
+        {
+          "type": "question",
+          "settings": {
+            "question": "When will my order ship?",
+            "answer": "<p>Orders are prepared within one business day and usually arrive in 2–5 days.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "What is your returns approach?",
+            "answer": "<p>Unopened products can be returned within 30 days for a full refund.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "How should I layer products?",
+            "answer": "<p>Thinnest to thickest: cleanse, treat with serums, moisturise, then protect with SPF in the morning.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Are the formulas suitable for sensitive skin?",
+            "answer": "<p>Each product page lists who a formula is made for. Patch test new products and check the full ingredient list.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Are you cruelty-free?",
+            "answer": "<p>Add your brand's cruelty-free and certification details here.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "How can I get order support?",
+            "answer": "<p>Write to us any time — we reply within one business day.</p>"
+          }
+        }
       ]
     },
     {
-      "name": "Product details — FAQ",
-      "settings": { "layout": "side", "style": "plus", "kicker": "Good to know", "heading": "Every last detail.", "schema_markup": false },
+      "name": "t:sections.faq.presets.presets__2.name",
+      "settings": {
+        "layout": "side",
+        "style": "plus",
+        "kicker": "Good to know",
+        "heading": "Every last detail.",
+        "schema_markup": false
+      },
       "blocks": [
-        { "type": "question", "settings": { "question": "Full ingredient list", "answer": "<p>Connect this to the product's ingredients metafield with the dynamic-source button.</p>" } },
-        { "type": "question", "settings": { "question": "Texture + scent", "answer": "<p>Describe how the formula feels and smells.</p>" } },
-        { "type": "question", "settings": { "question": "Conscious beauty", "answer": "<p>Share packaging and sourcing details.</p>" } }
+        {
+          "type": "question",
+          "settings": {
+            "question": "Full ingredient list",
+            "answer": "<p>Connect this to the product's ingredients metafield with the dynamic-source button.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Texture + scent",
+            "answer": "<p>Describe how the formula feels and smells.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Conscious beauty",
+            "answer": "<p>Share packaging and sourcing details.</p>"
+          }
+        }
       ]
     }
   ]

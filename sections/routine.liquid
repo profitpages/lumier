@@ -51,39 +51,124 @@
 
 {% schema %}
 {
-  "name": "Complete your routine",
+  "name": "t:sections.routine.name",
   "class": "section-routine",
   "max_blocks": 4,
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Build your ritual" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "A three-step glow story." },
-    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Thoughtful layers that let your skin look calm, plush and perfectly awake.</p>" },
-    { "type": "header", "content": "Bundle card" },
-    { "type": "text", "id": "bundle_kicker", "label": "Kicker", "default": "The full ritual" },
-    { "type": "text", "id": "bundle_title", "label": "Title", "default": "Take the whole routine home." },
-    { "type": "richtext", "id": "bundle_text", "label": "Text", "info": "Mention a bundle discount only if you've set one up under Discounts." },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Add the routine" },
-    { "type": "color_scheme", "id": "bundle_scheme", "label": "Bundle card color scheme", "default": "scheme-6" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Section color scheme", "default": "scheme-1" }
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.routine.settings.kicker.label",
+      "default": "Build your ritual"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.routine.settings.heading.label",
+      "default": "A three-step glow story."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.routine.settings.text.label",
+      "default": "<p>Thoughtful layers that let your skin look calm, plush and perfectly awake.</p>"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.routine.settings.header__4.content"
+    },
+    {
+      "type": "text",
+      "id": "bundle_kicker",
+      "label": "t:sections.routine.settings.bundle_kicker.label",
+      "default": "The full ritual"
+    },
+    {
+      "type": "text",
+      "id": "bundle_title",
+      "label": "t:sections.routine.settings.bundle_title.label",
+      "default": "Take the whole routine home."
+    },
+    {
+      "type": "richtext",
+      "id": "bundle_text",
+      "label": "t:sections.routine.settings.bundle_text.label",
+      "info": "t:sections.routine.settings.bundle_text.info"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.routine.settings.button_label.label",
+      "default": "Add the routine"
+    },
+    {
+      "type": "color_scheme",
+      "id": "bundle_scheme",
+      "label": "t:sections.routine.settings.bundle_scheme.label",
+      "default": "scheme-6"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.routine.settings.color_scheme.label",
+      "default": "scheme-1"
+    }
   ],
   "blocks": [
     {
-      "type": "step", "name": "Step",
+      "type": "step",
+      "name": "t:sections.routine.blocks.step.name",
       "settings": [
-        { "type": "text", "id": "label", "label": "Step name", "default": "Cleanse" },
-        { "type": "product", "id": "product", "label": "Product" },
-        { "type": "checkbox", "id": "use_current", "label": "Use the product being viewed", "default": false, "info": "On product pages, this step shows the current product." }
+        {
+          "type": "text",
+          "id": "label",
+          "label": "t:sections.routine.blocks.step.settings.label.label",
+          "default": "Cleanse"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "t:sections.routine.blocks.step.settings.product.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_current",
+          "label": "t:sections.routine.blocks.step.settings.use_current.label",
+          "default": false,
+          "info": "t:sections.routine.blocks.step.settings.use_current.info"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Complete your routine",
+      "name": "t:sections.routine.presets.presets__1.name",
       "blocks": [
-        { "type": "step", "settings": { "label": "Cleanse" } },
-        { "type": "step", "settings": { "label": "Treat", "use_current": true } },
-        { "type": "step", "settings": { "label": "Moisturize" } },
-        { "type": "step", "settings": { "label": "Protect" } }
+        {
+          "type": "step",
+          "settings": {
+            "label": "Cleanse"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "label": "Treat",
+            "use_current": true
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "label": "Moisturize"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "label": "Protect"
+          }
+        }
       ]
     }
   ]

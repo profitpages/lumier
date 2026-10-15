@@ -26,13 +26,36 @@
 
 {% schema %}
 {
-  "name": "Blog posts",
+  "name": "t:sections.main-blog.name",
   "class": "section-main-blog",
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "The journal" },
-    { "type": "range", "id": "per_page", "label": "Posts per page", "min": 3, "max": 24, "step": 3, "default": 9 },
-    { "type": "checkbox", "id": "show_date", "label": "Show date", "default": true },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.main-blog.settings.kicker.label",
+      "default": "The journal"
+    },
+    {
+      "type": "range",
+      "id": "per_page",
+      "label": "t:sections.main-blog.settings.per_page.label",
+      "min": 3,
+      "max": 24,
+      "step": 3,
+      "default": 9
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "t:sections.main-blog.settings.show_date.label",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.main-blog.settings.color_scheme.label",
+      "default": "scheme-1"
+    }
   ]
 }
 {% endschema %}

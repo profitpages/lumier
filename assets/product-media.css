@@ -1,0 +1,47 @@
+/* Product media: fit full photographs; editorial scenes retain their own crop. */
+.card.card--adapt, .product-card.product-card--adapt { align-self: start; }
+.card[data-image-fit="contain"] .card__img,
+.product-card[data-image-fit="contain"] .product-card__img,
+.product-card[data-image-fit="contain"] .product-image img { object-fit: contain; transform: none; }
+.card.card--adapt .card__media { aspect-ratio: var(--ratio, 1); }
+.product-card .product-image[data-image-ratio="adapt"] { aspect-ratio: var(--ratio, 1); }
+.card.card--adapt .card__img,
+.product-card .product-image[data-image-ratio="adapt"] img { object-fit: contain; transform: none; }
+.gallery__slide[data-product-image-fit="contain"] .gallery__img,
+.gallery__slide[data-product-image-fit="contain"].media > img,
+.gallery-item[data-product-image-fit="contain"] img,
+.fp__main[data-product-image-fit="contain"] > img { object-fit: contain; transform: none; }
+.gallery__slide[data-product-image-fit="cover"] .gallery__img,
+.gallery__slide[data-product-image-fit="cover"].media > img,
+.fp__main[data-product-image-fit="cover"] > img { object-fit: cover; }
+.gallery__slide[data-product-image-fit="adapt"],
+.fp__main[data-product-image-fit="adapt"] { aspect-ratio: var(--product-image-ratio, 1); }
+.gallery__stage[data-product-image-fit="adapt"] { aspect-ratio: var(--product-image-ratio, 1); max-height: none; }
+.gallery__slide[data-product-image-fit="adapt"] .gallery__img,
+.gallery__slide[data-product-image-fit="adapt"].media > img,
+.fp__main[data-product-image-fit="adapt"] > img { object-fit: contain; transform: none; }
+.gallery-item[data-product-image-fit="adapt"] img { aspect-ratio: var(--product-image-ratio, 1); height: auto; object-fit: contain; }
+.gallery-item[data-product-image-fit="cover"] img { object-fit: cover; }
+.gallery__stage .gallery__thumb img,
+.gallery .gallery__thumb img,
+.gallery__thumb img,
+.product-thumbnails img,
+.fp__thumb img,
+.gallery__float img,
+.sticky-buy img,
+.pp-bundle .pp-bundle__thumb img,
+.pp-bundle .pp-bundle__look-img img,
+.cmp__media img { object-fit: contain; }
+body :is(.gallery__thumb, .product-thumbnails, .fp__thumb, .sticky-buy__media,
+  .sticky-buy__thumb, .cart-line__media, .cart-item__thumb, .cart-row,
+  .pp-upsell__media, .upsell__media, .cmp__media, .review-product,
+  .lookbook-product, .room__product, .story__product-media, .mini-product__media,
+  .ritual-product) img { object-fit: contain; }
+body.motion-on .card[data-image-fit="contain"]:hover .card__img,
+body.motion-on .card.card--adapt:hover .card__img,
+body .card[data-image-fit="contain"]:hover .card__img,
+body .card.card--adapt:hover .card__img,
+body .product-card[data-image-fit="contain"]:hover .product-image img,
+body .product-card.product-card--adapt:hover .product-card__img,
+body .gallery__slide[data-product-image-fit="contain"] .gallery__img,
+body .gallery__slide[data-product-image-fit="adapt"] .gallery__img { transform: none; }

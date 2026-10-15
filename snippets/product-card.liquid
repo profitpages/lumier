@@ -10,8 +10,10 @@
 {%- endcomment -%}
 {%- liquid
   assign card_style = style | default: settings.card_style
-  assign card_ratio = ratio | default: settings.card_ratio
+  assign card_ratio = ratio | default: settings.card_ratio | default: 'adapt'
   case card_ratio
+    when 'adapt'
+      assign ratio_value = product.featured_media.preview_image.aspect_ratio | default: product.featured_image.aspect_ratio | default: 1
     when 'portrait'
       assign ratio_value = 0.8
     when 'tall'
@@ -95,7 +97,7 @@
   {%- endif -%}
 {%- endcapture -%}
 
-<article class="card card--{{ card_style }}" data-reveal>
+<article data-image-fit="{{ settings.card_image_fit | default: 'contain' }}" class="card card--{{ card_ratio }} card--{{ card_style }}" data-reveal>
   <div class="card__media" style="--ratio: {{ ratio_value }};">
     {%- if product != blank -%}
       <a class="card__media-link" href="{{ product.url }}" tabindex="-1" aria-hidden="true">

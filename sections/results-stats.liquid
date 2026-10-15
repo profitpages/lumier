@@ -30,34 +30,95 @@
 
 {% schema %}
 {
-  "name": "Results",
+  "name": "t:sections.results-stats.name",
   "class": "section-results",
   "max_blocks": 4,
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "After four weeks" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Results you can see in the light." },
-    { "type": "checkbox", "id": "show_image", "label": "Show image", "default": true },
-    { "type": "image_picker", "id": "image", "label": "Image" },
-    { "type": "text", "id": "note", "label": "Study note", "default": "Example figures — replace with results from your own consumer or clinical study, including the number of participants and duration." },
-    { "type": "paragraph", "content": "Only publish figures from studies you have run or have the rights to cite." },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-3" }
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.results-stats.settings.kicker.label",
+      "default": "After four weeks"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.results-stats.settings.heading.label",
+      "default": "Results you can see in the light."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "label": "t:sections.results-stats.settings.show_image.label",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.results-stats.settings.image.label"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "t:sections.results-stats.settings.note.label",
+      "default": "Example figures — replace with results from your own consumer or clinical study, including the number of participants and duration."
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.results-stats.settings.paragraph__6.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.results-stats.settings.color_scheme.label",
+      "default": "scheme-3"
+    }
   ],
   "blocks": [
     {
-      "type": "stat", "name": "Result",
+      "type": "stat",
+      "name": "t:sections.results-stats.blocks.stat.name",
       "settings": [
-        { "type": "text", "id": "figure", "label": "Figure", "default": "94%" },
-        { "type": "text", "id": "label", "label": "Label", "default": "said skin felt more hydrated" }
+        {
+          "type": "text",
+          "id": "figure",
+          "label": "t:sections.results-stats.blocks.stat.settings.figure.label",
+          "default": "94%"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "t:sections.results-stats.blocks.stat.settings.label.label",
+          "default": "said skin felt more hydrated"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Results",
+      "name": "t:sections.results-stats.presets.presets__1.name",
       "blocks": [
-        { "type": "stat", "settings": { "figure": "94%", "label": "said skin felt more hydrated" } },
-        { "type": "stat", "settings": { "figure": "89%", "label": "saw a more radiant-looking finish" } },
-        { "type": "stat", "settings": { "figure": "8 hrs", "label": "of comfortable moisture" } }
+        {
+          "type": "stat",
+          "settings": {
+            "figure": "94%",
+            "label": "said skin felt more hydrated"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "figure": "89%",
+            "label": "saw a more radiant-looking finish"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "figure": "8 hrs",
+            "label": "of comfortable moisture"
+          }
+        }
       ]
     }
   ]

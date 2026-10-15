@@ -73,43 +73,159 @@
 
 {% schema %}
 {
-  "name": "AM / PM ritual",
+  "name": "t:sections.am-pm-ritual.name",
   "class": "section-am-pm",
   "max_blocks": 10,
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Morning to midnight" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "A ritual for every hour." },
-    { "type": "richtext", "id": "text", "label": "Text" },
-    { "type": "header", "content": "Morning" },
-    { "type": "text", "id": "am_title", "label": "Title", "default": "First light" },
-    { "type": "text", "id": "am_text", "label": "Intro", "default": "Fresh, protected and softly luminous." },
-    { "type": "color_scheme", "id": "am_scheme", "label": "Color scheme", "default": "scheme-2" },
-    { "type": "header", "content": "Evening" },
-    { "type": "text", "id": "pm_title", "label": "Title", "default": "After hours" },
-    { "type": "text", "id": "pm_text", "label": "Intro", "default": "Richer textures that replenish while you rest." },
-    { "type": "color_scheme", "id": "pm_scheme", "label": "Color scheme", "default": "scheme-6" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Section color scheme", "default": "scheme-1" }
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.am-pm-ritual.settings.kicker.label",
+      "default": "Morning to midnight"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.am-pm-ritual.settings.heading.label",
+      "default": "A ritual for every hour."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.am-pm-ritual.settings.text.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.am-pm-ritual.settings.header__4.content"
+    },
+    {
+      "type": "text",
+      "id": "am_title",
+      "label": "t:sections.am-pm-ritual.settings.am_title.label",
+      "default": "First light"
+    },
+    {
+      "type": "text",
+      "id": "am_text",
+      "label": "t:sections.am-pm-ritual.settings.am_text.label",
+      "default": "Fresh, protected and softly luminous."
+    },
+    {
+      "type": "color_scheme",
+      "id": "am_scheme",
+      "label": "t:sections.am-pm-ritual.settings.am_scheme.label",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.am-pm-ritual.settings.header__8.content"
+    },
+    {
+      "type": "text",
+      "id": "pm_title",
+      "label": "t:sections.am-pm-ritual.settings.pm_title.label",
+      "default": "After hours"
+    },
+    {
+      "type": "text",
+      "id": "pm_text",
+      "label": "t:sections.am-pm-ritual.settings.pm_text.label",
+      "default": "Richer textures that replenish while you rest."
+    },
+    {
+      "type": "color_scheme",
+      "id": "pm_scheme",
+      "label": "t:sections.am-pm-ritual.settings.pm_scheme.label",
+      "default": "scheme-6"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.am-pm-ritual.settings.color_scheme.label",
+      "default": "scheme-1"
+    }
   ],
   "blocks": [
     {
-      "type": "step", "name": "Step",
+      "type": "step",
+      "name": "t:sections.am-pm-ritual.blocks.step.name",
       "settings": [
-        { "type": "select", "id": "period", "label": "Routine", "options": [{ "value": "am", "label": "Morning" }, { "value": "pm", "label": "Evening" }], "default": "am" },
-        { "type": "text", "id": "label", "label": "Step name", "default": "Cleanse" },
-        { "type": "product", "id": "product", "label": "Product" }
+        {
+          "type": "select",
+          "id": "period",
+          "label": "t:sections.am-pm-ritual.blocks.step.settings.period.label",
+          "options": [
+            {
+              "value": "am",
+              "label": "t:sections.am-pm-ritual.blocks.step.settings.period.options__1.label"
+            },
+            {
+              "value": "pm",
+              "label": "t:sections.am-pm-ritual.blocks.step.settings.period.options__2.label"
+            }
+          ],
+          "default": "am"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "t:sections.am-pm-ritual.blocks.step.settings.label.label",
+          "default": "Cleanse"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "t:sections.am-pm-ritual.blocks.step.settings.product.label"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "AM / PM ritual",
+      "name": "t:sections.am-pm-ritual.presets.presets__1.name",
       "blocks": [
-        { "type": "step", "settings": { "period": "am", "label": "Cleanse" } },
-        { "type": "step", "settings": { "period": "am", "label": "Treat" } },
-        { "type": "step", "settings": { "period": "am", "label": "Protect" } },
-        { "type": "step", "settings": { "period": "pm", "label": "Melt" } },
-        { "type": "step", "settings": { "period": "pm", "label": "Restore" } },
-        { "type": "step", "settings": { "period": "pm", "label": "Seal" } }
+        {
+          "type": "step",
+          "settings": {
+            "period": "am",
+            "label": "Cleanse"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "period": "am",
+            "label": "Treat"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "period": "am",
+            "label": "Protect"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "period": "pm",
+            "label": "Melt"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "period": "pm",
+            "label": "Restore"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "period": "pm",
+            "label": "Seal"
+          }
+        }
       ]
     }
   ]

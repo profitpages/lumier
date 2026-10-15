@@ -58,72 +58,291 @@
 
 {% schema %}
 {
-  "name": "Image with text",
+  "name": "t:sections.story.name",
   "class": "section-story",
   "max_blocks": 8,
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Image" },
     {
-      "type": "select", "id": "layout", "label": "Layout",
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.story.settings.image.label"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "t:sections.story.settings.layout.label",
       "options": [
-        { "value": "corner", "label": "Curved corner" },
-        { "value": "arch", "label": "Arch with offset slab" },
-        { "value": "offset", "label": "Offset color block" },
-        { "value": "full", "label": "Full-bleed split" }
+        {
+          "value": "corner",
+          "label": "t:sections.story.settings.layout.options__1.label"
+        },
+        {
+          "value": "arch",
+          "label": "t:sections.story.settings.layout.options__2.label"
+        },
+        {
+          "value": "offset",
+          "label": "t:sections.story.settings.layout.options__3.label"
+        },
+        {
+          "value": "full",
+          "label": "t:sections.story.settings.layout.options__4.label"
+        }
       ],
       "default": "corner"
     },
-    { "type": "checkbox", "id": "image_right", "label": "Image on the right", "default": true },
-    { "type": "checkbox", "id": "show_dot", "label": "Accent dot", "default": false },
-    { "type": "text", "id": "caption", "label": "Caption chip" },
     {
-      "type": "select", "id": "art", "label": "Placeholder art",
-      "options": [{ "value": "pump", "label": "Pump" }, { "value": "serum", "label": "Serum" }, { "value": "jar", "label": "Jar" }, { "value": "portrait", "label": "Portrait" }],
+      "type": "checkbox",
+      "id": "image_right",
+      "label": "t:sections.story.settings.image_right.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dot",
+      "label": "t:sections.story.settings.show_dot.label",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "t:sections.story.settings.caption.label"
+    },
+    {
+      "type": "select",
+      "id": "art",
+      "label": "t:sections.story.settings.art.label",
+      "options": [
+        {
+          "value": "pump",
+          "label": "t:sections.story.settings.art.options__1.label"
+        },
+        {
+          "value": "serum",
+          "label": "t:sections.story.settings.art.options__2.label"
+        },
+        {
+          "value": "jar",
+          "label": "t:sections.story.settings.art.options__3.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.story.settings.art.options__4.label"
+        }
+      ],
       "default": "pump"
     },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-4" }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.story.settings.color_scheme.label",
+      "default": "scheme-4"
+    }
   ],
   "blocks": [
-    { "type": "kicker", "name": "Kicker", "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "The Lumière point of view" }] },
     {
-      "type": "heading", "name": "Heading",
+      "type": "kicker",
+      "name": "t:sections.story.blocks.kicker.name",
       "settings": [
-        { "type": "text", "id": "heading", "label": "Heading", "default": "Everyday luxury, considered." },
-        { "type": "select", "id": "size", "label": "Size", "options": [{ "value": "lg", "label": "Large" }, { "value": "sm", "label": "Small" }], "default": "lg" }
+        {
+          "type": "text",
+          "id": "text",
+          "label": "t:sections.story.blocks.kicker.settings.text.label",
+          "default": "The Lumière point of view"
+        }
       ]
     },
-    { "type": "text", "name": "Text", "settings": [{ "type": "richtext", "id": "text", "label": "Text", "default": "<p>Thoughtful formulas and considered rituals bring a little more pleasure to the everyday. We favour responsible packaging choices and lasting essentials over excess.</p>" }] },
-    { "type": "benefits", "name": "List", "settings": [{ "type": "textarea", "id": "items", "label": "Items (one per line)", "default": "Carefully considered formulas\nReusable and recyclable packaging where available\nBeauty rituals made for real life" }] },
     {
-      "type": "button", "name": "Button",
+      "type": "heading",
+      "name": "t:sections.story.blocks.heading.name",
       "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "Our story" },
-        { "type": "url", "id": "link", "label": "Link" },
-        { "type": "select", "id": "style", "label": "Style", "options": [{ "value": "outline", "label": "Outline" }, { "value": "solid", "label": "Solid" }, { "value": "link", "label": "Underlined link" }], "default": "outline" }
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.story.blocks.heading.settings.heading.label",
+          "default": "Everyday luxury, considered."
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "t:sections.story.blocks.heading.settings.size.label",
+          "options": [
+            {
+              "value": "lg",
+              "label": "t:sections.story.blocks.heading.settings.size.options__1.label"
+            },
+            {
+              "value": "sm",
+              "label": "t:sections.story.blocks.heading.settings.size.options__2.label"
+            }
+          ],
+          "default": "lg"
+        }
       ]
     },
-    { "type": "product", "name": "Featured product", "limit": 1, "settings": [{ "type": "product", "id": "product", "label": "Product" }] }
+    {
+      "type": "text",
+      "name": "t:sections.story.blocks.text.name",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:sections.story.blocks.text.settings.text.label",
+          "default": "<p>Thoughtful formulas and considered rituals bring a little more pleasure to the everyday. We favour responsible packaging choices and lasting essentials over excess.</p>"
+        }
+      ]
+    },
+    {
+      "type": "benefits",
+      "name": "t:sections.story.blocks.benefits.name",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "items",
+          "label": "t:sections.story.blocks.benefits.settings.items.label",
+          "default": "Carefully considered formulas\nReusable and recyclable packaging where available\nBeauty rituals made for real life"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "t:sections.story.blocks.button.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "t:sections.story.blocks.button.settings.label.label",
+          "default": "Our story"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.story.blocks.button.settings.link.label"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "t:sections.story.blocks.button.settings.style.label",
+          "options": [
+            {
+              "value": "outline",
+              "label": "t:sections.story.blocks.button.settings.style.options__1.label"
+            },
+            {
+              "value": "solid",
+              "label": "t:sections.story.blocks.button.settings.style.options__2.label"
+            },
+            {
+              "value": "link",
+              "label": "t:sections.story.blocks.button.settings.style.options__3.label"
+            }
+          ],
+          "default": "outline"
+        }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "t:sections.story.blocks.product.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "t:sections.story.blocks.product.settings.product.label"
+        }
+      ]
+    }
   ],
   "presets": [
-    { "name": "Brand story", "blocks": [{ "type": "kicker" }, { "type": "heading" }, { "type": "text" }, { "type": "benefits" }, { "type": "button" }] },
     {
-      "name": "Image with text — offset",
-      "settings": { "layout": "offset", "image_right": false, "art": "serum" },
+      "name": "t:sections.story.presets.presets__1.name",
       "blocks": [
-        { "type": "kicker", "settings": { "text": "Skin first" } },
-        { "type": "heading", "settings": { "heading": "Your skin, in its best light." } },
-        { "type": "text", "settings": { "text": "<p>Our skincare brings thoughtful textures, clinically minded ingredients, and the pleasure of a slow morning together.</p>" } },
-        { "type": "button", "settings": { "label": "Explore skincare" } }
+        {
+          "type": "kicker"
+        },
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "benefits"
+        },
+        {
+          "type": "button"
+        }
       ]
     },
     {
-      "name": "Image with text — full bleed",
-      "settings": { "layout": "full", "image_right": false, "art": "jar" },
+      "name": "t:sections.story.presets.presets__2.name",
+      "settings": {
+        "layout": "offset",
+        "image_right": false,
+        "art": "serum"
+      },
       "blocks": [
-        { "type": "kicker", "settings": { "text": "The Lumière standard" } },
-        { "type": "heading", "settings": { "heading": "Formulas with intention", "size": "sm" } },
-        { "type": "text", "settings": { "text": "<p>Every texture begins with an edit of efficacious botanicals, barrier-loving actives, and sensorial details worth returning to.</p>" } },
-        { "type": "button", "settings": { "label": "Explore ingredients", "style": "link" } }
+        {
+          "type": "kicker",
+          "settings": {
+            "text": "Skin first"
+          }
+        },
+        {
+          "type": "heading",
+          "settings": {
+            "heading": "Your skin, in its best light."
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "<p>Our skincare brings thoughtful textures, clinically minded ingredients, and the pleasure of a slow morning together.</p>"
+          }
+        },
+        {
+          "type": "button",
+          "settings": {
+            "label": "Explore skincare"
+          }
+        }
+      ]
+    },
+    {
+      "name": "t:sections.story.presets.presets__3.name",
+      "settings": {
+        "layout": "full",
+        "image_right": false,
+        "art": "jar"
+      },
+      "blocks": [
+        {
+          "type": "kicker",
+          "settings": {
+            "text": "The Lumière standard"
+          }
+        },
+        {
+          "type": "heading",
+          "settings": {
+            "heading": "Formulas with intention",
+            "size": "sm"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "<p>Every texture begins with an edit of efficacious botanicals, barrier-loving actives, and sensorial details worth returning to.</p>"
+          }
+        },
+        {
+          "type": "button",
+          "settings": {
+            "label": "Explore ingredients",
+            "style": "link"
+          }
+        }
       ]
     }
   ]

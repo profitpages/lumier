@@ -124,7 +124,8 @@
     },
     "use_signature_fonts": true,
     "cart_type": "drawer",
-    "free_shipping_threshold": 75
+    "free_shipping_threshold": 75,
+    "cart_reassurance": ""
   },
   "presets": {
     "Default": {
@@ -252,7 +253,8 @@
       },
       "use_signature_fonts": true,
       "cart_type": "drawer",
-      "free_shipping_threshold": 75
+      "free_shipping_threshold": 75,
+      "cart_reassurance": ""
     }
   }
 }

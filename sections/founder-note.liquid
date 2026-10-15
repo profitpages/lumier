@@ -25,19 +25,66 @@
 
 {% schema %}
 {
-  "name": "Founder's note",
+  "name": "t:sections.founder-note.name",
   "class": "section-founder-note",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Portrait" },
-    { "type": "checkbox", "id": "image_right", "label": "Portrait on the right", "default": false },
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "A note from our founder" },
-    { "type": "richtext", "id": "text", "label": "Letter", "default": "<p>I started Lumière because the most luxurious part of my day was never the products themselves — it was the quiet five minutes I gave myself with them. Every formula is made to protect that moment.</p>" },
-    { "type": "text", "id": "signature", "label": "Signature", "default": "With warmth," },
-    { "type": "text", "id": "name", "label": "Name & role", "default": "Your name, Founder" },
-    { "type": "text", "id": "button_label", "label": "Link label", "default": "Read our story" },
-    { "type": "url", "id": "button_link", "label": "Link" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-4" }
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.founder-note.settings.image.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "image_right",
+      "label": "t:sections.founder-note.settings.image_right.label",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.founder-note.settings.kicker.label",
+      "default": "A note from our founder"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.founder-note.settings.text.label",
+      "default": "<p>I started Lumière because the most luxurious part of my day was never the products themselves — it was the quiet five minutes I gave myself with them. Every formula is made to protect that moment.</p>"
+    },
+    {
+      "type": "text",
+      "id": "signature",
+      "label": "t:sections.founder-note.settings.signature.label",
+      "default": "With warmth,"
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "t:sections.founder-note.settings.name.label",
+      "default": "Your name, Founder"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.founder-note.settings.button_label.label",
+      "default": "Read our story"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.founder-note.settings.button_link.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.founder-note.settings.color_scheme.label",
+      "default": "scheme-4"
+    }
   ],
-  "presets": [{ "name": "Founder's note" }]
+  "presets": [
+    {
+      "name": "t:sections.founder-note.presets.presets__1.name"
+    }
+  ]
 }
 {% endschema %}

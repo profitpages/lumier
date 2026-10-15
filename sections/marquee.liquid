@@ -17,43 +17,132 @@
 
 {% schema %}
 {
-  "name": "Scrolling text",
+  "name": "t:sections.marquee.name",
   "class": "section-marquee",
   "max_blocks": 10,
   "settings": [
-    { "type": "text", "id": "label", "label": "Accessible name", "default": "Brand promises" },
     {
-      "type": "select", "id": "separator", "label": "Separator",
-      "options": [{ "value": "sparkle", "label": "Sparkle" }, { "value": "flower", "label": "Flower" }, { "value": "dot", "label": "Dot" }, { "value": "leaf", "label": "Leaf" }],
+      "type": "text",
+      "id": "label",
+      "label": "t:sections.marquee.settings.label.label",
+      "default": "Brand promises"
+    },
+    {
+      "type": "select",
+      "id": "separator",
+      "label": "t:sections.marquee.settings.separator.label",
+      "options": [
+        {
+          "value": "sparkle",
+          "label": "t:sections.marquee.settings.separator.options__1.label"
+        },
+        {
+          "value": "flower",
+          "label": "t:sections.marquee.settings.separator.options__2.label"
+        },
+        {
+          "value": "dot",
+          "label": "t:sections.marquee.settings.separator.options__3.label"
+        },
+        {
+          "value": "leaf",
+          "label": "t:sections.marquee.settings.separator.options__4.label"
+        }
+      ],
       "default": "sparkle"
     },
-    { "type": "checkbox", "id": "serif", "label": "Large serif text", "default": true },
-    { "type": "range", "id": "speed", "label": "Loop duration (higher = slower)", "min": 16, "max": 80, "step": 4, "unit": "s", "default": 40 },
     {
-      "type": "select", "id": "direction", "label": "Direction",
-      "options": [{ "value": "left", "label": "Left" }, { "value": "right", "label": "Right" }],
+      "type": "checkbox",
+      "id": "serif",
+      "label": "t:sections.marquee.settings.serif.label",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "t:sections.marquee.settings.speed.label",
+      "min": 16,
+      "max": 80,
+      "step": 4,
+      "unit": "s",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "t:sections.marquee.settings.direction.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.marquee.settings.direction.options__1.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.marquee.settings.direction.options__2.label"
+        }
+      ],
       "default": "left"
     },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-4" }
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.marquee.settings.color_scheme.label",
+      "default": "scheme-4"
+    }
   ],
   "blocks": [
     {
-      "type": "item", "name": "Text",
+      "type": "item",
+      "name": "t:sections.marquee.blocks.item.name",
       "settings": [
-        { "type": "text", "id": "text", "label": "Text", "default": "Dermatologist tested" },
-        { "type": "url", "id": "link", "label": "Link" }
+        {
+          "type": "text",
+          "id": "text",
+          "label": "t:sections.marquee.blocks.item.settings.text.label",
+          "default": "Dermatologist tested"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.marquee.blocks.item.settings.link.label"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Scrolling text",
+      "name": "t:sections.marquee.presets.presets__1.name",
       "blocks": [
-        { "type": "item", "settings": { "text": "Dermatologist tested" } },
-        { "type": "item", "settings": { "text": "Fragrance-free formulas" } },
-        { "type": "item", "settings": { "text": "Cruelty-free, always" } },
-        { "type": "item", "settings": { "text": "Two samples with every order" } },
-        { "type": "item", "settings": { "text": "Recyclable glass" } }
+        {
+          "type": "item",
+          "settings": {
+            "text": "Dermatologist tested"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "Fragrance-free formulas"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "Cruelty-free, always"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "Two samples with every order"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "Recyclable glass"
+          }
+        }
       ]
     }
   ]

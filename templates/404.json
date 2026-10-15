@@ -21,7 +21,7 @@
         "panel": false,
         "color_scheme": "scheme-1",
         "card_style": "editorial",
-        "image_ratio": "square",
+        "image_ratio": "adapt",
         "show_vendor": false,
         "show_rating": true,
         "show_badges": true,

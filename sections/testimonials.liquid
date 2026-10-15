@@ -78,65 +78,194 @@
 
 {% schema %}
 {
-  "name": "Testimonials",
+  "name": "t:sections.testimonials.name",
   "class": "section-testimonials",
   "max_blocks": 9,
   "settings": [
     {
-      "type": "select", "id": "layout", "label": "Layout",
+      "type": "select",
+      "id": "layout",
+      "label": "t:sections.testimonials.settings.layout.label",
       "options": [
-        { "value": "community", "label": "Community (quote slider + photos)" },
-        { "value": "cards", "label": "Cards" },
-        { "value": "single", "label": "Single quote band" }
+        {
+          "value": "community",
+          "label": "t:sections.testimonials.settings.layout.options__1.label"
+        },
+        {
+          "value": "cards",
+          "label": "t:sections.testimonials.settings.layout.options__2.label"
+        },
+        {
+          "value": "single",
+          "label": "t:sections.testimonials.settings.layout.options__3.label"
+        }
       ],
       "default": "community"
     },
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Notes from our community" },
-    { "type": "text", "id": "heading", "label": "Heading (cards layout)", "default": "Loved in every light." },
-    { "type": "text", "id": "summary", "label": "Summary line (cards layout)", "info": "Optional, e.g. your real average from your reviews app." },
-    { "type": "header", "content": "Community photos" },
-    { "type": "image_picker", "id": "image_1", "label": "Photo 1" },
-    { "type": "image_picker", "id": "image_2", "label": "Photo 2" },
-    { "type": "image_picker", "id": "image_3", "label": "Photo 3" },
-    { "type": "text", "id": "cta_label", "label": "Tile label", "default": "Shop the look" },
-    { "type": "url", "id": "cta_link", "label": "Tile link" },
-    { "type": "paragraph", "content": "Please use genuine customer words only. For product reviews, use the Reviews section with your review app." },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-6" }
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.testimonials.settings.kicker.label",
+      "default": "Notes from our community"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.testimonials.settings.heading.label",
+      "default": "Loved in every light."
+    },
+    {
+      "type": "text",
+      "id": "summary",
+      "label": "t:sections.testimonials.settings.summary.label",
+      "info": "t:sections.testimonials.settings.summary.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.testimonials.settings.header__5.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "t:sections.testimonials.settings.image_1.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "t:sections.testimonials.settings.image_2.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "t:sections.testimonials.settings.image_3.label"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "t:sections.testimonials.settings.cta_label.label",
+      "default": "Shop the look"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "t:sections.testimonials.settings.cta_link.label"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.testimonials.settings.paragraph__11.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.testimonials.settings.color_scheme.label",
+      "default": "scheme-6"
+    }
   ],
   "blocks": [
     {
-      "type": "quote", "name": "Testimonial",
+      "type": "quote",
+      "name": "t:sections.testimonials.blocks.quote.name",
       "settings": [
-        { "type": "textarea", "id": "quote", "label": "Quote", "default": "The kind of beauty ritual that makes an ordinary Tuesday feel like an occasion." },
-        { "type": "text", "id": "author", "label": "Name", "default": "Maya R." },
-        { "type": "text", "id": "detail", "label": "Detail", "default": "Verified customer" },
-        { "type": "range", "id": "stars", "label": "Stars", "min": 0, "max": 5, "step": 1, "default": 5 },
-        { "type": "image_picker", "id": "avatar", "label": "Photo" },
-        { "type": "product", "id": "product", "label": "Product reviewed" }
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "t:sections.testimonials.blocks.quote.settings.quote.label",
+          "default": "The kind of beauty ritual that makes an ordinary Tuesday feel like an occasion."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "t:sections.testimonials.blocks.quote.settings.author.label",
+          "default": "Maya R."
+        },
+        {
+          "type": "text",
+          "id": "detail",
+          "label": "t:sections.testimonials.blocks.quote.settings.detail.label",
+          "default": "Verified customer"
+        },
+        {
+          "type": "range",
+          "id": "stars",
+          "label": "t:sections.testimonials.blocks.quote.settings.stars.label",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "t:sections.testimonials.blocks.quote.settings.avatar.label"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "t:sections.testimonials.blocks.quote.settings.product.label"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Testimonials — community",
+      "name": "t:sections.testimonials.presets.presets__1.name",
       "blocks": [
-        { "type": "quote" },
-        { "type": "quote", "settings": { "quote": "It disappears into my skin but leaves the most beautiful veil beneath makeup.", "author": "Leena S." } }
+        {
+          "type": "quote"
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "It disappears into my skin but leaves the most beautiful veil beneath makeup.",
+            "author": "Leena S."
+          }
+        }
       ]
     },
     {
-      "name": "Testimonials — cards",
-      "settings": { "layout": "cards", "kicker": "Luminous words", "color_scheme": "scheme-1" },
+      "name": "t:sections.testimonials.presets.presets__2.name",
+      "settings": {
+        "layout": "cards",
+        "kicker": "Luminous words",
+        "color_scheme": "scheme-1"
+      },
       "blocks": [
-        { "type": "quote", "settings": { "quote": "The glow is refined — my skin simply looks rested, hydrated and expensive.", "author": "Maya R.", "detail": "Verified buyer" } },
-        { "type": "quote", "settings": { "quote": "It disappears into my skin but leaves the most beautiful veil beneath makeup.", "author": "Leena S.", "detail": "Verified buyer" } },
-        { "type": "quote", "settings": { "quote": "My dry skin drinks this up. It has become the step I never skip.", "author": "Amelia K.", "detail": "Verified buyer" } }
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "The glow is refined — my skin simply looks rested, hydrated and expensive.",
+            "author": "Maya R.",
+            "detail": "Verified buyer"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "It disappears into my skin but leaves the most beautiful veil beneath makeup.",
+            "author": "Leena S.",
+            "detail": "Verified buyer"
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "My dry skin drinks this up. It has become the step I never skip.",
+            "author": "Amelia K.",
+            "detail": "Verified buyer"
+          }
+        }
       ]
     },
     {
-      "name": "Quote band",
-      "settings": { "layout": "single" },
-      "blocks": [{ "type": "quote" }]
+      "name": "t:sections.testimonials.presets.presets__3.name",
+      "settings": {
+        "layout": "single"
+      },
+      "blocks": [
+        {
+          "type": "quote"
+        }
+      ]
     }
   ]
 }

@@ -27,18 +27,63 @@
 
 {% schema %}
 {
-  "name": "Blog posts",
+  "name": "t:sections.blog-posts.name",
   "class": "section-blog-posts",
   "settings": [
-    { "type": "blog", "id": "blog", "label": "Blog" },
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Notes from the journal" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Small rituals, considered." },
-    { "type": "richtext", "id": "text", "label": "Text" },
-    { "type": "text", "id": "link_label", "label": "Link label", "default": "Read the journal" },
-    { "type": "range", "id": "limit", "label": "Posts", "min": 2, "max": 6, "step": 1, "default": 3 },
-    { "type": "checkbox", "id": "show_date", "label": "Show date", "default": false },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "t:sections.blog-posts.settings.blog.label"
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.blog-posts.settings.kicker.label",
+      "default": "Notes from the journal"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.blog-posts.settings.heading.label",
+      "default": "Small rituals, considered."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.blog-posts.settings.text.label"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "t:sections.blog-posts.settings.link_label.label",
+      "default": "Read the journal"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "t:sections.blog-posts.settings.limit.label",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "t:sections.blog-posts.settings.show_date.label",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.blog-posts.settings.color_scheme.label",
+      "default": "scheme-1"
+    }
   ],
-  "presets": [{ "name": "Blog posts" }]
+  "presets": [
+    {
+      "name": "t:sections.blog-posts.presets.presets__1.name"
+    }
+  ]
 }
 {% endschema %}

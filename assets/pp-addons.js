@@ -67,11 +67,16 @@
   }
   // Applying a discount code: Shopify stores it for the checkout when this URL is visited.
   function applyDiscount(code) {
-    if (!code) return Promise.resolve();
-    return fetch(url("/discount/" + encodeURIComponent(code)), { credentials: "same-origin", redirect: "follow" }).catch(function () {});
+    if (!code) return Promise.reject(new Error("Your items were added, but the discount could not be applied. Please contact the store before checking out."));
+    return fetch(url("/discount/" + encodeURIComponent(code)), { credentials: "same-origin", redirect: "follow" }).then(function (res) {
+      if (!res.ok) throw new Error("Your items were added, but the discount could not be applied. Please contact the store before checking out.");
+    });
   }
   function proxy(path, body) {
-    return fetch(url("/apps/pages" + path), { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then(json);
+    return fetch(url("/apps/pages" + path), { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then(json).then(function (data) {
+      if (data.success === false) throw new Error(data.error || "The offer is currently unavailable.");
+      return data;
+    });
   }
   function refreshed() { return cartGet().then(function (cart) { emit("pp:cart-updated", { cart: cart }); return cart; }); }
 
@@ -79,7 +84,10 @@
   document.addEventListener("submit", function (e) {
     var form = e.target;
     if (!form || !form.matches || !form.matches('form[action*="/cart/add"]')) return;
-    var qb = form.querySelector("[data-pp-qb]") || (form.id && document.querySelector('[data-pp-qb][data-form="' + form.id + '"]'));
+    // Shopify's hidden input named "id" shadows HTMLFormElement.id.
+    // Read the attribute so external quantity selectors find their real form.
+    var formId = form.getAttribute("id");
+    var qb = form.querySelector("[data-pp-qb]") || (formId && Array.prototype.find.call(document.querySelectorAll("[data-pp-qb]"), function (el) { return el.getAttribute("data-form") === formId; }));
     if (!qb) return;
     var tier = qb.querySelector("[data-pp-qb-tier]:checked");
     if (!tier) return;
@@ -89,6 +97,7 @@
     if (!idInput) return;
     e.preventDefault();
     e.stopImmediatePropagation();
+    if (form.getAttribute("aria-busy") === "true") return;
     var variantId = idInput.value;
     // Keep what else the form carries: a subscription plan, line-item properties (engraving, notes).
     var item = { id: variantId, quantity: qty };
@@ -101,12 +110,11 @@
     });
     if (Object.keys(props).length) item.properties = props;
     form.setAttribute("aria-busy", "true");
-    cartAdd([item])
-      .then(function (added) {
-        if (!discounted) return added;
-        return proxy("/quantity-breaks/" + encodeURIComponent(qb.getAttribute("data-handle")), { variantId: variantId, quantity: qty })
-          .then(function (r) { return applyDiscount(r && r.code); })
-          .then(function () { return added; });
+    var offerCode = discounted
+      ? proxy("/quantity-breaks/" + encodeURIComponent(qb.getAttribute("data-handle")), { variantId: variantId, quantity: qty }).then(function (r) { if (!r.code) throw new Error("The offer is currently unavailable."); return r.code; })
+      : Promise.resolve(null);
+    offerCode.then(function (code) {
+        return cartAdd([item]).then(function (added) { return code ? applyDiscount(code).then(function () { return added; }) : added; });
       })
       .then(function (added) { emit("pp:added", { items: added.items || [added] }); return refreshed(); })
       .catch(function (err) { emit("pp:error", { message: err.message }); })
@@ -146,8 +154,63 @@
     set("[data-pp-bundle-total]", formatMoney(total - off, fmt));
     set("[data-pp-bundle-compare]", formatMoney(total, fmt), off === 0);
     set("[data-pp-bundle-count]", String(boxes.length));
-    Array.prototype.forEach.call(wrap.querySelectorAll("[data-pp-bundle-add]"), function (b) { b.disabled = boxes.length === 0; });
+    var anchor = wrap.querySelector("[data-pp-bundle-anchor]");
+    Array.prototype.forEach.call(wrap.querySelectorAll("[data-pp-bundle-add]"), function (b) { b.disabled = boxes.length === 0 || Boolean(anchor && anchor.getAttribute("data-unavailable") === "true"); });
   }
+  // Product pickers update their own hidden variant input. Re-read it after
+  // their change handlers run, keeping tier prices and the bundle anchor in
+  // sync without coupling the add-ons to any theme's custom elements.
+  function syncProductOffers() {
+    Array.prototype.forEach.call(document.querySelectorAll("[data-pp-product-variants]"), function (data) {
+      var wrap = data.closest("[data-pp-qb], [data-pp-bundle]");
+      if (!wrap) return;
+      var variants;
+      try { variants = JSON.parse(data.textContent); } catch (_) { return; }
+      var scope = wrap.closest(".shopify-section") || wrap.closest("section") || document;
+      var form = wrap.getAttribute("data-form") && document.getElementById(wrap.getAttribute("data-form"));
+      var forms = form ? [form] : scope.querySelectorAll('form[action*="/cart/add"]');
+      var variant = null;
+      Array.prototype.some.call(forms, function (f) {
+        var input = f.querySelector('[name="id"]');
+        if (!input) return false;
+        variant = variants.find(function (v) { return String(v.id) === String(input.value); });
+        return Boolean(variant);
+      });
+      if (!variant) return;
+      var fmt = wrap.getAttribute("data-money-format");
+      var anchor = wrap.querySelector("[data-pp-bundle-anchor]");
+      if (anchor) {
+        anchor.value = variant.id;
+        anchor.checked = Boolean(variant.available);
+        anchor.setAttribute("data-unavailable", variant.available ? "false" : "true");
+        anchor.setAttribute("data-pp-price", variant.price);
+        var row = anchor.closest("[data-pp-bundle-row]");
+        var price = row && row.querySelector("[data-pp-bundle-price]");
+        if (price) price.textContent = formatMoney(variant.price, fmt);
+        bundleTotals(wrap);
+      }
+      Array.prototype.forEach.call(wrap.querySelectorAll("[data-pp-qb-tier]"), function (tier) {
+        var qty = parseInt(tier.value, 10) || 1;
+        var full = variant.price * qty;
+        var value = parseFloat(tier.getAttribute("data-discount") || "0");
+        var off = tier.getAttribute("data-discount-type") === "fixed" ? Math.round(value * 100) : Math.round(full * value / 100);
+        off = Math.min(off, full);
+        var label = tier.closest("label") || (tier.labels && tier.labels[0]);
+        if (!label) return;
+        var pay = label.querySelector(".pp-qb__price strong") || label.querySelector(".pp-qb__price");
+        var compare = label.querySelector(".pp-qb__price s, .pp-qb__was");
+        var each = label.querySelector(".pp-qb__each");
+        var saving = label.querySelector(".pp-qb__save");
+        if (pay) pay.textContent = formatMoney(full - off, fmt);
+        if (compare) { compare.textContent = formatMoney(full, fmt); compare.hidden = !off; }
+        if (each && wrap.getAttribute("data-each-format")) each.textContent = wrap.getAttribute("data-each-format").replace("__PP_PRICE__", formatMoney((full - off) / qty, fmt));
+        if (saving && wrap.getAttribute("data-save-format")) saving.textContent = wrap.getAttribute("data-save-format").replace("__PP_PRICE__", formatMoney(off, fmt));
+      });
+    });
+  }
+  document.addEventListener("change", function () { setTimeout(syncProductOffers, 0); });
+  document.addEventListener("variant:change", function () { setTimeout(syncProductOffers, 0); });
+  document.addEventListener("variant:changed", function () { setTimeout(syncProductOffers, 0); });
   document.addEventListener("change", function (e) {
     var wrap = e.target.closest && e.target.closest("[data-pp-bundle]");
     if (!wrap) return;
@@ -172,20 +235,23 @@
     var wrap = btn.closest("[data-pp-bundle]");
     if (!wrap) return;
     e.preventDefault();
+    if (btn.getAttribute("aria-busy") === "true") return;
+    syncProductOffers();
+    if (btn.disabled) return;
     var ids = Array.prototype.map.call(wrap.querySelectorAll("[data-pp-bundle-item]:checked"), function (i) { return i.value; });
     if (!ids.length) return;
     btn.setAttribute("aria-busy", "true");
     btn.disabled = true;
-    cartAdd(ids.map(function (id) { return { id: id, quantity: 1 }; }))
-      .then(function (added) {
-        if (ids.length < 2) return added;
-        return proxy("/upsells/" + encodeURIComponent(wrap.getAttribute("data-handle")), { selectedVariantIds: ids })
-          .then(function (r) { return applyDiscount(r && r.code); })
-          .then(function () { return added; });
+    var discounted = ids.length >= 2 && parseFloat(wrap.getAttribute("data-discount-value") || "0") > 0;
+    var offerCode = discounted
+      ? proxy("/upsells/" + encodeURIComponent(wrap.getAttribute("data-handle")), { selectedVariantIds: ids }).then(function (r) { if (!r.code) throw new Error("The offer is currently unavailable."); return r.code; })
+      : Promise.resolve(null);
+    offerCode.then(function (code) {
+        return cartAdd(ids.map(function (id) { return { id: id, quantity: 1 }; })).then(function (added) { return code ? applyDiscount(code).then(function () { return added; }) : added; });
       })
       .then(function (added) { emit("pp:added", { items: added.items || [] }); return refreshed(); })
       .catch(function (err) { emit("pp:error", { message: err.message }); })
-      .then(function () { btn.removeAttribute("aria-busy"); btn.disabled = false; });
+      .then(function () { btn.removeAttribute("aria-busy"); bundleTotals(wrap); });
   });
 
   // ── Reviews: load more ─────────────────────────────────────────────────────
@@ -267,10 +333,11 @@
     Array.prototype.forEach.call((scope || document).querySelectorAll("[data-pp-timer]:not([data-pp-ticking])"), function (el) {
       el.setAttribute("data-pp-ticking", "");
       var key = "pp-timer-end";
-      var end = parseInt(sessionStorage.getItem(key) || "0", 10);
+      var end = 0;
+      try { end = parseInt(sessionStorage.getItem(key) || "0", 10); } catch (err) { /* Storage can be blocked; the timer still runs on this page. */ }
       if (!end || end < Date.now()) {
         end = Date.now() + (parseInt(el.getAttribute("data-minutes"), 10) || 10) * 60000;
-        try { sessionStorage.setItem(key, String(end)); } catch (err) {}
+        try { sessionStorage.setItem(key, String(end)); } catch (err) { /* Keep the countdown in memory when storage is blocked. */ }
       }
       var tick = function () {
         var left = Math.max(0, end - Date.now());
@@ -300,8 +367,8 @@
       .then(function () { giftBusy = false; });
   }
   document.addEventListener("pp:cart-updated", function (e) { syncGift(e.detail && e.detail.cart); startTimers(); });
-  document.addEventListener("DOMContentLoaded", function () { startTimers(); });
-  if (document.readyState !== "loading") startTimers();
+  document.addEventListener("DOMContentLoaded", function () { startTimers(); syncProductOffers(); });
+  if (document.readyState !== "loading") { startTimers(); syncProductOffers(); }
 
   // The theme re-renders its cart drawer after its own cart changes (add to bag,
   // quantity, remove) without telling us. When fresh add-on markup appears,
@@ -310,13 +377,14 @@
   new MutationObserver(function (mutations) {
     var fresh = mutations.some(function (m) {
       return Array.prototype.some.call(m.addedNodes, function (n) {
-        return n.nodeType === 1 && (n.matches("[data-pp-timer], [data-pp-gift]") || n.querySelector("[data-pp-timer], [data-pp-gift]"));
+        return n.nodeType === 1 && (n.matches("[data-pp-timer], [data-pp-gift], [data-pp-bundle], [data-pp-qb]") || n.querySelector("[data-pp-timer], [data-pp-gift], [data-pp-bundle], [data-pp-qb]"));
       });
     });
     if (!fresh) return;
     clearTimeout(watchTimer);
     watchTimer = setTimeout(function () {
       startTimers();
+      syncProductOffers();
       if (document.querySelector("[data-pp-gift]") && !giftBusy) cartGet().then(syncGift).catch(function () {});
     }, 150);
   }).observe(document.documentElement, { childList: true, subtree: true });

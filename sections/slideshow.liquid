@@ -53,49 +53,189 @@
 
 {% schema %}
 {
-  "name": "Slideshow",
+  "name": "t:sections.slideshow.name",
   "class": "section-slideshow",
   "max_blocks": 5,
   "settings": [
-    { "type": "text", "id": "label", "label": "Accessible name", "default": "Featured rituals" },
-    { "type": "checkbox", "id": "autoplay", "label": "Auto-rotate slides", "default": true },
-    { "type": "range", "id": "interval", "label": "Change every", "min": 3, "max": 10, "step": 1, "unit": "s", "default": 6 }
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:sections.slideshow.settings.label.label",
+      "default": "Featured rituals"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "t:sections.slideshow.settings.autoplay.label",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "interval",
+      "label": "t:sections.slideshow.settings.interval.label",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 6
+    }
   ],
   "blocks": [
     {
-      "type": "slide", "name": "Slide",
+      "type": "slide",
+      "name": "t:sections.slideshow.blocks.slide.name",
       "settings": [
-        { "type": "text", "id": "kicker", "label": "Kicker", "default": "New ritual" },
-        { "type": "text", "id": "heading", "label": "Heading", "default": "Skin, lit from within." },
-        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Layered skincare for the little rituals that make every day feel luminous.</p>" },
-        { "type": "text", "id": "button_label", "label": "Primary button", "default": "Shop now" },
-        { "type": "url", "id": "button_link", "label": "Primary link" },
-        { "type": "text", "id": "button2_label", "label": "Secondary button" },
-        { "type": "url", "id": "button2_link", "label": "Secondary link" },
-        { "type": "image_picker", "id": "image", "label": "Image" },
         {
-          "type": "select", "id": "art", "label": "Default art (no image)",
-          "options": [{ "value": "serum", "label": "Serum" }, { "value": "jar", "label": "Jar" }, { "value": "pump", "label": "Pump" }, { "value": "lipstick", "label": "Lipstick" }, { "value": "compact", "label": "Compact" }, { "value": "tube", "label": "Tube" }],
+          "type": "text",
+          "id": "kicker",
+          "label": "t:sections.slideshow.blocks.slide.settings.kicker.label",
+          "default": "New ritual"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.slideshow.blocks.slide.settings.heading.label",
+          "default": "Skin, lit from within."
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:sections.slideshow.blocks.slide.settings.text.label",
+          "default": "<p>Layered skincare for the little rituals that make every day feel luminous.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "t:sections.slideshow.blocks.slide.settings.button_label.label",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:sections.slideshow.blocks.slide.settings.button_link.label"
+        },
+        {
+          "type": "text",
+          "id": "button2_label",
+          "label": "t:sections.slideshow.blocks.slide.settings.button2_label.label"
+        },
+        {
+          "type": "url",
+          "id": "button2_link",
+          "label": "t:sections.slideshow.blocks.slide.settings.button2_link.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.slideshow.blocks.slide.settings.image.label"
+        },
+        {
+          "type": "select",
+          "id": "art",
+          "label": "t:sections.slideshow.blocks.slide.settings.art.label",
+          "options": [
+            {
+              "value": "serum",
+              "label": "t:sections.slideshow.blocks.slide.settings.art.options__1.label"
+            },
+            {
+              "value": "jar",
+              "label": "t:sections.slideshow.blocks.slide.settings.art.options__2.label"
+            },
+            {
+              "value": "pump",
+              "label": "t:sections.slideshow.blocks.slide.settings.art.options__3.label"
+            },
+            {
+              "value": "lipstick",
+              "label": "t:sections.slideshow.blocks.slide.settings.art.options__4.label"
+            },
+            {
+              "value": "compact",
+              "label": "t:sections.slideshow.blocks.slide.settings.art.options__5.label"
+            },
+            {
+              "value": "tube",
+              "label": "t:sections.slideshow.blocks.slide.settings.art.options__6.label"
+            }
+          ],
           "default": "serum"
         },
         {
-          "type": "select", "id": "tone", "label": "Art tone",
-          "options": [{ "value": "blush", "label": "Blush" }, { "value": "lilac", "label": "Lilac" }, { "value": "peach", "label": "Peach" }, { "value": "sand", "label": "Sand" }],
+          "type": "select",
+          "id": "tone",
+          "label": "t:sections.slideshow.blocks.slide.settings.tone.label",
+          "options": [
+            {
+              "value": "blush",
+              "label": "t:sections.slideshow.blocks.slide.settings.tone.options__1.label"
+            },
+            {
+              "value": "lilac",
+              "label": "t:sections.slideshow.blocks.slide.settings.tone.options__2.label"
+            },
+            {
+              "value": "peach",
+              "label": "t:sections.slideshow.blocks.slide.settings.tone.options__3.label"
+            },
+            {
+              "value": "sand",
+              "label": "t:sections.slideshow.blocks.slide.settings.tone.options__4.label"
+            }
+          ],
           "default": "blush"
         },
-        { "type": "text", "id": "badge", "label": "Tilted badge" },
-        { "type": "checkbox", "id": "art_left", "label": "Image on the left", "default": false },
-        { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "t:sections.slideshow.blocks.slide.settings.badge.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "art_left",
+          "label": "t:sections.slideshow.blocks.slide.settings.art_left.label",
+          "default": false
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "t:sections.slideshow.blocks.slide.settings.color_scheme.label",
+          "default": "scheme-1"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Slideshow",
+      "name": "t:sections.slideshow.presets.presets__1.name",
       "blocks": [
-        { "type": "slide", "settings": { "badge": "New · Rose Dew" } },
-        { "type": "slide", "settings": { "kicker": "The night edit", "heading": "Rest, repair, wake luminous.", "art": "jar", "tone": "lilac", "art_left": true, "color_scheme": "scheme-3" } },
-        { "type": "slide", "settings": { "kicker": "Soft-focus colour", "heading": "A flush of something beautiful.", "art": "compact", "tone": "peach", "color_scheme": "scheme-4" } }
+        {
+          "type": "slide",
+          "settings": {
+            "badge": "New · Rose Dew"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "kicker": "The night edit",
+            "heading": "Rest, repair, wake luminous.",
+            "art": "jar",
+            "tone": "lilac",
+            "art_left": true,
+            "color_scheme": "scheme-3"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "kicker": "Soft-focus colour",
+            "heading": "A flush of something beautiful.",
+            "art": "compact",
+            "tone": "peach",
+            "color_scheme": "scheme-4"
+          }
+        }
       ]
     }
   ]

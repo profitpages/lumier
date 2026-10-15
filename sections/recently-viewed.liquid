@@ -9,15 +9,47 @@
 
 {% schema %}
 {
-  "name": "Recently viewed",
+  "name": "t:sections.recently-viewed.name",
   "class": "section-recently-viewed",
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Continue your ritual" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Recently viewed" },
-    { "type": "text", "id": "link_label", "label": "Link label", "default": "Shop all" },
-    { "type": "range", "id": "limit", "label": "Products", "min": 2, "max": 6, "step": 1, "default": 4 },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-4" }
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.recently-viewed.settings.kicker.label",
+      "default": "Continue your ritual"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.recently-viewed.settings.heading.label",
+      "default": "Recently viewed"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "t:sections.recently-viewed.settings.link_label.label",
+      "default": "Shop all"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "t:sections.recently-viewed.settings.limit.label",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.recently-viewed.settings.color_scheme.label",
+      "default": "scheme-4"
+    }
   ],
-  "presets": [{ "name": "Recently viewed" }]
+  "presets": [
+    {
+      "name": "t:sections.recently-viewed.presets.presets__1.name"
+    }
+  ]
 }
 {% endschema %}

@@ -53,7 +53,8 @@
     </script>
 
     {{ content_for_header }}
-  </head>
+    {{ 'product-media.css' | asset_url | stylesheet_tag }}
+</head>
 
   <body class="color-scheme-1 template-{{ template.name | handle }}{% if settings.reveal_enable %} has-reveal{% endif %}{% if settings.float_enable %} has-float{% endif %}{% unless settings.decor_enable %} no-decor{% endunless %}{% if settings.grain_enable %} has-grain{% endif %}">
     <a class="skip-link" href="#MainContent">{{ 'general.skip_to_content' | t }}</a>

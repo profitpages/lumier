@@ -43,53 +43,174 @@
 
 {% schema %}
 {
-  "name": "Shop by concern",
+  "name": "t:sections.shop-by-concern.name",
   "class": "section-concerns",
   "max_blocks": 8,
   "settings": [
     {
-      "type": "select", "id": "layout", "label": "Layout",
-      "options": [{ "value": "cards", "label": "Photo cards" }, { "value": "chips", "label": "Chip links (compact)" }],
+      "type": "select",
+      "id": "layout",
+      "label": "t:sections.shop-by-concern.settings.layout.label",
+      "options": [
+        {
+          "value": "cards",
+          "label": "t:sections.shop-by-concern.settings.layout.options__1.label"
+        },
+        {
+          "value": "chips",
+          "label": "t:sections.shop-by-concern.settings.layout.options__2.label"
+        }
+      ],
       "default": "cards"
     },
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "A ritual for every you" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop by concern" },
-    { "type": "richtext", "id": "text", "label": "Text" },
-    { "type": "text", "id": "link_label", "label": "Card link label", "default": "Discover" },
-    { "type": "range", "id": "columns", "label": "Cards per row (desktop)", "min": 3, "max": 5, "step": 1, "default": 4 },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.shop-by-concern.settings.kicker.label",
+      "default": "A ritual for every you"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.shop-by-concern.settings.heading.label",
+      "default": "Shop by concern"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.shop-by-concern.settings.text.label"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "t:sections.shop-by-concern.settings.link_label.label",
+      "default": "Discover"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "t:sections.shop-by-concern.settings.columns.label",
+      "min": 3,
+      "max": 5,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.shop-by-concern.settings.color_scheme.label",
+      "default": "scheme-1"
+    }
   ],
   "blocks": [
     {
-      "type": "concern", "name": "Concern",
+      "type": "concern",
+      "name": "t:sections.shop-by-concern.blocks.concern.name",
       "settings": [
-        { "type": "text", "id": "title", "label": "Title", "default": "Dryness" },
-        { "type": "text", "id": "text", "label": "Text", "default": "Comforting hydration for thirsty skin." },
-        { "type": "collection", "id": "collection", "label": "Collection" },
-        { "type": "image_picker", "id": "image", "label": "Image", "info": "Defaults to the collection image." },
-        { "type": "url", "id": "link", "label": "Custom link", "info": "Overrides the collection, e.g. a filtered collection URL." }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.shop-by-concern.blocks.concern.settings.title.label",
+          "default": "Dryness"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "t:sections.shop-by-concern.blocks.concern.settings.text.label",
+          "default": "Comforting hydration for thirsty skin."
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "t:sections.shop-by-concern.blocks.concern.settings.collection.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.shop-by-concern.blocks.concern.settings.image.label",
+          "info": "t:sections.shop-by-concern.blocks.concern.settings.image.info"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.shop-by-concern.blocks.concern.settings.link.label",
+          "info": "t:sections.shop-by-concern.blocks.concern.settings.link.info"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Shop by concern",
+      "name": "t:sections.shop-by-concern.presets.presets__1.name",
       "blocks": [
-        { "type": "concern", "settings": { "title": "Dryness", "text": "Comforting hydration for thirsty skin." } },
-        { "type": "concern", "settings": { "title": "Dullness", "text": "Bring a little light to your daily ritual." } },
-        { "type": "concern", "settings": { "title": "Sensitivity", "text": "Thoughtful textures for a gentler feel." } },
-        { "type": "concern", "settings": { "title": "Uneven tone", "text": "A considered routine for a more even-looking glow." } }
+        {
+          "type": "concern",
+          "settings": {
+            "title": "Dryness",
+            "text": "Comforting hydration for thirsty skin."
+          }
+        },
+        {
+          "type": "concern",
+          "settings": {
+            "title": "Dullness",
+            "text": "Bring a little light to your daily ritual."
+          }
+        },
+        {
+          "type": "concern",
+          "settings": {
+            "title": "Sensitivity",
+            "text": "Thoughtful textures for a gentler feel."
+          }
+        },
+        {
+          "type": "concern",
+          "settings": {
+            "title": "Uneven tone",
+            "text": "A considered routine for a more even-looking glow."
+          }
+        }
       ]
     },
     {
-      "name": "Concern chips",
-      "settings": { "layout": "chips", "heading": "Shop by concern", "color_scheme": "scheme-2" },
+      "name": "t:sections.shop-by-concern.presets.presets__2.name",
+      "settings": {
+        "layout": "chips",
+        "heading": "Shop by concern",
+        "color_scheme": "scheme-2"
+      },
       "blocks": [
-        { "type": "concern", "settings": { "title": "Dryness" } },
-        { "type": "concern", "settings": { "title": "Dullness" } },
-        { "type": "concern", "settings": { "title": "Sensitivity" } },
-        { "type": "concern", "settings": { "title": "Uneven tone" } },
-        { "type": "concern", "settings": { "title": "Fine lines" } }
+        {
+          "type": "concern",
+          "settings": {
+            "title": "Dryness"
+          }
+        },
+        {
+          "type": "concern",
+          "settings": {
+            "title": "Dullness"
+          }
+        },
+        {
+          "type": "concern",
+          "settings": {
+            "title": "Sensitivity"
+          }
+        },
+        {
+          "type": "concern",
+          "settings": {
+            "title": "Uneven tone"
+          }
+        },
+        {
+          "type": "concern",
+          "settings": {
+            "title": "Fine lines"
+          }
+        }
       ]
     }
   ]

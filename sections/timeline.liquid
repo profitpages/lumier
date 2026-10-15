@@ -23,34 +23,96 @@
 
 {% schema %}
 {
-  "name": "Timeline",
+  "name": "t:sections.timeline.name",
   "class": "section-timeline",
   "max_blocks": 8,
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Our journey" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "From a kitchen-table formula to a daily ritual." },
-    { "type": "richtext", "id": "text", "label": "Text" },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.timeline.settings.kicker.label",
+      "default": "Our journey"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.timeline.settings.heading.label",
+      "default": "From a kitchen-table formula to a daily ritual."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.timeline.settings.text.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.timeline.settings.color_scheme.label",
+      "default": "scheme-1"
+    }
   ],
   "blocks": [
     {
-      "type": "milestone", "name": "Milestone",
+      "type": "milestone",
+      "name": "t:sections.timeline.blocks.milestone.name",
       "settings": [
-        { "type": "text", "id": "year", "label": "Year or label", "default": "2019" },
-        { "type": "text", "id": "title", "label": "Title", "default": "The first serum" },
-        { "type": "textarea", "id": "text", "label": "Text", "default": "A single, considered formula made in small batches." },
-        { "type": "image_picker", "id": "image", "label": "Image (optional)" }
+        {
+          "type": "text",
+          "id": "year",
+          "label": "t:sections.timeline.blocks.milestone.settings.year.label",
+          "default": "2019"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.timeline.blocks.milestone.settings.title.label",
+          "default": "The first serum"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "t:sections.timeline.blocks.milestone.settings.text.label",
+          "default": "A single, considered formula made in small batches."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.timeline.blocks.milestone.settings.image.label"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Timeline",
+      "name": "t:sections.timeline.presets.presets__1.name",
       "blocks": [
-        { "type": "milestone" },
-        { "type": "milestone", "settings": { "year": "2021", "title": "A ritual takes shape", "text": "Cleanser, cream and mist join the serum." } },
-        { "type": "milestone", "settings": { "year": "2023", "title": "Refillable glass", "text": "Our signature bottles become refillable." } },
-        { "type": "milestone", "settings": { "year": "Today", "title": "Rituals, refined", "text": "Thoughtful essentials for luminous everyday living." } }
+        {
+          "type": "milestone"
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2021",
+            "title": "A ritual takes shape",
+            "text": "Cleanser, cream and mist join the serum."
+          }
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2023",
+            "title": "Refillable glass",
+            "text": "Our signature bottles become refillable."
+          }
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "Today",
+            "title": "Rituals, refined",
+            "text": "Thoughtful essentials for luminous everyday living."
+          }
+        }
       ]
     }
   ]

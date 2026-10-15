@@ -10,7 +10,8 @@
   assign qb = product.metafields.profitpages.quantity_breaks.value
 -%}
 {%- if addons.active and qb.tiers.size > 1 -%}
-  <fieldset class="pp-qb pp-qb--rows" data-pp-qb data-handle="{{ product.handle }}" data-form="{{ form_id }}">
+  <fieldset class="pp-qb pp-qb--rows" data-pp-qb data-money-format="{{ shop.money_format | escape }}" data-each-format="{{ 'addons.qb_each' | t: price: '__PP_PRICE__' | escape }}" data-save-format="{{ 'addons.qb_save' | t: amount: '__PP_PRICE__' | escape }}" data-handle="{{ product.handle }}" data-form="{{ form_id }}">
+    <script type="application/json" data-pp-product-variants>{{ product.variants | json }}</script>
     {%- if heading == blank -%}{%- assign heading = 'addons.qb_heading' | t -%}{%- else -%}{%- assign heading = heading | escape -%}{%- endif -%}
     <legend class="pp-qb__legend kicker">{{ heading }}</legend>
     <div class="pp-qb__tiers">
@@ -32,7 +33,7 @@
           assign tier_id = 'PPQB-' | append: uid | append: '-' | append: forloop.index
         -%}
         <label class="pp-qb__tier" for="{{ tier_id }}">
-          <input class="pp-qb__input" type="radio" id="{{ tier_id }}" name="pp_qb_{{ uid }}" value="{{ qty }}" data-pp-qb-tier data-discount="{{ value }}"{% if forloop.first %} checked{% endif %}>
+          <input class="pp-qb__input" type="radio" id="{{ tier_id }}" name="pp_qb_{{ uid }}" value="{{ qty }}" data-pp-qb-tier data-discount-type="{{ tier.discountType }}" data-discount="{{ value }}"{% if forloop.first %} checked{% endif %}>
           <span class="pp-qb__dot" aria-hidden="true"></span>
           <span class="pp-qb__main">
             <span class="pp-qb__label">{{ tier.label | escape }}</span>

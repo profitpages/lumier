@@ -59,66 +59,321 @@
 
 {% schema %}
 {
-  "name": "Find your ritual quiz",
+  "name": "t:sections.skin-quiz.name",
   "class": "section-skin-quiz",
   "max_blocks": 18,
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Ritual finder" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Find your ritual in three taps." },
-    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Tell us a little about your skin and we'll edit the shelf for you.</p>" },
-    { "type": "text", "id": "q_skin", "label": "Question 1", "default": "How does your skin usually feel?" },
-    { "type": "text", "id": "q_concern", "label": "Question 2", "default": "What would you love to change?" },
-    { "type": "text", "id": "q_budget", "label": "Question 3", "default": "What's your budget?" },
-    { "type": "text", "id": "done_heading", "label": "Final message", "default": "Your edit is ready." },
-    { "type": "text", "id": "button_label", "label": "Results button", "default": "See my ritual" },
-    { "type": "collection", "id": "collection", "label": "Results collection", "info": "Defaults to all products. Filters must be enabled in Search & Discovery." },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Intro color scheme", "default": "scheme-3" },
-    { "type": "color_scheme", "id": "section_scheme", "label": "Section color scheme", "default": "scheme-1" }
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.skin-quiz.settings.kicker.label",
+      "default": "Ritual finder"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.skin-quiz.settings.heading.label",
+      "default": "Find your ritual in three taps."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.skin-quiz.settings.text.label",
+      "default": "<p>Tell us a little about your skin and we'll edit the shelf for you.</p>"
+    },
+    {
+      "type": "text",
+      "id": "q_skin",
+      "label": "t:sections.skin-quiz.settings.q_skin.label",
+      "default": "How does your skin usually feel?"
+    },
+    {
+      "type": "text",
+      "id": "q_concern",
+      "label": "t:sections.skin-quiz.settings.q_concern.label",
+      "default": "What would you love to change?"
+    },
+    {
+      "type": "text",
+      "id": "q_budget",
+      "label": "t:sections.skin-quiz.settings.q_budget.label",
+      "default": "What's your budget?"
+    },
+    {
+      "type": "text",
+      "id": "done_heading",
+      "label": "t:sections.skin-quiz.settings.done_heading.label",
+      "default": "Your edit is ready."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.skin-quiz.settings.button_label.label",
+      "default": "See my ritual"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:sections.skin-quiz.settings.collection.label",
+      "info": "t:sections.skin-quiz.settings.collection.info"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.skin-quiz.settings.color_scheme.label",
+      "default": "scheme-3"
+    },
+    {
+      "type": "color_scheme",
+      "id": "section_scheme",
+      "label": "t:sections.skin-quiz.settings.section_scheme.label",
+      "default": "scheme-1"
+    }
   ],
   "blocks": [
     {
-      "type": "skin", "name": "Answer · Skin type",
+      "type": "skin",
+      "name": "t:sections.skin-quiz.blocks.skin.name",
       "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "Dry" },
-        { "type": "text", "id": "note", "label": "Note", "default": "Tight, craves comfort" },
-        { "type": "select", "id": "icon", "label": "Icon", "options": [{ "value": "drop", "label": "Drop" }, { "value": "sun", "label": "Sun" }, { "value": "leaf", "label": "Leaf" }, { "value": "heart", "label": "Heart" }, { "value": "sparkle", "label": "Sparkle" }], "default": "drop" },
-        { "type": "text", "id": "param", "label": "Filter parameter", "default": "filter.p.m.custom.skin_type=Dry" }
+        {
+          "type": "text",
+          "id": "label",
+          "label": "t:sections.skin-quiz.blocks.skin.settings.label.label",
+          "default": "Dry"
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "t:sections.skin-quiz.blocks.skin.settings.note.label",
+          "default": "Tight, craves comfort"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "t:sections.skin-quiz.blocks.skin.settings.icon.label",
+          "options": [
+            {
+              "value": "drop",
+              "label": "t:sections.skin-quiz.blocks.skin.settings.icon.options__1.label"
+            },
+            {
+              "value": "sun",
+              "label": "t:sections.skin-quiz.blocks.skin.settings.icon.options__2.label"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.skin-quiz.blocks.skin.settings.icon.options__3.label"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.skin-quiz.blocks.skin.settings.icon.options__4.label"
+            },
+            {
+              "value": "sparkle",
+              "label": "t:sections.skin-quiz.blocks.skin.settings.icon.options__5.label"
+            }
+          ],
+          "default": "drop"
+        },
+        {
+          "type": "text",
+          "id": "param",
+          "label": "t:sections.skin-quiz.blocks.skin.settings.param.label",
+          "default": "filter.p.m.custom.skin_type=Dry"
+        }
       ]
     },
     {
-      "type": "concern", "name": "Answer · Concern",
+      "type": "concern",
+      "name": "t:sections.skin-quiz.blocks.concern.name",
       "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "Dullness" },
-        { "type": "text", "id": "note", "label": "Note" },
-        { "type": "select", "id": "icon", "label": "Icon", "options": [{ "value": "sun", "label": "Sun" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "drop", "label": "Drop" }, { "value": "leaf", "label": "Leaf" }, { "value": "moon", "label": "Moon" }], "default": "sun" },
-        { "type": "text", "id": "param", "label": "Filter parameter", "default": "filter.p.product_type=Serum" }
+        {
+          "type": "text",
+          "id": "label",
+          "label": "t:sections.skin-quiz.blocks.concern.settings.label.label",
+          "default": "Dullness"
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "t:sections.skin-quiz.blocks.concern.settings.note.label"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "t:sections.skin-quiz.blocks.concern.settings.icon.label",
+          "options": [
+            {
+              "value": "sun",
+              "label": "t:sections.skin-quiz.blocks.concern.settings.icon.options__1.label"
+            },
+            {
+              "value": "sparkle",
+              "label": "t:sections.skin-quiz.blocks.concern.settings.icon.options__2.label"
+            },
+            {
+              "value": "drop",
+              "label": "t:sections.skin-quiz.blocks.concern.settings.icon.options__3.label"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.skin-quiz.blocks.concern.settings.icon.options__4.label"
+            },
+            {
+              "value": "moon",
+              "label": "t:sections.skin-quiz.blocks.concern.settings.icon.options__5.label"
+            }
+          ],
+          "default": "sun"
+        },
+        {
+          "type": "text",
+          "id": "param",
+          "label": "t:sections.skin-quiz.blocks.concern.settings.param.label",
+          "default": "filter.p.product_type=Serum"
+        }
       ]
     },
     {
-      "type": "budget", "name": "Answer · Budget",
+      "type": "budget",
+      "name": "t:sections.skin-quiz.blocks.budget.name",
       "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "Under $40" },
-        { "type": "text", "id": "note", "label": "Note" },
-        { "type": "select", "id": "icon", "label": "Icon", "options": [{ "value": "tag", "label": "Tag" }, { "value": "gift", "label": "Gift" }, { "value": "sparkle", "label": "Sparkle" }], "default": "tag" },
-        { "type": "text", "id": "param", "label": "Filter parameter", "default": "filter.v.price.lte=40" }
+        {
+          "type": "text",
+          "id": "label",
+          "label": "t:sections.skin-quiz.blocks.budget.settings.label.label",
+          "default": "Under $40"
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "t:sections.skin-quiz.blocks.budget.settings.note.label"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "t:sections.skin-quiz.blocks.budget.settings.icon.label",
+          "options": [
+            {
+              "value": "tag",
+              "label": "t:sections.skin-quiz.blocks.budget.settings.icon.options__1.label"
+            },
+            {
+              "value": "gift",
+              "label": "t:sections.skin-quiz.blocks.budget.settings.icon.options__2.label"
+            },
+            {
+              "value": "sparkle",
+              "label": "t:sections.skin-quiz.blocks.budget.settings.icon.options__3.label"
+            }
+          ],
+          "default": "tag"
+        },
+        {
+          "type": "text",
+          "id": "param",
+          "label": "t:sections.skin-quiz.blocks.budget.settings.param.label",
+          "default": "filter.v.price.lte=40"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Find your ritual quiz",
+      "name": "t:sections.skin-quiz.presets.presets__1.name",
       "blocks": [
-        { "type": "skin", "settings": { "label": "Dry", "note": "Tight, craves comfort", "icon": "drop", "param": "filter.p.m.custom.skin_type=Dry" } },
-        { "type": "skin", "settings": { "label": "Oily", "note": "Shiny by midday", "icon": "sun", "param": "filter.p.m.custom.skin_type=Oily" } },
-        { "type": "skin", "settings": { "label": "Combination", "note": "A bit of both", "icon": "leaf", "param": "filter.p.m.custom.skin_type=Combination" } },
-        { "type": "skin", "settings": { "label": "Sensitive", "note": "Reacts easily", "icon": "heart", "param": "filter.p.m.custom.skin_type=Sensitive" } },
-        { "type": "concern", "settings": { "label": "Dullness", "icon": "sun", "param": "filter.p.product_type=Serum" } },
-        { "type": "concern", "settings": { "label": "Fine lines", "icon": "sparkle", "param": "filter.p.product_type=Treatment" } },
-        { "type": "concern", "settings": { "label": "Dehydration", "icon": "drop", "param": "filter.p.product_type=Moisturiser" } },
-        { "type": "concern", "settings": { "label": "Breakouts", "icon": "leaf", "param": "filter.p.product_type=Cleanser" } },
-        { "type": "budget", "settings": { "label": "Under $40", "icon": "tag", "param": "filter.v.price.lte=40" } },
-        { "type": "budget", "settings": { "label": "Under $80", "icon": "gift", "param": "filter.v.price.lte=80" } },
-        { "type": "budget", "settings": { "label": "Treat myself", "icon": "sparkle", "param": "filter.v.price.gte=80" } }
+        {
+          "type": "skin",
+          "settings": {
+            "label": "Dry",
+            "note": "Tight, craves comfort",
+            "icon": "drop",
+            "param": "filter.p.m.custom.skin_type=Dry"
+          }
+        },
+        {
+          "type": "skin",
+          "settings": {
+            "label": "Oily",
+            "note": "Shiny by midday",
+            "icon": "sun",
+            "param": "filter.p.m.custom.skin_type=Oily"
+          }
+        },
+        {
+          "type": "skin",
+          "settings": {
+            "label": "Combination",
+            "note": "A bit of both",
+            "icon": "leaf",
+            "param": "filter.p.m.custom.skin_type=Combination"
+          }
+        },
+        {
+          "type": "skin",
+          "settings": {
+            "label": "Sensitive",
+            "note": "Reacts easily",
+            "icon": "heart",
+            "param": "filter.p.m.custom.skin_type=Sensitive"
+          }
+        },
+        {
+          "type": "concern",
+          "settings": {
+            "label": "Dullness",
+            "icon": "sun",
+            "param": "filter.p.product_type=Serum"
+          }
+        },
+        {
+          "type": "concern",
+          "settings": {
+            "label": "Fine lines",
+            "icon": "sparkle",
+            "param": "filter.p.product_type=Treatment"
+          }
+        },
+        {
+          "type": "concern",
+          "settings": {
+            "label": "Dehydration",
+            "icon": "drop",
+            "param": "filter.p.product_type=Moisturiser"
+          }
+        },
+        {
+          "type": "concern",
+          "settings": {
+            "label": "Breakouts",
+            "icon": "leaf",
+            "param": "filter.p.product_type=Cleanser"
+          }
+        },
+        {
+          "type": "budget",
+          "settings": {
+            "label": "Under $40",
+            "icon": "tag",
+            "param": "filter.v.price.lte=40"
+          }
+        },
+        {
+          "type": "budget",
+          "settings": {
+            "label": "Under $80",
+            "icon": "gift",
+            "param": "filter.v.price.lte=80"
+          }
+        },
+        {
+          "type": "budget",
+          "settings": {
+            "label": "Treat myself",
+            "icon": "sparkle",
+            "param": "filter.v.price.gte=80"
+          }
+        }
       ]
     }
   ]

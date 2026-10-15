@@ -45,25 +45,90 @@
 
 {% schema %}
 {
-  "name": "Collection banner",
+  "name": "t:sections.collection-hero.name",
   "class": "section-collection-hero",
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Collection 01" },
-    { "type": "text", "id": "heading", "label": "Heading (when not on a collection)", "default": "The Skincare Edit" },
-    { "type": "richtext", "id": "text", "label": "Text (when the collection has no description)", "default": "<p>Thoughtfully formulated essentials for skin that looks and feels beautifully cared for.</p>" },
     {
-      "type": "select", "id": "title_size", "label": "Title size",
-      "options": [{ "value": "editorial", "label": "Editorial (small serif)" }, { "value": "large", "label": "Large" }],
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.collection-hero.settings.kicker.label",
+      "default": "Collection 01"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.collection-hero.settings.heading.label",
+      "default": "The Skincare Edit"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.collection-hero.settings.text.label",
+      "default": "<p>Thoughtfully formulated essentials for skin that looks and feels beautifully cared for.</p>"
+    },
+    {
+      "type": "select",
+      "id": "title_size",
+      "label": "t:sections.collection-hero.settings.title_size.label",
+      "options": [
+        {
+          "value": "editorial",
+          "label": "t:sections.collection-hero.settings.title_size.options__1.label"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.collection-hero.settings.title_size.options__2.label"
+        }
+      ],
       "default": "large"
     },
-    { "type": "checkbox", "id": "show_art", "label": "Show framed image", "default": true },
-    { "type": "image_picker", "id": "image", "label": "Image", "info": "Defaults to the collection image." },
-    { "type": "checkbox", "id": "show_dot", "label": "Accent dot", "default": true },
-    { "type": "text", "id": "caption", "label": "Caption chip", "default": "A daily ritual, beautifully considered." },
-    { "type": "checkbox", "id": "show_count", "label": "Show product count", "default": true },
-    { "type": "checkbox", "id": "show_breadcrumb", "label": "Show breadcrumb", "default": true },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+    {
+      "type": "checkbox",
+      "id": "show_art",
+      "label": "t:sections.collection-hero.settings.show_art.label",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.collection-hero.settings.image.label",
+      "info": "t:sections.collection-hero.settings.image.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dot",
+      "label": "t:sections.collection-hero.settings.show_dot.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "t:sections.collection-hero.settings.caption.label",
+      "default": "A daily ritual, beautifully considered."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_count",
+      "label": "t:sections.collection-hero.settings.show_count.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumb",
+      "label": "t:sections.collection-hero.settings.show_breadcrumb.label",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.collection-hero.settings.color_scheme.label",
+      "default": "scheme-1"
+    }
   ],
-  "presets": [{ "name": "Collection banner" }]
+  "presets": [
+    {
+      "name": "t:sections.collection-hero.presets.presets__1.name"
+    }
+  ]
 }
 {% endschema %}

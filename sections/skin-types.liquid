@@ -43,42 +43,141 @@
 
 {% schema %}
 {
-  "name": "Skin types",
+  "name": "t:sections.skin-types.name",
   "class": "section-skin-types",
   "max_blocks": 6,
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Made for" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Every skin type, gently." },
-    { "type": "richtext", "id": "text", "label": "Text" },
-    { "type": "checkbox", "id": "use_metafield", "label": "On product pages, highlight the product's skin types", "default": true, "info": "Reads custom.skin_type (list of single-line text). Labels must match, e.g. 'Dry'." },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" }
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "t:sections.skin-types.settings.kicker.label",
+      "default": "Made for"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.skin-types.settings.heading.label",
+      "default": "Every skin type, gently."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.skin-types.settings.text.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_metafield",
+      "label": "t:sections.skin-types.settings.use_metafield.label",
+      "default": true,
+      "info": "t:sections.skin-types.settings.use_metafield.info"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.skin-types.settings.color_scheme.label",
+      "default": "scheme-2"
+    }
   ],
   "blocks": [
     {
-      "type": "type", "name": "Skin type",
+      "type": "type",
+      "name": "t:sections.skin-types.blocks.type.name",
       "settings": [
         {
-          "type": "select", "id": "icon", "label": "Icon",
+          "type": "select",
+          "id": "icon",
+          "label": "t:sections.skin-types.blocks.type.settings.icon.label",
           "options": [
-            { "value": "drop", "label": "Drop" }, { "value": "sun", "label": "Sun" }, { "value": "leaf", "label": "Leaf" },
-            { "value": "flower", "label": "Flower" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "heart", "label": "Heart" }, { "value": "moon", "label": "Moon" }
+            {
+              "value": "drop",
+              "label": "t:sections.skin-types.blocks.type.settings.icon.options__1.label"
+            },
+            {
+              "value": "sun",
+              "label": "t:sections.skin-types.blocks.type.settings.icon.options__2.label"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.skin-types.blocks.type.settings.icon.options__3.label"
+            },
+            {
+              "value": "flower",
+              "label": "t:sections.skin-types.blocks.type.settings.icon.options__4.label"
+            },
+            {
+              "value": "sparkle",
+              "label": "t:sections.skin-types.blocks.type.settings.icon.options__5.label"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.skin-types.blocks.type.settings.icon.options__6.label"
+            },
+            {
+              "value": "moon",
+              "label": "t:sections.skin-types.blocks.type.settings.icon.options__7.label"
+            }
           ],
           "default": "drop"
         },
-        { "type": "text", "id": "label", "label": "Skin type", "default": "Dry" },
-        { "type": "text", "id": "text", "label": "Short note", "default": "Craves cushion" }
+        {
+          "type": "text",
+          "id": "label",
+          "label": "t:sections.skin-types.blocks.type.settings.label.label",
+          "default": "Dry"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "t:sections.skin-types.blocks.type.settings.text.label",
+          "default": "Craves cushion"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Skin types",
+      "name": "t:sections.skin-types.presets.presets__1.name",
       "blocks": [
-        { "type": "type", "settings": { "icon": "drop", "label": "Dry", "text": "Craves cushion" } },
-        { "type": "type", "settings": { "icon": "sun", "label": "Oily", "text": "Needs balance" } },
-        { "type": "type", "settings": { "icon": "leaf", "label": "Combination", "text": "Wants both" } },
-        { "type": "type", "settings": { "icon": "heart", "label": "Sensitive", "text": "Loves gentle" } },
-        { "type": "type", "settings": { "icon": "sparkle", "label": "Normal", "text": "Keeps it simple" } }
+        {
+          "type": "type",
+          "settings": {
+            "icon": "drop",
+            "label": "Dry",
+            "text": "Craves cushion"
+          }
+        },
+        {
+          "type": "type",
+          "settings": {
+            "icon": "sun",
+            "label": "Oily",
+            "text": "Needs balance"
+          }
+        },
+        {
+          "type": "type",
+          "settings": {
+            "icon": "leaf",
+            "label": "Combination",
+            "text": "Wants both"
+          }
+        },
+        {
+          "type": "type",
+          "settings": {
+            "icon": "heart",
+            "label": "Sensitive",
+            "text": "Loves gentle"
+          }
+        },
+        {
+          "type": "type",
+          "settings": {
+            "icon": "sparkle",
+            "label": "Normal",
+            "text": "Keeps it simple"
+          }
+        }
       ]
     }
   ]

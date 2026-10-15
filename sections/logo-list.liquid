@@ -24,33 +24,90 @@
 
 {% schema %}
 {
-  "name": "Press & logos",
+  "name": "t:sections.logo-list.name",
   "class": "section-logos",
   "max_blocks": 8,
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "As featured in" },
-    { "type": "checkbox", "id": "mono", "label": "Show logos softly muted until hovered", "default": true },
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.logo-list.settings.heading.label",
+      "default": "As featured in"
+    },
+    {
+      "type": "checkbox",
+      "id": "mono",
+      "label": "t:sections.logo-list.settings.mono.label",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.logo-list.settings.color_scheme.label",
+      "default": "scheme-1"
+    }
   ],
   "blocks": [
     {
-      "type": "logo", "name": "Logo",
+      "type": "logo",
+      "name": "t:sections.logo-list.blocks.logo.name",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Logo" },
-        { "type": "text", "id": "name", "label": "Name", "default": "Vogue Beauty" },
-        { "type": "text", "id": "quote", "label": "Short press quote" },
-        { "type": "url", "id": "link", "label": "Link" }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.logo-list.blocks.logo.settings.image.label"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "t:sections.logo-list.blocks.logo.settings.name.label",
+          "default": "Vogue Beauty"
+        },
+        {
+          "type": "text",
+          "id": "quote",
+          "label": "t:sections.logo-list.blocks.logo.settings.quote.label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.logo-list.blocks.logo.settings.link.label"
+        }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Press & logos",
+      "name": "t:sections.logo-list.presets.presets__1.name",
       "blocks": [
-        { "type": "logo", "settings": { "name": "Glow Journal", "quote": "The serum we can't stop talking about." } },
-        { "type": "logo", "settings": { "name": "Skin Weekly", "quote": "Quietly brilliant." } },
-        { "type": "logo", "settings": { "name": "The Edit", "quote": "Texture, perfected." } },
-        { "type": "logo", "settings": { "name": "Beauty Daily", "quote": "A modern classic." } }
+        {
+          "type": "logo",
+          "settings": {
+            "name": "Glow Journal",
+            "quote": "The serum we can't stop talking about."
+          }
+        },
+        {
+          "type": "logo",
+          "settings": {
+            "name": "Skin Weekly",
+            "quote": "Quietly brilliant."
+          }
+        },
+        {
+          "type": "logo",
+          "settings": {
+            "name": "The Edit",
+            "quote": "Texture, perfected."
+          }
+        },
+        {
+          "type": "logo",
+          "settings": {
+            "name": "Beauty Daily",
+            "quote": "A modern classic."
+          }
+        }
       ]
     }
   ]

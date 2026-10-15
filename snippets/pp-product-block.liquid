@@ -1,0 +1,154 @@
+{%- comment -%}
+  Profit Pages product-information blocks (store-builder kit: scripts/theme-addons/product-blocks).
+  Emoji benefits, Urgency text, Clickable discount, Shipping checkpoints and Rating stars, drawn in the theme's own
+  look by assets/pp-product-blocks.css. Every text is a block setting. The countdown runs to the merchant's dispatch
+  cut-off in the store's time zone, the dates follow the merchant's lead times and the stars come only from real
+  reviews: nothing is invented.
+  Emoji benefits: with the "Emoji" marker, a short first word with no letters or digits that is not plain ASCII (an
+  emoji) becomes the line's marker; a line without one gets the tick.
+  Usage: {% render 'pp-product-block', block: block, product: product, btn_class: 'btn btn--sm' %}
+{%- endcomment -%}
+{%- liquid
+  assign s = block.settings
+  assign ppb_tz = 'now' | date: '%z'
+-%}
+{%- case block.type -%}
+  {%- when 'rating' -%}
+    {%- assign r = product.metafields.reviews.rating.value -%}
+    {%- if r != blank -%}
+      {%- liquid
+        assign r_value = r.rating | round: 1
+        assign r_max = r.scale_max | default: 5
+        assign r_pct = r.rating | divided_by: r_max | times: 100
+        assign r_count = product.metafields.reviews.rating_count.value | default: 0
+      -%}
+      <div class="ppb ppb-rating" {{ block.shopify_attributes }}>
+        <span class="ppb-rating__stars" style="--pct: {{ r_pct }}%;" aria-hidden="true">★★★★★</span>
+        <span class="ppb-rating__text">{{ r_value }}{% if s.show_count %} ({{ r_count }}){% endif %}</span>
+      </div>
+    {%- endif -%}
+
+  {%- when 'benefit_list' -%}
+    {%- liquid
+      assign lines = s.items | newline_to_br | split: '<br />'
+      if s.source == 'product' and product.metafields.custom.highlights.value != blank
+        assign lines = product.metafields.custom.highlights.value
+      endif
+    -%}
+    <ul class="ppb ppb-benefits ppb-benefits--{{ s.marker }}" role="list" {{ block.shopify_attributes }}>
+      {%- for raw in lines limit: 6 -%}
+        {%- assign line = raw | strip -%}
+        {%- if line == blank -%}{%- continue -%}{%- endif -%}
+        {%- liquid
+          assign mark = ''
+          assign body = line
+          if s.marker == 'emoji'
+            assign first = line | split: ' ' | first
+            assign first_size = first | size
+            assign first_up = first | upcase
+            assign first_down = first | downcase
+            assign first_enc = first | url_encode
+            if first != line and first_size <= 4 and first_up == first_down and first_enc contains '%'
+              assign mark = first
+              assign body = line | remove_first: first | strip
+            endif
+          endif
+        -%}
+        <li>
+          {%- if mark != blank -%}
+            <span class="ppb-benefits__emoji" aria-hidden="true">{{ mark }}</span>
+          {%- elsif s.marker == 'dot' -%}
+            <span class="ppb-benefits__dot" aria-hidden="true"></span>
+          {%- else -%}
+            <span class="ppb-benefits__mark" aria-hidden="true"><svg class="ppb-icon" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
+          {%- endif -%}
+          <span class="ppb-benefits__text">{{ body | escape }}</span>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+  {%- when 'urgency' -%}
+    {%- capture ppb_icon -%}
+      {%- case s.icon -%}
+        {%- when 'truck' -%}<svg class="ppb-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h11v9H3zM14 9.5h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
+        {%- when 'package' -%}<svg class="ppb-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg>
+        {%- when 'bolt' -%}<svg class="ppb-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/></svg>
+        {%- when 'gift' -%}<svg class="ppb-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h16v3H4zM5.5 12.5h13V20h-13zM12 9.5V20"/><path d="M12 9.5S10.5 4.5 8 5.5 9 9.5 12 9.5c3 0 4.5-3 4-4s-4 0-4 4"/></svg>
+        {%- when 'sparkle' -%}<svg class="ppb-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5c.6 4.4 2.6 6.4 7 7-4.4.6-6.4 2.6-7 7-.6-4.4-2.6-6.4-7-7 4.4-.6 6.4-2.6 7-7z"/></svg>
+        {%- else -%}<svg class="ppb-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+      {%- endcase -%}
+    {%- endcapture -%}
+    {%- if s.mode == 'text' -%}
+      {%- if s.text != blank -%}
+        <p class="ppb ppb-urgency" {{ block.shopify_attributes }}>{{ ppb_icon }}<span>{{ s.text | escape }}</span></p>
+      {%- endif -%}
+    {%- elsif product.available -%}
+      {%- liquid
+        assign u_elapsed = 'now' | date: '%H' | times: 60 | plus: 0
+        assign u_min = 'now' | date: '%M' | plus: 0
+        assign u_elapsed = u_elapsed | plus: u_min | times: 60
+        assign u_left = s.cutoff_hour | times: 3600 | minus: u_elapsed
+        assign u_dow = 'now' | date: '%u' | plus: 0
+        assign u_open = true
+        if u_left <= 0
+          assign u_open = false
+        endif
+        if s.weekdays_only and u_dow > 5
+          assign u_open = false
+        endif
+        assign u_h = u_left | divided_by: 3600
+        assign u_m = u_left | modulo: 3600 | divided_by: 60
+        capture u_clock
+          echo '<strong class="ppb-urgency__clock" data-urgency-clock>'
+          echo u_h | append: 'h ' | append: u_m | append: 'm'
+          echo '</strong>'
+        endcapture
+      -%}
+      <p class="ppb ppb-urgency" data-ppb-urgency data-cutoff="{{ s.cutoff_hour }}" data-tz="{{ ppb_tz }}" data-weekdays="{{ s.weekdays_only }}" {{ block.shopify_attributes }}>
+        {{ ppb_icon }}
+        <span data-urgency-open{% unless u_open %} hidden{% endunless %}>{{ s.before_text | escape | replace: '[time]', u_clock }}</span>
+        <span data-urgency-closed{% if u_open %} hidden{% endif %}>{{ s.after_text | escape }}</span>
+      </p>
+    {%- endif -%}
+
+  {%- when 'discount_code' -%}
+    {%- if s.code != blank -%}
+      <div class="ppb ppb-code" data-ppb-code="{{ s.code | escape }}" data-applied-label="{{ s.applied_label | escape }}" {{ block.shopify_attributes }}>
+        <span class="ppb-code__icon" aria-hidden="true"><svg class="ppb-icon" viewBox="0 0 24 24"><path d="M4 9.5h16v3H4zM5.5 12.5h13V20h-13zM12 9.5V20"/><path d="M12 9.5S10.5 4.5 8 5.5 9 9.5 12 9.5c3 0 4.5-3 4-4s-4 0-4 4"/></svg></span>
+        <div class="ppb-code__copy">
+          {%- if s.title != blank -%}<p class="ppb-code__title">{{ s.title | escape }}</p>{%- endif -%}
+          <p class="ppb-code__text">{{ s.text | escape }} <span class="ppb-code__value">{{ s.code | escape }}</span></p>
+        </div>
+        <button class="{{ btn_class | default: 'btn' }} ppb-code__btn" type="button" data-ppb-apply>{{ s.button_label | escape }}</button>
+      </div>
+    {%- endif -%}
+
+  {%- when 'checkpoints' -%}
+    {%- liquid
+      assign c_now = 'now' | date: '%s' | plus: 0
+      assign c_ship = s.ship_days | times: 86400 | plus: c_now
+      assign c_min = s.min_days | times: 86400 | plus: c_now
+      assign c_max_days = s.max_days
+      if c_max_days < s.min_days
+        assign c_max_days = s.min_days
+      endif
+      assign c_max = c_max_days | times: 86400 | plus: c_now
+    -%}
+    <ol class="ppb ppb-steps" role="list" data-ppb-steps data-tz="{{ ppb_tz }}" data-skip-weekends="{{ s.skip_weekends }}" {{ block.shopify_attributes }}>
+      <li class="ppb-steps__step">
+        <span class="ppb-steps__icon" aria-hidden="true"><svg class="ppb-icon" viewBox="0 0 24 24"><path d="M5.5 8h13l-1 12.5h-11z"/><path d="M9 10.5V7a3 3 0 0 1 6 0v3.5"/></svg></span>
+        <span class="ppb-steps__label">{{ s.ordered_label | escape }}</span>
+        <span class="ppb-steps__date"><span data-days="0">{{ c_now | date: '%b %-d' }}</span></span>
+      </li>
+      <li class="ppb-steps__step">
+        <span class="ppb-steps__icon" aria-hidden="true"><svg class="ppb-icon" viewBox="0 0 24 24"><path d="M3 6.5h11v9H3zM14 9.5h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></span>
+        <span class="ppb-steps__label">{{ s.shipped_label | escape }}</span>
+        <span class="ppb-steps__date"><span data-days="{{ s.ship_days }}">{{ c_ship | date: '%b %-d' }}</span></span>
+      </li>
+      <li class="ppb-steps__step">
+        <span class="ppb-steps__icon" aria-hidden="true"><svg class="ppb-icon" viewBox="0 0 24 24"><path d="M4 11 12 4.5l8 6.5v9H4z"/><path d="M10 20v-5.5h4V20"/></svg></span>
+        <span class="ppb-steps__label">{{ s.delivered_label | escape }}</span>
+        <span class="ppb-steps__date"><span data-days="{{ s.min_days }}">{{ c_min | date: '%b %-d' }}</span>{% if c_max_days > s.min_days %} – <span data-days="{{ c_max_days }}">{{ c_max | date: '%b %-d' }}</span>{% endif %}</span>
+      </li>
+    </ol>
+{%- endcase -%}
